@@ -1,0 +1,92 @@
+UrbanConstruct.IndexMainSlider = {
+		init: function() {
+			var that = this;
+      that.UrbanConstruct_IndexMainSlider();
+      that.UrbanConstruct_sliderCounter();
+		},
+  UrbanConstruct_IndexMainSlider: function(){
+    const urbanconstructSlider = new Swiper ('.urbanconstruct-index-slider .swiper', {
+      slidesPerView: 1,  
+      effect: 'fade',
+			loop: $('.urbanconstruct-index-slider .slider-item').length > 1 ? true:false,
+      speed: 1000,
+      autoplay: {
+        delay: 8000,
+        disableOnInteraction: false,
+      },
+			/*navigation: {
+				nextEl: ".urbanconstruct-index-slider .swiper-next",
+				prevEl: ".urbanconstruct-index-slider .swiper-prev",
+			},*/
+			
+    });
+  },
+  UrbanConstruct_sliderCounter: function(){
+		const stats = document.querySelectorAll(".urbanconstruct-index-slider .list-counter .counter-num");
+		stats.forEach(stat => {
+			// pattern used to seperate input number from html into an array of numbers and non numbers. EX $65.3M -> ["$65.3M", "$", "65", ".", "3", "M"]
+			if(stat.textContent != ''){
+      const patt = /(\D+)?(\d+)(\D+)?(\d+)?(\D+)?/;
+			const time = 100;
+			let result = [...patt.exec(stat.textContent)];
+			let fresh = true;
+			let ticks;
+
+			// Remove first full match from result array (we dont need the full match, just the individual match groups).
+			result.shift();
+			// Remove undefined values from result array where they didnt have a match in one of the optional regex groups
+			result = result.filter(res => res != null);
+
+			while (stat.firstChild) {
+				stat.removeChild(stat.firstChild);
+			}
+
+			for (let res of result) {
+				if (isNaN(res)) {
+					stat.insertAdjacentHTML("beforeend", `<span>${res}</span>`);
+				} else {
+					for (let i = 0; i < res.length; i++) {
+						stat.insertAdjacentHTML(
+							"beforeend",
+							`<span data-value="${res[i]}">
+						<span>&ndash;</span>
+						${Array(parseInt(res[i]) + 1)
+							.join(0)
+							.split(0)
+							.map(
+								(x, j) => `
+							<span>${j}</span>
+						`
+							)
+							.join("")}
+					</span>`
+						);
+					}
+				}
+			}
+
+			ticks = [...stat.querySelectorAll("span[data-value]")];
+
+			let activate = () => {
+
+				setTimeout(() => {
+					fresh = false;
+				}, time);
+
+				setTimeout(() => {
+						for (let tick of ticks) {
+							let dist = parseInt(tick.getAttribute("data-value")) + 1;
+							tick.style.transform = `translateY(-${dist * 100}%)`;
+						}
+					}, fresh ? time : 0);
+			};
+			activate();
+      }
+		});
+
+	},
+};
+(function() {
+  UrbanConstruct.IndexMainSlider.init();
+})();
+

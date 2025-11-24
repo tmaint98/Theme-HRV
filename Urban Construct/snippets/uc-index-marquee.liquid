@@ -1,0 +1,12 @@
+<link rel="preload stylesheet" href="{{ 'uc-index-marquee.scss.css' | asset_url }}" as="stylesheet">
+<section class="urbanconstruct-index-marquee">
+    <div class="marquee wow fadeIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+      <div class="marquee__inner">
+        {% if settings.urbanconstruct_index_marquee_desc != '' %}
+          {% for i in (1..3) %}
+            <div class="marquee__inner--item">{{ settings.urbanconstruct_index_marquee_desc }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>

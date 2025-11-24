@@ -1,0 +1,147 @@
+<div class="layout-project">
+  <div class="hidden">{% include 'breadcrumb'%}<h1>{{page.title}}</h1></div>
+
+{%if settings.show_project%}
+<section class="section-project">
+  <div class="container">
+    <div class="heading-title wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+      {% if settings.project_title_1 != '' %}
+        <div class="title1">{{ settings.project_title_1 }}</div>
+      {% endif %}
+      <div class="title-right">
+      {% if settings.project_title_2 != '' %}
+        <h2 class="title2">{{ settings.project_title_2 | newline_to_br }}</h2>
+      {% endif %}
+      {% if settings.project_desc != '' %}
+        <div class="desc">{{ settings.project_desc }}</div>
+      {% endif %}
+        </div>
+    </div>
+  </div>
+    <div class="container-fluid">
+    {% assign count = 0 %}
+      {% assign list_project1 = '' %}
+    {% assign list_project2 = '' %}
+      {% for i in (1..6) %}
+        {% capture show %}show_project_{{i}}{%endcapture%}
+        {% capture img %}project_{{i}}_img.jpg{%endcapture%}
+        {% capture title %}project_{{i}}_title{%endcapture%}
+        {% capture desc %}project_{{i}}_desc{%endcapture%}
+        {% capture link %}project_{{i}}_link{%endcapture%}
+        {% if settings[show] %}
+          {% assign count = count | plus: 1 %}
+          {% capture project_html %}<div class="project-item">
+        <a href="{{settings[link]}}">
+        <div class="img" style="--bg-img: url({{ img | asset_url}});"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" /></div>
+        <div class="detail">
+          <h3 class="title">{{settings[title]}}</h3>
+          {%if settings[desc] != ''%}<div class="desc">{{settings[desc]}}</div>{%endif%}
+        </div>
+          </a>
+      </div>{%endcapture%}
+          {%if count < 4%}
+          {% assign list_project1 = list_project1 | append: project_html %}
+          {%else%}
+            {% assign list_project2 = list_project2 | append: project_html %}
+            {%endif%}
+        {% endif %}
+      {% endfor %}
+    {%if list_project1 != ''%}
+      <div id="list-project--1" class="list-project {%if count == 1%}item--1{%elsif count == 2%}item--2{%else%}item--3{%endif%} wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {{ list_project1 }}
+      </div>
+    {%endif%}
+    {%if list_project2 != ''%}
+      <div id="list-project--2" class="list-project {%if count == 4%}item--1{%elsif count == 5%}item--2{%else%}item--3{%endif%} wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {{ list_project2 }}
+      </div>
+    {%endif%}
+  </div>
+</section>
+  {%endif%}
+{%if settings.show_project_services%}
+<section class="section-project-services {%if settings.show_project%}has-project{%endif%}">
+  <div class="container">
+    <div class="heading-title wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+      {% if settings.project_services_title_1 != '' %}
+        <div class="title1">{{ settings.project_services_title_1 }}</div>
+      {% endif %}
+      {% if settings.project_services_title_2 != '' %}
+        <h2 class="title2">{{ settings.project_services_title_2 | newline_to_br }}</h2>
+      {% endif %}
+      {% if settings.project_services_desc != '' %}
+        <div class="desc">{{ settings.project_services_desc }}</div>
+      {% endif %}
+    </div>
+    <div class="row list-services">
+      {%assign time1 = 0.2%}
+      {%for i in (1..3)%}
+        {%capture show%}show_project_services_{{i}}{%endcapture%}
+        {%capture img%}project_services_{{i}}_img.jpg{%endcapture%}
+        {%capture title%}project_services_{{i}}_title{%endcapture%}
+        {%capture desc%}project_services_{{i}}_desc{%endcapture%}
+        {%capture link%}project_services_{{i}}_link{%endcapture%}
+        {%if settings[show]%}
+          {%assign time1 = time1 | plus: 0.1%}
+          <div class="col-lg-4 col-12 wow fadeInUp" data-wow-delay="{{time1}}s" data-wow-duration="0.8s">
+            <div class="service-item">
+              <div class="img"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" /></div>
+              <div class="detail">
+                {%if settings[title] != ''%}<h3 class="title"><a href="{{settings[link]}}">{{settings[title]}}</a></h3>{%endif%}
+                {%if settings[desc] != ''%}<div class="desc">{{settings[desc]}}</div>{%endif%}
+              </div>
+              </div>
+          </div>
+        {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+</section>
+    {%endif%}
+{% if settings.show_project_marquee %}
+  <section class="section-project-marquee">
+    <div class="marquee wow fadeIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+      <div class="marquee__inner">
+        {% if settings.project_marquee_desc != '' %}
+          {%assign list = settings.project_marquee_desc | split: ';'%}
+          {%for i in (1..3)%}
+          {%for desc in list%}
+            <div class="marquee__inner--item">{{ desc }} 
+                <span class="icon"><svg viewBox="0 0 19 21"><path d="M7.93164 20.1157L8.25293 13.0703L2.33203 16.9028L0.496094 13.7358L6.78418 10.5229L0.496094 7.31006L2.33203 4.09717L8.25293 7.92969L7.93164 0.884277H11.5576L11.2363 7.92969L17.1572 4.09717L18.9932 7.31006L12.7051 10.5229L18.9932 13.7358L17.1572 16.9028L11.2363 13.0703L11.5576 20.1157H7.93164Z"></path></svg></span>
+             </div>
+          {%endfor%}
+          {%endfor%}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{%if settings.show_project_form%}
+  <section class="section-project-form">
+    <div class="container-fluid">
+      <div class="form-bg">
+        <div class="row project-form">
+          <div class="offset-xl-6 col-xl-6 offset-lg-2 col-lg-8 col-12">
+            <div class="form-booking">
+            {%if settings.project_form_title != ''%}<h2 class="title">{{settings.project_form_title | newline_to_br}}</h2>{%endif%}
+            {%if settings.form_pro_booking == 'google-sheet'%}
+              <form id="formbooking" action="{{settings.gg_link_form}}" data-shop="{{shop.name}}">
+                {%include 'project-form'%}
+              </form>
+            {%else%}
+            {%- capture formProductContact -%}
+              {%form "contact"%}
+                {%include 'project-form'%}
+              {%endform%}
+              {%- endcapture -%}
+              {{ formProductContact | replace: "script","noscript" }}
+            {%endif%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {%include 'modal-success'%}
+  {%endif%}
+</div>

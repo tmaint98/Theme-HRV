@@ -1,0 +1,39 @@
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'uc-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'uc-index-blog.scss.css' | asset_url }}" as="stylesheet">
+<section class="urbanconstruct-index-blog">
+    <div class="container">
+      <div class="heading-title text-center wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {% if settings.urbanconstruct_index_blog_title_1 != '' %}
+          <div class="title1">{{ settings.urbanconstruct_index_blog_title_1 }}</div>
+        {% endif %}
+        {% if settings.urbanconstruct_index_blog_title_2 != '' %}
+          <h2 class="title2">{{ settings.urbanconstruct_index_blog_title_2 | newline_to_br }}</h2>
+        {% endif %}
+        {% if settings.urbanconstruct_index_team_desc != '' %}
+          <div class="desc">{{ settings.urbanconstruct_index_blog_desc }}</div>
+        {% endif %}
+      </div>
+      {% if blogs[settings.urbanconstruct_index_blog_handle].articles.size == 0 %}
+        <p class="txt-noArticle text-center">Chưa có bài viết nào trong mục này</p>
+        {% else %}
+        <div class="row list-blog">
+          {%assign time2 = 0%}
+          {% for article in blogs[settings.urbanconstruct_index_blog_handle].articles limit: 3 %}
+            {%assign time2 = time2 | plus: 0.1%}
+            <div class="col-lg-4 col-12 wow fadeInUp" data-wow-delay="{{time2}}s" data-wow-duration="0.8s">
+            {% include 'uc-index-article-loop' %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if blogs[settings.urbanconstruct_index_blog_handle].articles.size > 3 and settings.urbanconstruct_index_blog_btn != '' %}
+          <div class="btn-more text-center wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.5s">
+            <a href="{{blogs[settings.urbanconstruct_index_blog_handle].url}}" class="button">{{ settings.urbanconstruct_index_blog_btn }}</a>
+          </div>
+        {% endif %}
+      {% endif %}
+
+    </div>
+  </section>

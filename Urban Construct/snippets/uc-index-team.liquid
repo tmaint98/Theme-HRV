@@ -1,0 +1,48 @@
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'uc-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'uc-index-team.scss.css' | asset_url }}" as="stylesheet">
+<section class="urbanconstruct-index-team">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-12 wow fadeIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+          <div class="team-left">
+            <div class="heading-title">
+              {% if settings.urbanconstruct_index_team_title_1 != '' %}
+                <div class="title1">{{ settings.urbanconstruct_index_team_title_1 }}</div>
+              {% endif %}
+              {% if settings.urbanconstruct_index_team_title_2 != '' %}
+                <h2 class="title2">{{ settings.urbanconstruct_index_team_title_2 | newline_to_br }}</h2>
+              {% endif %}
+              {% if settings.urbanconstruct_index_team_desc != '' %}
+                <div class="desc">{{ settings.urbanconstruct_index_team_desc }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-12">
+          <div class="team-right">
+            {%assign time1 = 0.3%}
+            {% for i in (1..4) %}
+              {% capture show %}show_urbanconstruct_index_team_{{i}}{%endcapture%}
+              {% capture img %}urbanconstruct_index_team_{{i}}_img.jpg{%endcapture%}
+              {% capture name %}urbanconstruct_index_team_{{i}}_name{%endcapture%}
+              {% capture position %}urbanconstruct_index_team_{{i}}_position{%endcapture%}
+              {% capture link %}urbanconstruct_index_team_{{i}}_link{%endcapture%}
+              {% if settings[show] %}
+                {%assign time1 = time1 | plus: 0.1%}
+                <div class="team-item wow fadeInUp" data-wow-delay="{{time1}}s" data-wow-duration="0.8s">
+                  <a href="{{settings[link]}}" class="img"><img src="{{ img | asset_url}}" alt="{{settings[name]}}" /></a>
+                  <div class="detail">
+                    <div class="name">{{ settings[name] }}</div>
+                    <div class="position">{{ settings[position] }}</div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

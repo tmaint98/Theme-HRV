@@ -1,0 +1,31 @@
+{% include 'article-image' with article:article %}
+<div class="item-article">
+	<div class="media-article">
+		<a href="{{ article.url }}" title="{{ article.title }}" aria-label="{{ article.title }}" class="img-hover img-zoom">
+			<img src="{{ imageUrl | product_img_url : 'grande'}}" alt="{{ article.title }}"/>
+		</a>	
+	</div>
+	<div class="info-article">
+    <div class="author">{{article.author}}</div>
+		<div class="title-article">
+			<h4>
+				<a href="{{ article.url }}">{{ article.title }}</a>
+			</h4>
+		</div>
+    <div class="article-post-meta">   
+        <span class="date">                
+          <time pubdate datetime="{{ article.published_at | date: '%d Tháng %m, %Y' }}">{{ article.published_at | date: '%d Tháng %m, %Y' }}</time>
+        </span>
+        {% if blogs[settings.home_blog_handle].comments_enabled? %}
+        <span class="comment"><i class="comment-icon fa fa-comment-o"></i>
+          <a href="{{ article.url }}">
+            {{ article.comments_count }}<span> {{ article.comments_count | pluralize: 'Bình luận','Bình luận' }}</span>
+          </a>
+        </span>
+        {% endif %}	
+      </div>	
+		<div class="short-article">
+			{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}
+		</div>
+	</div>
+</div>

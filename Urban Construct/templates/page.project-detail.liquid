@@ -1,0 +1,136 @@
+{%assign mota = page.content | replace: '<div','<p' | replace: '</div>','</p>' | split: '####'%}
+<div class="layout-project-detail">
+  <div class="hidden">{% include 'breadcrumb'%}</div>
+  <section class="section-project-heading">
+    <div class="container">
+      <div class="row heading--1">
+        <div class="col-md-6 col-12">
+          <h1 class="title">{{page.title}}</h1>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="desc">{{mota[0]}}</div>
+        </div>
+      </div>
+      <div class="row heading--2">
+        <div class="col-md-6 col-12">
+          <div class="desc2">
+          {{mota[1]}}
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="desc3">
+            <div class="table-render"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {%if mota[2] contains 'src='%}
+  <section class="section-project-img">
+    <div class="container">
+      {% assign arrayImg = mota[2] | split : '<img' %}
+			<div class="row list-img">
+				{%for img in arrayImg%}
+				{%if img contains 'src="'%}
+				{% assign url = img | split : '>'%}
+				<div class="item-img">
+				<img {{url.first}} />
+				</div>
+				{%endif%}
+				{%endfor%}
+			</div>
+    </div>
+  </section>
+  {%endif%}
+   <section class="section-project-step">
+     <div class="container">
+       <div class="step-title">{{mota[3]}}</div>
+       <div class="step-content"><div class="table-render"></div></div>
+     </div>
+   </section>
+  {% if settings.show_project_detail_marquee %}
+  <section class="section-project-marquee">
+    <div class="marquee wow fadeIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+      <div class="marquee__inner">
+        {% if settings.project_detail_marquee_desc != '' %}
+          {%assign list = settings.project_detail_marquee_desc | split: ';'%}
+          {%for i in (1..3)%}
+          {%for desc in list%}
+            <div class="marquee__inner--item">{{ desc }} 
+                <span class="icon"><svg viewBox="0 0 19 21"><path d="M7.93164 20.1157L8.25293 13.0703L2.33203 16.9028L0.496094 13.7358L6.78418 10.5229L0.496094 7.31006L2.33203 4.09717L8.25293 7.92969L7.93164 0.884277H11.5576L11.2363 7.92969L17.1572 4.09717L18.9932 7.31006L12.7051 10.5229L18.9932 13.7358L17.1572 16.9028L11.2363 13.0703L11.5576 20.1157H7.93164Z"></path></svg></span>
+             </div>
+          {%endfor%}
+          {%endfor%}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+  {%if settings.show_project_detail_banner%}
+<section class="section-project-banner">
+  <div class="container-fluid">
+    <div class="banner"><img src="{{ 'project_detail_banner_img.jpg' | asset_url}}" alt="{{settings.project_detail_banner_alt}}" /></div>
+  </div>
+</section>
+    {%endif%}
+  {% if settings.show_project_detail_blog %}
+  <section class="section-project-blog">
+    <div class="container">
+      <div class="row heading-title wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        <div class="col-lg-6 col-12">
+          {% if settings.project_detail_blog_title_1 != '' %}
+          <div class="title1">{{ settings.project_detail_blog_title_1 }}</div>
+        {% endif %}
+        </div>
+        <div class="col-lg-6 col-12">
+          {% if settings.project_detail_blog_title_2 != '' %}
+          <h2 class="title2">{{ settings.project_detail_blog_title_2 | newline_to_br }}</h2>
+          {% endif %}
+          {% if settings.project_detail_team_desc != '' %}
+            <div class="desc">{{ settings.project_detail_blog_desc }}</div>
+          {% endif %}
+        </div>
+      </div>
+      {% if blogs[settings.project_detail_blog_handle].articles.size == 0 %}
+        <p class="txt-noArticle text-center">Chưa có bài viết nào trong mục này</p>
+        {% else %}
+        <div class="row list-blog">
+          {%assign time2 = 0%}
+          {% for article in blogs[settings.project_detail_blog_handle].articles limit: 2 %}
+            {%assign time2 = time2 | plus: 0.1%}
+            <div class="col-lg-6 col-12 wow fadeInUp" data-wow-delay="{{time2}}s" data-wow-duration="0.8s">
+            {% include 'article-loop' %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if blogs[settings.project_detail_blog_handle].articles.size > 2 and settings.project_detail_blog_btn != '' %}
+          <div class="btn-more text-center wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.5s">
+            <a href="{{blogs[settings.project_detail_blog_handle].url}}" class="button">{{ settings.project_detail_blog_btn }}</a>
+          </div>
+        {% endif %}
+      {% endif %}
+
+    </div>
+  </section>
+{% endif %}
+  {% if settings.show_project_detail_ins %}
+  <section class="section-project-ins {% if settings.show_project_detail_blog %}has-blog{%endif%}">
+    <div class="container">
+      <h2 class="title text-center">{{settings.project_detail_ins_title_1}} <a href="{{settings.project_detail_ins_link}}">{{settings.project_detail_ins_title_2}}</a></h2>
+      <div class="list-ins">
+        {%for i in (1..6)%}
+          {%capture show%}show_project_detail_ins_{{i}}{%endcapture%}
+          {%capture img%}project_detail_ins_{{i}}_img.jpg{%endcapture%}
+          {%capture alt%}project_detail_ins_{{i}}_alt{%endcapture%}
+          {%if settings[show]%}
+            <div class="ins-item">
+              <img src="{{ img | asset_url}}" alt="{{settings[alt]}}" />
+            </div>
+          {%endif%}
+          {%endfor%}
+      </div>
+    </div>
+  </section>
+    {%endif%}
+</div>
+

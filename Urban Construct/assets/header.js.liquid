@@ -1,0 +1,200 @@
+UrbanConstruct.Header = {
+		init: function() {
+			var that = this;
+      that.UrbanConstruct_scrollFixedHeader();
+      that.UrbanConstruct_actionClick();
+      that.UrbanConstruct_clickIconsHeader();
+      that.UrbanConstruct_menuSidebar();
+      that.UrbanConstruct_modalLive();
+		  that.UrbanConstruct_hiddenBtnLive();
+		},
+  UrbanConstruct_scrollFixedHeader: function(){
+		var $header = $(".urbanconstruct-mainHeader--height");
+		var curScrollTop = 0;
+		$(window).scroll(function(e) {
+			var scroll = $(window).scrollTop();
+			if(scroll > $header.height()){
+				$header.addClass('urbanconstruct-fixed-header');
+			}
+			else{
+				$header.removeClass('urbanconstruct-fixed-header');
+			}
+		});
+	},
+  UrbanConstruct_actionClick: function(){
+		$(document).on('click', function (event) {
+			var class_name = event.target.className.animVal;
+			if(class_name == 'urbanconstruct-svg-ico-account' || class_name == 'urbanconstruct-svg-ico-search'){}
+			else{
+				if (!$(event.target).closest('.urbanconstruct-header-action_dropdown').length) {
+					$('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+				}
+			}
+		})
+	},
+  UrbanConstruct_clickIconsHeader: function(){
+		$('.urbanconstruct-header-action_clicked').click(function(e){
+			e.preventDefault();		
+			if($(this).parents('.urbanconstruct-header-action-item').hasClass('urbanconstruct-js-action-show')){
+				$('body').removeClass('urbanconstruct-locked-scroll');
+				$(this).parents('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+				if($(window).width() < 992){
+					if ($(this).parents('.urbanconstruct-header-action-item').hasClass('urbanconstruct-header-action_cart')) {
+						$('.urbanconstruct-siteCart-mobile__overlay').removeClass('urbanconstruct-show-cart');
+						$('body').removeClass('urbanconstruct-locked-scroll').removeClass('urbanconstruct-body-showcart');
+					}
+				}
+			}
+			else{
+				$('body').removeClass("urbanconstruct-locked-scroll-menu");
+				$('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+				$('body').addClass('urbanconstruct-locked-scroll');
+				$(this).parents('.urbanconstruct-header-action-item').addClass('urbanconstruct-js-action-show');
+				if($(window).width() < 992){
+					if ($(this).parents('.urbanconstruct-header-action-item').hasClass('urbanconstruct-header-action_cart'))  {
+
+						$('.urbanconstruct-siteCart-mobile').addClass('urbanconstruct-show-cart');
+						$('body').removeClass('urbanconstruct-locked-scroll').addClass('urbanconstruct-body-showcart');
+					}
+				}
+			}		
+		});	
+		$('.urbanconstruct-siteCart-mobile__header').click(function() {
+			if ($(this).parents('.urbanconstruct-siteCart-mobile').hasClass('urbanconstruct-show-cart')) {
+				$(this).parents('.urbanconstruct-siteCart-mobile').removeClass('urbanconstruct-show-cart');
+				$('body').removeClass('urbanconstruct-locked-scroll').removeClass('urbanconstruct-body-showcart');
+				$('.urbanconstruct-header-action-item.urbanconstruct-header-action_cart').removeClass('urbanconstruct-js-action-show');
+			} else {	
+				$('body').addClass('urbanconstruct-body-showcart');
+				$(this).parents('.urbanconstruct-siteCart-mobile').addClass('urbanconstruct-show-cart');
+
+			}
+		});
+		$('.urbanconstruct-siteCart-mobile__overlay').on('click', function(e){
+			$(this).parents('.urbanconstruct-siteCart-mobile').removeClass('urbanconstruct-show-cart');
+			$('body').removeClass('urbanconstruct-locked-scroll').removeClass('urbanconstruct-body-showcart');
+			$('.urbanconstruct-header-action-item.urbanconstruct-header-action_cart').removeClass('urbanconstruct-js-action-show');
+		})
+		$('body').on('click', '#urbanconstruct-sitenav-overlay', function(e){
+			$('body').removeClass('urbanconstruct-locked-scroll');
+			$('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+		});
+		$('body').on('click', '#urbanconstruct-sitenav-overlay,.sitenav-content .btnclose', function(e){
+			$('body').removeClass('urbanconstruct-locked-scroll').removeClass("urbanconstruct-locked-scroll-menu");
+			$('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+		});
+		$('.urbanconstruct-activeCartChecked').click(function() {
+			$('body').addClass('urbanconstruct-locked-scroll');
+			$('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+			$('.urbanconstruct-sidebar-main').addClass('urbanconstruct-is-show-right');
+			$('.urbanconstruct-sidebar-main .urbanconstruct-sitenav-cart').addClass('urbanconstruct-show');
+		});
+		$('.urbanconstruct-activeMenuChecked').click(function() {
+			if($('.urbanconstruct-sidebar-main .urbanconstruct-sitenav-wrapper.urbanconstruct-sitenav-menu').length == 0){
+				$.ajax({
+					url: '/index?view=header-load-menu',
+					success:function(data){
+						$('.urbanconstruct-sidebar-main').append(data);
+						setTimeout(function() {
+							if($('.addThis_listSharing').hasClass('active')){
+								$('.addThis_listSharing').removeClass('active');
+								$('.addThis_listSharing').fadeOut(150);	
+							}
+							$('body').addClass('urbanconstruct-locked-scroll');
+							$('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+							$('.urbanconstruct-sidebar-main').addClass('urbanconstruct-is-show-left');
+							$('.urbanconstruct-sidebar-main .urbanconstruct-sitenav-menu').addClass('urbanconstruct-show');
+						},100);
+						UrbanConstruct.Header.UrbanConstruct_menuSidebar();
+						UrbanConstruct.Header.UrbanConstruct_closeSidebarMain();
+            {%if settings.urbanconstruct_shop_google_translate%}
+            if($(window).width() < 992){
+              var currentLang_mb = localStorage.getItem("selectedLang"),
+            currentLangFlag_mb = localStorage.getItem("selectedLangFlag");
+        
+            if (currentLang_mb) {
+              document.documentElement.setAttribute("lang", currentLang_mb);
+            }
+            changeLanguage(currentLang_mb,currentLangFlag_mb);
+            $(".language-text").removeClass('hidden');
+            }
+            {%endif%}
+					}
+				});
+			}else{
+				if($('.addThis_listSharing').hasClass('active')){
+					$('.addThis_listSharing').removeClass('active');
+					$('.addThis_listSharing').fadeOut(150);	
+				}
+				$('body').addClass('urbanconstruct-locked-scroll');
+				$('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+				$('.urbanconstruct-sidebar-main').addClass('urbanconstruct-is-show-left');
+				$('.urbanconstruct-sidebar-main .urbanconstruct-sitenav-menu').addClass('urbanconstruct-show');
+			}
+		});
+    $('.urbanconstruct-activeInfoChecked').click(function() {
+			$('body').addClass('urbanconstruct-locked-scroll');
+			$('.urbanconstruct-header-action-item').removeClass('urbanconstruct-js-action-show');
+			$('.urbanconstruct-sidebar-main').addClass('urbanconstruct-is-show-right');
+			$('.urbanconstruct-sidebar-main .urbanconstruct-sitenav-info').addClass('urbanconstruct-show');
+		});
+		$('.urbanconstruct-sidebar-overlay, .urbanconstruct-btn-sitenav-close').on('click', function(e){
+			$('body').removeClass('urbanconstruct-locked-scroll').removeClass('urbanconstruct-body-showcart');
+			$(this).parents('.urbanconstruct-sidebar-main').removeClass('urbanconstruct-is-show-right');
+			$(this).parents('.urbanconstruct-sidebar-main').removeClass('urbanconstruct-is-show-left');
+			$('.urbanconstruct-sidebar-main .urbanconstruct-sitenav-wrapper').removeClass('urbanconstruct-show');
+		})
+	},
+  UrbanConstruct_menuSidebar: function(){
+		$('.urbanconstruct-plus-nClick1').click(function(e){
+			e.preventDefault();
+			$(this).parents('.urbanconstruct-level0').toggleClass('opened');
+			$(this).parents('.urbanconstruct-level0').children('ul').slideToggle(200);
+		});
+		$('.urbanconstruct-plus-nClick2').click(function(e){
+			e.preventDefault();
+			$(this).parents('.urbanconstruct-level1').toggleClass('opened');
+			$(this).parents('.urbanconstruct-level1').children('ul').slideToggle(200);
+		});
+		$('.urbanconstruct-plus-nClick3').click(function(e){
+			e.preventDefault();
+			$(this).parents('.urbanconstruct-level2').toggleClass('opened');
+			$(this).parents('.urbanconstruct-level2').children('ul').slideToggle(200);
+		});
+		/*jQuery('.sidebox-title .htitle').click(function(){
+			$(this).parents('.group-sidebox').toggleClass('is-open').find('.sidebox-content-togged').slideToggle('medium');
+		}); */
+	},
+  UrbanConstruct_closeSidebarMain: function(){
+		$('.urbanconstruct-sidebar-overlay, .urbanconstruct-btn-sitenav-close').on('click', function(e){
+			$('body').removeClass('urbanconstruct-locked-scroll');
+			$(this).parents('.urbanconstruct-sidebar-main').removeClass('urbanconstruct-is-show-right');
+			$(this).parents('.urbanconstruct-sidebar-main').removeClass('urbanconstruct-is-show-left');
+			$('.urbanconstruct-sidebar-main .urbanconstruct-sitenav-wrapper').removeClass('urbanconstruct-show');
+			jQuery('body').removeClass('urbanconstruct-mainBody-mbcart').removeClass('urbanconstruct-body-showcart');
+		})
+	},
+  UrbanConstruct_modalLive: function(){
+		$('.urbanconstruct-header-box-live .urbanconstruct-btn-live').click(function(){
+			$('.urbanconstruct-modal-live').toggleClass('opened');
+		});
+		$('.urbanconstruct-box-live-mb .urbanconstruct-btn-live').click(function(){
+			$('.urbanconstruct-modal-live').toggleClass('opened');
+		});
+		$('.urbanconstruct-btn-close--live').click(function(){
+			$('.urbanconstruct-modal-live').removeClass('opened');
+		});
+	},
+	UrbanConstruct_hiddenBtnLive: function(){
+		setTimeout(function(){
+			$('.urbanconstruct-box-live-mb').removeClass('hidden');
+		},500);
+
+		$('.urbanconstruct-btn-close').click(function(){
+			$('.urbanconstruct-box-live-mb').addClass('hidden');
+		});
+	},
+};
+(function() {
+  UrbanConstruct.Header.init();
+})();

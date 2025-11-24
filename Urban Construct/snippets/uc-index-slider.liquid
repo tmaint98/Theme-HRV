@@ -1,0 +1,95 @@
+<link rel="preload stylesheet" href="{{ 'uc-index-slider.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'uc-index-slider.js' | asset_url }}"></script>
+
+<div class="urbanconstruct-index-slider" id="urbanconstruct-index-slider">
+  <div class="container-fluid">
+    <div class="index-slider">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="slider-item">
+              <div class="slide--image">
+                <a href="{{ settings.urbanconstruct_index_slide_1_link }}" title="{{ settings.urbanconstruct_index_slide_1_alt | strip_html | escape}}" aria-label="{{ settings.urbanconstruct_index_slide_1_alt | strip_html | escape}}">
+                  <picture>
+                    <source media="(max-width: 767px)" srcset="{{ 'urbanconstruct_index_slide_1_img_mb.jpg' | asset_url}}" />
+                    <source media="(min-width: 768px)" srcset="{{ 'urbanconstruct_index_slide_1_img.jpg' | asset_url}}" />
+                    <img src="{{ 'urbanconstruct_index_slide_1_img.jpg' | asset_url }}" alt="{{ settings.urbanconstruct_index_slide_1_alt | strip_html | escape }}" />
+                  </picture>
+                </a>
+              </div>
+            </div>
+          </div>
+          {%- for i in (2..4) -%}
+          {% capture show_slide %}urbanconstruct_index_slide_{{i}}_show{% endcapture %}
+          {% capture image %}urbanconstruct_index_slide_{{i}}_img.jpg{% endcapture %}
+          {% capture image_mb %}urbanconstruct_index_slide_{{i}}_img_mb.jpg{% endcapture %}
+          {% capture alt %}urbanconstruct_index_slide_{{i}}_alt{% endcapture %}
+          {% capture link %}urbanconstruct_index_slide_{{i}}_link{% endcapture %}
+          {%- if settings[show_slide] -%}
+            <div class="swiper-slide">
+              <div class="slider-item">
+                <div class="slide--image">
+                  <a href="{{ settings[link] }}" title="{{ settings[alt] | strip_html | escape}}" aria-label="{{ settings[alt] | strip_html | escape}}">
+                    <picture>
+                      <source media="(max-width: 767px)" srcset="{{ image_mb | asset_url}}" />
+                      <source media="(min-width: 768px)" srcset="{{ image | asset_url}}" />
+                      <img src="{{ image | asset_url }}" alt="{{ settings[alt] | strip_html | escape }}" />
+                    </picture>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+        </div>
+      </div>
+      <div class="content-group">
+      <div class="slider-content">
+        <div class="slider-detail wow fadeIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+          {%if settings.urbanconstruct_index_slide_title != ''%}<h2 class="title">{{settings.urbanconstruct_index_slide_title}}</h2>{%endif%}
+          {%if settings.urbanconstruct_index_slide_desc != ''%}<div class="desc">{{settings.urbanconstruct_index_slide_desc}}</div>{%endif%}
+          {%if settings.urbanconstruct_index_slide_btn_1 != '' or settings.urbanconstruct_index_slide_btn_2 != ''%}
+            <div class="list-btn">
+              {%if settings.urbanconstruct_index_slide_btn_1 != '' %}
+                <a href="{{settings.urbanconstruct_index_slide_link_1}}" class="button btn-1">{{settings.urbanconstruct_index_slide_btn_1}}</a>
+              {%endif%}
+              {%if settings.urbanconstruct_index_slide_btn_2 != '' %}
+                <a href="{{settings.urbanconstruct_index_slide_link_2}}" class="button btn-2">{{settings.urbanconstruct_index_slide_btn_2}}</a>
+              {%endif%}
+            </div>
+          {%endif%}
+        </div>
+        {% if settings.show_urbanconstruct_index_slide_counter %}
+          <div class="slider-counter">
+          <div class="row list-counter counters wow fadeIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+            {% for i in (1..4) %}
+              {% capture show %}show_urbanconstruct_index_slide_counter_{{i}}{%endcapture%}
+              {% capture num %}urbanconstruct_index_slide_counter_{{i}}_num{%endcapture%}
+              {% capture desc %}urbanconstruct_index_slide_counter_{{i}}_desc{%endcapture%}
+              {% if settings[show] %}
+                <div class="counter-item">
+                  <div class="counter-num" aria-label="{{settings[num]}}">{{ settings[num] }}</div>
+                  <div class="counter-desc">{{ settings[desc] }}</div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          </div>
+        {% endif %}
+      </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-home-pus-promotion pus-promotion-grids">
+  <div class="container">
+    <div class="hrv-pus-promotion" data-hrvpus-layout="flashsale"></div>
+  </div>
+</div>
+<div class="section-home-hrvpmo hrvpmo-grids">
+  <div class="container">
+    <div class="hrv-pmo-coupon" data-hrvpmo-layout="grids"></div>
+    <div class="hrv-pmo-discount" data-hrvpmo-layout="grids"></div>
+  </div>
+</div>

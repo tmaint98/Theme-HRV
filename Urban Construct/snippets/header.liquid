@@ -1,0 +1,194 @@
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'uc-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'header.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header.js' | asset_url }}"></script>
+{%if settings.urbanconstruct_shop_google_translate%}
+{%include 'theme_google_translate_js'%}
+{%endif%}
+{%if settings.urbanconstruct_shop_buying%}
+<link rel="preload stylesheet" href="{{ 'header-minicart.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header-minicart.js' | asset_url }}"></script>
+{%endif%}
+{%if settings.show_urbanconstruct_header_search%}
+<link rel="preload stylesheet" href="{{ 'header-search.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header-search.js' | asset_url }}"></script>
+{%endif%}
+
+{%- assign checkcarticon = false -%}
+{%- if settings.urbanconstruct_toolbar_bottom_selected == 'urbanconstruct_toolbar_style_1' and settings.urbanconstruct_sidebar_icon_cart_show -%}
+{%- assign checkcarticon = true -%}
+{%- endif -%}
+<div class="urbanconstruct-mainHeader--height">
+	<header class="urbanconstruct-mainHeader">
+    <div class="urbanconstruct-mainHeader-middle">
+			<div class="container-fluid">
+				<div class="urbanconstruct-flex-header">
+					<div class="urbanconstruct-header-left">
+						<div class="urbanconstruct-header-wrap-iconav urbanconstruct-header-wrap-action d-sm-block d-lg-none">
+							<div class="urbanconstruct-header-action">
+								<div class="urbanconstruct-header-action-item urbanconstruct-header-action_menu urbanconstruct-activeMenuChecked">							
+									<div class="urbanconstruct-header-action_text">
+										<a class="urbanconstruct-header-action__link" name="icon-menu-mobile" href="javascript:void(0)" aria-label="Menu" title="Menu">
+											<span class="urbanconstruct-box-icon">								
+												<span class="urbanconstruct-hamburger-menu"  aria-hidden="true">
+													<span class="urbanconstruct-bar"></span>
+												</span>
+												<span class="urbanconstruct-box-icon--close">
+													<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+												</span>											
+											</span>	
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="urbanconstruct-header-wrap-logo">
+							<div class="urbanconstruct-wrap-logo" itemscope="" itemtype="http://schema.org/Organization">
+								{% if settings.urbanconstruct_use_logo %}
+								{% if template == 'index' %}
+								<a href="{{shop.url}}"  itemprop="url">
+									<img itemprop="logo" src="{{ 'urbanconstruct_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+								</a>			
+								<h1 style="display:none"><a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a></h1>
+								{% else %}
+								<a href="{{shop.url}}"  itemprop="url">
+									<img itemprop="logo" src="{{ 'urbanconstruct_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+								</a>
+								{% endif %}
+								{% else %}
+								{% if template == 'index' %}	<h1><a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a></h1>
+								{% else %}	<a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a>{% endif %}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+          <div class="urbanconstruct-header-center">
+            <div class="urbanconstruct-header-wrap-menu d-none d-md-none d-lg-block">
+							{%- include 'header-menu' -%}
+						</div>	
+          </div>
+					<div class="urbanconstruct-header-right">
+						<div class="urbanconstruct-header-wrap-action">
+							<div class="urbanconstruct-header-action">	
+                {%if settings.urbanconstruct_show_header_hotline%}
+                  <div class="urbanconstruct-header-action-item urbanconstruct-header-action_hotline">
+                  <a href="tel:{{settings.urbanconstruct_header_hotline_num | remove: ' '}}">
+                    <svg width="20" height="20" viewBox="0 0 473.806 473.806"><path d="M374.456,293.506c-9.7-10.1-21.4-15.5-33.8-15.5c-12.3,0-24.1,5.3-34.2,15.4l-31.6,31.5c-2.6-1.4-5.2-2.7-7.7-4    c-3.6-1.8-7-3.5-9.9-5.3c-29.6-18.8-56.5-43.3-82.3-75c-12.5-15.8-20.9-29.1-27-42.6c8.2-7.5,15.8-15.3,23.2-22.8    c2.8-2.8,5.6-5.7,8.4-8.5c21-21,21-48.2,0-69.2l-27.3-27.3c-3.1-3.1-6.3-6.3-9.3-9.5c-6-6.2-12.3-12.6-18.8-18.6    c-9.7-9.6-21.3-14.7-33.5-14.7s-24,5.1-34,14.7c-0.1,0.1-0.1,0.1-0.2,0.2l-34,34.3c-12.8,12.8-20.1,28.4-21.7,46.5    c-2.4,29.2,6.2,56.4,12.8,74.2c16.2,43.7,40.4,84.2,76.5,127.6c43.8,52.3,96.5,93.6,156.7,122.7c23,10.9,53.7,23.8,88,26    c2.1,0.1,4.3,0.2,6.3,0.2c23.1,0,42.5-8.3,57.7-24.8c0.1-0.2,0.3-0.3,0.4-0.5c5.2-6.3,11.2-12,17.5-18.1c4.3-4.1,8.7-8.4,13-12.9    c9.9-10.3,15.1-22.3,15.1-34.6c0-12.4-5.3-24.3-15.4-34.3L374.456,293.506z M410.256,398.806    C410.156,398.806,410.156,398.906,410.256,398.806c-3.9,4.2-7.9,8-12.2,12.2c-6.5,6.2-13.1,12.7-19.3,20    c-10.1,10.8-22,15.9-37.6,15.9c-1.5,0-3.1,0-4.6-0.1c-29.7-1.9-57.3-13.5-78-23.4c-56.6-27.4-106.3-66.3-147.6-115.6    c-34.1-41.1-56.9-79.1-72-119.9c-9.3-24.9-12.7-44.3-11.2-62.6c1-11.7,5.5-21.4,13.8-29.7l34.1-34.1c4.9-4.6,10.1-7.1,15.2-7.1    c6.3,0,11.4,3.8,14.6,7c0.1,0.1,0.2,0.2,0.3,0.3c6.1,5.7,11.9,11.6,18,17.9c3.1,3.2,6.3,6.4,9.5,9.7l27.3,27.3    c10.6,10.6,10.6,20.4,0,31c-2.9,2.9-5.7,5.8-8.6,8.6c-8.4,8.6-16.4,16.6-25.1,24.4c-0.2,0.2-0.4,0.3-0.5,0.5    c-8.6,8.6-7,17-5.2,22.7c0.1,0.3,0.2,0.6,0.3,0.9c7.1,17.2,17.1,33.4,32.3,52.7l0.1,0.1c27.6,34,56.7,60.5,88.8,80.8    c4.1,2.6,8.3,4.7,12.3,6.7c3.6,1.8,7,3.5,9.9,5.3c0.4,0.2,0.8,0.5,1.2,0.7c3.4,1.7,6.6,2.5,9.9,2.5c8.3,0,13.5-5.2,15.2-6.9    l34.2-34.2c3.4-3.4,8.8-7.5,15.1-7.5c6.2,0,11.3,3.9,14.4,7.3c0.1,0.1,0.1,0.1,0.2,0.2l55.1,55.1    C420.456,377.706,420.456,388.206,410.256,398.806z"></path><path d="M256.056,112.706c26.2,4.4,50,16.8,69,35.8s31.3,42.8,35.8,69c1.1,6.6,6.8,11.2,13.3,11.2c0.8,0,1.5-0.1,2.3-0.2    c7.4-1.2,12.3-8.2,11.1-15.6c-5.4-31.7-20.4-60.6-43.3-83.5s-51.8-37.9-83.5-43.3c-7.4-1.2-14.3,3.7-15.6,11    S248.656,111.506,256.056,112.706z"></path><path d="M473.256,209.006c-8.9-52.2-33.5-99.7-71.3-137.5s-85.3-62.4-137.5-71.3c-7.3-1.3-14.2,3.7-15.5,11    c-1.2,7.4,3.7,14.3,11.1,15.6c46.6,7.9,89.1,30,122.9,63.7c33.8,33.8,55.8,76.3,63.7,122.9c1.1,6.6,6.8,11.2,13.3,11.2    c0.8,0,1.5-0.1,2.3-0.2C469.556,223.306,474.556,216.306,473.256,209.006z"></path></svg>
+                    <span>{{settings.urbanconstruct_header_hotline_num}}</span>
+                  </a>
+                  </div>
+                {%endif%}
+                {%if settings.urbanconstruct_show_header_btn%}
+                  <div class="urbanconstruct-header-action-item urbanconstruct-header-action_btn">
+                    <a href="{{settings.urbanconstruct_header_btn_link}}" class="button">{{settings.urbanconstruct_header_btn_title}}</a>
+                  </div>
+                {%endif%}
+								{%if settings.show_urbanconstruct_header_search%}
+								<div class="urbanconstruct-header-action-item urbanconstruct-header-action_search">							
+									<div class="urbanconstruct-header-action_text">
+										<a class="urbanconstruct-header-action__link urbanconstruct-header-action_clicked"  href="#" id="site-search-handle"  aria-label="Tìm kiếm" title="Tìm kiếm">
+											<span class="urbanconstruct-box-icon">								
+												<svg class="urbanconstruct-svg-ico-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 451 451" style="enable-background:new 0 0 451 451;" xml:space="preserve">
+													<g>
+														<path d="M447.05,428l-109.6-109.6c29.4-33.8,47.2-77.9,47.2-126.1C384.65,86.2,298.35,0,192.35,0C86.25,0,0.05,86.3,0.05,192.3   s86.3,192.3,192.3,192.3c48.2,0,92.3-17.8,126.1-47.2L428.05,447c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4   C452.25,441.8,452.25,433.2,447.05,428z M26.95,192.3c0-91.2,74.2-165.3,165.3-165.3c91.2,0,165.3,74.2,165.3,165.3   s-74.1,165.4-165.3,165.4C101.15,357.7,26.95,283.5,26.95,192.3z"></path>
+													</g>
+												</svg>
+												<span class="urbanconstruct-box-icon--close">
+													<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+												</span>											
+											</span>	
+										</a>
+										<span class="urbanconstruct-box-triangle">
+											<svg viewBox="0 0 20 9" role="presentation">
+												<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z"></path>
+											</svg>
+										</span>
+									</div>
+									<div class="urbanconstruct-header-action_dropdown">
+										<div class="urbanconstruct-header-dropdown_content">
+											<div class="urbanconstruct-sitenav-content urbanconstruct-sitenav-search">
+												<p class="urbanconstruct-boxtitle">Tìm kiếm</p>											
+                        {% include 'header-search'%}
+											</div>
+										</div>
+									</div>
+								</div>
+								{%endif%}
+								{% if shop.customer_accounts_enabled and settings.show_urbanconstruct_header_account%}
+								<div class="urbanconstruct-header-action-item urbanconstruct-header-action_account">							
+									<div class="urbanconstruct-header-action_text">
+										<a class="urbanconstruct-header-action__link"  href="{%- if customer -%}/account{%else%}/account/login{%endif%}" aria-label="Tài khoản" title="Tài khoản">
+											<span class="urbanconstruct-box-icon">		
+												<svg class="urbanconstruct-svg-ico-account" viewBox="0 0 1024 1024" >
+													<path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path>
+													<path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path>
+												</svg>					
+											</span>								
+										</a>
+									</div>
+								</div>
+								{%endif%}
+								{% if settings.urbanconstruct_shop_buying %}
+								<div class="urbanconstruct-header-action-item urbanconstruct-header-action_cart {% unless template == 'cart'%}{%if settings.promotion_hrvapp_use == 'false'%}urbanconstruct-activeCartChecked{%endif%}{%endunless%} {%unless checkcarticon %}urbanconstruct-show-mb{%endunless%}">							
+									<div class="urbanconstruct-header-action_text">
+										<a class="urbanconstruct-header-action__link {% unless template == 'cart'%} {%if settings.promotion_hrvapp_use == 'false'%}urbanconstruct-header-action_clicked{%endif%} {% endunless %}"  href="{% if template == 'cart' or settings.promotion_hrvapp_use%}/cart{%else%}#{%endif%}" aria-label="Giỏ hàng" title="Giỏ hàng">				
+											<span class="urbanconstruct-box-icon">								
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -13 456.75885 456" width="456pt">
+													<path d="m150.355469 322.332031c-30.046875 0-54.402344 24.355469-54.402344 54.402344 0 30.042969 24.355469 54.398437 54.402344 54.398437 30.042969 0 54.398437-24.355468 54.398437-54.398437-.03125-30.03125-24.367187-54.371094-54.398437-54.402344zm0 88.800781c-19 0-34.402344-15.402343-34.402344-34.398437 0-19 15.402344-34.402344 34.402344-34.402344 18.996093 0 34.398437 15.402344 34.398437 34.402344 0 18.996094-15.402344 34.398437-34.398437 34.398437zm0 0"></path>
+													<path d="m446.855469 94.035156h-353.101563l-7.199218-40.300781c-4.4375-24.808594-23.882813-44.214844-48.699219-48.601563l-26.101563-4.597656c-5.441406-.96875-10.632812 2.660156-11.601562 8.097656-.964844 5.441407 2.660156 10.632813 8.101562 11.601563l26.199219 4.597656c16.53125 2.929688 29.472656 15.871094 32.402344 32.402344l35.398437 199.699219c4.179688 23.894531 24.941406 41.324218 49.199219 41.300781h210c22.0625.066406 41.546875-14.375 47.902344-35.5l47-155.800781c.871093-3.039063.320312-6.3125-1.5-8.898438-1.902344-2.503906-4.859375-3.980468-8-4zm-56.601563 162.796875c-3.773437 12.6875-15.464844 21.367188-28.699218 21.300781h-210c-14.566407.039063-27.035157-10.441406-29.5-24.800781l-24.699219-139.398437h336.097656zm0 0"></path>
+													<path d="m360.355469 322.332031c-30.046875 0-54.402344 24.355469-54.402344 54.402344 0 30.042969 24.355469 54.398437 54.402344 54.398437 30.042969 0 54.398437-24.355468 54.398437-54.398437-.03125-30.03125-24.367187-54.371094-54.398437-54.402344zm0 88.800781c-19 0-34.402344-15.402343-34.402344-34.398437 0-19 15.402344-34.402344 34.402344-34.402344 18.996093 0 34.398437 15.402344 34.398437 34.402344 0 18.996094-15.402344 34.398437-34.398437 34.398437zm0 0"></path>
+												</svg>
+												<span class="urbanconstruct-box-icon--close">
+													<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+												</span>			
+												<span class="urbanconstruct-count-holder">
+													<span class="urbanconstruct-count">{{ cart.item_count }}</span>
+												</span>		
+											</span>							
+										</a>
+										<span class="urbanconstruct-box-triangle">
+											<svg viewBox="0 0 20 9" role="presentation">
+												<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z" fill="#ffffff"></path>
+											</svg>
+										</span>
+									</div>
+								</div>
+								{% endif %}
+                {%if settings.urbanconstruct_header_info_show%}
+                <div class="urbanconstruct-header-action-item urbanconstruct-header-action_info urbanconstruct-activeInfoChecked">							
+								<div class="urbanconstruct-header-action_text">
+									<a class="urbanconstruct-header-action__link"  href="javascript:void(0)" aria-label="info" title="info">				
+										<span class="urbanconstruct-box-icon">								
+											<span class="urbanconstruct-hamburger-menu" aria-hidden="true">
+												
+											</span>
+										</span>							
+									</a>
+									<span class="urbanconstruct-box-triangle">
+										<svg viewBox="0 0 20 9" role="presentation">
+											<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z" fill="#ffffff"></path>
+										</svg>
+									</span>
+								</div>
+							</div>
+                {%endif%}
+                {%if settings.urbanconstruct_shop_google_translate%}
+                <div class="urbanconstruct-header-action-item urbanconstruct-header-action_translate">
+                  {%- include 'theme_google_translate' -%}
+                </div>
+                {%endif%}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    </div>
+	</header>
+</div>
+{%- include 'header-sidebar-main' -%}
+{%- include 'modal-coupon-header' -%}
+{%if settings.urbanconstruct_header_live_show%}
+{%- include 'modal-live-header' -%}
+{%endif%}

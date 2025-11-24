@@ -1,0 +1,280 @@
+$colorMain: {{ settings.shop_main_color }};
+$colorText: {{ settings.shop_text_color }};
+
+.layout-contact {
+  border-top: 1px solid rgba($colorText, 0.2);
+}
+.contact-info {
+  padding: 150px 0;
+  .item {
+    font-size: 20px;
+    font-weight: 600;
+    .title {
+      color: rgba($colorText, 0.6);
+      margin-bottom: 15px;
+    }
+    .info {
+      li:not(:last-child) {
+        margin-bottom: 8px;
+      }
+    }
+  }
+  @media(min-width: 768px) {
+    .heading-title {
+      .title2 {
+        font-size: 46px;
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 60px 0 40px;
+    .item {
+      font-size: 16px;
+       &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+      .title {
+        margin-bottom: 10px;
+      }
+      .info {
+        li:not(:last-child) {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}
+.form-contact {
+  padding: 20px 0;
+  .form-bg {
+    position: relative;
+    background-image: url("{{'contact_form_bg.jpg' | asset_url}}");
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    padding: 60px 0;
+    .form-booking {
+      background: var(--shop-color-bg);
+      padding: 45px 30px 55px;
+      border-radius: 16px;
+      .title {
+        font-size: 35px;
+        margin-bottom: 30px;
+      }
+      .cta-submitform {
+        width: 100%;
+        justify-content: center;
+        &.btn-disabled {
+          cursor: no-drop;
+        }
+      }
+      .contact-form .input-group {
+        input[type="checkbox"] {
+          width: 18px;
+          height: 24px;
+          flex: 0 0 18px;
+          appearance: checkbox;
+          -webkit-appearance: checkbox;
+          margin-right: 10px;
+        }
+        label {
+          margin: 0;
+          color: rgba($colorText, 0.6);
+          a {
+            color: var(--shop-color-main);
+          }
+        }
+      }
+      .field-error {
+        top: calc(100% - 20px);
+        bottom: auto;
+      }
+    }
+  }
+  @media(min-width: 1200px) {
+    .form-bg {
+      .form-booking {
+        max-width: 520px;
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    .form-bg > .row {
+      margin: 0;
+    }
+  }
+  @media(max-width: 767px) {
+    .form-bg {
+      padding: 40px 0;
+      .form-booking {
+        padding: 30px 15px;
+        .title {
+          font-size: 22px;
+          margin-bottom: 20px;
+        }
+        .contact-form .input-group {
+          input,
+          textarea {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*
+   .heading-pageDetail h1 {
+   font-weight: 700;
+   font-size: 22px;
+   margin: 0 0 20px;
+   }
+   .wrapper-pageDetail {
+   background: #fff;
+   padding: 10px 15px;
+   height: 100%;
+   box-shadow: 0 0 3px rgba(0, 0, 0, 0.08);
+   }
+   .content-pageDetail {
+   margin-bottom: 40px;
+   }
+   .content-pageDetail * {
+   max-width: 100%;
+   }
+   .wrapper-bodycontact .wrapbox-content-left {
+   padding-right: 0;
+   }
+   .layout-pageContact .breadcrumb-shop {
+   margin-bottom: 0;
+   }
+   .box-info-contact,
+   .box-send-contact {
+   background: #fff;
+   padding: 15px;
+   border-radius: 3px;
+   }
+   .box-info-contact {
+   margin-bottom: 15px;
+   }
+   .box-info-contact li {
+   margin-bottom: 10px;
+   }
+   .box-info-contact li > span {
+   width: 35px;
+   height: 35px;
+   line-height: 35px;
+   border-radius: 50%;
+   float: left;
+   border: 1px solid #ddd;
+   text-align: center;
+   font-size: 15px;
+   }
+   .box-info-contact li p {
+   width: calc(100% - 35px);
+   float: left;
+   padding-left: 15px;
+   margin-bottom: 5px;
+   color: #696969;
+   font-weight: 500;
+   }
+   .box-info-contact li p a {
+   color: #696969;
+   }
+   .box-info-contact li p strong {
+   color: #000;
+   margin-bottom: 5px;
+   }
+   .wrapbox-contact {
+   display: flex;
+   display: -ms-flex;
+   justify-content: space-between;
+   -ms-justify-content: space-between;
+   flex-wrap: wrap;
+   -ms-flex-wrap: wrap;
+   }
+   .wrapbox-contact .infoList-contact {
+   width: 50%;
+   }
+   .box-send-contact h2,
+   .box-info-contact h2 {
+   font-weight: 700;
+   font-size: 22px;
+   margin: 0 0 20px;
+   }
+   .box-send-contact p {
+   margin-bottom: 15px;
+   }
+   .contact-form .input-group {
+   width: 100%;
+   margin-bottom: 20px;
+   }
+   .contact-form .input-group input,
+   .contact-form .input-group textarea {
+   color: #5c5c5c;
+   height: 45px;
+   width: 100%;
+   font-weight: 500;
+   padding: 8px 20px;
+   background: #fff;
+   border: 1px solid var(--shop-color-border);
+   border-radius: 4px;
+   box-shadow: none;
+   -moz-appearance: none;
+   -webkit-appearance: none;
+   appearance: none;
+   }
+   .contact-form .input-group textarea {
+   width: 100%;
+   height: 130px;
+   padding: 20px;
+   }
+   .contact-form .input-group textarea:focus {
+   outline: none;
+   }
+   @media(min-width: 992px) {
+   .box-map-contact {
+   height: 100%;
+   border-radius: 4px;
+   overflow: hidden;
+   }
+   .box-map-contact iframe {
+   top: 30px;
+   height: 100%;
+   position: -webkit-sticky;
+   position: sticky;
+   -webkit-transition: top 400ms ease;
+   -moz-transition: top 400ms ease;
+   transition: top 400ms ease;
+   }
+   }
+   @media(max-width: 991px) {
+   .wrapbox-contact {
+   flex-direction: column;
+   -ms-flex-direction: column;
+   }
+   .wrapbox-contact .infoList-contact {
+   width: 100%;
+   }
+   .wrapbox-contact .infoList-contact:nth-child(2) {
+   flex-direction: column-reverse;
+   -ms-flex-direction: column-reverse;
+   }
+   .widthContent {
+   flex-direction: column-reverse;
+   -ms-flex-direction: column-reverse;
+   }
+   .wrapper-bodycontact .wrapbox-content-left {
+   padding-right: 15px;
+   margin-top: 15px;
+   }
+   .box-map-contact iframe {
+   height: 50vh;
+   }
+   }
+   @media(max-width: 767px) {
+   .wrapbox-content-right {
+   padding: 0;
+   }
+   }
+*/

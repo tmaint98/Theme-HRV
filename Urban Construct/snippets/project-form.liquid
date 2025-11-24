@@ -1,0 +1,41 @@
+<div class="contact-form">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <div class="input-group">
+        <input required type="text" name="{{settings.gg_full_name}}" id="full_name" data-valid="full_name"  class="form-control" placeholder="{{settings.form_full_name}}" aria-describedby="basic-addon1">
+      </div>
+      <p class="full_name-validation field-error"></p>
+    </div>
+    <div class="col-sm-12 col-xs-12">
+      <div class="input-group">
+        <input pattern="[0-9]{10,12}" required type="text" name="{{settings.gg_phone}}" id="your_phone" data-valid="your_phone" class="form-control" placeholder="{{settings.form_phone}}" aria-describedby="basic-addon1">
+      </div>
+      <p class="your_phone-validation field-error"></p>
+    </div>
+    <div class="col-sm-12 col-xs-12">
+      <div class="input-group">
+        <input required type="text" name="{{settings.gg_email}}" id="your_email" data-valid="your_email" class="form-control" placeholder="{{settings.form_email}}" aria-describedby="basic-addon1">
+      </div>
+      <p class="your_email-validation field-error"></p>
+    </div>
+    <div class="col-sm-12 col-xs-12">
+      <div class="input-group">
+        <textarea required type="number" name="{{settings.gg_message}}" id="your_mess" data-valid="your_mess" min="1"  class="form-control" placeholder="{{settings.form_message}}" aria-describedby="basic-addon1"></textarea>
+      </div>
+      <p class="your_mess-validation field-error"></p>
+    </div>
+    <div class="col-sm-12 col-xs-12">
+      <div class="input-group">
+        <input required type="checkbox" name="form_policy" id="form_policy" class="form-control" />
+        <label for="form_policy">{{settings.form_policy}}</label>
+      </div>
+    </div>
+    <div class="col-sm-12 col-xs-12">
+      <div class="addcart-area">						
+        <button type="button" id="btn-booking-send" class="button btn-disabled" disabled> 
+          {{settings.form_booking}} 
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

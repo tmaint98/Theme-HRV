@@ -1,0 +1,17 @@
+<link rel="preload stylesheet" href="{{ 'uc-index-partner.scss.css' | asset_url }}" as="stylesheet">
+<section class="urbanconstruct-index-partner wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+    <div class="container">
+      <div class="list-partner">
+        {% for i in (1..6) %}
+          {% capture show %}show_urbanconstruct_index_partner_{{i}}{%endcapture%}
+          {% capture img %}urbanconstruct_index_partner_{{i}}_img.jpg{%endcapture%}
+          {% capture alt %}urbanconstruct_index_partner_{{i}}_alt{%endcapture%}
+          {% if settings[show] %}
+            <div class="partner-item">
+              <img src="{{ img | asset_url}}" alt="{{settings[alt]}}" />
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,59 @@
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'uc-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'uc-index-about-2.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'uc-index-about-2.js' | asset_url }}"></script>
+<section class="urbanconstruct-index-about-2">
+    <div class="container">
+      <div class="heading-title heading--1 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {% if settings.urbanconstruct_index_about_2_title_1 != '' %}
+          <div class="title1">{{ settings.urbanconstruct_index_about_2_title_1 }}</div>
+        {% endif %}
+        {% if settings.urbanconstruct_index_about_2_title_2 != '' %}
+          <h2 class="title2">{{ settings.urbanconstruct_index_about_2_title_2 | newline_to_br }}</h2>
+        {% endif %}
+      </div>
+      <div class="row">
+        <div class="offset-lg-6 col-lg-6 col-12">
+          <div class="heading-title heading--2 wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+            {% if settings.urbanconstruct_index_about_2_desc != '' %}
+              <div class="desc">{{ settings.urbanconstruct_index_about_2_desc }}</div>
+            {% endif %}
+            {% if settings.urbanconstruct_index_about_2_btn != '' %}
+              <div class="btn-more">
+                <a href="{{settings.urbanconstruct_index_about_2_link}}" class="button">{{ settings.urbanconstruct_index_about_2_btn }}</a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      {% assign count = 0 %}
+      {% assign list_project = '' %}
+      {% for i in (1..3) %}
+        {% capture show %}show_urbanconstruct_index_about_2_project_{{i}}{%endcapture%}
+        {% capture img %}urbanconstruct_index_about_2_project_{{i}}_img.jpg{%endcapture%}
+        {% capture title %}urbanconstruct_index_about_2_project_{{i}}_title{%endcapture%}
+        {% capture desc %}urbanconstruct_index_about_2_project_{{i}}_desc{%endcapture%}
+        {% capture link %}urbanconstruct_index_about_2_project_{{i}}_link{%endcapture%}
+        {% if settings[show] %}
+          {% assign count = count | plus: 1 %}
+          {% capture project_html %}<div class="project-item">
+        <a href="{{settings[link]}}">
+        <div class="img" style="--bg-img: url({{ img | asset_url}});"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" /></div>
+        <div class="detail">
+          <h3 class="title">{{settings[title]}}</h3>
+          {%if settings[desc] != ''%}<div class="desc">{{settings[desc]}}</div>{%endif%}
+        </div>
+          </a>
+      </div>{%endcapture%}
+          {% assign list_project = list_project | append: project_html %}
+        {% endif %}
+      {% endfor %}
+      <div class="list-project {%if count == 1%}item--1{%elsif count == 2%}item--2{%else%}item--3{%endif%} wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {{ list_project }}
+      </div>
+    </div>
+  </section>

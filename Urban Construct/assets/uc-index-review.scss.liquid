@@ -1,0 +1,235 @@
+:root{
+   --uc-index-review-bg: {{ settings.urbanconstruct_index_review_bg }};
+  --uc-index-review-bg-item: {{ settings.urbanconstruct_index_review_bg_item }};
+  --uc-index-review-percent: {{ settings.urbanconstruct_index_review_color_percent }};
+}
+$colorReview: {{ settings.urbanconstruct_index_review_color }};
+.urbanconstruct-index-review{
+  @media(min-width: 992px){
+  	.container{	max-width: 100%;padding-left: 20px;	padding-right: 20px;}
+  }
+  @media(min-width: 1200px){
+  	.container{max-width:1170px;}
+  }
+  @media(min-width: 1366px){
+  	.container{max-width:1290px;}
+  }
+  @media(min-width: 1600px){
+  	.container{max-width:1410px;}
+  	.container-fluid{max-width:1800px;}
+  }
+}
+.urbanconstruct-index-review{
+   @function rem($px) {
+@return($px / 16px)*1rem;
+}
+
+@function sqrt($r) {
+$x0: 1;
+$x1: $x0;
+@for $i from 1 through 10 {
+$x1: $x0 -($x0 * $x0 - abs($r)) /(2 * $x0);
+$x0: $x1;
+}
+@return $x1;
+}
+
+@function pow($number, $exponent) {
+$value: 1;
+@if $exponent > 0 {
+@for $i from 1 through $exponent {
+$value: $value * $number;
+}
+}
+@return $value;
+}
+
+
+.counter-num {
+  letter-spacing: rem(2px);
+  line-height: 1;
+  position: relative;
+  display: flex;
+  justify-content: start;
+  overflow: hidden;
+  align-items: center;
+  height: rem(50px);
+  font-size: rem(50px);
+  font-weight: 600;
+  color: var(--uc-index-slide-color-counter);
+  & > span {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 2s ease;
+    transform: translateY(0);
+    line-height: 1;
+    span {
+      flex: 0 0 100%;
+      height: 100%;
+    }
+  }
+  $d: 0;
+  $inc: 0.375;
+  @for $i from 1 through 20 {
+     &:nth-child(#{$i}) > span {
+    ;
+    // transition-delay: #{$d * 1s};
+  }
+  $d: $d + $inc;
+}
+}
+}
+.urbanconstruct-index-review {
+  padding: 80px 0;
+  background: var(--uc-index-review-bg);
+  color: $colorReview;
+  position: relative;
+   &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba($colorReview, 0.1) 0, rgba($colorReview, 0) 55%) no-repeat
+  }
+  .heading-title {
+    .desc {
+      color: rgba($colorReview, 0.6);
+    }
+  }
+  .review-item {
+    background: var(--uc-index-review-bg-item);
+    padding: 50px 40px;
+    border-radius: 16px;
+    position: relative;
+    .item-left {
+      .logo {
+        margin-bottom: 15px;
+        img {
+          opacity: 0.6;
+          transition: all 0.3s;
+          max-height: 60px;
+          width: auto;
+           &:hover {
+            opacity: 1;
+          }
+        }
+
+      }
+      .title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .desc {
+        color: rgba($colorReview, 0.6);
+        margin-bottom: 30px;
+      }
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .img {
+          img {
+            max-width: 70px;
+            border-radius: 50%;
+          }
+        }
+        .detail {
+          .name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+          .position {
+            font-size: 14px;
+            color: rgba($colorReview, 0.6);
+          }
+        }
+      }
+    }
+    .item-right {
+      .title {
+        font-size: 24px;
+      }
+      .percent {
+        &,
+        .counter-num {
+          color: var(--uc-index-review-percent);
+        }
+        .p-desc {
+          font-size: 18px;
+          font-weight: 600;
+          margin-top: 10px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .swiper-pagination{
+    .swiper-pagination-bullet{
+      background: rgba($colorReview, 0.5);
+      &.swiper-pagination-bullet-active{
+        background: $colorReview;
+      }
+    }
+  }
+  @media(min-width: 1200px) {
+    .review-item {
+      .item-left {
+        padding-right: 40px;
+        border-right: 1px solid rgba($colorReview, 0.1);
+      }
+      .item-right {
+        padding-left: 30px;
+        height: 100%;
+        display: flex;
+        flex-flow: wrap;
+        align-items: center;
+        > div {
+          flex: 0 0 100%;
+        }
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    &:before{
+      width: 100%;
+    }
+    .review-item {
+      .row {
+        gap: 20px;
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .review-item {
+      padding: 30px 15px;
+      .item-left {
+        .logo img{max-height: 45px;}
+        .title,.info .detail .name{
+          font-size: 16px;
+        }
+      }
+      .item-right {
+        .title{
+        font-size: 18px;
+        }
+        .percent{
+          margin: 20px 0;
+          .counter-num {
+            height: rem(30px);
+  font-size: rem(30px);
+        }
+        .p-desc {
+          font-size: 16px;
+        }
+        }
+      }
+    }
+  }
+}

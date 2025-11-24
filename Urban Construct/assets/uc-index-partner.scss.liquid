@@ -1,0 +1,52 @@
+.urbanconstruct-index-partner{
+  @media(min-width: 992px){
+  	.container{	max-width: 100%;padding-left: 20px;	padding-right: 20px;}
+  }
+  @media(min-width: 1200px){
+  	.container{max-width:1170px;}
+  }
+  @media(min-width: 1366px){
+  	.container{max-width:1290px;}
+  }
+  @media(min-width: 1600px){
+  	.container{max-width:1410px;}
+  	.container-fluid{max-width:1800px;}
+  }
+}
+.urbanconstruct-index-partner {
+  padding: 80px 0;
+  .list-partner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    .partner-item {
+      -ms-flex: 0 0 calc(100% / 6 - 25px);
+      flex: 0 0 calc(100% / 6 - 25px);
+      max-width: calc(100% / 6 - 25px);
+      img {
+        max-height: 80px;
+        opacity: 0.3;
+        transition: all 0.3s;
+         &:hover {
+          opacity: 1;
+        }
+      }
+
+    }
+  }
+  @media(max-width: 991px) {
+    .list-partner {
+      flex-flow: wrap;
+      gap: 15px;
+      .partner-item {
+        -ms-flex: 0 0 calc(100% / 3 - 10px);
+        flex: 0 0 calc(100% / 3 - 10px);
+        max-width: calc(100% / 3 - 10px);
+      }
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+  }
+}

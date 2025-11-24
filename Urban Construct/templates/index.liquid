@@ -1,0 +1,423 @@
+{%- for i in (1..11) -%}
+{%- capture sectionname -%}urbanconstruct_section_index_{{i}}{%- endcapture -%}
+{%- if settings[sectionname] != 'none' -%}
+{%- include settings[sectionname] -%}
+{%- endif -%}
+{%- endfor -%}
+
+<div style="display: none">
+  {%for i in (2..11)%}
+<tr>
+						<td>Khối {{i}}</td>
+						<td class="min-width-320px">
+							<select name="urbanconstruct_section_index_{{i}}">
+								<option value="none">None</option>
+								<option value="uc-index-slider">Banner slider</option>
+                <option value="uc-index-about-1">Giới thiệu 1</option>
+                <option value="uc-index-policy">Chính sách</option>
+                <option value="uc-index-about-2">Giới thiệu 2</option>
+                <option value="uc-index-marquee">Chữ cuộn ngang</option>
+                <option value="uc-index-review">Đánh giá</option>
+                <option value="uc-index-service">Dịch vụ</option>
+                <option value="uc-index-partner">Logo đối tác</option>
+                <option value="uc-index-contact">Liên hệ</option>
+                <option value="uc-index-team">Nhân viên</option>
+                <option value="uc-index-blog">Bài viết</option>
+							</select>
+						</td>
+					</tr>
+    {%endfor%}
+</div>
+
+{%comment%}
+{% if settings.home_slider_show %}
+  {% include 'homepage-slider' %}{% endif %}
+
+<div class="section-home-pus-promotion pus-promotion-grids">
+  <div class="container">
+    <div class="hrv-pus-promotion" data-hrvpus-layout="flashsale"></div>
+  </div>
+</div>
+<div class="section-home-hrvpmo hrvpmo-grids">
+  <div class="container">
+    <div class="hrv-pmo-coupon" data-hrvpmo-layout="grids"></div>
+    <div class="hrv-pmo-discount" data-hrvpmo-layout="grids"></div>
+  </div>
+</div>
+{% if settings.show_home_about_1 %}
+  <section class="section-index-about-1">
+    <div class="container">
+      <div class="row">
+        {% if settings.show_home_about_1_banner_1 %}
+          <div class="col-lg-6 col-12">
+            <div class="banner banner-left wow fadeInUp" data-wow-delay="0s" data-wow-duration="0.8s">
+              <img src="{{'home_about_1_banner_1_img.jpg' | asset_url}}" alt="{{settings.home_about_1_banner_1_alt}}" />
+            </div>
+          </div>
+        {% endif %}
+        <div class="{%if settings.show_home_about_1_banner_1%}col-lg-6{%endif%} col-12 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1s">
+          <div class="heading-title">
+            {% if settings.home_about_1_title_1 != '' %}
+              <div class="title1">{{ settings.home_about_1_title_1 }}</div>
+            {% endif %}
+            {% if settings.home_about_1_title_2 != '' %}
+              <h2 class="title2">{{ settings.home_about_1_title_2 | newline_to_br }}</h2>
+            {% endif %}
+            {% if settings.home_about_1_desc != '' %}
+              <div class="desc">{{ settings.home_about_1_desc }}</div>
+            {% endif %}
+          </div>
+          {% if settings.show_home_about_1_banner_2 %}
+            <div class="banner banner-right">
+              <img src="{{'home_about_1_banner_2_img.jpg' | asset_url}}" alt="{{settings.home_about_1_banner_2_alt}}" />
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_policy %}
+  <section class="section-index-policy {% if settings.show_home_about_1 %}has-about{%endif%}">
+    <div class="container">
+      <div class="row">
+        {% assign time = 0 %}
+        {% for i in (1..3) %}
+          {% capture show %}show_home_policy_{{i}}{%endcapture%}
+          {% capture img %}home_policy_{{i}}_img.jpg{%endcapture%}
+          {% capture title %}home_policy_{{i}}_title{%endcapture%}
+          {% capture desc %}home_policy_{{i}}_desc{%endcapture%}
+          {% if settings[show] %}
+            {% assign time = time | plus: 0.2 %}
+            <div class="col-lg-4 col-12 policy-item wow fadeInUp" data-wow-delay="{{time}}s" data-wow-duration="0.8s">
+              <div class="img"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" /></div>
+              <div class="detail">
+                <h3 class="title">{{ settings[title] }}</h3>
+                {% if settings[desc] != '' %}
+                  <div class="desc">{{ settings[desc] }}</div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_about_2 %}
+  <section class="section-index-about-2">
+    <div class="container">
+      <div class="heading-title heading--1 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {% if settings.home_about_2_title_1 != '' %}
+          <div class="title1">{{ settings.home_about_2_title_1 }}</div>
+        {% endif %}
+        {% if settings.home_about_2_title_2 != '' %}
+          <h2 class="title2">{{ settings.home_about_2_title_2 | newline_to_br }}</h2>
+        {% endif %}
+      </div>
+      <div class="row">
+        <div class="offset-lg-6 col-lg-6 col-12">
+          <div class="heading-title heading--2 wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+            {% if settings.home_about_2_desc != '' %}
+              <div class="desc">{{ settings.home_about_2_desc }}</div>
+            {% endif %}
+            {% if settings.home_about_2_btn != '' %}
+              <div class="btn-more">
+                <a href="{{settings.home_about_2_link}}" class="button">{{ settings.home_about_2_btn }}</a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      {% assign count = 0 %}
+      {% assign list_project = '' %}
+      {% for i in (1..3) %}
+        {% capture show %}show_home_about_2_project_{{i}}{%endcapture%}
+        {% capture img %}home_about_2_project_{{i}}_img.jpg{%endcapture%}
+        {% capture title %}home_about_2_project_{{i}}_title{%endcapture%}
+        {% capture desc %}home_about_2_project_{{i}}_desc{%endcapture%}
+        {% capture link %}home_about_2_project_{{i}}_link{%endcapture%}
+        {% if settings[show] %}
+          {% assign count = count | plus: 1 %}
+          {% capture project_html %}<div class="project-item">
+        <a href="{{settings[link]}}">
+        <div class="img" style="--bg-img: url({{ img | asset_url}});"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" /></div>
+        <div class="detail">
+          <h3 class="title">{{settings[title]}}</h3>
+          {%if settings[desc] != ''%}<div class="desc">{{settings[desc]}}</div>{%endif%}
+        </div>
+          </a>
+      </div>{%endcapture%}
+          {% assign list_project = list_project | append: project_html %}
+        {% endif %}
+      {% endfor %}
+      <div class="list-project {%if count == 1%}item--1{%elsif count == 2%}item--2{%else%}item--3{%endif%} wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {{ list_project }}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_marquee %}
+  <section class="section-index-marquee">
+    <div class="marquee wow fadeIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+      <div class="marquee__inner">
+        {% if settings.home_marquee_desc != '' %}
+          {% for i in (1..3) %}
+            <div class="marquee__inner--item">{{ settings.home_marquee_desc }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_review %}
+  <section class="section-index-review">
+    <div class="container">
+      <div class="heading-title text-center wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {% if settings.home_review_title_1 != '' %}
+          <div class="title1">{{ settings.home_review_title_1 }}</div>
+        {% endif %}
+        {% if settings.home_review_title_2 != '' %}
+          <h2 class="title2">{{ settings.home_review_title_2 | newline_to_br }}</h2>
+        {% endif %}
+        {% if settings.home_review_desc != '' %}
+          <div class="desc">{{ settings.home_review_desc }}</div>
+        {% endif %}
+      </div>
+      <div class="list-review owl-carousel">
+        {% for i in (1..3) %}
+          {% capture show %}show_home_review_{{i}}{%endcapture%}
+          {% capture logo %}home_review_{{i}}_logo.jpg{%endcapture%}
+          {% capture title %}home_review_{{i}}_title{%endcapture%}
+          {% capture desc %}home_review_{{i}}_desc{%endcapture%}
+          {% capture img %}home_review_{{i}}_img.jpg{%endcapture%}
+          {% capture name %}home_review_{{i}}_name{%endcapture%}
+          {% capture position %}home_review_{{i}}_position{%endcapture%}
+          {% capture p_title %}home_review_{{i}}_percent_title{%endcapture%}
+          {% capture p_num %}home_review_{{i}}_percent_num{%endcapture%}
+          {% capture p_num_desc %}home_review_{{i}}_percent_num_desc{%endcapture%}
+          {% capture p_desc %}home_review_{{i}}_percent_desc{%endcapture%}
+          {% if settings[show] %}
+            <div class="review-item wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+              <div class="row">
+                <div class="col-lg-8 col-12">
+                  <div class="item-left">
+                    <div class="logo"><img src="{{ logo | asset_url}}" alt="logo" /></div>
+                    <div class="title">{{ settings[title] }}</div>
+                    <div class="desc">{{ settings[desc] }}</div>
+                    <div class="info">
+                      <div class="img"><img src="{{ img | asset_url}}" alt="{{settings[name]}}" /></div>
+                      <div class="detail">
+                        <div class="name">{{ settings[name] }}</div>
+                        <div class="position">{{ settings[position] }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-12">
+                  <div class="item-right">
+                    <div class="title">{{ settings[p_title] }}</div>
+                    <div class="percent">
+                      <span class="counter-num" aria-label="{{settings[p_num]}}">{{ settings[p_num] }}</span>
+                      <span class="p-desc">{{ settings[p_num_desc] }}</span>
+                    </div>
+                    <div class="desc">{{ settings[p_desc] }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_service %}
+  <section class="section-index-service {%if settings.show_home_service_bg%}has-bg{%endif%}">
+    <div class="container">
+      <div class="service-heading wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        <div class="heading-title">
+          {% if settings.home_service_title_1 != '' %}
+            <div class="title1">{{ settings.home_service_title_1 }}</div>
+          {% endif %}
+          {% if settings.home_service_title_2 != '' %}
+            <h2 class="title2">{{ settings.home_service_title_2 | newline_to_br }}</h2>
+          {% endif %}
+          {% if settings.home_service_desc != '' %}
+            <div class="desc">{{ settings.home_service_desc }}</div>
+          {% endif %}
+        </div>
+        {% if settings.home_service_btn != '' %}
+          <a href="{{settings.home_service_link}}">{{ settings.home_service_btn }}</a>
+        {% endif %}
+      </div>
+      {% assign active = 0 %}
+      {% assign list_title = '' %}
+      {% assign list_content = '' %}
+      {% for i in (1..5) %}
+        {% capture show %}show_home_service_{{i}}{%endcapture%}
+        {% capture title %}home_service_{{i}}_title{%endcapture%}
+        {% capture img %}home_service_{{i}}_img.jpg{%endcapture%}
+        {% if settings[show] %}
+          {% assign active = active | plus: 1 %}
+          {% capture list_title_html %}
+            <li class="nav-item">
+              <a class="nav-link {%if active == 1%}active{%endif%}" data-toggle="tab" href="#service-tab-{{i}}">{{settings[title]}}</a>
+            </li>
+          {%endcapture%}
+          {% capture list_content_html %}
+            <div class="tab-pane {%if active == 1%}active{%endif%}" id="service-tab-{{i}}">
+              <div class="img"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" /></div>
+            </div>
+            {%endcapture%}
+          {% assign list_title = list_title | append: list_title_html %}
+          {% assign list_content = list_content | append: list_content_html %}
+        {% endif %}
+
+      {% endfor %}
+      {% if active > 0 %}
+        <div class="service-tab wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+          <ul class="nav nav-tabs">
+            {{ list_title }}
+          </ul>
+          <div class="tab-content">
+            {{ list_content }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_partner %}
+  <section class="section-index-partner wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+    <div class="container">
+      <div class="list-partner">
+        {% for i in (1..6) %}
+          {% capture show %}show_home_partner_{{i}}{%endcapture%}
+          {% capture img %}home_partner_{{i}}_img.jpg{%endcapture%}
+          {% capture alt %}home_partner_{{i}}_alt{%endcapture%}
+          {% if settings[show] %}
+            <div class="partner-item">
+              <img src="{{ img | asset_url}}" alt="{{settings[alt]}}" />
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_contact %}
+  <section class="section-index-contact wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+    <div class="container-fluid">
+      <div class="contact-img">
+      <picture>
+        <source media="(max-width: 767px)" srcset="{{ 'home_contact_img_mb.jpg' | asset_url}}" />
+        <source media="(min-width: 768px)" srcset="{{ 'home_contact_img.jpg' | asset_url}}" />
+        <img src="{{ 'home_contact_img.jpg' | asset_url }}" alt="{{ settings.home_contact_title_2 }}" />
+      </picture>
+      </div>
+      <div class="contact-detail">
+        <div class="heading-title text-center">
+          {% if settings.home_contact_title_1 != '' %}
+            <div class="title1">{{ settings.home_contact_title_1 }}</div>
+          {% endif %}
+          {% if settings.home_contact_title_2 != '' %}
+            <h2 class="title2">{{ settings.home_contact_title_2 | newline_to_br }}</h2>
+          {% endif %}
+          {% if settings.home_contact_desc != '' %}
+            <div class="desc">{{ settings.home_contact_desc }}</div>
+          {% endif %}
+          {% if settings.home_contact_btn != '' %}
+            <div class="btn-more">
+              <a href="{{settings.home_contact_link}}" class="button">{{ settings.home_contact_btn }}</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_team %}
+  <section class="section-index-team">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-12 wow fadeIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+          <div class="team-left">
+            <div class="heading-title">
+              {% if settings.home_team_title_1 != '' %}
+                <div class="title1">{{ settings.home_team_title_1 }}</div>
+              {% endif %}
+              {% if settings.home_team_title_2 != '' %}
+                <h2 class="title2">{{ settings.home_team_title_2 | newline_to_br }}</h2>
+              {% endif %}
+              {% if settings.home_team_desc != '' %}
+                <div class="desc">{{ settings.home_team_desc }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-12">
+          <div class="team-right">
+            {%assign time1 = 0.3%}
+            {% for i in (1..4) %}
+              {% capture show %}show_home_team_{{i}}{%endcapture%}
+              {% capture img %}home_team_{{i}}_img.jpg{%endcapture%}
+              {% capture name %}home_team_{{i}}_name{%endcapture%}
+              {% capture position %}home_team_{{i}}_position{%endcapture%}
+              {% capture link %}home_team_{{i}}_link{%endcapture%}
+              {% if settings[show] %}
+                {%assign time1 = time1 | plus: 0.1%}
+                <div class="team-item wow fadeInUp" data-wow-delay="{{time1}}s" data-wow-duration="0.8s">
+                  <a href="{{settings[link]}}" class="img"><img src="{{ img | asset_url}}" alt="{{settings[name]}}" /></a>
+                  <div class="detail">
+                    <div class="name">{{ settings[name] }}</div>
+                    <div class="position">{{ settings[position] }}</div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% if settings.show_home_blog %}
+  <section class="section-index-blog">
+    <div class="container">
+      <div class="heading-title text-center wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        {% if settings.home_blog_title_1 != '' %}
+          <div class="title1">{{ settings.home_blog_title_1 }}</div>
+        {% endif %}
+        {% if settings.home_blog_title_2 != '' %}
+          <h2 class="title2">{{ settings.home_blog_title_2 | newline_to_br }}</h2>
+        {% endif %}
+        {% if settings.home_team_desc != '' %}
+          <div class="desc">{{ settings.home_blog_desc }}</div>
+        {% endif %}
+      </div>
+      {% if blogs[settings.home_blog_handle].articles.size == 0 %}
+        <p class="txt-noArticle text-center">Chưa có bài viết nào trong mục này</p>
+        {% else %}
+        <div class="row list-blog">
+          {%assign time2 = 0%}
+          {% for article in blogs[settings.home_blog_handle].articles limit: 3 %}
+            {%assign time2 = time2 | plus: 0.1%}
+            <div class="col-lg-4 col-12 wow fadeInUp" data-wow-delay="{{time2}}s" data-wow-duration="0.8s">
+            {% include 'article-loop' %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if blogs[settings.home_blog_handle].articles.size > 3 and settings.home_blog_btn != '' %}
+          <div class="btn-more text-center wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.5s">
+            <a href="{{blogs[settings.home_blog_handle].url}}" class="button">{{ settings.home_blog_btn }}</a>
+          </div>
+        {% endif %}
+      {% endif %}
+
+    </div>
+  </section>
+{% endif %}
+{%endcomment%}

@@ -1,0 +1,59 @@
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'uc-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'uc-index-service.scss.css' | asset_url }}" as="stylesheet">
+<section class="urbanconstruct-index-service {%if settings.show_urbanconstruct_index_service_bg%}has-bg{%endif%}">
+    <div class="container">
+      <div class="service-heading wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+        <div class="heading-title">
+          {% if settings.urbanconstruct_index_service_title_1 != '' %}
+            <div class="title1">{{ settings.urbanconstruct_index_service_title_1 }}</div>
+          {% endif %}
+          {% if settings.urbanconstruct_index_service_title_2 != '' %}
+            <h2 class="title2">{{ settings.urbanconstruct_index_service_title_2 | newline_to_br }}</h2>
+          {% endif %}
+          {% if settings.urbanconstruct_index_service_desc != '' %}
+            <div class="desc">{{ settings.urbanconstruct_index_service_desc }}</div>
+          {% endif %}
+        </div>
+        {% if settings.urbanconstruct_index_service_btn != '' %}
+          <a href="{{settings.urbanconstruct_index_service_link}}">{{ settings.urbanconstruct_index_service_btn }}</a>
+        {% endif %}
+      </div>
+      {% assign active = 0 %}
+      {% assign list_title = '' %}
+      {% assign list_content = '' %}
+      {% for i in (1..5) %}
+        {% capture show %}show_urbanconstruct_index_service_{{i}}{%endcapture%}
+        {% capture title %}urbanconstruct_index_service_{{i}}_title{%endcapture%}
+        {% capture img %}urbanconstruct_index_service_{{i}}_img.jpg{%endcapture%}
+        {% if settings[show] %}
+          {% assign active = active | plus: 1 %}
+          {% capture list_title_html %}
+            <li class="nav-item">
+              <a class="nav-link {%if active == 1%}active{%endif%}" data-toggle="tab" href="#service-tab-{{i}}">{{settings[title]}}</a>
+            </li>
+          {%endcapture%}
+          {% capture list_content_html %}
+            <div class="tab-pane {%if active == 1%}active{%endif%}" id="service-tab-{{i}}">
+              <div class="img"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" /></div>
+            </div>
+            {%endcapture%}
+          {% assign list_title = list_title | append: list_title_html %}
+          {% assign list_content = list_content | append: list_content_html %}
+        {% endif %}
+
+      {% endfor %}
+      {% if active > 0 %}
+        <div class="service-tab wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+          <ul class="nav nav-tabs">
+            {{ list_title }}
+          </ul>
+          <div class="tab-content">
+            {{ list_content }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>

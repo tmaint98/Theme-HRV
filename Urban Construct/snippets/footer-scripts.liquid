@@ -1,0 +1,239 @@
+{%- include 'option_selection_js' -%}
+<script src="{{ 'api.jquery.js' | haravan_asset_url }}"></script>
+{%- if template contains 'customers' -%}
+{{ 'haravan_common.js' | haravan_asset_url | script_tag }}
+{{ 'customer_area.js'  | haravan_asset_url | script_tag }}
+{%- endif -%}
+{%- include 'plugins-js' -%}
+<script src="{{ 'jquery.angle.js' | asset_url }}"></script>
+{%-if settings.promotion_hrvapp_use-%}
+{%-if settings.promotion_hrvapp == 'appcombo'-%}
+<script type="text/javascript" src="{{ 'app-combo.js'  | asset_url }}" defer></script>
+{%-elsif settings.promotion_hrvapp == 'appbuyxgety'-%}
+<script type="text/javascript" src="{{ 'app-buyxgety.js' | asset_url }}" defer></script>
+{%-endif-%}
+{%-endif-%}	
+
+<script src="{{ 'jquery.fancybox.min.js'  | asset_url }}"></script>
+{%- if template contains 'product' -%}
+<script src="{{ 'script_combo-check.js'  | asset_url }}"></script>
+<!-- SCRIPT PRODUCT -->
+{%- if settings.product_layout_style == 'style_03' or template == 'product.style-03' or settings.product_layout_style == 'style_04' or template == 'product.style-04' -%}
+<script src="{{ 'slick.min.js'  | asset_url }}"></script>
+{%- endif -%}
+{%- endif -%}
+<!-- SCRIPT THEME -->
+{{ 'wow.min.js'  | asset_url | script_tag }}
+<script defer>
+  (function() {
+    new WOW().init();
+  })();
+</script>
+{%unless template == 'index'%}
+<script src="{{ 'scripts.js'  | asset_url }}" defer></script>
+{%endunless%}
+{%- if template contains 'customers' -%}
+{%- if customer and settings.hrloyalty_icon_used -%}<script src="{{ 'customer-scripts.js'  | asset_url }}"></script>{%- endif -%}
+{%- endif -%}
+<!-- POPUP LOAD --> 
+{%- if template contains 'index' -%}
+{%- if settings.popup_contact_show -%}
+<script>
+	jQuery(document).ready(function(){
+		{%- if settings.popup_contact_time == '0'  -%}
+		{%- assign  time_show_popup = 100 -%}
+		{% else %}
+		{%- assign  time_show_popup = settings.popup_contact_time | times: 1000 -%}
+		{% endif %}
+		setTimeout(function(){
+			if(sessionStorage.mega_popup == null ){
+				$('#popup-contact').modal('show');
+			}
+		},{{time_show_popup}});
+		 if ($('.popupForm').length > 0){
+			 $('.popup-form-customer form.contact-form').submit(function(e){
+				 var self = $(this);
+				 if($(this)[0].checkValidity() == true){
+					 e.preventDefault();
+					 grecaptcha.ready(function() {
+						 grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+							 self.find('input[name="g-recaptcha-response"]').val(token);
+							 $.ajax({
+								 type: 'POST',
+								 url:'/account/contact',
+								 data: $('.popup-form-customer form.contact-form').serialize(),
+								 success:function(data){
+									 if($(data).find('#error_customer').length == 0){
+										 $('.popup-form-customer .succes-popup').addClass('success').html('Cảm ơn bạn đã đăng ký email theo dõi!');
+										 setTimeout(function(){ 
+											 $('#popup-contact').modal('hide');
+											 location.reload();
+										 },1500);
+									 }
+									 else{
+										 $('.popup-form-customer .succes-popup').addClass('error').html($(data).find('#error_customer').html());
+									 }
+								 }
+							 })
+						 })
+					 });
+				 }
+				 if(sessionStorage.mega_popup == null ){
+					 sessionStorage.mega_popup = 'show' ;
+				 }		
+			 });
+		 }
+		 else{
+			 $(document).on('click','.linkbanner-popup-contact', function(){
+				 $('#popup-contact').modal('hide');
+				 if(sessionStorage.mega_popup == null ){
+					 sessionStorage.mega_popup = 'show' ;
+				 }
+			 });
+		 }
+		 $(document).on('click','.modal-popupContact .close-popup-contact', function(e){
+			 e.preventDefault();
+			 $('#popup-contact').modal('hide');
+			 if(sessionStorage.mega_popup == null ){
+				 sessionStorage.mega_popup = 'show' ;
+			 }
+		 });
+		 $(".modal-popupContact").on('hidden.bs.modal', function(){
+			 if(sessionStorage.mega_popup == null ){
+				 sessionStorage.mega_popup = 'show' ;
+			 } 
+		 });
+		 $(document).on('click', '.popup-discount .cpi-button', function(e){ 
+			 e.preventDefault();	
+			 $('.popup-discount .cpi-button').html('Sao chép mã').removeClass('disabled');
+			 var copyText = $(this).attr('data-coupon');
+			 var dummy = $('<input class="copy-discount-text-hide">').val(copyText).appendTo('.popupPromotion').select();
+			 dummy.focus();
+			 document.execCommand('copy');
+			 $('.copy-discount-text-hide').remove();
+			 $(this).html('Đã sao chép').addClass('disabled');
+		 });
+		});
+</script>
+{%- endif -%}
+{%-if settings.slide_1_video  -%}
+<script>
+	if ($("#homepage-slider .slider-item.item-video").length > 0) {
+		var mainSlider =$('#homepage-slider .owl-carousel');
+		var idVideo = '{{settings.slide_1_videoId}}';	
+		var player;
+		function loadYTAPIScript() {
+			let tag = document.createElement('script');
+			tag.src = 'https://www.youtube.com/iframe_api';
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		}
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('ytslide_'+idVideo, {
+				height:'100%',
+				width: '100%',
+				videoId: idVideo,
+				playerVars: {
+					autoplay: 1,mute: 1, 
+					controls:0, 
+					loop: 1,
+					autohide: 1, 
+					rel: 0,
+					fs:0, 
+					playsinline:1,
+					playlist: idVideo,   
+					origin: "{{ shop.url  | remove: 'https:' | remove: 'http:'}}",
+				},
+				events: {
+					'onReady': onPlayerReady,
+					//'onStateChange': onPlayerStateChange
+				},
+			});
+		}
+		function onPlayerReady(event) {
+			event.target.playVideo();	
+			listClickButtons();	
+			mainSlider.on('changed.owl.carousel', function (obj) {
+				event.target.pauseVideo();
+				//event.target.stopVideo();
+				var current = obj.item.index;
+				var currentVideo = $(obj.target).find('.owl-item').eq(current).find('.item-video');
+				var currentVideoSource = currentVideo.find('iframe');
+				if (currentVideo.length > 0) {
+					setTimeout(function(){
+						event.target.setVolume(40);
+						event.target.playVideo();	
+					}, 1200);	
+				}
+			});
+		}
+		function onPlayerStateChange(e) {
+			let state = e.target.getPlayerState();
+			let stateText = '';
+			if (state === -1) {
+				stateText = 'unstarted';
+			} else if (state === YT.PlayerState.ENDED) {
+				stateText = 'ended';
+			} else if (state === YT.PlayerState.PLAYING) {
+				stateText = 'playing';
+			} else if (state === YT.PlayerState.PAUSED) {
+				stateText = 'paused';
+			} else if (state === YT.PlayerState.BUFFERING) {
+				stateText = 'buffering';
+			} else if (state === YT.PlayerState.CUED) {
+				stateText = 'cued';
+			}
+			/*console.log('State text: ', stateText);*/
+		}
+		function listClickButtons() {
+			let isPlayed = false;
+			let playpauseBtn = document.getElementById('ytslide-playpause');
+			let playmuteBtn = document.getElementById('ytslide-mute');
+
+			if (player.getPlayerState() == 1 || player.getPlayerState() == 3 ) isPlayed = true;
+			playpauseBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				if (isPlayed === false) {
+					player.playVideo();
+					isPlayed = true;
+				} else {
+					player.pauseVideo();
+					isPlayed = false;
+				}
+			});
+			playmuteBtn.addEventListener('click', (e) => {
+				e.preventDefault(); 
+				if (player.isMuted()) {
+					playmuteBtn.innerHTML = '<svg class="svgyt-unmute" version="1.1" viewBox="0 0 36 36"><path class="ytp-svg-fill" d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z" ></path></svg>';
+					player.setVolume(50);
+					player.unMute();
+				} else {
+					playmuteBtn.innerHTML ='<svg class="svgyt-mute" version="1.1" viewBox="0 0 36 36"><path class="ytp-svg-fill" d="m 21.48,17.98 c 0,-1.77 -1.02,-3.29 -2.5,-4.03 v 2.21 l 2.45,2.45 c .03,-0.2 .05,-0.41 .05,-0.63 z m 2.5,0 c 0,.94 -0.2,1.82 -0.54,2.64 l 1.51,1.51 c .66,-1.24 1.03,-2.65 1.03,-4.15 0,-4.28 -2.99,-7.86 -7,-8.76 v 2.05 c 2.89,.86 5,3.54 5,6.71 z M 9.25,8.98 l -1.27,1.26 4.72,4.73 H 7.98 v 6 H 11.98 l 5,5 v -6.73 l 4.25,4.25 c -0.67,.52 -1.42,.93 -2.25,1.18 v 2.06 c 1.38,-0.31 2.63,-0.95 3.69,-1.81 l 2.04,2.05 1.27,-1.27 -9,-9 -7.72,-7.72 z m 7.72,.99 -2.09,2.08 2.09,2.09 V 9.98 z"></path></svg>';
+					player.mute();
+				}
+			});
+			/*
+				let stopBtn = document.getElementById('yt-stop');
+				stopBtn.addEventListener('click', (e) => {
+					e.preventDefault();
+					player.stopVideo();
+				});
+				*/
+		}
+		document.addEventListener('DOMContentLoaded', (e) => {
+				loadYTAPIScript();
+		});
+	}
+</script>
+{%-endif-%}
+{%- endif -%}
+<!--END *** POPUP LOAD =====================-->
+
+<script>
+	{% if settings.header_inventory_show == 'false' %}
+	$.post('/location.js?locationId=0').done(function(){
+		
+	});
+	 {% endif %}
+</script>
+

@@ -1,0 +1,101 @@
+:root{
+  --uc-index-blog-bg-btn: {{settings.urbanconstruct_index_blog_bg_btn}};
+  --uc-index-blog-color-btn: {{settings.urbanconstruct_index_blog_color_btn}};
+}
+.urbanconstruct-index-blog{
+  @media(min-width: 992px){
+  	.container{	max-width: 100%;padding-left: 20px;	padding-right: 20px;}
+  }
+  @media(min-width: 1200px){
+  	.container{max-width:1170px;}
+  }
+  @media(min-width: 1366px){
+  	.container{max-width:1290px;}
+  }
+  @media(min-width: 1600px){
+  	.container{max-width:1410px;}
+  	.container-fluid{max-width:1800px;}
+  }
+}
+.urbanconstruct-index-blog .button {
+  color: var(--uc-index-blog-color-btn);
+  background-color: var(--uc-index-blog-bg-btn);
+}
+.urbanconstruct-index-blog {
+  position: relative;padding: 80px 0;
+   &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: calc(100% - 60px);
+    height: 1px;
+    background: currentcolor;
+    opacity: 0.2;
+  }
+  .item-article {
+    .media-article {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      text-align: center;
+      img {
+        border-radius: 16px;
+        transition: all 0.3s;
+      }
+    }
+    .info-article {
+      margin-top: 20px;
+      .author {
+        font-size: 14px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .title-article a {
+        font-size: 28px;
+      }
+      .article-post-meta {
+        font-size: 14px;
+        opacity: 0.6;
+        .comment {
+          margin-left: 10px;
+        }
+      }
+      .short-article{display: none;}
+    }
+     &:hover {
+      .media-article {
+        img {
+          transform: scale(1.08);
+        }
+      }
+    }
+  }
+  .btn-more {
+    margin-top: 40px;
+  }
+  @media(max-width: 991px){
+    &:before {
+      left: 15px;
+    width: calc(100% - 30px);
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+    .row{
+      gap: 15px;
+    }
+    .item-article {
+      .info-article {
+      margin-top: 15px;
+        .author{
+          margin-bottom: 0;
+        }
+      .title-article a{
+      font-size: 18px;
+      }
+    }
+    }
+    
+  }
+}

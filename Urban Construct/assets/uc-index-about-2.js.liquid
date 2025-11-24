@@ -1,0 +1,24 @@
+UrbanConstruct.IndexAboutProject = {
+		init: function() {
+			var that = this;
+      that.UrbanConstruct_aboutProject();
+		},
+  UrbanConstruct_aboutProject: function(){
+    if($(window).width() > 1199){
+      let $parent = $(".urbanconstruct-index-about-2 .list-project");
+      if ($parent.length > 0) {
+        $parent.find('.project-item').hover(function(){
+          $parent.find('.project-item').removeClass('active').addClass('no-active');
+          $(this).addClass('active').removeClass('no-active');
+        },function(){
+          $parent.find('.project-item').removeClass('active').removeClass('no-active');
+        })
+      }  
+    }
+  },
+};
+(function() {
+  UrbanConstruct.IndexAboutProject.init();
+})();
+
+
