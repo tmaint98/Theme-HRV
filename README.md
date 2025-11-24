@@ -1,2 +1,1 @@
 # Theme-HRV
-* text=auto
