@@ -1,0 +1,76 @@
+{%if settings.show_greenweave_about_us_blog %}
+  {%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+  <link rel="preload stylesheet" href="{{ 'gw-about-us-blog.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-about-us-blog.js' | asset_url }}"></script>
+<section class="greenweave-about-us-blog">
+	<div class="container">
+    <div class="heading-title">
+      {% if settings.greenweave_about_us_blog_title_1 != '' %}
+        <div class="title1">{{ settings.greenweave_about_us_blog_title_1 }}</div>
+      {% endif %}
+      {% if settings.greenweave_about_us_blog_title_2 != '' %}
+        <h2 class="title2 font-title">{{ settings.greenweave_about_us_blog_title_2 | newline_to_br }}</h2>
+      {% endif %}
+      {% if settings.greenweave_about_us_blog_desc != '' %}
+        <div class="desc">{{ settings.greenweave_about_us_blog_desc | newline_to_br }}</div>
+      {% endif %}
+    </div>
+    {%if blogs[settings.greenweave_about_us_blog_handle].articles.size == 0%}
+    <p class="txt-noArticle">Chưa có bài viết nào trong mục này</p>
+    {%else%}
+      <div class="swiper">
+        <div class="swiper-wrapper list-blog">
+        {% for article in blogs[settings.greenweave_about_us_blog_handle].articles limit: settings.greenweave_about_us_blog_limit %}
+          <div class="swiper-slide">
+          {% include 'article-image' with article:article %}
+            <article class="article-loop">
+              <div class="article-inner">				
+                <div class="article-image">
+                  <a href="{{ article.url}}" class="blog-post-thumbnail" title="{{ article.title }}" rel="nofollow">
+                    <img {%if forloop.first%} src="{{ imageUrl | product_img_url : '1024x1024' }}"{%else%}src="{{ imageUrl | product_img_url : 'grande' }}"{%endif%}
+                         alt="{{ article.title }}" >
+                  </a>
+                </div>
+                <div class="article-detail">	
+                  <div class="article-author">   
+                    <span class="author">{{article.author}}</span>
+                  </div>
+                  <div class="article-title">
+                    <h3 class="post-title">
+                      <a href="{{ article.url}}" title="{{ article.title }}">{{ article.title }}</a>
+                    </h3>
+                  </div>		
+                  <div class="article-post-meta">   
+                    <span class="date">                
+                      <time pubdate datetime="{{ article.published_at | date: '%d Tháng %m, %Y' }}">{{ article.published_at | date: '%d Tháng %m, %Y' }}</time>
+                    </span>
+                    {% if blogs[settings.greenweave_about_us_blog_handle].comments_enabled? %}
+                    <span class="comment"><i class="comment-icon fa fa-comment-o"></i>
+                      <a href="{{ article.url }}">
+                        {{ article.comments_count }}<span> {{ article.comments_count | pluralize: 'Bình luận','Bình luận' }}</span>
+                      </a>
+                    </span>
+                    {% endif %}	
+                  </div>										
+                </div>
+              </div>						
+            </article>
+          </div>
+        {%endfor%}
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+      {%if blogs[settings.greenweave_about_us_blog_handle].articles.size > settings.greenweave_about_us_blog_limit and settings.greenweave_about_us_blog_btn != ''%}
+      <div class="btn-more">
+        <a href="{{blogs[settings.greenweave_about_us_blog_handle].url}}" class="button">
+          {{settings.greenweave_about_us_blog_btn}}
+        </a>
+      </div>
+      {%endif%}
+    {%endif%}
+  </div>
+</section>
+  {%endif%}

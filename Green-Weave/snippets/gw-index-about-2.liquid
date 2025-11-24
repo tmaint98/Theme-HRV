@@ -1,0 +1,52 @@
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'gw-index-about-2.scss.css' | asset_url }}" as="stylesheet">
+<section class="greenweave-index-about-2">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-12">
+          <div class="heading-title">
+            {% if settings.greenweave_index_about_2_title_1 != '' %}
+              <div class="title1">{{ settings.greenweave_index_about_2_title_1 }}</div>
+            {% endif %}
+            {% if settings.greenweave_index_about_2_title_2 != '' %}
+              <h2 class="title2 font-title">{{ settings.greenweave_index_about_2_title_2 | newline_to_br }}</h2>
+            {% endif %}
+            {% if settings.greenweave_index_about_2_desc != '' %}
+              <div class="desc">{{ settings.greenweave_index_about_2_desc | newline_to_br }}</div>
+            {% endif %}
+          </div>
+
+        </div>
+        <div class="col-lg-6 col-12">
+          {% if settings.greenweave_index_about_2_btn != '' %}
+            <div class="btn-more">
+              <a href="{{settings.greenweave_index_about_2_link}}" class="btn-icon">{{ settings.greenweave_index_about_2_btn }}
+                <span class="icon">
+                  <svg
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 24 24"
+                    id="right"
+                    class="icon line">
+                    <polyline id="primary" points="14 5 21 12 14 19" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline>
+                    <line
+                      id="primary-2"
+                      data-name="primary"
+                      x1="21"
+                      y1="12"
+                      x2="3"
+                      y2="12"
+                      style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></line>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </section>

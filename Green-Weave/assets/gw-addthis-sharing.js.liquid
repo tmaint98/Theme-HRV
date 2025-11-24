@@ -1,0 +1,116 @@
+GreenWeave.Addthis = {
+		init: function() {
+			var that = this;
+      that.GreenWeave_addThisIconShare();
+      that.GreenWeave_clickIconsToolbar();
+		},
+  GreenWeave_addThisIconShare: function(){
+		if ($('.greenweave_addthis_listSharing').length > 0){
+			$(window).scroll(function(){
+				if($(window).scrollTop() > 250 ) {
+					$('.greenweave_addthis_listSharing_list').addClass('is-show');
+				} else {
+					$('.greenweave_addthis_listSharing_list').removeClass('is-show');
+				}
+			});
+			$('.greenweave_addthis_contact__icons .greenweave-box-contact,.greenweave_addthis_contact__lists .greenweave_addthis_close').on('click', function(e){
+				if($('.greenweave_addthis_listSharing').hasClass('active')){
+					$('body').removeClass('greenweave-greenweave-locked-scroll');
+					$('.greenweave_addthis_listSharing').removeClass('active');
+					$('.greenweave_addthis_listSharing').fadeOut(150);				
+				}
+				else{		
+					$('.greenweave_addthis_listSharing').fadeIn(100);
+					$('.greenweave_addthis_listSharing').addClass('active');
+				}
+			});
+			$("body").on('click', function(event) {
+				if ($(event.target).is('.greenweave_addthis_contact__dialog') || $(event.target).is('.addThiclose')) {
+					event.preventDefault();
+					$('body').removeClass('greenweave-greenweave-locked-scroll');
+					$('.greenweave_addthis_listSharing').removeClass('active');
+					$('.greenweave_addthis_listSharing').fadeOut(150);			
+				}
+			});
+			$('.greenweave-body-popupform form.contact-form').submit(function(e){
+				var self = $(this);
+				if($(this)[0].checkValidity() == true){
+					e.preventDefault();
+					grecaptcha.ready(function() {
+						grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+							self.find('input[name="g-recaptcha-response"]').val(token);
+							$.ajax({
+								type: 'POST',
+								url:'/contact',
+								data: $('.greenweave-body-popupform form.contact-form').serialize(),			 
+								success:function(data){		
+									$('.greenweave-modal-addthis.fade.show').modal('hide');
+									swal({
+										icon: "success",
+										className: "greenweave-form-success",
+										title: "{%if settings.greenweave_addthis_icon3_title2 != ''%}{{settings.greenweave_addthis_icon3_title2}}{%else%}Đăng kí thông tin thành công{%endif%}",
+										text: "{{settings.greenweave_addthis_icon3_content}}",
+										button: false,
+										timer: 5000,
+									}).then((result) => {
+										//location.reload(); 
+									});
+								},	
+							})
+						}); 
+					});
+				}
+			});
+		}
+		/*if ($('.layoutProduct_scroll').length > 0 ) {
+			if	(jQuery(window).width() < 768 ){
+				var curScrollTop = 0;
+				$(window).scroll(function(){	
+					var scrollTop = $(window).scrollTop();
+					if(scrollTop > curScrollTop  && scrollTop > 200 ) {
+						$('.layoutProduct_scroll').removeClass('scroll-down').addClass('scroll-up');
+					}
+					else {
+						if (scrollTop > 200 && scrollTop + $(window).height() + 150 < $(document).height()) {
+							$('.layoutProduct_scroll').removeClass('scroll-up').addClass('scroll-down');	
+						}
+					}
+					if(scrollTop < curScrollTop  && scrollTop < 200 ) {
+						$('.layoutProduct_scroll').removeClass('scroll-up').removeClass('scroll-down');
+					}
+					curScrollTop = scrollTop;
+				});
+			}
+		}*/
+	},
+  GreenWeave_clickIconsToolbar: function(){
+		$('.greenweave-toolbarCartClick').click(function(){
+			if($('.greenweave_addthis_listSharing').hasClass('active')){
+				$('.greenweave_addthis_listSharing').removeClass('active');
+				$('.greenweave_addthis_listSharing').fadeOut(150);	
+			}
+			$('body').addClass('greenweave-locked-scroll');
+      $('.greenweave-header-action-item').removeClass('greenweave-js-action-show');
+			$('.greenweave-sidebar-main').addClass('greenweave-is-show-right');
+			$('.greenweave-sidebar-main .greenweave-sitenav-cart').addClass('greenweave-show');
+		});
+		$('.greenweave-toolbarContactClick').click(function(){
+			if($('.greenweave_addthis_listSharing').hasClass('active')){
+				$('body').removeClass('greenweave-locked-scroll');
+				$('.greenweave_addthis_listSharing').removeClass('active');
+				$('.greenweave_addthis_listSharing').fadeOut(150);				
+			}
+			else{		
+				$('body').addClass('greenweave-locked-scroll');
+				$('.greenweave_addthis_listSharing').fadeIn(100);
+				$('.greenweave_addthis_listSharing').addClass('active');
+			}
+		});
+		$('.greenweave-toolbarMenuClick').click(function(){
+			$('.greenweave-activeMenuChecked').trigger('click');
+		});
+	},
+};
+(function() {
+  GreenWeave.Addthis.init();
+})();

@@ -1,0 +1,217 @@
+:root {
+  --bg-faqs: {{settings.greenweave_about_us_faqs_bg}};
+  --color-faqs: {{settings.greenweave_about_us_faqs_color}};
+  --bg-counter1: {{settings.greenweave_about_us_faqs_bg_counter1}};
+  --color-counter1: {{settings.greenweave_about_us_faqs_color_counter1}};
+  --bg-counter2: {{settings.greenweave_about_us_faqs_bg_counter2}};
+  --color-counter2: {{settings.greenweave_about_us_faqs_color_counter2}};
+}
+.greenweave-about-us-faqs {
+  background: var(--bg-faqs);color: var(--color-faqs);
+
+  
+  @function rem($px) {
+  @return($px / 16px)*1rem;
+}
+
+@function sqrt($r) {
+$x0: 1;
+$x1: $x0;
+@for $i from 1 through 10 {
+$x1: $x0 -($x0 * $x0 - abs($r)) /(2 * $x0);
+$x0: $x1;
+}
+@return $x1;
+}
+
+@function pow($number, $exponent) {
+$value: 1;
+@if $exponent > 0 {
+@for $i from 1 through $exponent {
+$value: $value * $number;
+}
+}
+@return $value;
+}
+.counter-faqs {
+  letter-spacing: rem(2px);
+  line-height: 1;
+  position: relative;
+  display: flex;
+  justify-content: start;
+  overflow: hidden;
+  align-items: center;
+  height: rem(60px);
+  font-size: rem(60px);
+  font-weight: 600;
+  & > span {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 1s ease;
+    transform: translateY(0);
+    line-height: 1;
+    span {
+      flex: 0 0 100%;
+      height: 100%;
+    }
+  }
+  $d: 0;
+  $inc: 0.375;
+  @for $i from 1 through 20 {
+     &:nth-child(#{$i}) > span {
+    ;
+    // transition-delay: #{$d * 1s};
+  }
+  $d: $d + $inc;
+}
+}
+.intro-list-faqs {
+  .header-faqs {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 25px 0 25px 35px;
+    position: relative;
+    cursor: pointer;
+     &:before {
+      content: "";
+      left: 0;
+      top: calc(50% - 10px);
+      position: absolute;
+      box-sizing: border-box;
+      height: 20px;
+      width: 20px;
+      background: var(--color-faqs);
+  		-webkit-mask: url("data:image/svg+xml, %3Csvg width='20px' height='20px' viewBox='0 0 24 24' id='plus' data-name='Line Color' xmlns='http://www.w3.org/2000/svg' class='icon line-color'%3E%3Cpath id='primary' d='M5, 12H19M12, 5V19' style='fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;'%3E%3C/path%3E%3C/svg%3E") center / contain;
+  		mask: url("data:image/svg+xml, %3Csvg width='20px' height='20px' viewBox='0 0 24 24' id='plus' data-name='Line Color' xmlns='http://www.w3.org/2000/svg' class='icon line-color'%3E%3Cpath id='primary' d='M5, 12H19M12, 5V19' style='fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;'%3E%3C/path%3E%3C/svg%3E") center / contain;
+  		mask-repeat: no-repeat;
+
+      /*background-image: url("data:image/svg+xml, %3Csvg width='20px' height='20px' viewBox='0 0 24 24' id='plus' data-name='Line Color' xmlns='http://www.w3.org/2000/svg' class='icon line-color'%3E%3Cpath id='primary' d='M5, 12H19M12, 5V19' style='fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;'%3E%3C/path%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;*/
+      transition: all 0.4s ease-in-out 0s;
+      -moz-transition: all 0.4s ease-in-out 0s;
+      -o-transition: all 0.4s ease-in-out 0s;
+      -webkit-transition: all 0.4s ease-in-out 0s;
+      -ms-transition: all 0.4s ease-in-out 0s;
+    }
+    &.opened {
+      border-color: #000;
+    }
+     &.opened:before {
+       -webkit-mask: url("data:image/svg+xml, %3Csvg width='20px' height='20px' viewBox='0 0 24 24' id='minus' data-name='Line Color' xmlns='http://www.w3.org/2000/svg' class='icon line-color'%3E%3Cline id='primary' x1='19' y1='12' x2='5' y2='12' style='fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;'%3E%3C/line%3E%3C/svg%3E") center / contain;
+  		mask: url("data:image/svg+xml, %3Csvg width='20px' height='20px' viewBox='0 0 24 24' id='minus' data-name='Line Color' xmlns='http://www.w3.org/2000/svg' class='icon line-color'%3E%3Cline id='primary' x1='19' y1='12' x2='5' y2='12' style='fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;'%3E%3C/line%3E%3C/svg%3E") center / contain;
+      /*background-image: url("data:image/svg+xml, %3Csvg width='20px' height='20px' viewBox='0 0 24 24' id='minus' data-name='Line Color' xmlns='http://www.w3.org/2000/svg' class='icon line-color'%3E%3Cline id='primary' x1='19' y1='12' x2='5' y2='12' style='fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;'%3E%3C/line%3E%3C/svg%3E");*/
+    }
+  }
+  .content-faqs {
+    display: none;
+    padding-bottom: 10px;
+    position: relative;
+    top: -15px;
+    opacity: 0.6;
+  }
+  .faq-item {
+     &:not(:last-child) {
+      position: relative;
+       &:before{
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: 1px;
+         background: var(--color-faqs);
+         opacity: 0.1;
+       }
+    }
+  }
+}
+.faqs-banner {
+  position: relative;
+  .banner {
+    text-align: right;
+    img {
+      border-radius: 16px;
+    }
+  }
+  .list-counter {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    padding-right: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    .counter {
+      -ms-flex: 0 0 calc(50% - 10px);
+      flex: 0 0 calc(50% - 10px);
+      max-width: calc(50% - 10px);
+      padding: 30px 40px;
+      border-radius: 16px;
+       &--1 {
+        background: var(--bg-counter1);
+        color: var(--color-counter1);
+      }
+       &--2 {
+        background: var(--bg-counter2);
+        color: var(--color-counter2);
+      }
+      .title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .counter-faqs {
+        margin: 10px 0;
+        > span span {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+@media(min-width: 992px) {
+  .faqs-content {
+    padding-right: 30px;
+  }
+  .faqs-banner {
+    padding-left: 25%;
+  }
+}
+@media(max-width: 991px) {
+  .faqs-content {
+    margin-bottom: 30px;
+  }
+}
+@media(max-width: 767px) {
+  .intro-list-faqs {
+    .header-faqs {
+      font-size: 16px;
+      padding: 15px 0 15px 30px;
+    }
+    .content-faqs {
+      top: -10px;
+    }
+  }
+  .faqs-banner {
+    margin-bottom: 40px;
+    .list-counter {
+      padding-right: 0;
+      bottom: -40px;
+      .counter {
+        padding: 15px;
+        .title {
+          font-size: 16px;
+        }
+        .counter-faqs {
+          height: rem(40px);
+          font-size: rem(40px);
+        }
+      }
+    }
+  }
+}
+}

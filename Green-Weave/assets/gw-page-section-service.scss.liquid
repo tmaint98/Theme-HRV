@@ -1,0 +1,55 @@
+.greenweave-page-service {
+  .item {
+    .img img {
+      max-height: 80px;
+    }
+    .title {
+      margin-top: 25px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
+  .list-top {
+    .list-item {
+      display: flex;
+      flex-flow: wrap;
+      gap: 30px;
+      .item {
+        -ms-flex: 0 0 calc(50% - 15px);
+        flex: 0 0 calc(50% - 15px);
+        max-width: calc(50% - 15px);
+      }
+    }
+  }
+
+  .list-bottom {
+    gap: 30px;
+    margin: 30px 0 0;
+    .item {
+      -ms-flex: 0 0 calc(25% - 22.5px);
+      flex: 0 0 calc(25% - 22.5px);
+      max-width: calc(25% - 22.5px);
+    }
+  }
+  @media(max-width: 991px){
+  .list-bottom {
+    .item {
+      -ms-flex: 0 0 calc(50% - 15px);
+        flex: 0 0 calc(50% - 15px);
+        max-width: calc(50% - 15px);
+    }
+  }
+  }
+  @media(max-width: 767px){
+    .item {
+    .img img {
+      max-height: 60px;
+    }
+    .title {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  }
+  }
+}
+

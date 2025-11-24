@@ -1,0 +1,22 @@
+<link rel="preload stylesheet" href="{{ 'gw-page-process.scss.css' | asset_url }}" as="stylesheet">
+{% assign has_heading = false %}
+<div class="greenweave-layout-process">
+	<div class="hidden">{% include 'breadcrumb' %}</div>
+  <section class="greenweave-process-breadcrumb">
+    <div class="container">
+      <h1 class="text-center font-title">{{ page.title }}</h1>
+      <div class="icon-down text-center">
+        <a href="#btn-scroll">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 14.626 8.639"><path id="Контур_6507" data-name="Контур 6507" d="M14.392,101.42l-.479-.482a.8.8,0,0,0-1.132,0L7.316,106.4l-5.472-5.472a.8.8,0,0,0-1.132,0l-.479.479a.8.8,0,0,0,0,1.131l6.515,6.538a.818.818,0,0,0,.567.257h0a.818.818,0,0,0,.566-.257l6.508-6.52a.808.808,0,0,0,.234-.571A.8.8,0,0,0,14.392,101.42Z" transform="translate(0 -100.698)"></path></svg>
+        </a>
+        </div>
+    </div>
+  </section>
+  <div id="btn-scroll">
+    {% include 'gw-process-services'%}
+    {% include 'gw-process-stage-1'%}
+    {% include 'gw-process-stage-2'%}
+    {% include 'gw-process-stage-3'%}
+    {% include 'gw-process-contact'%}
+  </div>
+</div>

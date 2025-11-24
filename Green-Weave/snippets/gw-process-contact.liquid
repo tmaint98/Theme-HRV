@@ -1,0 +1,71 @@
+{%if settings.show_greenweave_process_contact%}
+    {%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+  <link rel="preload stylesheet" href="{{ 'gw-process-contact.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-process-contact.js' | asset_url }}"></script>
+	<section class="greenweave-process-contact">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-12">
+					<div class="contact-content">
+						<div class="heading-title">
+							{%if settings.greenweave_process_contact_title_1 != ''%}<div class="title1">{{settings.greenweave_process_contact_title_1}}</div>{%endif%}
+							{%if settings.greenweave_process_contact_title_2 != ''%}<h2 class="title2 font-title">{{settings.greenweave_process_contact_title_2 | newline_to_br}}</h2>{%endif%}
+							{%if settings.greenweave_process_contact_desc != ''%}<p class="desc">{{settings.greenweave_process_contact_desc}}</p>{%endif%}
+						</div>
+            <ul class="list-info">
+              {%if settings.greenweave_process_contact_address != ''%}
+                <li>
+                  <span class="icon-info">
+                  <svg width="26px" height="26px" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M512 1012.8c-253.6 0-511.2-54.4-511.2-158.4 0-92.8 198.4-131.2 283.2-143.2h3.2c12 0 22.4 8.8 24 20.8 0.8 6.4-0.8 12.8-4.8 17.6-4 4.8-9.6 8.8-16 9.6-176.8 25.6-242.4 72-242.4 96 0 44.8 180.8 110.4 463.2 110.4s463.2-65.6 463.2-110.4c0-24-66.4-70.4-244.8-96-6.4-0.8-12-4-16-9.6-4-4.8-5.6-11.2-4.8-17.6 1.6-12 12-20.8 24-20.8h3.2c85.6 12 285.6 50.4 285.6 143.2 0.8 103.2-256 158.4-509.6 158.4z m-16.8-169.6c-12-11.2-288.8-272.8-288.8-529.6 0-168 136.8-304.8 304.8-304.8S816 145.6 816 313.6c0 249.6-276.8 517.6-288.8 528.8l-16 16-16-15.2zM512 56.8c-141.6 0-256.8 115.2-256.8 256.8 0 200.8 196 416 256.8 477.6 61.6-63.2 257.6-282.4 257.6-477.6C768.8 172.8 653.6 56.8 512 56.8z m0 392.8c-80 0-144.8-64.8-144.8-144.8S432 160 512 160c80 0 144.8 64.8 144.8 144.8 0 80-64.8 144.8-144.8 144.8zM512 208c-53.6 0-96.8 43.2-96.8 96.8S458.4 401.6 512 401.6c53.6 0 96.8-43.2 96.8-96.8S564.8 208 512 208z" fill="" /></svg>
+                    </span>
+                  <span class="s_title">{{settings.greenweave_process_contact_address}}</span>
+                </li>
+                {%endif%}
+              {%if settings.greenweave_process_contact_phone != ''%}
+                <li>
+                  <span class="icon-info">
+                  <svg width="26px" height="26px" viewBox="-10 0 46 46" xmlns="http://www.w3.org/2000/svg">
+                    <path id="_27.Phone" data-name="27.Phone" d="M33,47H15a4,4,0,0,1-4-4V5a4,4,0,0,1,4-4H33a4,4,0,0,1,4,4V43A4,4,0,0,1,33,47ZM35,5a2,2,0,0,0-2-2H15a2,2,0,0,0-2,2V9H35Zm0,6H13V37H35Zm0,28H13v4a2,2,0,0,0,2,2H33a2,2,0,0,0,2-2ZM24,44a2,2,0,1,1,2-2A2,2,0,0,1,24,44ZM17,14h2a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H17a1,1,0,0,1-1-1V15A1,1,0,0,1,17,14Zm0,7h2a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H17a1,1,0,0,1-1-1V22A1,1,0,0,1,17,21Zm0,7h2a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H17a1,1,0,0,1-1-1V29A1,1,0,0,1,17,28Zm6-14h2a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H23a1,1,0,0,1-1-1V15A1,1,0,0,1,23,14Zm0,7h2a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H23a1,1,0,0,1-1-1V22A1,1,0,0,1,23,21Zm0,7h2a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H23a1,1,0,0,1-1-1V29A1,1,0,0,1,23,28Zm6-14h2a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H29a1,1,0,0,1-1-1V15A1,1,0,0,1,29,14Zm0,7h2a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H29a1,1,0,0,1-1-1V22A1,1,0,0,1,29,21ZM21,5h6a1,1,0,0,1,0,2H21a1,1,0,0,1,0-2Z" transform="translate(-11 -1)" fill-rule="evenodd"/>
+                  </svg>
+                  </span>
+                  <a href="tel:{{settings.greenweave_process_contact_phone | remove: ' '}}" class="info-phone font-title">{{settings.greenweave_process_contact_phone}}</a>
+                </li>
+                {%endif%}
+              {%if settings.greenweave_process_contact_email != ''%}
+                <li>
+                  <span class="icon-info">
+                  <svg width="24px" height="24px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <path class="clr-i-outline clr-i-outline-path-1" d="M32,6H4A2,2,0,0,0,2,8V28a2,2,0,0,0,2,2H32a2,2,0,0,0,2-2V8A2,2,0,0,0,32,6ZM30.46,28H5.66l7-7.24-1.44-1.39L4,26.84V9.52L16.43,21.89a2,2,0,0,0,2.82,0L32,9.21v17.5l-7.36-7.36-1.41,1.41ZM5.31,8H30.38L17.84,20.47Z"></path>
+                      <rect x="0" y="0" width="36" height="36" fill-opacity="0"/>
+                  </svg>
+                  </span>
+                  <a href="mailto:{{settings.greenweave_process_contact_email}}" class="info-email">{{settings.greenweave_process_contact_email}}</a>
+                </li>
+                {%endif%}
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12">
+          <div class="greenweave-process-form-booking">
+            {%if settings.greenweave_process_form_type_booking == 'google-sheet'%}
+              <form id="greenweave_process_formbooking" action="{{settings.greenweave_process_gg_link_form}}" data-shop="{{shop.name}}">
+                {%include 'gw-process-form-detail'%}
+              </form>
+            {%else%}
+            {%- capture formProductContact -%}
+              {%form "contact"%}
+                {%include 'gw-process-form-detail'%}
+              {%endform%}
+              {%- endcapture -%}
+              {{ formProductContact | replace: "script","noscript" }}
+            {%endif%}
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%include 'gw-process-modal-success'%}
+  {%endif%}

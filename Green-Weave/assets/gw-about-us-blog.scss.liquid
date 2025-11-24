@@ -1,0 +1,97 @@
+:root {
+  --bg-btn-blog: {{ settings.greenweave_about_us_blog_bg_btn }};
+  --color-btn-blog: {{ settings.greenweave_about_us_blog_color_btn }};
+}
+.greenweave-about-us-blog {
+  .button{
+    color: var(--color-btn-blog);
+    background-color: var(--bg-btn-blog);
+  }
+  .article-loop {
+    a {
+      color: inherit;
+    }
+    .article-image {
+      border-radius: 16px;
+      overflow: hidden;
+      img {
+        transition: all 0.3s;
+      }
+    }
+    .article-detail {
+      margin-top: 20px;
+      .article-author {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .article-title {
+        .post-title {
+          font-size: 24px;
+          margin-bottom: 15px;
+        }
+      }
+      .article-post-meta {
+        font-size: 14px;
+        opacity: 0.6;
+        a {
+          opacity: 0.6;
+        }
+        .comment {
+          position: relative;
+          padding-left: 25px;
+           &:before {
+            content: '\f111';
+            font-family: "FontAwesome";
+            font-size: 5px;
+            position: absolute;
+            top: 5px;
+            left: 8px;
+            color: rgba(17, 25, 21, 0.3);
+          }
+        }
+      }
+    }
+     &:hover {
+      .article-image {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+  .btn-more {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .swiper{
+    &:not(.swiper-initialized){
+      .swiper-wrapper{
+        display: flex;gap: 30px;
+        .swiper-slide{
+          flex: 0 0 25%;
+        }
+      }
+    }
+  .swiper-pagination {
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
+    .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      background: currentcolor;
+      opacity: 0.3;
+      &.swiper-pagination-bullet-active {
+          opacity: 1;
+      }
+    }
+  }
+  }
+@media(max-width: 767px){
+  .article-loop .article-detail .article-title .post-title{
+    font-size: 20px;
+  }
+}
+}

@@ -1,0 +1,181 @@
+$bgReview: {{settings.greenweave_index_review_bg}};
+$colorReview: {{settings.greenweave_index_review_color}};
+$bgReviewIcon: {{settings.greenweave_index_review_bg_icon}};
+$colorReviewIcon: {{settings.greenweave_index_review_color_icon}};
+.hidden{display: none !important;}
+.greenweave-index-review{
+  @media(min-width: 992px){
+  	.container{	max-width: 100%;padding-left: 20px;	padding-right: 20px;}
+  }
+  @media(min-width: 1200px){
+  	.container{max-width:1170px;}
+  }
+  @media(min-width: 1366px){
+  	.container{max-width:1290px;}
+  }
+  @media(min-width: 1600px){
+  	.container{max-width:1410px;}
+  	.container-fluid{max-width:1800px;}
+  }
+}
+.greenweave-index-review {
+  padding: 80px 0;background: $bgReview;color: $colorReview;
+  .review-info {
+    display: flex;
+    flex-flow: wrap;
+    gap: 30px;
+    .info-item {
+      -ms-flex: 0 0 calc(100% / 3 - 20px);
+      flex: 0 0 calc(100% / 3 - 20px);
+      max-width: calc(100% / 3 - 20px);
+      .item-img {
+        position: relative;
+        cursor: pointer;
+        img {
+          max-width: 100px;
+          border-radius: 50%;
+          opacity: 0.3;
+          transition: all 0.3s;
+        }
+        .item-quote {
+          position: absolute;
+          bottom: 0;
+          left: 60px;
+          width: 30px;
+          height: 30px;
+          line-height: 28px;
+          background: $bgReviewIcon;
+          color: $colorReviewIcon;
+          text-align: center;
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 0.3s;
+          svg {
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+          }
+        }
+         &:hover {
+          img,
+          .item-quote {
+            opacity: 1;
+          }
+        }
+      }
+      .item-detail {
+        opacity: 0;
+        transition: all 0.3s;
+        .name {
+          margin: 20px 0 5px;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 1.3;
+        }
+        .position {
+          font-size: 14px;
+          margin: 0;
+          color: rgba($colorReview, 0.6);
+        }
+      }
+      &.active {
+        .item-img img,
+        .item-img .item-quote,
+        .item-detail {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .review-desc {
+    .desc-item {
+      .desc {
+        font-size: 22px;
+        margin: 0;
+      }
+    }
+  }
+  .review-nav {
+    margin-top: 60px;
+    button {
+      width: 55px;
+      height: 55px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border-radius: 50%;
+      border: 1px solid rgba($colorReview, 0.3);
+      outline: none;
+      color: $colorReview;
+      transition: all 0.3s;
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: $colorReview;
+        transition: all 0.3s;
+        polyline,
+        line {
+          stroke: $colorReview;
+          transition: all 0.3s;
+        }
+      }
+      &.swiper-button-disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    .review-desc {
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .review-info {
+      gap: 15px;
+      justify-content: center;
+      text-align: center;
+      .info-item {
+        -ms-flex: 0 0 calc(100% / 3 - 10px);
+        flex: 0 0 calc(100% / 3 - 10px);
+        max-width: calc(100% / 3 - 10px);
+        .item-img {
+          max-width: 90px;
+          margin: 0 auto;
+          img {
+            max-width: 80px;
+          }
+          .item-quote {
+            left: calc(100% - 35px);
+            width: 24px;
+            height: 24px;
+            line-height: 22px;
+            svg {
+              width: 12px;
+              height: 12px;
+            }
+          }
+        }
+        .item-detail .name {
+          margin: 15px 0 5px;
+          font-size: 16px;
+        }
+      }
+    }
+    .review-desc {
+      .desc-item .desc {
+        font-size: 16px;
+        text-align: center;
+      }
+    }
+    .review-nav {
+      margin-top: 30px;text-align: center;
+      button {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}

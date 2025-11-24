@@ -1,0 +1,52 @@
+:root{
+  --bg-pc: {{settings.greenweave_process_bg}};
+  --color-pc: {{settings.greenweave_process_color}};
+}
+[class^="greenweave-process-"] {
+  padding: 80px 0;
+}
+@media(max-width: 767px) {
+  [class^="greenweave-process-"] {
+    padding: 40px 0;
+  }
+}
+.greenweave-layout-process{
+  @media(min-width: 992px){
+  	.container{	max-width: 100%;padding-left: 20px;	padding-right: 20px;}
+  }
+  @media(min-width: 1200px){
+  	.container{max-width:1170px;}
+  }
+  @media(min-width: 1366px){
+  	.container{max-width:1290px;}
+  }
+  @media(min-width: 1600px){
+  	.container{max-width:1410px;}
+  	.container-fluid{max-width:1800px;}
+  }
+}
+.greenweave-layout-process {
+  background: var(--bg-pc);
+  color: var(--color-pc);
+}
+#btn-scroll{
+	scroll-margin-block-start: 90px;
+	@media(max-width: 767px){
+		scroll-margin-block-start: 70px;
+	}
+}
+.greenweave-process-breadcrumb {
+  padding: 120px 0 40px;text-align: center;
+  h1 {
+    font-size: 58px;
+    margin-bottom: 25px;
+  }
+  .icon-down a svg{fill: var(--color-pc);}
+  @media(max-width: 767px){
+        padding: 60px 0 20px;
+    h1{
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+  }
+}

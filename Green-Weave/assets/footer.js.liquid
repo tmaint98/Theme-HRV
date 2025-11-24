@@ -1,0 +1,16 @@
+GreenWeave.Footer = {
+		init: function() {
+			var that = this;
+      that.GreenWeave_toggleFooter();
+		},
+  GreenWeave_toggleFooter: function(){
+		$('.greenweave-title-footer').on('click', function(){
+			if ($(window).width() < 992) {
+				jQuery(this).toggleClass('opened').parent().find('.greenweave-block-collapse').stop().slideToggle('medium');
+			}
+		});
+	},
+};
+(function() {
+  GreenWeave.Footer.init();
+})();

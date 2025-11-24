@@ -1,0 +1,49 @@
+{%unless template == 'page.process' or template == 'page.contact' %}
+{%if settings.greenweave_show_footer_newsletter%}
+<link rel="preload stylesheet" href="{{ 'gw-index-contact.scss.css' | asset_url }}" as="stylesheet">
+<div class="greenweave-form-contact">
+  <div class="container">
+		<div class="form-contact">
+			<div class="heading-title">
+				<h2 class="title2 font-title">{{settings.greenweave_footer_newsletter_title | newline_to_br}}</h2>
+				{%if settings.greenweave_footer_newsletter_desc%}<p class="detail-desc">{{settings.greenweave_footer_newsletter_desc}}</p>{%endif%}
+			</div>
+			{% form 'contact' %}
+			{% if form.posted_successfully? %}
+			<div class="alert alert-success">
+				Cám ơn bạn đã liên hệ! Chúng tôi sẽ trả lời ngay khi có thể
+			</div>
+			{% endif %}
+			<div class="contact-form">
+				<div class="row">
+					<div class="col-sm-12 col-xs-12">
+						<div class="input-group">
+							<input required type="text" name="contact[name]" class="form-control" placeholder="Tên của bạn" aria-describedby="basic-addon1">
+						</div>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<div class="input-group">
+							<input required type="text" name="contact[email]" class="form-control" placeholder="Email của bạn" aria-describedby="basic-addon1">
+						</div>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<div class="input-group">
+							<input pattern="[0-9]{10,12}" required type="text" name="contact[phone]" class="form-control" placeholder="Số điện thoại của bạn" aria-describedby="basic-addon1">
+						</div>
+					</div>
+					<div class="col-sm-12 col-xs-12">
+						<div class="input-group">
+							<textarea required name="contact[body]" placeholder="Nội dung"></textarea>
+						</div>
+					</div>
+					<div class="col-12">
+						<button class="button dark">{{settings.greenweave_footer_newsletter_btn}}</button>
+					</div>
+				</div>
+			</div>
+			{% endform %}
+		</div>
+  </div>
+	</div>
+{%endif%}
+{%endunless%}

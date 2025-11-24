@@ -1,0 +1,52 @@
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+{%-unless has_section_collection -%} 
+  <link rel="preload stylesheet" href="{{ 'gw-index-collection.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_section_collection = true -%}
+{%- endunless -%}
+{%capture bg_col%}greenweave_index_collection_{{ind}}_bg{%endcapture%}
+{%capture color_col%}greenweave_index_collection_{{ind}}_color{%endcapture%}
+{%capture bg_btn%}greenweave_index_collection_{{ind}}_btn_bg{%endcapture%}
+{%capture color_btn%}greenweave_index_collection_{{ind}}_btn_color{%endcapture%}
+{%capture title1%}greenweave_index_collection_{{ind}}_title_1{%endcapture%}
+{%capture title2%}greenweave_index_collection_{{ind}}_title_2{%endcapture%}
+{%capture desc%}greenweave_index_collection_{{ind}}_desc{%endcapture%}
+{%capture handle%}greenweave_index_collection_{{ind}}_handle{%endcapture%}
+{%assign col_handle = settings[handle]%}
+{%capture limit%}greenweave_index_collection_{{ind}}_limit{%endcapture%}
+{%capture btn%}greenweave_index_collection_{{ind}}_btn{%endcapture%}
+<section class="greenweave-index-collection" style="--bg-col: {{settings[bg_col]}};--color-col: {{settings[color_col]}};--bg-btn: {{settings[bg_btn]}};--color-btn: {{settings[color_btn]}};">
+    <div class="container">
+      <div class="heading-title">
+        {% if settings[title1] != '' %}
+          <div class="title1">{{ settings[title1] }}</div>
+        {% endif %}
+        {% if settings[title2] != '' %}
+          <h2 class="title2 font-title">{{ settings[title2] | newline_to_br }}</h2>
+        {% endif %}
+        {% if settings[desc] != '' %}
+          <div class="desc">{{ settings[desc] | newline_to_br }}</div>
+        {% endif %}
+      </div>
+      {%- if collections[col_handle].products.size == 0 -%}
+        <div class="collection-alert-no">
+          <p>Chưa có sản phẩm nào trong danh mục này</p>
+        </div>
+      {%- else -%}
+        <div class="row listProduct-row">
+          {%- for product in collections[col_handle].products limit: settings[limit] -%}
+            <div class="col-lg-3 col-6 product-item">
+              {%- include 'gw-product-loop' -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        {% if collections[col_handle].products.size > settings[limit] and settings[btn] != '' %}
+          <div class="btn-more">
+            <a href="{{collections[col_handle].url}}" class="button">{{ settings[btn] }}</a>
+          </div>
+        {% endif %}
+      {%- endif -%}
+    </div>
+  </section>

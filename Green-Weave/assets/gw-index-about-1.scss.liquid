@@ -1,0 +1,100 @@
+$colorAbout: {{settings.greenweave_index_about_1_color}};
+$colorBtn: {{settings.greenweave_index_about_1_btn_color}};
+$bgBtn: {{settings.greenweave_index_about_1_btn_bg}};
+
+.greenweave-index-about-1{
+  @media(min-width: 992px){
+  	.container{	max-width: 100%;padding-left: 20px;	padding-right: 20px;}
+  }
+  @media(min-width: 1200px){
+  	.container{max-width:1170px;}
+  }
+  @media(min-width: 1366px){
+  	.container{max-width:1290px;}
+  }
+  @media(min-width: 1600px){
+  	.container{max-width:1410px;}
+  	.container-fluid{max-width:1800px;}
+  }
+}
+.greenweave-index-about-1 .heading-title{
+  color: $colorAbout;
+}
+.greenweave-index-about-1 .button {
+  color: $colorBtn;
+  background-color: $bgBtn;
+}
+.greenweave-index-about-1 {
+  padding: 80px 0;
+  background-image: url("{{ 'greenweave_index_about_1_bg.jpg' | asset_url}}");
+  background-size: cover;
+  background-position: center;
+  .banner {
+    position: relative;
+    padding-bottom: 15%;
+    .img {
+      img {
+        border-radius: 14px;
+      }
+      &--1 {
+        width: 70%;
+      }
+      &--2 {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 63%;
+        height: auto;
+      }
+    }
+  }
+  .list-logo {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 100px 0 30px;
+    .item {
+      -ms-flex: 0 0 calc(100% / 6 - 25px);
+      flex: 0 0 calc(100% / 6 - 25px);
+      max-width: calc(100% / 6 - 25px);
+      text-align: center;
+      img {
+        opacity: 0.5;
+        transition: all 0.3s;
+      }
+       &:hover {
+        img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  @media(min-width: 1200px) {
+    .row > div:last-child {
+      padding-left: 100px;
+    }
+  }
+  @media(max-width: 991px){
+    padding-top: 40px;
+    .row{
+      gap: 20px;
+    }
+    .list-logo{
+          padding: 70px 0 0;
+    }
+  }
+   @media(max-width: 767px){
+     padding: 40px 0;
+     .list-logo{
+          padding: 40px 0 0;
+       gap: 15px 30px;
+       .item {
+      -ms-flex: 0 0 calc(100% / 3 - 20px);
+      flex: 0 0 calc(100% / 3 - 20px);
+      max-width: calc(100% / 3 - 20px);
+       }
+    }
+   }
+}

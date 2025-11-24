@@ -1,0 +1,70 @@
+{% if settings.show_greenweave_about_us_service %}
+  {%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+  <link rel="preload stylesheet" href="{{ 'gw-about-us-service.scss.css' | asset_url }}" as="stylesheet">
+  <section class="greenweave-about-us-service">
+    <div class="container">
+      <div class="heading-title">
+        {% if settings.greenweave_about_us_service_title_1 != '' %}
+          <div class="title1">{{ settings.greenweave_about_us_service_title_1 }}</div>
+        {% endif %}
+        <div class="heading-col">
+          <div class="heading-left">
+            {% if settings.greenweave_about_us_service_title_2 != '' %}
+              <h2 class="title2 font-title">{{ settings.greenweave_about_us_service_title_2 | newline_to_br }}</h2>
+            {% endif %}
+          </div>
+          <div class="heading-right">
+            {% if settings.greenweave_about_us_service_desc != '' %}
+              <div class="desc">{{ settings.greenweave_about_us_service_desc | newline_to_br }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="row list-service">
+        {% for i in (1..4) %}
+          {% capture show %}show_greenweave_about_us_service_{{i}}{%endcapture%}
+          {% capture img %}greenweave_about_us_service_{{i}}_img.jpg{%endcapture%}
+          {% capture title %}greenweave_about_us_service_{{i}}_title{%endcapture%}
+          {% capture btn %}greenweave_about_us_service_{{i}}_btn{%endcapture%}
+          {% capture link %}greenweave_about_us_service_{{i}}_link{%endcapture%}
+          {% if settings[show] %}
+            <div class="service-item">
+              <a href="{{settings[link]}}">
+                <div class="img" style="--bg-img: url({{ img | asset_url}})"></div>
+                {% if settings[title] != '' %}
+                  <h3 class="title">{{ settings[title] }}</h3>
+                {% endif %}
+
+                <div class="btn-more">
+                  <div class="icon {%if settings[btn] != ''%}has-text{%endif%}">
+                    {%if settings[btn] != ''%}<span>{{settings[btn]}}</span>{%endif%}
+                  <svg
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 24 24"
+                    id="right"
+                    class="line">
+                    <polyline id="primary" points="14 5 21 12 14 19" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline>
+                    <line
+                      id="primary-2"
+                      data-name="primary"
+                      x1="21"
+                      y1="12"
+                      x2="3"
+                      y2="12"
+                      style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></line>
+                  </svg>
+                </div>
+                </div>
+                
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}

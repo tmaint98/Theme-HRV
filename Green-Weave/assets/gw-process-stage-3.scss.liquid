@@ -1,0 +1,51 @@
+:root {
+  --bg-stage-3: {{settings.greenweave_process_stage_3_bg}};
+  --color-stage-3: {{settings.greenweave_process_stage_3_color}};
+--bg-stage-3-btn: {{settings.greenweave_process_stage_3_bg_btn}};
+--color-stage-3-btn: {{settings.greenweave_process_stage_3_color_btn}};
+--bg-stage-3-icon: {{settings.greenweave_process_stage_3_bg_icon}};
+}
+.greenweave-process-stage-3 {
+  background: var(--bg-stage-3);color: var(--color-stage-3);
+  .button{
+    color: var(--color-stage-3-btn);
+    background-color: var(--bg-stage-3-btn);
+  }
+  .stage-banner {
+    .img img {
+      border-radius: 16px;
+    }
+  }
+  .more-desc {
+    .item {
+      svg {
+        fill: var(--bg-stage-3-icon);
+        margin-right: 6px;
+      }
+       &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .btn-more {
+    margin-top: 40px;
+  }
+  @media(min-width: 1200px) {
+    .stage-banner {
+      padding-right: 90px;
+    }
+  }
+  @media(max-width: 991px) {
+    .stage-banner {
+      margin-bottom: 30px;
+    }
+  }
+  @media(max-width: 767px) {
+    .more-desc .item:not(:last-child) {
+      margin-bottom: 5px;
+    }
+    .btn-more {
+      margin-top: 20px;
+    }
+  }
+}

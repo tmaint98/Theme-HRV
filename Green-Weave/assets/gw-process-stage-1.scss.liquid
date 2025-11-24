@@ -1,0 +1,53 @@
+:root {
+  --bg-stage-1: {{settings.greenweave_process_stage_1_bg}};
+  --color-stage-1: {{settings.greenweave_process_stage_1_color}};
+  --bg-stage-1-title: {{settings.greenweave_process_stage_1_bg_title}};
+--color-stage-1-title: {{settings.greenweave_process_stage_1_color_title}};
+--bg-stage-1-btn: {{settings.greenweave_process_stage_1_bg_btn}};
+--color-stage-1-btn: {{settings.greenweave_process_stage_1_color_btn}};
+}
+.greenweave-process-stage-1 {
+  background: var(--bg-stage-1);color: var(--color-stage-1);
+  .button{
+    color: var(--color-stage-1-btn);
+    background-color: var(--bg-stage-1-btn);
+  }
+  .stage-banner {
+    position: relative;
+    padding-right: 30px;
+    .img img {
+      border-radius: 16px;
+    }
+    .title {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: var(--bg-stage-1-title);
+      color: var(--color-stage-1-title);
+      border-radius: 16px;
+      padding: 45px 55px;
+      font-size: 35px;
+      line-height: 1.2;
+      width: 55%;
+    }
+  }
+  @media(min-width: 1200px) {
+    .stage-banner {
+      padding-right: 90px;
+    }
+    .stage-content {
+      padding-left: 90px;
+    }
+  }
+  @media(max-width: 991px) {
+    .stage-banner {
+      margin-bottom: 30px;
+    }
+  }
+  @media(max-width: 767px) {
+    .stage-banner .title {
+      font-size: 20px;
+      padding: 20px;
+    }
+  }
+}

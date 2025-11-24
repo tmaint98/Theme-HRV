@@ -1,0 +1,44 @@
+GreenWeave.IndexReview = {
+		init: function() {
+			var that = this;
+      that.GreenWeave_IndexReviewSwiper();
+		},
+  GreenWeave_IndexReviewSwiper: function(){
+    const greenweaveReview = new Swiper ('.greenweave-index-review .swiper', {
+      slidesPerView: 1,  
+			//spaceBetween: 30,
+      speed: 1000,
+			loop: false,
+      autoplay: false,
+      /*autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },*/
+			navigation: {
+				nextEl: ".greenweave-index-review .review-next",
+				prevEl: ".greenweave-index-review .review-prev",
+			},
+      on: {
+        slideChange() {
+          const i = this.activeIndex;
+          $('.greenweave-index-review .custom-dot').removeClass('active').eq(i).addClass('active');
+        }
+      }
+			
+    });
+    const $next = $('.greenweave-index-review .review-next');
+    const $prev = $('.greenweave-index-review .review-prev');
+    if (!$next.hasClass('swiper-button-disabled') || !$prev.hasClass('swiper-button-disabled')) {
+      $('.greenweave-index-review .review-nav').removeClass('hidden');
+    } 
+    
+    $('.greenweave-index-review .custom-dot').on('click', function() {
+      const i = $(this).data('index');
+      greenweaveReview.slideTo(i);
+      $('.greenweave-index-review .custom-dot').removeClass('active').eq(i).addClass('active');
+    });
+  }
+};
+(function() {
+  GreenWeave.IndexReview.init();
+})();

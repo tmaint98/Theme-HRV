@@ -1,0 +1,25 @@
+{%if settings.show_greenweave_page_services_solution%}
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'gw-page-service-solution.scss.css' | asset_url }}" as="stylesheet">
+<section class="greenweave-page-service-solution" style="--bg-solution: {{settings.greenweave_page_services_solution_bg}};--color-solution: {{settings.greenweave_page_services_solution_color}}">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8 col-12">
+        <div class="heading-title">
+          {% if settings.greenweave_page_services_solution_title != '' %}
+            <h2 class="title2 font-title">{{ settings.greenweave_page_services_solution_title | newline_to_br }}</h2>
+          {% endif %}
+        </div>
+      </div>
+      {%if settings.greenweave_page_services_solution_btn != ''%}
+      <div class="col-lg-4 col-12">
+        <div class="btn-more"><a href="{{settings.greenweave_page_services_solution_link}}" class="button">{{settings.greenweave_page_services_solution_btn}}</a></div>
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</section>
+{%endif%}

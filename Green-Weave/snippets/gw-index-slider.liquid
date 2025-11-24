@@ -1,0 +1,108 @@
+<link rel="preload stylesheet" href="{{ 'gw-index-slider.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-index-slider.js' | asset_url }}"></script>
+
+<div class="greenweave-index-slider" id="greenweave-index-slider">
+  <div class="container-fluid index-slider">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slider-item">
+            <div class="slide--image">
+              <picture>
+                <source media="(max-width: 767px)" srcset="{{ 'greenweave_index_slider_1_img_mb.jpg' | asset_url}}" />
+                <source media="(min-width: 768px)" srcset="{{ 'greenweave_index_slider_1_img.jpg' | asset_url}}" />
+                <img src="{{ 'greenweave_index_slider_1_img.jpg' | asset_url }}" alt="{{ settings.greenweave_index_slider_1_title | strip_html | escape }}" />
+              </picture>
+            </div>
+            <div class="slide--content">
+              <div class="content">
+                {% if settings.greenweave_index_slider_1_title != '' %}
+                  <h2 class="title font-title">{{ settings.greenweave_index_slider_1_title | newline_to_br }}</h2>
+                {% endif %}
+                {% if settings.greenweave_index_slider_1_desc != '' %}
+                  <div class="desc">{{ settings.greenweave_index_slider_1_desc | newline_to_br }}</div>
+                {% endif %}
+                {% if settings.greenweave_index_slider_1_btn != '' %}
+                  <div class="btn-more">
+                    <a href="{{ settings.greenweave_index_slider_1_link }}" class="button">{{ settings.greenweave_index_slider_1_btn }}</a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- for i in (2..4) -%}
+          {% capture show_slide %}greenweave_index_slider_{{i}}_show{% endcapture %}
+          {% capture image %}greenweave_index_slider_{{i}}_img.jpg{% endcapture %}
+          {% capture image_mb %}greenweave_index_slider_{{i}}_img_mb.jpg{% endcapture %}
+          {% capture title %}greenweave_index_slider_{{i}}_title{% endcapture %}
+          {% capture desc %}greenweave_index_slider_{{i}}_desc{% endcapture %}
+          {% capture btn %}greenweave_index_slider_{{i}}_btn{% endcapture %}
+          {% capture link %}greenweave_index_slider_{{i}}_link{% endcapture %}
+          {%- if settings[show_slide] -%}
+            <div class="swiper-slide">
+              <div class="slider-item">
+                <div class="slide--image">
+                  <picture>
+                    <source media="(max-width: 767px)" srcset="{{ image_mb | asset_url}}" />
+                    <source media="(min-width: 768px)" srcset="{{ image | asset_url}}" />
+                    <img src="{{ image | asset_url }}" alt="{{ settings[title] | strip_html | escape }}" />
+                  </picture>
+                </div>
+                <div class="slide--content">
+                  <div class="content">
+                    {% if settings[title] != '' %}
+                      <h2 class="title font-title">{{ settings[title] | newline_to_br }}</h2>
+                    {% endif %}
+                    {% if settings[desc] != '' %}
+                      <div class="desc">{{ settings[desc] | newline_to_br }}</div>
+                    {% endif %}
+                    {% if settings[btn] != '' %}
+                      <div class="btn-more">
+                        <a href="{{ settings[link] }}" class="button">{{ settings[btn] }}</a>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="swiper-nav swiper-next">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-right"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+        </svg>
+      </div>
+      <div class="swiper-nav swiper-prev">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-left"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-home-pus-promotion pus-promotion-grids">
+  <div class="container">
+    <div class="hrv-pus-promotion" data-hrvpus-layout="flashsale"></div>
+  </div>
+</div>
+<div class="section-home-hrvpmo hrvpmo-grids">
+  <div class="container">
+    <div class="hrv-pmo-coupon" data-hrvpmo-layout="grids"></div>
+    <div class="hrv-pmo-discount" data-hrvpmo-layout="grids"></div>
+  </div>
+</div>

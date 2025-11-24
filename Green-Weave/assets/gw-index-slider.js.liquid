@@ -1,0 +1,30 @@
+GreenWeave.IndexMainSlider = {
+		init: function() {
+			var that = this;
+      that.GreenWeave_IndexMainSlider();
+		},
+  GreenWeave_IndexMainSlider: function(){
+    const greenweaveSlider = new Swiper ('.greenweave-index-slider .swiper', {
+      slidesPerView: 1,  
+			loop: $('.greenweave-index-slider .slider-item').length > 1 ? true:false,
+      speed: 1000,
+      autoplay: false,
+      /*autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },*/
+			navigation: {
+				nextEl: ".greenweave-index-slider .swiper-next",
+				prevEl: ".greenweave-index-slider .swiper-prev",
+			},
+			
+    });
+    const totalSlides = greenweaveSlider.slides.length;
+    if (totalSlides <= greenweaveSlider.params.slidesPerView) {
+      $('.greenweave-index-slider .swiper-next, .greenweave-index-slider .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  GreenWeave.IndexMainSlider.init();
+})();

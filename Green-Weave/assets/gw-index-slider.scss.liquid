@@ -1,0 +1,194 @@
+$colorSlide: {{ settings.greenweave_index_slider_color }};
+$bgBtn: {{ settings.greenweave_index_slider_button }};
+$colorBtn: {{ settings.greenweave_index_slider_button_text }};
+.greenweave-index-slider {
+  a {
+    color: $colorSlide;
+    text-decoration: none;
+    outline: none;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+     &:hover {
+      text-decoration: none;
+    }
+  }
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+  }
+  .button {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+    padding: 18px 45px;
+    line-height: normal;
+    color: $colorBtn;
+    background-color: $bgBtn;
+    border: 0;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+    outline: none !important;
+    -webkit-transition: all 0.45s;
+    transition: all 0.45s;
+     &:before {
+      content: '';
+      background-color: rgba($colorBtn, 0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: -1;
+      transition: all 0.4s ease-in-out;
+      border-radius: 100px;
+    }
+    @media(min-width: 992px) {
+       &:hover,
+      &.has-hover,
+       &:focus {
+        border-color: transparent;
+      }
+       &:hover:before,
+       &.has-hover:before,
+       &:focus:before {
+        opacity: 1;
+      }
+    }
+    @media(max-width: 767px) {
+      font-size: 12px;
+      padding: 8px 15px;
+      min-height: 35px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .index-slider {
+    padding: 0;
+  }
+  .slider-item {
+    position: relative;
+    .slide--content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: $colorSlide;
+      .content {
+        max-width: 90%;
+        margin: 0 auto;
+
+      }
+      .title {
+        font-size: 85px;
+      }
+      .desc {
+        font-size: 18px;
+        font-weight: 600;
+        color: rgba($colorSlide, 0.8);
+        margin-top: 20px;
+      }
+      .btn-more {
+        margin-top: 30px;
+      }
+    }
+  }
+  .swiper {
+    .swiper-nav {
+      position: absolute;
+      top: calc(50% - 23px);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      color: $colorSlide;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: currentcolor;
+        polyline,
+        line {
+          stroke: currentcolor;
+        }
+      }
+      &.swiper-next {
+        right: 15px;
+      }
+      &.swiper-prev {
+        left: 15px;
+      }
+       &:hover {
+        background: rgba($colorSlide, 0.2);
+      }
+    }
+  }
+
+  @media(max-width: 1199px) and (min-width: 768px) {
+    .slider-item .slide--content .title {
+      font-size: 58px;
+    }
+  }
+  @media(max-width: 767px) {
+    .slider-item {
+      .slide--content {
+        .title,
+        .desc {
+          br {
+            content: '';
+             &:after {
+              content: ' ';
+            }
+          }
+        }
+        .title {
+          font-size: 35px;
+        }
+        .desc {
+          font-size: 14px;
+        }
+      }
+    }
+    .swiper {
+      .swiper-nav {
+        top: calc(50% - 20px);
+        width: 40px;
+        height: 40px;
+        background: rgba($colorSlide, 0.2);
+        &.swiper-next {
+          right: 5px;
+        }
+        &.swiper-prev {
+          left: 5px;
+        }
+      }
+    }
+  }
+}
+
+.hrv-pus-promotion:empty,
+.section-home-pus-promotion:empty,
+.hrv-pmo-discount:empty,
+.hrv-pmo-coupon:empty,
+.section-home-hrvpmo:empty {
+  padding: 0;
+}

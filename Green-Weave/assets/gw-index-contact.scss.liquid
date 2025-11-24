@@ -1,0 +1,142 @@
+$bgForm: {{settings.greenweave_footer_newsletter_bg}};
+$colorForm: {{settings.greenweave_footer_newsletter_color}};
+$colorBtn: {{settings.greenweave_footer_newsletter_color_btn}};
+$bgBtn: {{settings.greenweave_footer_newsletter_bg_btn}};
+.greenweave-form-contact{
+  @media(min-width: 992px){
+  	.container{	max-width: 100%;padding-left: 20px;	padding-right: 20px;}
+  }
+  @media(min-width: 1200px){
+  	.container{max-width:1170px;}
+  }
+  @media(min-width: 1366px){
+  	.container{max-width:1290px;}
+  }
+  @media(min-width: 1600px){
+  	.container{max-width:1410px;}
+  	.container-fluid{max-width:1800px;}
+  }
+}
+.greenweave-form-contact .heading-title{
+  margin-bottom: 40px;position: relative;color: $colorForm;
+  .title1{font-size: 14px;font-weight: 600;text-transform: uppercase;margin-bottom: 15px;}
+  .title2{font-size: 58px;margin-bottom: 20px;line-height: 1.1;}
+  .desc{font-size: 18px;color: rgba($colorForm, 0.6);}
+  @media(max-width: 767px){
+    margin-bottom: 25px;
+    .title1{margin-bottom: 8px;}
+    .title2{
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .title2, .desc{
+      br{
+      content: '';
+      &:after{
+        content: ' ';
+      }
+    }
+    }
+    .desc{
+      font-size: 14px;
+    }
+  }
+}
+.greenweave-form-contact .button {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+    padding: 18px 45px;
+    line-height: normal;
+    color: $colorBtn;
+    background-color: $bgBtn;
+    border: 0;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+    outline: none !important;
+    -webkit-transition: all 0.45s;
+    transition: all 0.45s;
+     &:before {
+      content: '';
+      background-color: rgba($colorBtn, 0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: -1;
+      transition: all 0.4s ease-in-out;
+      border-radius: 100px;
+    }
+    @media(min-width: 992px) {
+       &:hover,
+      &.has-hover,
+       &:focus {
+        border-color: transparent;
+      }
+       &:hover:before,
+       &.has-hover:before,
+       &:focus:before {
+        opacity: 1;
+      }
+    }
+    @media(max-width: 767px) {
+      font-size: 12px;
+      padding: 8px 15px;
+      min-height: 35px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+.greenweave-form-contact{
+  padding: 80px 0;
+		position: relative;
+			background-image: url({{ 'greenweave_footer_newsletter_bg.jpg' | asset_url}});
+			background-size: cover;
+			background-position: center;
+			background-attachment: fixed;
+			background-repeat: no-repeat;
+			&:before {
+				content: "";
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.05);
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		.form-contact {
+			max-width: 600px;
+			margin: 0 auto;
+			background: rgba($bgForm, 0.9);
+			padding: 30px 15px;
+			border-radius: 12px;
+      text-align: center;
+      .contact-form .input-group {width: 100%;margin-bottom: 20px;}
+      .contact-form .input-group input,
+      .contact-form .input-group textarea {
+      	color:#5c5c5c;height: 45px;width:100%;font-weight: 500;padding:8px 20px;background: #fff;
+      	border: 1px solid var(--shop-color-border);border-radius:4px;box-shadow: none;
+      	-moz-appearance: none;-webkit-appearance: none;appearance: none;font-size: 14px;
+      }
+      .contact-form .input-group textarea {width: 100%;height:130px;padding:20px 20px;}
+      .contact-form .input-group textarea:focus {outline: none;}
+		}
+  @media(min-width: 768px){
+    .heading-title{
+      .title2{
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+  }
+	}

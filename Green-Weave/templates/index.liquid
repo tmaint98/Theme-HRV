@@ -1,0 +1,10 @@
+<link rel="preload stylesheet" href="{{ 'gw-product-loop.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-product-loop.js' | asset_url }}"></script>
+{%- assign has_section_collection = false -%}
+{%- assign has_heading = false -%}
+{%- for i in (1..9) -%}
+{%- capture sectionname -%}greenweave_section_index_{{i}}{%- endcapture -%}
+{%- if settings[sectionname] != 'none' -%}
+{%- include settings[sectionname] -%}
+{%- endif -%}
+{%- endfor -%}

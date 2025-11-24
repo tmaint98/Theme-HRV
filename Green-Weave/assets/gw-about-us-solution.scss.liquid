@@ -1,0 +1,37 @@
+:root {
+  --bg-solution: {{ settings.greenweave_about_us_solution_bg }};
+  --color-solution: {{ settings.greenweave_about_us_solution_color }};
+}
+.greenweave-about-us-solution {
+  background: var(--bg-solution);
+  color: var(--color-solution);
+  text-align: center;
+  .desc {
+    opacity: 0.6;
+  }
+  .name {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .position {
+    font-size: 18px;
+    opacity: 0.6;
+  }
+  .typewriter {
+    .tw-text {
+      text-decoration: underline;
+    }
+    .tw-cursor {
+        opacity: 0;
+      }
+  }
+
+  @media(max-width: 767px) {
+    .name {
+      font-size: 18px;
+    }
+    .position {
+      font-size: 14px;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+GreenWeave.IndexService = {
+		init: function() {
+			var that = this;
+      that.GreenWeave_IndexServiceSwiper();
+		},
+  GreenWeave_IndexServiceSwiper: function(){
+    const greenweaveService = new Swiper ('.greenweave-index-service .swiper', {
+      slidesPerView: 3,  
+			spaceBetween: 30,
+      speed: 1000,
+			loop: false,
+      autoplay: false,
+      /*autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },*/
+      breakpoints: {
+        1025: {
+            slidesPerView: 3,
+            spaceBetween: 30
+        },
+        992: {
+            slidesPerView: 2,
+            spaceBetween: 30
+        },
+        0: {
+            slidesPerView: 1,
+            spaceBetween: 10
+        }
+      },
+			navigation: {
+				nextEl: ".greenweave-index-service .service-next",
+				prevEl: ".greenweave-index-service .service-prev",
+			},
+			
+    });
+    const $next = $('.greenweave-index-service .service-next');
+    const $prev = $('.greenweave-index-service .service-prev');
+    if (!$next.hasClass('swiper-button-disabled') || !$prev.hasClass('swiper-button-disabled')) {
+      $('.greenweave-index-service .service-nav').removeClass('hidden');
+    }
+  }
+};
+(function() {
+  GreenWeave.IndexService.init();
+})();
+

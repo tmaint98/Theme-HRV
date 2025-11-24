@@ -1,0 +1,178 @@
+<link rel="preload stylesheet" href="{{ 'header.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header.js' | asset_url }}"></script>
+{%if settings.greenweave_shop_google_translate%}
+{%- include 'theme_google_translate_js' -%}
+{%endif%}
+{%if settings.greenweave_shop_buying%}
+<link rel="preload stylesheet" href="{{ 'header-minicart.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header-minicart.js' | asset_url }}"></script>
+{%endif%}
+{%if settings.show_greenweave_header_search%}
+<link rel="preload stylesheet" href="{{ 'header-search.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header-search.js' | asset_url }}"></script>
+{%endif%}
+
+{%- assign checkcarticon = false -%}
+{%- if settings.greenweave_toolbar_bottom_selected == 'greenweave_toolbar_style_1' and settings.greenweave_sidebar_icon_cart_show -%}
+{%- assign checkcarticon = true -%}
+{%- endif -%}
+<div class="greenweave-mainHeader--height">
+	<header class="greenweave-mainHeader">
+    <div class="greenweave-mainHeader-middle">
+			<div class="container-fluid">
+				<div class="greenweave-flex-header">
+					<div class="greenweave-header-left">
+						<div class="greenweave-header-wrap-iconav greenweave-header-wrap-action d-sm-block d-lg-none">
+							<div class="greenweave-header-action">
+								<div class="greenweave-header-action-item greenweave-header-action_menu greenweave-activeMenuChecked">							
+									<div class="greenweave-header-action_text">
+										<a class="greenweave-header-action__link" name="icon-menu-mobile" href="javascript:void(0)" aria-label="Menu" title="Menu">
+											<span class="greenweave-box-icon">								
+												<span class="greenweave-hamburger-menu"  aria-hidden="true">
+													<span class="greenweave-bar"></span>
+												</span>
+												<span class="greenweave-box-icon--close">
+													<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+												</span>											
+											</span>	
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="greenweave-header-wrap-logo">
+							<div class="greenweave-wrap-logo" itemscope="" itemtype="http://schema.org/Organization">
+								{% if settings.greenweave_use_logo %}
+								{% if template == 'index' %}
+								<a href="{{shop.url}}"  itemprop="url">
+									<img itemprop="logo" src="{{ 'greenweave_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+								</a>			
+								<h1 style="display:none"><a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a></h1>
+								{% else %}
+								<a href="{{shop.url}}"  itemprop="url">
+									<img itemprop="logo" src="{{ 'greenweave_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+								</a>
+								{% endif %}
+								{% else %}
+								{% if template == 'index' %}	<h1><a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a></h1>
+								{% else %}	<a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a>{% endif %}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+          <div class="greenweave-header-center">
+            <div class="greenweave-header-wrap-menu d-none d-md-none d-lg-block">
+							{%- include 'header-menu' -%}
+						</div>	
+          </div>
+					<div class="greenweave-header-right">
+						<div class="greenweave-header-wrap-action">
+							<div class="greenweave-header-action">	
+                {%if settings.greenweave_shop_google_translate%}
+                <div class="greenweave-header-action-item greenweave-header-action_translate">
+                    {%- include 'theme_google_translate' -%}
+                </div>
+                {%endif%}
+								{%if settings.show_greenweave_header_search%}
+								<div class="greenweave-header-action-item greenweave-header-action_search">							
+									<div class="greenweave-header-action_text">
+										<a class="greenweave-header-action__link greenweave-header-action_clicked"  href="#" id="site-search-handle"  aria-label="Tìm kiếm" title="Tìm kiếm">
+											<span class="greenweave-box-icon">								
+												<svg class="greenweave-svg-ico-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 451 451" style="enable-background:new 0 0 451 451;" xml:space="preserve">
+													<g>
+														<path d="M447.05,428l-109.6-109.6c29.4-33.8,47.2-77.9,47.2-126.1C384.65,86.2,298.35,0,192.35,0C86.25,0,0.05,86.3,0.05,192.3   s86.3,192.3,192.3,192.3c48.2,0,92.3-17.8,126.1-47.2L428.05,447c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4   C452.25,441.8,452.25,433.2,447.05,428z M26.95,192.3c0-91.2,74.2-165.3,165.3-165.3c91.2,0,165.3,74.2,165.3,165.3   s-74.1,165.4-165.3,165.4C101.15,357.7,26.95,283.5,26.95,192.3z"></path>
+													</g>
+												</svg>
+												<span class="greenweave-box-icon--close">
+													<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+												</span>											
+											</span>	
+										</a>
+										<span class="greenweave-box-triangle">
+											<svg viewBox="0 0 20 9" role="presentation">
+												<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z"></path>
+											</svg>
+										</span>
+									</div>
+									<div class="greenweave-header-action_dropdown">
+										<div class="greenweave-header-dropdown_content">
+											<div class="greenweave-sitenav-content greenweave-sitenav-search">
+												<p class="greenweave-boxtitle">Tìm kiếm</p>											
+                        {% include 'header-search'%}
+											</div>
+										</div>
+									</div>
+								</div>
+								{%endif%}
+								{% if shop.customer_accounts_enabled and settings.show_greenweave_header_account%}
+								<div class="greenweave-header-action-item greenweave-header-action_account">							
+									<div class="greenweave-header-action_text">
+										<a class="greenweave-header-action__link"  href="{%- if customer -%}/account{%else%}/account/login{%endif%}" aria-label="Tài khoản" title="Tài khoản">
+											<span class="greenweave-box-icon">		
+												<svg class="greenweave-svg-ico-account" viewBox="0 0 1024 1024" >
+													<path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path>
+													<path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path>
+												</svg>					
+											</span>								
+										</a>
+									</div>
+								</div>
+								{%endif%}
+								{% if settings.greenweave_shop_buying %}
+								<div class="greenweave-header-action-item greenweave-header-action_cart {% unless template == 'cart'%}{%if settings.promotion_hrvapp_use == 'false'%}greenweave-activeCartChecked{%endif%}{%endunless%} {%unless checkcarticon %}greenweave-show-mb{%endunless%}">							
+									<div class="greenweave-header-action_text">
+										<a class="greenweave-header-action__link {% unless template == 'cart'%} {%if settings.promotion_hrvapp_use == 'false'%}greenweave-header-action_clicked{%endif%} {% endunless %}"  href="{% if template == 'cart' or settings.promotion_hrvapp_use%}/cart{%else%}#{%endif%}" aria-label="Giỏ hàng" title="Giỏ hàng">				
+											<span class="greenweave-box-icon">								
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -13 456.75885 456" width="456pt">
+													<path d="m150.355469 322.332031c-30.046875 0-54.402344 24.355469-54.402344 54.402344 0 30.042969 24.355469 54.398437 54.402344 54.398437 30.042969 0 54.398437-24.355468 54.398437-54.398437-.03125-30.03125-24.367187-54.371094-54.398437-54.402344zm0 88.800781c-19 0-34.402344-15.402343-34.402344-34.398437 0-19 15.402344-34.402344 34.402344-34.402344 18.996093 0 34.398437 15.402344 34.398437 34.402344 0 18.996094-15.402344 34.398437-34.398437 34.398437zm0 0"></path>
+													<path d="m446.855469 94.035156h-353.101563l-7.199218-40.300781c-4.4375-24.808594-23.882813-44.214844-48.699219-48.601563l-26.101563-4.597656c-5.441406-.96875-10.632812 2.660156-11.601562 8.097656-.964844 5.441407 2.660156 10.632813 8.101562 11.601563l26.199219 4.597656c16.53125 2.929688 29.472656 15.871094 32.402344 32.402344l35.398437 199.699219c4.179688 23.894531 24.941406 41.324218 49.199219 41.300781h210c22.0625.066406 41.546875-14.375 47.902344-35.5l47-155.800781c.871093-3.039063.320312-6.3125-1.5-8.898438-1.902344-2.503906-4.859375-3.980468-8-4zm-56.601563 162.796875c-3.773437 12.6875-15.464844 21.367188-28.699218 21.300781h-210c-14.566407.039063-27.035157-10.441406-29.5-24.800781l-24.699219-139.398437h336.097656zm0 0"></path>
+													<path d="m360.355469 322.332031c-30.046875 0-54.402344 24.355469-54.402344 54.402344 0 30.042969 24.355469 54.398437 54.402344 54.398437 30.042969 0 54.398437-24.355468 54.398437-54.398437-.03125-30.03125-24.367187-54.371094-54.398437-54.402344zm0 88.800781c-19 0-34.402344-15.402343-34.402344-34.398437 0-19 15.402344-34.402344 34.402344-34.402344 18.996093 0 34.398437 15.402344 34.398437 34.402344 0 18.996094-15.402344 34.398437-34.398437 34.398437zm0 0"></path>
+												</svg>
+												<span class="greenweave-box-icon--close">
+													<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+												</span>			
+												<span class="greenweave-count-holder">
+													<span class="greenweave-count">{{ cart.item_count }}</span>
+												</span>		
+											</span>							
+										</a>
+										<span class="greenweave-box-triangle">
+											<svg viewBox="0 0 20 9" role="presentation">
+												<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z" fill="#ffffff"></path>
+											</svg>
+										</span>
+									</div>
+								</div>
+								{% endif %}
+                {%if settings.greenweave_header_info_show%}
+                <div class="greenweave-header-action-item greenweave-header-action_info greenweave-activeInfoChecked">							
+								<div class="greenweave-header-action_text">
+									<a class="greenweave-header-action__link"  href="javascript:void(0)" aria-label="info" title="info">				
+										<span class="greenweave-box-icon">								
+											<span class="greenweave-hamburger-menu" aria-hidden="true">
+												
+											</span>
+										</span>							
+									</a>
+									<span class="greenweave-box-triangle">
+										<svg viewBox="0 0 20 9" role="presentation">
+											<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z" fill="#ffffff"></path>
+										</svg>
+									</span>
+								</div>
+							</div>
+                {%endif%}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    </div>
+	</header>
+</div>
+{%- include 'header-sidebar-main' -%}
+{%- include 'modal-coupon-header' -%}
+{%if settings.greenweave_header_live_show%}
+{%comment%}{%- include 'modal-live-header' -%}{%endcomment%}
+{%endif%}
+

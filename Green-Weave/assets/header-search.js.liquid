@@ -1,0 +1,100 @@
+GreenWeave.Search = {
+  init: function(){
+    var that = this;
+    that.GreenWeave_searchAutoHeader();
+  },
+  GreenWeave_searchAutoHeader: function(){
+		$('.greenweave-ultimate-search').submit(function(e) {
+			e.preventDefault();
+			var q = $(this).find('input[name=q]').val();
+			if(q.indexOf('script') > -1 || q.indexOf('>') > -1){
+				alert('Từ khóa của bạn có chứa mã độc hại! Vui lòng nhập lại từ khóa khác');
+				$(this).find('input[name=q]').val('');
+			}
+			else{
+				var q_follow = 'product';
+				var query = encodeURIComponent('(title:product contains ' + q + ')');
+				if( !q ) {
+					window.location = '/search?type='+ q_follow +'&q=*';
+					return;
+				}	
+				else {
+					window.location = '/search?type=' + q_follow +'&q=filter=' + query;
+					return;
+				}
+			}
+		});
+		var $input = $('.greenweave-ultimate-search input[type="text"]');
+		$input.bind('keyup change paste propertychange', function() {
+			var key = $(this).val(),
+					$parent = $(this).parents('.greenweave-wpo-wrapper-search'),
+					$results = $(this).parents('.greenweave-wpo-wrapper-search').find('.greenweave-smart-search-wrapper');
+
+			if(key.indexOf('script') > -1 || key.indexOf('>') > -1){
+				alert('Từ khóa của bạn có chứa mã độc hại! Vui lòng nhập lại từ khóa khác');
+				$(this).val('');
+				$('.greenweave-ultimate-search input[type="text"]').val('');
+			}
+			else{
+				if(key.length > 0 ){
+					$(this).attr('data-history', key);
+					$('.greenweave-ultimate-search input[type="text"]').val($(this).val());
+					var q_follow = 'product',
+							str = '';
+					str = '/search?type=product&q=' + key + '&view=header-ultimate-product';
+					$.ajax({
+						url: str,
+						type: 'GET',
+						async: true,
+						success: function(data){
+							$results.find('.greenweave-resultsContent').html(data);
+						}
+					})
+					if(!$('.greenweave-header-action_search').hasClass('greenweave-js-action-show')){
+						$('body').removeClass("locked-scroll");
+						$('.greenweave-header-action-item').removeClass('greenweave-js-action-show');
+					}
+					$("greenweave-ultimate-search").addClass("expanded");
+					$results.fadeIn();
+				}
+				else{
+					$('greenweave-ultimate-search input[type="text"]').val($(this).val());
+					$("greenweave-ultimate-search").removeClass("expanded");
+					$results.fadeOut();
+				}
+			}
+
+		})
+		$('body').click(function(evt) {
+			var target = evt.target;
+			if (target.id !== 'greenweave-ajaxSearchResults' && target.id !== 'greenweave-inputSearchAuto') {
+				$("#greenweave-ajaxSearchResults").hide();
+			}
+			if (target.id !== 'greenweave-ajaxSearchResults-mb' && target.id !== 'greenweave-inputSearchAuto-mb') {
+				$("#greenweave-ajaxSearchResults-mb").hide();
+			}
+			if (target.id !== 'greenweave-ajaxSearchResults-3' && target.id !== 'greenweave-inputSearchAuto-3') {
+				$("#greenweave-ajaxSearchResults-3").hide();
+			}
+		});
+		$('body').on('click', '.greenweave-ultimate-search input[type="text"]', function() {
+			if ($(this).is(":focus")) {
+				if ($(this).val() != '') {
+					$(".greenweave-ajaxSearchResults").show();
+				}
+			} else {
+			}
+		})
+		$('body').on('click', '.greenweave-ultimate-search .search-close', function(e){
+			e.preventDefault();
+			$(".greenweave-ajaxSearchResults").hide();
+			$(".greenweave-ultimate-search").removeClass("expanded");
+			$(".greenweave-ultimate-search").find('input[name=q]').val('');
+		})
+	},
+};
+
+(function() {
+  GreenWeave.Search.init();
+})();
+

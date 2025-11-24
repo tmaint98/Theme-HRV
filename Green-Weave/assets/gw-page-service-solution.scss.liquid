@@ -1,0 +1,36 @@
+.greenweave-page-service-solution .button {
+    color: var(--color-solution);
+    background-color: transparent;
+    border: 1px solid;
+    @media(min-width: 992px) {
+       &:hover,
+      &.has-hover,
+       &:focus {
+        border-color: transparent;
+         background-color: var(--color-solution);
+         color: var(--bg-solution);
+         opacity: 1;
+      }
+       
+    }
+  }
+.greenweave-page-service-solution{
+  background: var(--bg-solution);
+  color: var(--color-solution);
+  @media(min-width: 992px){
+    .heading-title{
+      &,.title2{
+        margin: 0;
+      }
+    }
+    .btn-more{
+          display: flex;
+    justify-content: end;
+    }
+  }
+  @media(max-width: 991px){
+    .heading-title, .btn-more{
+      text-align: center;
+    }
+  }
+}

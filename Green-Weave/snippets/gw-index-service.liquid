@@ -1,0 +1,113 @@
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'gw-index-service.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-index-service.js' | asset_url }}"></script>
+<section class="greenweave-index-service">
+    <div class="container">
+      <div class="heading-title">
+        {% if settings.greenweave_index_service_title_1 != '' %}
+          <div class="title1">{{ settings.greenweave_index_service_title_1 }}</div>
+        {% endif %}
+        <div class="heading-col">
+          <div class="heading-left">
+            {% if settings.greenweave_index_service_title_2 != '' %}
+              <h2 class="title2 font-title">{{ settings.greenweave_index_service_title_2 | newline_to_br }}</h2>
+            {% endif %}
+          </div>
+          <div class="heading-center">
+            {% if settings.greenweave_index_service_desc != '' %}
+              <div class="desc">{{ settings.greenweave_index_service_desc | newline_to_br }}</div>
+            {% endif %}
+          </div>
+          <div class="heading-right">
+            <div class="service-nav hidden">
+              <button type="button" class="service-prev">
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 24 24"
+                  id="left"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="line">
+                  <polyline id="primary" points="10 19 3 12 10 5" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline>
+                  <line
+                    id="primary-2"
+                    data-name="primary"
+                    x1="3"
+                    y1="12"
+                    x2="21"
+                    y2="12"
+                    style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></line>
+                </svg>
+              </button>
+              <button type="button" class="service-next">
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 24 24"
+                  id="right"
+                  class="line">
+                  <polyline id="primary" points="14 5 21 12 14 19" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline>
+                  <line
+                    id="primary-2"
+                    data-name="primary"
+                    x1="21"
+                    y1="12"
+                    x2="3"
+                    y2="12"
+                    style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper">
+        <div class="swiper-wrapper list-service">
+        {% for i in (1..4) %}
+          {% capture show %}show_greenweave_index_service_{{i}}{%endcapture%}
+          {% capture img %}greenweave_index_service_{{i}}_img.jpg{%endcapture%}
+          {% capture title %}greenweave_index_service_{{i}}_title{%endcapture%}
+          {% capture desc %}greenweave_index_service_{{i}}_desc{%endcapture%}
+          {% capture link %}greenweave_index_service_{{i}}_link{%endcapture%}
+          {% if settings[show] %}
+            <div class="swiper-slide">
+            <div class="service-item">
+              <a href="{{settings[link]}}">
+                <div class="img" style="--bg-img: url('{{ img | asset_url}}')"><img src="{{ img | asset_url}}" alt="{{settings[title] | strip_html | escape}}" loading="lazy" decoding="async" /></div>
+                {% if settings[title] != '' %}
+                  <h3 class="title">{{ settings[title] }}</h3>
+                {% endif %}
+                {% if settings[desc] != '' %}
+                  <div class="desc">{{ settings[desc] }}</div>
+                {% endif %}
+
+                <div class="icon">
+                  <svg
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 24 24"
+                    id="right"
+                    class="line">
+                    <polyline id="primary" points="14 5 21 12 14 19" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline>
+                    <line
+                      id="primary-2"
+                      data-name="primary"
+                      x1="21"
+                      y1="12"
+                      x2="3"
+                      y2="12"
+                      style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></line>
+                  </svg>
+                </div>
+              </a>
+            </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      </div>
+      </div>
+  </section>

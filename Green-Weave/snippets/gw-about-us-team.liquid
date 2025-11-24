@@ -1,0 +1,78 @@
+
+{% if settings.show_greenweave_about_us_team %}
+  {%if settings.greenweave_about_us_team_title_2_text != ''%}
+  {%unless has_Typewriter %} 
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'myTypewriter.js' | asset_url }}"></script>
+  {% assign has_Typewriter = true %}
+  {% endunless %}
+  {%endif%}
+  {%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+  {% endunless %}
+  <link rel="preload stylesheet" href="{{ 'gw-about-us-team.scss.css' | asset_url }}" as="stylesheet">
+  <section class="greenweave-about-us-team">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-12 team-content">
+          <div class="heading-title">
+							{%if settings.greenweave_about_us_team_title_1 != ''%}<div class="title1">{{settings.greenweave_about_us_team_title_1}}</div>{%endif%}
+							{%if settings.greenweave_about_us_team_title_2 != ''%}
+                <h2 class="title2 font-title">
+                {{settings.greenweave_about_us_team_title_2 | newline_to_br}}
+                  {%if settings.greenweave_about_us_team_title_2_text != ''%}
+                  {%assign list = settings.greenweave_about_us_team_title_2_text | split: ';'%}
+                  {%assign list_html = ''%}
+                  {%for i in list%}
+                    {%capture text%}"{{i}}"{%unless forloop.last%},{%endunless%}{%endcapture%}
+                    {%assign list_html = list_html | append: text%}
+                  {%endfor%}
+                  <span data-strings='[{{list_html}}]' class="typewriter">
+                    <span class="tw-text-bg"><span class="tw-text"></span></span><span class="tw-cursor">|</span>
+                  </span>
+                  {%endif%}
+                </h2>
+              {%endif%}
+							{%if settings.greenweave_about_us_team_desc != ''%}<p class="desc">{{settings.greenweave_about_us_team_desc}}</p>{%endif%}
+						</div>
+          {%if settings.greenweave_about_us_team_btn%}
+            <div class="btn-more">
+              <a href="{{settings.greenweave_about_us_team_link}}" class="button">{{settings.greenweave_about_us_team_btn}}</a>
+            </div>
+            {%endif%}
+        </div>
+        <div class="col-lg-6 col-12">
+          <div class="row list-team">
+            {%for i in (1..4)%}
+              {%capture show%}show_greenweave_about_us_team_{{i}}{%endcapture%}
+              {%capture img%}greenweave_about_us_team_{{i}}_img.jpg{%endcapture%}
+              {%capture name%}greenweave_about_us_team_{{i}}_name{%endcapture%}
+              {%capture position%}greenweave_about_us_team_{{i}}_position{%endcapture%}
+              {%capture link1%}greenweave_about_us_team_{{i}}_link_1{%endcapture%}
+              {%capture link2%}greenweave_about_us_team_{{i}}_link_2{%endcapture%}
+              {%capture link3%}greenweave_about_us_team_{{i}}_link_3{%endcapture%}
+              {%capture link4%}greenweave_about_us_team_{{i}}_link_4{%endcapture%}
+              {%if settings[show]%}
+                <div class="team-item">
+                  <div class="img"><img src="{{ img | asset_url}}" alt="{{settings[name]}}" /></div>
+                  <div class="content">
+                    <div class="info">
+                    {%if settings[name] != ''%}<div class="name">{{settings[name]}}</div>{%endif%}
+                    {%if settings[position] != ''%}<div class="position">{{settings[position]}}</div>{%endif%}
+                    </div>
+                    <ul class="list-social">
+                      {%-if settings[link1] != blank -%}<li class="social-svg"><a href="{{settings[link1]}}" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook"><svg width="20px" height="20px" viewBox="-7 -2 24 24" preserveAspectRatio="xMinYMin" class="jam jam-facebook"><path d='M2.046 3.865v2.748H.032v3.36h2.014v9.986H6.18V9.974h2.775s.26-1.611.386-3.373H6.197V4.303c0-.343.45-.805.896-.805h2.254V0H6.283c-4.34 0-4.237 3.363-4.237 3.865z' /></svg></a></li>	{%-endif-%}
+      								{%-if settings[link2] != blank -%}<li class="social-svg"><a href="{{settings[link2]}}" target="_blank" rel="noopener" title="Youtube" aria-label="Youtube"><svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="M23,9.71a8.5,8.5,0,0,0-.91-4.13,2.92,2.92,0,0,0-1.72-1A78.36,78.36,0,0,0,12,4.27a78.45,78.45,0,0,0-8.34.3,2.87,2.87,0,0,0-1.46.74c-.9.83-1,2.25-1.1,3.45a48.29,48.29,0,0,0,0,6.48,9.55,9.55,0,0,0,.3,2,3.14,3.14,0,0,0,.71,1.36,2.86,2.86,0,0,0,1.49.78,45.18,45.18,0,0,0,6.5.33c3.5.05,6.57,0,10.2-.28a2.88,2.88,0,0,0,1.53-.78,2.49,2.49,0,0,0,.61-1,10.58,10.58,0,0,0,.52-3.4C23,13.69,23,10.31,23,9.71ZM9.74,14.85V8.66l5.92,3.11C14,12.69,11.81,13.73,9.74,14.85Z"/></svg></a></li>	{%-endif-%}
+      								{%-if settings[link3] != blank -%}<li class="social-svg svg-tiktok"><a href="{{settings[link3]}}" target="_blank" rel="noopener" title="Tiktok" aria-label="Tiktok"><svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48"><path d="M 11.5 6 C 8.4802259 6 6 8.4802259 6 11.5 L 6 36.5 C 6 39.519774 8.4802259 42 11.5 42 L 36.5 42 C 39.519774 42 42 39.519774 42 36.5 L 42 11.5 C 42 8.4802259 39.519774 6 36.5 6 L 11.5 6 z M 11.5 9 L 36.5 9 C 37.898226 9 39 10.101774 39 11.5 L 39 36.5 C 39 37.898226 37.898226 39 36.5 39 L 11.5 39 C 10.101774 39 9 37.898226 9 36.5 L 9 11.5 C 9 10.101774 10.101774 9 11.5 9 z M 26.435547 13.023438 A 1.50015 1.50015 0 0 0 25 14.5 L 25 28 C 25 30.227598 23.227598 32 21 32 C 18.772402 32 17 30.227598 17 28 C 17 25.772402 18.772402 24 21 24 A 1.50015 1.50015 0 1 0 21 21 C 17.151598 21 14 24.151598 14 28 C 14 31.848402 17.151598 35 21 35 C 24.848402 35 28 31.848402 28 28 L 28 20.335938 C 29.268121 21.316987 30.78243 22 32.5 22 A 1.50015 1.50015 0 1 0 32.5 19 C 29.996501 19 28 17.003499 28 14.5 A 1.50015 1.50015 0 0 0 26.435547 13.023438 z"></path></svg></a></li>	{%-endif-%}
+                      {%-if settings[link4] != blank -%}<li class="social-svg"><a href="{{settings[link4]}}" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram"><svg width="20px" height="20px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-instagram"><path d='M14.017 0h-8.07A5.954 5.954 0 0 0 0 5.948v8.07a5.954 5.954 0 0 0 5.948 5.947h8.07a5.954 5.954 0 0 0 5.947-5.948v-8.07A5.954 5.954 0 0 0 14.017 0zm3.94 14.017a3.94 3.94 0 0 1-3.94 3.94h-8.07a3.94 3.94 0 0 1-3.939-3.94v-8.07a3.94 3.94 0 0 1 3.94-3.939h8.07a3.94 3.94 0 0 1 3.939 3.94v8.07z'/><path d='M9.982 4.819A5.17 5.17 0 0 0 4.82 9.982a5.17 5.17 0 0 0 5.163 5.164 5.17 5.17 0 0 0 5.164-5.164A5.17 5.17 0 0 0 9.982 4.82zm0 8.319a3.155 3.155 0 1 1 0-6.31 3.155 3.155 0 0 1 0 6.31z'/><circle cx='15.156' cy='4.858' r='1.237'/></svg></a></li>	{%-endif-%}
+    								</ul>
+                  </div>
+                </div>
+                {%endif%}
+              {%endfor%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%endif%}

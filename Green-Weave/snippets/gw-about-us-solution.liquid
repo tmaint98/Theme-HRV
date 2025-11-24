@@ -1,0 +1,42 @@
+
+{% if settings.show_greenweave_about_us_solution %}
+  {%if settings.greenweave_about_us_solution_title_2_text != ''%}
+  {%unless has_Typewriter %} 
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'myTypewriter.js' | asset_url }}"></script>
+  {% assign has_Typewriter = true %}
+  {% endunless %}
+  {%endif%}
+  {%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+  <link rel="preload stylesheet" href="{{ 'gw-about-us-solution.scss.css' | asset_url }}" as="stylesheet">
+  <section class="greenweave-about-us-solution">
+    <div class="container">
+      <div class="heading-title">
+        {%if settings.greenweave_about_us_solution_title_1 != ''%}<div class="title1">{{settings.greenweave_about_us_solution_title_1}}</div>{%endif%}
+        {%if settings.greenweave_about_us_solution_title_2 != ''%}
+          <h2 class="title2 font-title">
+          {{settings.greenweave_about_us_solution_title_2 | newline_to_br}}
+            {%if settings.greenweave_about_us_solution_title_2_text != ''%}
+            {%assign list = settings.greenweave_about_us_solution_title_2_text | split: ';'%}
+            {%assign list_html = ''%}
+            {%for i in list%}
+              {%capture text%}"{{i}}"{%unless forloop.last%},{%endunless%}{%endcapture%}
+              {%assign list_html = list_html | append: text%}
+            {%endfor%}
+            <span data-strings='[{{list_html}}]' class="typewriter">
+              <span class="tw-text"></span><span class="tw-cursor">|</span>
+            </span>
+            {%endif%}
+          </h2>
+        {%endif%}
+        {%if settings.greenweave_about_us_solution_desc != ''%}<p class="desc">{{settings.greenweave_about_us_solution_desc}}</p>{%endif%}
+      </div>
+      <div class="info">
+        <div class="name">{{settings.greenweave_about_us_solution_ceo_name}}</div>
+        <div class="position">{{settings.greenweave_about_us_solution_ceo_position}}</div>
+      </div>
+    </div>
+  </section>
+    {%endif%}

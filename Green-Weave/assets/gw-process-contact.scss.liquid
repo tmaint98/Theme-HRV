@@ -1,0 +1,194 @@
+:root {
+--bg-contact-btn: {{settings.greenweave_process_contact_bg_btn}};
+--color-contact-btn: {{settings.greenweave_process_contact_color_btn}};
+--bg-contact-icon: {{settings.greenweave_process_contact_bg_icon}};
+}
+/* modal-succes */
+#greenweave_process_mymodal_success.modalForm-success{
+	svg{fill: #009900;width: 80px; height: 80px; margin-bottom: 15px;}
+	p{font-size: 18px;}
+}
+/*END modal-succes */
+.greenweave-process-contact {
+  .button{
+    color: var(--color-contact-btn);
+    background-color: var(--bg-contact-btn);
+  }
+  .list-info {
+    li {
+      display: flex;
+      align-items: center;
+      .s_title{
+      opacity: 0.6;
+      }
+       &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+      .icon-info {
+        width: 30px;
+        display: inline-block;
+        margin-right: 10px;
+        svg {
+          fill: var(--bg-contact-icon);
+        }
+      }
+      .info-phone {
+        font-size: 20px;
+        font-weight: 600;
+        color: currentColor;
+      }
+      .info-email {
+        color: currentColor;
+        opacity: 0.6;
+        position: relative;
+         &:before {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background: currentcolor;
+          transition: all 0.3s;
+        }
+         &:hover {
+           opacity: 1;
+           &:before {
+            left: 0;
+            width: 100%;
+          }
+        }
+      }
+
+    }
+  }
+  .greenweave-process-form-booking {
+    padding: 0;
+    #btn-booking-send {
+      &.btn-disabled {
+        cursor: no-drop;
+      }
+    }
+    .contact-form .input-group {
+      position: relative;
+      margin-bottom: 30px;
+      .icon-form {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        z-index: 1;
+        svg {
+          fill: currentcolor;
+          opacity: 0.6;
+        }
+      }
+      .line {
+         &:before {
+          content: '';
+          position: absolute;
+          bottom: 1px;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background: currentcolor;
+          transition: all 0.3s;
+        }
+      }
+      input,
+      textarea {
+        background: none;
+        border: none;
+        border-bottom: 1px solid #e6e6e6;
+        border-radius: 0;
+        padding: 12px 10px 12px 40px;
+        box-shadow: none;
+      }
+      input {
+        height: 50px;
+      }
+      textarea {
+        height: 100px;
+      }
+      input[type="checkbox"] {
+        width: 18px;
+        height: 24px;
+        flex: 0 0 18px;
+        appearance: checkbox;
+        -webkit-appearance: checkbox;
+        margin-right: 10px;
+      }
+      label {
+        margin: 0;
+        opacity: 0.6;
+        flex: 0 0 calc(100% - 30px);
+        font-size: 14px;
+      }
+       &:not(.error) {
+        input,
+        textarea {
+           &:focus {
+             + .line:before {
+              width: 100%;
+            }
+          }
+        }
+         &:hover {
+          .line:before {
+            width: 100%;
+          }
+        }
+      }
+
+    }
+    .addcart-area{
+      display: flex;
+    align-items: center;
+    gap: 15px;
+      button{
+        flex: 0 0 auto;
+        .icon{
+          margin-right: 10px;
+          svg{
+            fill: var(--color-contact-btn);
+          }
+        }
+      }
+      .input-group{
+        margin: 0;
+      }
+    }
+    .field-error {
+      top: calc(100% - 30px);
+      bottom: auto;
+    }
+  }
+  @media(min-width: 1200px){
+    .contact-content{
+      padding-right: 50px;
+    }
+  }
+  @media(max-width: 991px){
+    .greenweave-process-form-booking{
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    .list-info li .info-phone{
+      font-size: 18px;
+    }
+    .greenweave-process-form-booking{
+      .contact-form .input-group {
+        margin-bottom: 15px;
+        input,textarea{
+          font-size: 14px;
+        }
+      }
+      .field-error {
+      top: calc(100% - 15px);
+    }
+       .addcart-area{
+         flex-flow: column-reverse;
+       }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+<div class="greenweave-sitenav-wrapper greenweave-sitenav-left greenweave-sitenav-menu">
+	<div class="greenweave-sitenav-inner">
+		<div class="greenweave-sitenav-header">
+      {%if settings.greenweave_shop_google_translate%}
+        <div class="greenweave-menu-translate">
+          {%- include 'theme_google_translate' -%}
+        </div>
+      {%else%}
+        {% if settings.greenweave_use_logo %}
+          <div class="greenweave-menu-logo">
+            <a href="{{shop.url}}"  itemprop="url">
+              <img itemprop="logo" src="{{ 'greenweave_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+            </a>
+          </div>
+        {% else %}
+        <div class="greenweave-sitenav-header__title">
+          <a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a>
+        </div>
+        {% endif %}
+      
+        {%endif%}
+			<a name="button-close" class="greenweave-sitenav-header__btn greenweave-btn-sitenav-close">
+				<svg viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z" fill-rule="evenodd"></path></svg>
+			</a>
+		</div>
+		<div class="greenweave-sitenav-content">
+			<div class="greenweave-menu-mobile--wrap">
+				<ul class="greenweave-menuList-links">
+					{% for link in linklists[settings.greenweave_mainmenu_link].links%}
+					{% if linklists[link.handle].links == empty %}				
+					<li class="{% if link.active %} active {% endif %}"><a href="{{link.url}}" title="{{link.title}}"><span>{{link.title}}</span></a></li>
+					{% else %}
+					<li class="greenweave-has-submenu greenweave-level0 {% if link.active %} active {% endif %}">
+						<a href="{{ link.url }}" title="{{link.title}}">{{ link.title }} <span class="greenweave-icon-plus-submenu greenweave-plus-nClick1"></span></a>
+						<ul class="greenweave-submenu-links">
+							{% for link2 in linklists[link.handle].links %}
+							{% if linklists[link2.handle].links == empty %}
+							<li><a href="{{ link2.url }}" title="{{link2.title}}">{{ link2.title }}</a></li>
+							{% else %}
+							<li class="greenweave-has-submenu greenweave-level1">
+								<a href="{{ link2.url }}">{{ link2.title }}  <span class="greenweave-icon-plus-submenu greenweave-plus-nClick2"></span></a>
+								<ul class="greenweave-submenu-links" >
+									{% for link3 in linklists[link2.handle].links %}	
+									{% if linklists[link3.handle].links == empty %}
+									<li class=""><a href="{{ link3.url }}" title="{{link3.title}}" >{{ link3.title }}</a></li>
+									{% else %}
+									<li class="greenweave-has-submenu greenweave-level2">
+										<a href="{{ link3.url }}">{{ link3.title }}  <span class="greenweave-icon-plus-submenu greenweave-plus-nClick3"></span></a>
+										<ul class="greenweave-submenu-links" >
+											{% for link4 in linklists[link3.handle].links %}
+											<li><a href="{{ link4.url }}" title="{{link4.title}}">{{ link4.title }}</a></li>
+											{% endfor %}
+										</ul>
+									</li>
+									{% endif %}
+									{% endfor %}
+								</ul>
+							</li>
+							{% endif %}
+							{% endfor %}
+						</ul>
+					</li>
+					{% endif %}
+					{% endfor%}
+				</ul>	
+        
+			</div>
+		</div>
+	</div>
+	<div class="greenweave-sidebar-overlay"></div>
+</div>

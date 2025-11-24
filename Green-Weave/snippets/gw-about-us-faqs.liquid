@@ -1,0 +1,60 @@
+{% if settings.show_greenweave_about_us_faqs %}
+  {%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+  <link rel="preload stylesheet" href="{{ 'gw-about-us-faqs.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-about-us-faqs.js' | asset_url }}"></script>
+  <section class="greenweave-about-us-faqs">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-12">
+          <div class="faqs-content">
+          <div class="heading-title">
+							{%if settings.greenweave_about_us_faqs_title_1 != ''%}<div class="title1">{{settings.greenweave_about_us_faqs_title_1}}</div>{%endif%}
+							{%if settings.greenweave_about_us_faqs_title_2 != ''%}<h2 class="title2 font-title">{{settings.greenweave_about_us_faqs_title_2 | newline_to_br}}</h2>{%endif%}
+							{%if settings.greenweave_about_us_faqs_desc != ''%}<p class="desc">{{settings.greenweave_about_us_faqs_desc}}</p>{%endif%}
+						</div>
+          <div class="intro-list-faqs">
+					{% for i in (1..5) %}
+          {% capture show%}show_greenweave_about_us_faqs_{{i}}{%endcapture%}
+					{%capture title %}greenweave_about_us_faqs_{{i}}_qs{%endcapture %}
+					{%capture desc %}greenweave_about_us_faqs_{{i}}_an{%endcapture %}
+					{%if settings[show] %}
+					<div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+						<div class="header-faqs" itemprop="name">{{ settings[title] }}</div>
+						<div class="content-faqs" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+							<div itemprop="text">{{ settings[desc] }}</div>
+						</div>
+					</div>
+					{%endif%}
+					{%endfor%}
+          </div>
+				</div>
+        </div>
+        <div class="col-lg-7 col-12">
+          <div class="faqs-banner">
+            <div class="banner">
+              <img src="{{ 'greenweave_about_us_faqs_img.jpg' | asset_url}}" alt="{{settings.greenweave_about_us_faqs_title_2}}" loading="lazy" decoding="async" />
+            </div>
+            <div class="list-counter">
+              {%for i in (1..2)%}
+                {%capture show%}show_greenweave_about_us_faqs_counter_{{i}}{%endcapture%}
+                {%capture num%}greenweave_about_us_faqs_counter_{{i}}_num{%endcapture%}
+                {%capture title%}greenweave_about_us_faqs_counter_{{i}}_title{%endcapture%}
+                {%capture desc%}greenweave_about_us_faqs_counter_{{i}}_desc{%endcapture%}
+                {%if settings[show]%}
+                <div class="counter counter--{{i}}">
+                  <div class="title">{{settings[title]}}</div>
+                  <div class="counter-faqs font-title" aria-label="{{settings[num]}}">{{ settings[num] }}</div>
+                  <div class="desc">{{ settings[desc] }}</div>
+                </div>
+                {%endif%}
+              {%endfor%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    {%endif%}

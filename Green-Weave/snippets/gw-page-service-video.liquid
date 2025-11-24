@@ -1,0 +1,20 @@
+{% if settings.show_greenweave_page_services_video %}
+{%unless has_heading %} 
+  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {% assign has_heading = true %}
+{% endunless %}
+<link rel="preload stylesheet" href="{{ 'gw-page-service-video.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-page-service-video.js' | asset_url }}"></script>
+<section class="greenweave-page-service-video">
+  <div class="banner-video">
+    <img src="{{'greenweave_page_services_video_img.jpg' | asset_url}}" alt="video" loading="lazy" decoding="async" />
+    <div class="video-play">
+      <a class="icon-play" href="https://www.youtube.com/watch?v={{settings.greenweave_page_services_video_id}}">
+        <svg width="30px" height="30px" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.79062 2.09314C4.63821 1.98427 4.43774 1.96972 4.27121 2.05542C4.10467 2.14112 4 2.31271 4 2.5V12.5C4 12.6873 4.10467 12.8589 4.27121 12.9446C4.43774 13.0303 4.63821 13.0157 4.79062 12.9069L11.7906 7.90687C11.922 7.81301 12 7.66148 12 7.5C12 7.33853 11.922 7.18699 11.7906 7.09314L4.79062 2.09314Z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+{%endif%}

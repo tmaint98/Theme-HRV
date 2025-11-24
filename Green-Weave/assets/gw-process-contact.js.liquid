@@ -1,0 +1,208 @@
+GreenWeave.PageProcessForm = {
+		init: function() {
+			var that = this;
+      that.GreenWeave_formBooking();
+		},
+  GreenWeave_formBooking: function(){
+		/*var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		var h = today.getHours();
+		var m = today.getMinutes();
+		if(h<10){h='0'+h} if(m<10){m='0'+m} 
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} 
+		today =yyyy+'-'+mm+'-'+dd;
+	
+		$('#greenweave_process_your_date').val(today);
+		$('#greenweave_process_your_time').val(h + ':' + m);*/
+		
+		function checkEmpty(obj) {
+			var name = $(obj).attr("data-valid");
+
+			$("."+name+"-validation").html("");
+			$(obj).css("border-bottom","");
+      $(obj).parents('.input-group').removeClass('error');
+
+			if($(obj).val() == "" || $(obj).val() == 'null' || $(obj).val() == null  || $(obj).val() == 'undefined'  || $(obj).val() == undefined) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+        $(obj).parents('.input-group').addClass('error');
+				return false;
+			}
+			return true;
+		}
+		function checkEmail(obj) {
+			var result_ph = true;
+
+			var name = $(obj).attr("data-valid");
+			$("."+name+"-validation").html("");
+			$(obj).css("border-bottom","");
+      $(obj).parents('.input-group').removeClass('error');
+
+			result_ph = checkEmpty(obj);
+
+			if(!result_ph) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+        $(obj).parents('.input-group').addClass('error');
+				return false;
+			}
+
+			var email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			result_ph = email_regex.test($(obj).val());
+
+			if(!result_ph) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Địa chỉ Email không hợp lệ");
+        $(obj).parents('.input-group').addClass('error');
+				return false;
+			}
+
+			return result_ph;
+		}
+		function checkPhone(obj) {
+			var result = true;
+
+			var name = $(obj).attr("data-valid");
+			$("."+name+"-validation").html("");
+			$(obj).css("border-bottom","");
+      $(obj).parents('.input-group').removeClass('error');
+
+			result = checkEmpty(obj);
+
+			if(!result) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+        $(obj).parents('.input-group').addClass('error');
+				return false;
+			}
+
+			var phone_regex = /(^0[2-9]\d{8}$)|(^01\d{9}$)/;
+			result = phone_regex.test($(obj).val());
+
+			if(!result) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Số điện thoại không hợp lệ");
+        $(obj).parents('.input-group').addClass('error');
+				return false;
+			}
+
+			return result;
+		}
+    var valid = false;
+		function validate(){
+			var name = $('.greenweave-process-form-booking #greenweave_process_full_name').val();
+			var phone = $('.greenweave-process-form-booking #greenweave_process_your_phone').val();
+			var email = $('.greenweave-process-form-booking #greenweave_process_your_email').val();
+			
+			//debugger;
+			if(name != '' && name != null && phone != '' && phone != null && email != '' && email != null && $('#greenweave_process_form_policy').is(':checked')){
+				valid = true;
+				//valid = valid && checkPhone($(".greenweave-process-form-booking #greenweave_process_your_phone"));
+			}
+			else{
+				valid = false;
+			}
+			if(valid == true){
+				$("#btn-booking-send-process").removeClass('btn-disabled').attr("disabled",false);
+			}
+			else{
+				$("#btn-booking-send-process").addClass('btn-disabled').attr("disabled",true);
+			}
+		}
+    
+		$('.greenweave-process-form-booking #greenweave_process_full_name').change(function(){
+			checkEmpty($('.greenweave-process-form-booking #greenweave_process_full_name'));
+      validate();
+		})
+		$('.greenweave-process-form-booking #greenweave_process_your_phone').change(function(){
+			checkPhone($(this));
+      validate();
+		})
+		$('.greenweave-process-form-booking #greenweave_process_your_email').change(function(){
+			checkEmail($(this));
+      validate();
+		})
+    $('.greenweave-process-form-booking #greenweave_process_form_policy').change(function() {
+      validate();
+    });
+
+		$('#btn-booking-send-process').click(function(e){
+			e.preventDefault(); 
+			if(checkEmpty($(".greenweave-process-form-booking #greenweave_process_full_name")) && checkPhone($(".greenweave-process-form-booking #greenweave_process_your_phone")) && checkEmail($(".greenweave-process-form-booking #greenweave_process_your_email")) && $('#greenweave_process_form_policy').is(':checked')){
+				let check_form = false;
+				{%if settings.greenweave_process_form_type_booking == 'google-sheet'%}
+					check_form = true;
+				{%endif%}
+				 if(check_form){
+					 let unindexed_array = $("#greenweave_process_formbooking").serializeArray();
+					 let indexed_array = {};
+					 let url = $("#greenweave_process_formbooking").attr('action');
+					 $.map(unindexed_array, function(n, i){
+						 indexed_array[n['name']] = n['value'];
+					 });
+					 debugger;
+					 $.ajax({
+						 type: 'POST',
+						 url: url,
+						 async : false,
+						 data: indexed_array,
+						 dataType: 'json',
+						 complete: function() {
+							 setTimeout(function(){
+								 //$('#modal-booking').modal('hide');
+								 $('#greenweave_process_mymodal_success').modal('show');
+							 },300);
+							 setTimeout(function(){
+								 $('#greenweave_process_mymodal_success').modal('hide');
+							 },5000);	
+						 },
+						 error: function(XMLHttpRequest, textStatus) {
+							 console.log('err', textStatus );
+						 }
+					 });
+				 }
+				 else{
+					const self = $(this).parents('form');
+              let namee = self.find("#greenweave_process_full_name").val(),
+              phonee = self.find("#greenweave_process_your_phone").val(),
+              emaill = self.find("#greenweave_process_your_email").val(),
+              subject = self.find("#greenweave_process_your_subject").val(),
+              message = "{%if settings.greenweave_process_form_subject != ''%}{{settings.greenweave_process_form_subject}}: {%else%}Chủ đề: {%endif%}";
+              message += self.find("#greenweave_process_your_subject").val();
+              message += "\n{%if settings.greenweave_process_form_message != ''%}{{settings.greenweave_process_form_message}}: {%else%}Nội dung: {%endif%}";
+              message += self.find("#greenweave_process_your_mess").val();
+              message += "\n(Form đăng ký trang Process)";
+             grecaptcha.ready(function() {
+               grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+                 self.find('input[name="g-recaptcha-response"]').val(token);
+                  $.ajax({
+                   type: 'POST',
+                   url:'/contact',
+                   data: "form_type=contact&__RequestVerificationToken="+self.find('input[name="__RequestVerificationToken"]').val()+"&utf8=✓&contact[name]="+namee+"&contact[phone]="+phonee+"&contact[email]="+emaill+"&contact[body]="+message+"&g-recaptcha-response="+self.find('input[name="g-recaptcha-response"]').val(),
+                   success:function(data){
+                     self.trigger("reset")
+                     setTimeout(function(){
+    									 $('#greenweave_process_mymodal_success').modal('show');
+    								 },300);
+    								 setTimeout(function(){
+    									 $('#greenweave_process_mymodal_success').modal('hide');
+    								 },5000);	
+                   }
+                 })
+               })
+             })
+				 }
+				}
+		});
+		$("#greenweave_process_mymodal_success").on('hidden.bs.modal', function(){
+					 location.reload();
+		});	
+	},
+};
+(function() {
+  GreenWeave.PageProcessForm.init();
+})();
+
+
