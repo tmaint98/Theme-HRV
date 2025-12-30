@@ -1,0 +1,38 @@
+StreetVibe.IndexMainSlider = {
+		init: function() {
+			var that = this;
+      that.StreetVibe_IndexMainSlider();
+		},
+  StreetVibe_IndexMainSlider: function(){
+    const streetvibeSlider = new Swiper ('.streetvibe-index-slider .swiper', {
+      slidesPerView: 1,  
+			loop: $('.streetvibe-index-slider .slider-item').length > 1 ? true:false,
+      preloadImages: false,
+      lazy: true,
+      speed: 1000,
+      //autoplay: false,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+			/*navigation: {
+				nextEl: ".streetvibe-index-slider .swiper-next",
+				prevEl: ".streetvibe-index-slider .swiper-prev",
+			},*/
+      pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			
+    });
+    const totalSlides = streetvibeSlider.slides.length;
+    if (totalSlides <= streetvibeSlider.params.slidesPerView) {
+      $('.streetvibe-index-slider .swiper-next, .streetvibe-index-slider .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  StreetVibe.IndexMainSlider.init();
+})();
+
+

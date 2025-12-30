@@ -1,0 +1,57 @@
+.streetvibe-about-us-col-slide{
+  padding: 60px 0;
+  overflow: hidden;
+  $colorCol: var(--color);
+  color: $colorCol;
+  .btn-link{
+    color: $colorCol;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb,currentColor 40%,transparent);
+    &:hover{
+      text-decoration-color: $colorCol;
+    }
+  }
+  .col-heading{
+    margin-bottom: 30px;
+    .title{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      h2{
+        font-size: 22px;
+        margin: 0;
+      }
+      .swiper-nav{
+        flex: 0 0 auto;
+        width: 40px;
+        cursor: pointer;
+        &.swiper-button-disabled{
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+  .col-slide{
+    margin-left: -30px;
+    padding: 0 50px;
+    .list-pro{
+        //overflow: visible;
+    }
+    .streetvibe-product-loop {
+      margin-left: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+    .col-slide{
+      margin-left: -15px;
+      padding: 0;
+      .streetvibe-product-loop {
+      margin-left: 15px;
+    }
+    }
+  }
+}
+

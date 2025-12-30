@@ -1,0 +1,56 @@
+<link rel="preload stylesheet" href="{{ 'sv-index-review.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'sv-index-review.js' | asset_url }}"></script>
+
+<div class="streetvibe-index-review streetvibe-index-ajax index-review" id="sv-index-review">
+  {%comment%}
+  <div class="container">
+    <div class="review-slide swiper">
+      <div class="swiper-wrapper">
+        {% for i in (1..5) %}
+          {% capture show %}show_streetvibe_index_review_{{i}}{%endcapture%}
+          {% capture title %}streetvibe_index_review_{{i}}_title{%endcapture%}
+          {% capture desc %}streetvibe_index_review_{{i}}_desc{%endcapture%}
+          {% capture name %}streetvibe_index_review_{{i}}_name{%endcapture%}
+          {% capture img %}streetvibe_index_review_{{i}}_img.jpg{%endcapture%}
+          {% capture btn %}streetvibe_index_review_{{i}}_btn{%endcapture%}
+          {% capture link %}streetvibe_index_review_{{i}}_link{%endcapture%}
+          {% if settings[show] %}
+            <div class="swiper-slide">
+              <div class="review-item">
+                <div class="row align-items-center">
+                  <div class="review-content">
+                    {% if settings[title] != empty %}
+                      <div class="title">{{ settings[title] }}</div>
+                    {% endif %}
+                    <div class="review-star">
+                      <span class="text-ani"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                    </div>
+                    {% if settings[desc] != empty %}
+                      <div class="desc">
+                        <span class="text-ani">{{ settings[desc] }}</span>
+                      </div>
+                    {% endif %}
+                    {% if settings[name] != empty %}
+                      <div class="name">
+                        <span class="text-ani">{{ settings[name] }}</span>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="review-banner">
+                    <img src="{{ img | asset_url}}" alt="{{settings[title]}}" />
+                    {% if settings[btn] != empty %}
+                      <a href="{{settings[link]}}" class="btn-link">{{ settings[btn] }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="swiper-nav swiper-prev"><svg width="20px" height="20px" viewBox="-78.5 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>left</title><path d="M257 64L291 98 128 262 291 426 257 460 61 262 257 64Z" /></svg></div>
+      <div class="swiper-nav swiper-next"><svg width="20px" height="20px" viewBox="-77 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>right</title><path d="M98 460L64 426 227 262 64 98 98 64 294 262 98 460Z" /></svg></div>
+    </div>
+  </div>
+{%endcomment%}
+</div>

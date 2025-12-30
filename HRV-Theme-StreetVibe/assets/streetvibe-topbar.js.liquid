@@ -1,0 +1,34 @@
+StreetVibe.Topbar = {
+		init: function() {
+			var that = this;
+      that.StreetVibe_TopbarSlide();
+		},
+  StreetVibe_TopbarSlide: function(){
+    const TopbarSlider = new Swiper ('.streetvibe-topbar-slide.swiper', {
+      slidesPerView: 1,  
+			loop: $('.streetvibe-topbar-slide .slide-item').length > 1 ? true:false,
+      speed: 1000,
+      //autoplay: false,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+			navigation: {
+				nextEl: ".streetvibe-topbar-slide .swiper-next",
+				prevEl: ".streetvibe-topbar-slide .swiper-prev",
+			},
+			
+    });
+    const totalSlides = TopbarSlider.slides.length;
+    if (totalSlides <= TopbarSlider.params.slidesPerView) {
+      $('.streetvibe-topbar-slide .swiper-next, .streetvibe-topbar-slide .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  StreetVibe.Topbar.init();
+})();

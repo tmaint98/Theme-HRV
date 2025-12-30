@@ -1,0 +1,16 @@
+<link rel="preload stylesheet" href="{{ 'sv-index-slider.scss.css' | asset_url }}" as="stylesheet">
+<link href="{{ 'sv-index-slider.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'sv-index-slider.js' | asset_url }}"></script>
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'index.js' | asset_url }}"></script>
+<link rel="preload stylesheet" href="{{ 'sv-product-loop.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'sv-product-loop.js' | asset_url }}"></script>
+{%- assign has_section_collection = false -%}
+{%- assign has_section_collection_slide = false -%}
+{%- assign has_heading = false -%}
+
+{%- for i in (1..11) -%}
+{%- capture sectionname -%}streetvibe_section_index_{{i}}{%- endcapture -%}
+{%- if settings[sectionname] != 'none' -%}
+{%- include settings[sectionname] -%}
+{%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,41 @@
+$bgAbout2: {{ settings.streetvibe_index_about_2_bg }};
+$colorAbout2: {{ settings.streetvibe_index_about_2_color }};
+$bgAbout2_btn: {{ settings.streetvibe_index_about_2_bg_btn }};
+$colorAbout2_btn: {{ settings.streetvibe_index_about_2_color_btn }};
+
+.streetvibe-index-about-2{
+  padding: 60px 0;
+  background: $bgAbout2;
+  color: $colorAbout2;
+  .about-banner{
+    position: relative;
+    .banner-img{
+      max-width: 54%;
+      &:first-child{
+        position: absolute;
+        top: 10%;
+        left: 0;
+      }
+      &:last-child{
+        margin: 0 0 0 auto;
+      }
+    }
+  }
+  .button{
+    background-color: $bgAbout2_btn;
+    color: $colorAbout2_btn;
+  }
+  @media(min-width: 1200px){
+    .about-content{
+      padding: 0 80px;
+    }
+  }
+  @media(max-width: 991px){
+    .row{
+      gap: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+  }
+}

@@ -1,0 +1,72 @@
+$colorBlog: {{ settings.streetvibe_index_blog_color }};
+$bgBlog_btn: {{ settings.streetvibe_index_blog_bg_btn }};
+$colorBlog_btn: {{ settings.streetvibe_index_blog_color_btn }};
+.streetvibe-index-blog {
+  padding: 60px 0;
+  color: $colorBlog;
+
+  .list-blog {
+    margin: 0;
+    gap: 30px;
+    .article-loop {
+      flex: 0 0 auto;
+      width: calc(100% / 3 - 20px);
+      .article-detail {
+        padding-top: 20px;
+      }
+      .post-title {
+        font-size: 22px;
+        margin-bottom: 10px;
+        a {
+          color: $colorBlog;
+        }
+      }
+      .article-post-meta,
+      .entry-content {
+        opacity: 0.8;
+      }
+      .article-post-meta {
+        font-size: 12px;
+        margin-bottom: 15px;
+      }
+      .btn-link {
+        color: $colorBlog;
+        text-decoration: underline;
+        text-decoration-color: color-mix(in srgb,currentColor 40%,transparent);
+        margin-top: 10px;
+        display: inline-block;
+         &:hover {
+          text-decoration-color: $colorBlog;
+        }
+      }
+    }
+  }
+  .btn-more {
+    margin-top: 30px;
+    .button {
+      background-color: $bgBlog_btn;
+      color: $colorBlog_btn;
+    }
+  }
+  @media(max-width: 991px) {
+    .list-blog {
+      .article-loop {
+        width: 100%;
+        & ~ .article-loop {
+          padding-top: 35px;
+          border-top: 1px solid rgba($colorBlog, 0.1);
+        }
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .list-blog {
+      .article-loop {
+        .post-title {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,100 @@
+StreetVibe.Search = {
+  init: function(){
+    var that = this;
+    that.StreetVibe_searchAutoHeader();
+  },
+  StreetVibe_searchAutoHeader: function(){
+		$('.streetvibe-ultimate-search').submit(function(e) {
+			e.preventDefault();
+			var q = $(this).find('input[name=q]').val();
+			if(q.indexOf('script') > -1 || q.indexOf('>') > -1){
+				alert('Từ khóa của bạn có chứa mã độc hại! Vui lòng nhập lại từ khóa khác');
+				$(this).find('input[name=q]').val('');
+			}
+			else{
+				var q_follow = 'product';
+				var query = encodeURIComponent('(title:product contains ' + q + ')');
+				if( !q ) {
+					window.location = '/search?type='+ q_follow +'&q=*';
+					return;
+				}	
+				else {
+					window.location = '/search?type=' + q_follow +'&q=filter=' + query;
+					return;
+				}
+			}
+		});
+		var $input = $('.streetvibe-ultimate-search input[type="text"]');
+		$input.bind('keyup change paste propertychange', function() {
+			var key = $(this).val(),
+					$parent = $(this).parents('.streetvibe-wpo-wrapper-search'),
+					$results = $(this).parents('.streetvibe-wpo-wrapper-search').find('.streetvibe-smart-search-wrapper');
+
+			if(key.indexOf('script') > -1 || key.indexOf('>') > -1){
+				alert('Từ khóa của bạn có chứa mã độc hại! Vui lòng nhập lại từ khóa khác');
+				$(this).val('');
+				$('.streetvibe-ultimate-search input[type="text"]').val('');
+			}
+			else{
+				if(key.length > 0 ){
+					$(this).attr('data-history', key);
+					$('.streetvibe-ultimate-search input[type="text"]').val($(this).val());
+					var q_follow = 'product',
+							str = '';
+					str = '/search?type=product&q=' + key + '&view=header-ultimate-product';
+					$.ajax({
+						url: str,
+						type: 'GET',
+						async: true,
+						success: function(data){
+							$results.find('.streetvibe-resultsContent').html(data);
+						}
+					})
+					if(!$('.streetvibe-header-action_search').hasClass('streetvibe-js-action-show')){
+						$('body').removeClass("locked-scroll");
+						$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+					}
+					$("streetvibe-ultimate-search").addClass("expanded");
+					$results.fadeIn();
+				}
+				else{
+					$('streetvibe-ultimate-search input[type="text"]').val($(this).val());
+					$("streetvibe-ultimate-search").removeClass("expanded");
+					$results.fadeOut();
+				}
+			}
+
+		})
+		$('body').click(function(evt) {
+			var target = evt.target;
+			if (target.id !== 'streetvibe-ajaxSearchResults' && target.id !== 'streetvibe-inputSearchAuto') {
+				$("#streetvibe-ajaxSearchResults").hide();
+			}
+			if (target.id !== 'streetvibe-ajaxSearchResults-mb' && target.id !== 'streetvibe-inputSearchAuto-mb') {
+				$("#streetvibe-ajaxSearchResults-mb").hide();
+			}
+			if (target.id !== 'streetvibe-ajaxSearchResults-3' && target.id !== 'streetvibe-inputSearchAuto-3') {
+				$("#streetvibe-ajaxSearchResults-3").hide();
+			}
+		});
+		$('body').on('click', '.streetvibe-ultimate-search input[type="text"]', function() {
+			if ($(this).is(":focus")) {
+				if ($(this).val() != '') {
+					$(".streetvibe-ajaxSearchResults").show();
+				}
+			} else {
+			}
+		})
+		$('body').on('click', '.streetvibe-ultimate-search .search-close', function(e){
+			e.preventDefault();
+			$(".streetvibe-ajaxSearchResults").hide();
+			$(".streetvibe-ultimate-search").removeClass("expanded");
+			$(".streetvibe-ultimate-search").find('input[name=q]').val('');
+		})
+	},
+};
+
+(function() {
+  StreetVibe.Search.init();
+})();
+

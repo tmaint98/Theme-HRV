@@ -1,0 +1,48 @@
+{%- unless has_section_collection_slide -%}
+  <link rel="preload stylesheet" href="{{ 'sv-index-col-slide.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'sv-index-col-slide.js' | asset_url }}"></script>
+  {%- assign has_section_collection_slide = true -%}
+{%- endunless -%}
+
+
+{% capture color %}streetvibe_col_slide_{{ind}}_color{%endcapture%}
+{% capture title %}streetvibe_col_slide_{{ind}}_title{%endcapture%}
+{% capture handle %}streetvibe_col_slide_{{ind}}_handle{%endcapture%}
+{% capture limit %}streetvibe_col_slide_{{ind}}_limit{%endcapture%}
+{% capture btn %}streetvibe_col_slide_{{ind}}_btn{%endcapture%}
+{% assign col_handle = settings[handle] %}
+<div class="streetvibe-index-col-slide streetvibe-index-ajax index-col-slide" data-handle="{{col_handle}}" style="--color: {{settings[color]}};">
+  <div class="container-fluid">
+    <div class="col-heading text-center">
+      <div class="title">
+        <div class="swiper-nav swiper-prev-list"><svg width="20px" height="20px" viewBox="-78.5 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>left</title><path d="M257 64L291 98 128 262 291 426 257 460 61 262 257 64Z" /></svg></div>
+        <h2>
+          {% if settings[title] != empty %}{{settings[title]}}{% else %}{{ collections[col_handle].title }}{% endif %}
+        </h2>
+        <div class="swiper-nav swiper-next-list"><svg width="20px" height="20px" viewBox="-77 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>right</title><path d="M98 460L64 426 227 262 64 98 98 64 294 262 98 460Z" /></svg></div>
+      </div>
+      {% if settings[btn] != empty and collections[col_handle].products.size > settings[limit] %}
+        <a href="{{collections[col_handle].url}}" class="btn-link">{{ settings[btn] }}</a>
+      {% endif %}
+    </div>
+    <div class="col-slide">
+      {% if collections[col_handle].products.size == 0 %}
+        <div class="col-md-12 product-noloop">
+          <div class="collection-alert-no text-center">
+            <p>Chưa có sản phẩm nào trong danh mục này</p>
+          </div>
+        </div>
+      {% else %}
+        <div class="list-pro swiper">
+          {%comment%}<div class="swiper-wrapper">
+            {% for product in collections[col_handle].products limit: settings[limit] %}
+              <div class="swiper-slide">
+                {% include 'sv-product-loop' %}
+              </div>
+            {% endfor %}
+          </div>{%endcomment%}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

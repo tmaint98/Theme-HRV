@@ -1,0 +1,49 @@
+StreetVibe.AboutColSlider = {
+		init: function() {
+			var that = this;
+      {%for i in (1..2)%}
+      {%capture show %}show_streetvibe_about_us_col_slide_{{i}}{%endcapture%}
+        {%capture handle%}streetvibe_about_us_col_slide_{{i}}_handle{%endcapture%}
+        {%if settings[show] %}
+        {% assign col_handle = settings[handle] %}
+          that.StreetVibe_AboutColSlider('{{col_handle}}');
+        {%endif%}
+      {%endfor%}
+      
+		},
+  StreetVibe_AboutColSlider: function(handle){
+    const streetvibeSlider = new Swiper ('.streetvibe-about-us-col-slide[data-handle="'+ handle +'"] .list-pro', {
+      slidesPerView: 4,  
+			//loop: $('.streetvibe-about-us-col-slide .streetvibe-product-loop').length > 3 ? true:false,
+      loop: false,
+      speed: 1000,
+      autoplay: false,
+      /*autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },*/
+			navigation: {
+				nextEl: '.streetvibe-about-us-col-slide[data-handle="'+ handle +'"] .swiper-next-list',
+				prevEl: '.streetvibe-about-us-col-slide[data-handle="'+ handle +'"] .swiper-prev-list',
+			},
+      breakpoints: {
+        0: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 4
+        },
+      },
+    });
+    const totalSlides = streetvibeSlider.slides.length;
+    if (totalSlides <= streetvibeSlider.params.slidesPerView) {
+      $('.streetvibe-about-us-col-slide[data-handle="'+ handle +'"] .swiper-next-list, .streetvibe-about-us-col-slide[data-handle="'+ handle +'"] .swiper-prev-list').hide();
+    }
+  },
+};
+(function() {
+  StreetVibe.AboutColSlider.init();
+})();
+
+
+

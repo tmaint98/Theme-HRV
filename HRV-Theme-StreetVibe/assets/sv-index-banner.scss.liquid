@@ -1,0 +1,55 @@
+$bgBaner: {{settings.streetvibe_index_banner_bg}};
+$colorBaner: {{settings.streetvibe_index_banner_color}};
+.streetvibe-index-banner{
+  padding: 60px 0;
+  .list-banner{
+    margin: 0;
+    gap: 30px;
+    .banner-item{
+      flex: 0 0 auto;
+      width: calc(50% - 15px);
+      position: relative;
+      .item-content{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50%;
+        background: $bgBaner;
+        color: $colorBaner;
+        padding: 20px;
+        .title{
+          font-size: 28px;
+          margin-bottom: 5px;
+        }
+        .link{
+          text-decoration: underline;
+          color: $colorBaner;
+          text-decoration-color: rgba($colorBaner, 0.4);
+          &:hover{
+            text-decoration-color: $colorBaner;
+          }
+        }
+      }
+    }
+  }
+  @media(max-width: 991px){
+    .list-banner{
+      flex-flow: nowrap;
+      gap: 15px;
+      overflow-x: scroll; 
+      .banner-item{
+        width: 80%;
+        .item-content{
+        width: 70%;
+        padding: 15px;
+        .title{
+          font-size: 20px;
+        }
+      }
+      }
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+  }
+}

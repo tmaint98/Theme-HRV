@@ -1,0 +1,12 @@
+<link rel="preload stylesheet" href="{{ 'sv-index-marquee.scss.css' | asset_url }}" as="stylesheet">
+<section class="streetvibe-index-marquee">
+    <div class="marquee">
+      <div class="marquee__inner">
+        {% if settings.streetvibe_index_marquee_desc != '' %}
+          {% for i in (1..4) %}
+            <div class="marquee__inner--item">{{ settings.streetvibe_index_marquee_desc }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>

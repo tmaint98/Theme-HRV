@@ -1,0 +1,36 @@
+StreetVibe.IndexReviewSlider = {
+		init: function() {
+			var that = this;
+      //that.StreetVibe_IndexReviewSlider();
+		},
+  StreetVibe_IndexReviewSlider: function(){
+    const streetvibeSlider = new Swiper ('.streetvibe-index-review .swiper', {
+      slidesPerView: 1,  
+			loop: $('.streetvibe-index-review .review-item').length > 1 ? true:false,
+      speed: 1000,
+      autoplay: false,
+      /*autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },*/
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+			navigation: {
+				nextEl: ".streetvibe-index-review .swiper-next",
+				prevEl: ".streetvibe-index-review .swiper-prev",
+			},
+    });
+    const totalSlides = streetvibeSlider.slides.length;
+    if (totalSlides <= streetvibeSlider.params.slidesPerView) {
+      $('.streetvibe-index-review .swiper-next, .streetvibe-index-review .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  StreetVibe.IndexReviewSlider.init();
+})();
+
+
+

@@ -1,0 +1,199 @@
+StreetVibe.Header = {
+		init: function() {
+			var that = this;
+      that.StreetVibe_scrollFixedHeader();
+      that.StreetVibe_actionClick();
+      that.StreetVibe_clickIconsHeader();
+      that.StreetVibe_menuSidebar();
+      that.StreetVibe_modalLive();
+		  that.StreetVibe_hiddenBtnLive();
+		},
+  StreetVibe_scrollFixedHeader: function(){
+		var $header = $(".streetvibe-mainHeader--height");
+		var curScrollTop = 0;
+		$(window).scroll(function(e) {
+			var scroll = $(window).scrollTop();
+			if(scroll > $header.height()){
+				$header.addClass('streetvibe-fixed-header');
+			}
+			else{
+				$header.removeClass('streetvibe-fixed-header');
+			}
+		});
+	},
+  StreetVibe_actionClick: function(){
+		$(document).on('click', function (event) {
+			var class_name = event.target.className.animVal;
+			if(class_name == 'streetvibe-svg-ico-account' || class_name == 'streetvibe-svg-ico-search'){}
+			else{
+				if (!$(event.target).closest('.streetvibe-header-action_dropdown').length) {
+					$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+				}
+			}
+		})
+	},
+  StreetVibe_clickIconsHeader: function(){
+		$('.streetvibe-header-action_clicked').click(function(e){
+			e.preventDefault();		
+			if($(this).parents('.streetvibe-header-action-item').hasClass('streetvibe-js-action-show')){
+				$('body').removeClass('streetvibe-locked-scroll');
+				$(this).parents('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+				if($(window).width() < 992){
+					if ($(this).parents('.streetvibe-header-action-item').hasClass('streetvibe-header-action_cart')) {
+						$('.streetvibe-siteCart-mobile__overlay').removeClass('streetvibe-show-cart');
+						$('body').removeClass('streetvibe-locked-scroll').removeClass('streetvibe-body-showcart');
+					}
+				}
+			}
+			else{
+				$('body').removeClass("streetvibe-locked-scroll-menu");
+				$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+				$('body').addClass('streetvibe-locked-scroll');
+				$(this).parents('.streetvibe-header-action-item').addClass('streetvibe-js-action-show');
+				if($(window).width() < 992){
+					if ($(this).parents('.streetvibe-header-action-item').hasClass('streetvibe-header-action_cart'))  {
+
+						$('.streetvibe-siteCart-mobile').addClass('streetvibe-show-cart');
+						$('body').removeClass('streetvibe-locked-scroll').addClass('streetvibe-body-showcart');
+					}
+				}
+			}		
+		});	
+		$('.streetvibe-siteCart-mobile__header').click(function() {
+			if ($(this).parents('.streetvibe-siteCart-mobile').hasClass('streetvibe-show-cart')) {
+				$(this).parents('.streetvibe-siteCart-mobile').removeClass('streetvibe-show-cart');
+				$('body').removeClass('streetvibe-locked-scroll').removeClass('streetvibe-body-showcart');
+				$('.streetvibe-header-action-item.streetvibe-header-action_cart').removeClass('streetvibe-js-action-show');
+			} else {	
+				$('body').addClass('streetvibe-body-showcart');
+				$(this).parents('.streetvibe-siteCart-mobile').addClass('streetvibe-show-cart');
+
+			}
+		});
+		$('.streetvibe-siteCart-mobile__overlay').on('click', function(e){
+			$(this).parents('.streetvibe-siteCart-mobile').removeClass('streetvibe-show-cart');
+			$('body').removeClass('streetvibe-locked-scroll').removeClass('streetvibe-body-showcart');
+			$('.streetvibe-header-action-item.streetvibe-header-action_cart').removeClass('streetvibe-js-action-show');
+		})
+		$('body').on('click', '#streetvibe-sitenav-overlay', function(e){
+			$('body').removeClass('streetvibe-locked-scroll');
+			$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+		});
+		$('body').on('click', '#streetvibe-sitenav-overlay,.sitenav-content .btnclose', function(e){
+			$('body').removeClass('streetvibe-locked-scroll').removeClass("streetvibe-locked-scroll-menu");
+			$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+		});
+		$('.streetvibe-activeCartChecked').click(function() {
+			$('body').addClass('streetvibe-locked-scroll');
+			$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+			$('.streetvibe-sidebar-main').addClass('streetvibe-is-show-right');
+			$('.streetvibe-sidebar-main .streetvibe-sitenav-cart').addClass('streetvibe-show');
+		});
+		$('.streetvibe-activeMenuChecked').click(function() {
+			if($('.streetvibe-sidebar-main .streetvibe-sitenav-wrapper.streetvibe-sitenav-menu').length == 0){
+				$.ajax({
+					url: '/index?view=header-load-menu',
+					success:function(data){
+						$('.streetvibe-sidebar-main').append(data);
+						setTimeout(function() {
+							if($('.addThis_listSharing').hasClass('active')){
+								$('.addThis_listSharing').removeClass('active');
+								$('.addThis_listSharing').fadeOut(150);	
+							}
+							$('body').addClass('streetvibe-locked-scroll');
+							$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+							$('.streetvibe-sidebar-main').addClass('streetvibe-is-show-left');
+							$('.streetvibe-sidebar-main .streetvibe-sitenav-menu').addClass('streetvibe-show');
+						},100);
+						StreetVibe.Header.StreetVibe_menuSidebar();
+						StreetVibe.Header.StreetVibe_closeSidebarMain();
+            {%if settings.StreetVibe_shop_google_translate%}
+            if($(window).width() < 992){
+              var currentLang_mb = localStorage.getItem("selectedLang"),
+            currentLangFlag_mb = localStorage.getItem("selectedLangFlag");
+        
+            if (currentLang_mb) {
+              document.documentElement.setAttribute("lang", currentLang_mb);
+            }
+            changeLanguage(currentLang_mb,currentLangFlag_mb);
+            }
+            {%endif%}
+					}
+				});
+			}else{
+				if($('.addThis_listSharing').hasClass('active')){
+					$('.addThis_listSharing').removeClass('active');
+					$('.addThis_listSharing').fadeOut(150);	
+				}
+				$('body').addClass('streetvibe-locked-scroll');
+				$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+				$('.streetvibe-sidebar-main').addClass('streetvibe-is-show-left');
+				$('.streetvibe-sidebar-main .streetvibe-sitenav-menu').addClass('streetvibe-show');
+			}
+		});
+    $('.streetvibe-activeInfoChecked').click(function() {
+			$('body').addClass('streetvibe-locked-scroll');
+			$('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+			$('.streetvibe-sidebar-main').addClass('streetvibe-is-show-right');
+			$('.streetvibe-sidebar-main .streetvibe-sitenav-info').addClass('streetvibe-show');
+		});
+		$('.streetvibe-sidebar-overlay, .streetvibe-btn-sitenav-close').on('click', function(e){
+			$('body').removeClass('streetvibe-locked-scroll').removeClass('streetvibe-body-showcart');
+			$(this).parents('.streetvibe-sidebar-main').removeClass('streetvibe-is-show-right');
+			$(this).parents('.streetvibe-sidebar-main').removeClass('streetvibe-is-show-left');
+			$('.streetvibe-sidebar-main .streetvibe-sitenav-wrapper').removeClass('streetvibe-show');
+		})
+	},
+  StreetVibe_menuSidebar: function(){
+		$('.streetvibe-plus-nClick1').click(function(e){
+			e.preventDefault();
+			$(this).parents('.streetvibe-level0').toggleClass('opened');
+			$(this).parents('.streetvibe-level0').children('ul').slideToggle(200);
+		});
+		$('.streetvibe-plus-nClick2').click(function(e){
+			e.preventDefault();
+			$(this).parents('.streetvibe-level1').toggleClass('opened');
+			$(this).parents('.streetvibe-level1').children('ul').slideToggle(200);
+		});
+		$('.streetvibe-plus-nClick3').click(function(e){
+			e.preventDefault();
+			$(this).parents('.streetvibe-level2').toggleClass('opened');
+			$(this).parents('.streetvibe-level2').children('ul').slideToggle(200);
+		});
+		/*jQuery('.sidebox-title .htitle').click(function(){
+			$(this).parents('.group-sidebox').toggleClass('is-open').find('.sidebox-content-togged').slideToggle('medium');
+		}); */
+	},
+  StreetVibe_closeSidebarMain: function(){
+		$('.streetvibe-sidebar-overlay, .streetvibe-btn-sitenav-close').on('click', function(e){
+			$('body').removeClass('streetvibe-locked-scroll');
+			$(this).parents('.streetvibe-sidebar-main').removeClass('streetvibe-is-show-right');
+			$(this).parents('.streetvibe-sidebar-main').removeClass('streetvibe-is-show-left');
+			$('.streetvibe-sidebar-main .streetvibe-sitenav-wrapper').removeClass('streetvibe-show');
+			jQuery('body').removeClass('streetvibe-mainBody-mbcart').removeClass('streetvibe-body-showcart');
+		})
+	},
+  StreetVibe_modalLive: function(){
+		$('.streetvibe-header-box-live .streetvibe-btn-live').click(function(){
+			$('.streetvibe-modal-live').toggleClass('opened');
+		});
+		$('.streetvibe-box-live-mb .streetvibe-btn-live').click(function(){
+			$('.streetvibe-modal-live').toggleClass('opened');
+		});
+		$('.streetvibe-btn-close--live').click(function(){
+			$('.streetvibe-modal-live').removeClass('opened');
+		});
+	},
+	StreetVibe_hiddenBtnLive: function(){
+		setTimeout(function(){
+			$('.streetvibe-box-live-mb').removeClass('hidden');
+		},500);
+
+		$('.streetvibe-btn-close').click(function(){
+			$('.streetvibe-box-live-mb').addClass('hidden');
+		});
+	},
+};
+(function() {
+  StreetVibe.Header.init();
+})();

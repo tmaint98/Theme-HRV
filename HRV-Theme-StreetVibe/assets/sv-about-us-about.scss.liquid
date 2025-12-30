@@ -1,0 +1,41 @@
+$bgAbout1: {{ settings.streetvibe_about_us_about_1_bg }};
+$colorAbout1: {{ settings.streetvibe_about_us_about_1_color }};
+$bgAbout1_btn: {{ settings.streetvibe_about_us_about_1_bg_btn }};
+$colorAbout1_btn: {{ settings.streetvibe_about_us_about_1_color_btn }};
+
+.streetvibe-about-us-about{
+  padding: 60px 0;
+  background: $bgAbout1;
+  color: $colorAbout1;
+  .about-banner{
+    position: relative;
+    .banner-img{
+      max-width: 54%;
+      &:first-child{
+        position: absolute;
+        top: 10%;
+        left: 0;
+      }
+      &:last-child{
+        margin: 0 0 0 auto;
+      }
+    }
+  }
+  .button{
+    background-color: $bgAbout1_btn;
+    color: $colorAbout1_btn;
+  }
+  @media(min-width: 1200px){
+    .about-content{
+      padding: 0 80px;
+    }
+  }
+  @media(max-width: 991px){
+    .row{
+      gap: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+  }
+}

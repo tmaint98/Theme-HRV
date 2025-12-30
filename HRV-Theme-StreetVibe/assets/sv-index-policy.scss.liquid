@@ -1,0 +1,37 @@
+$bgPolicy: {{ settings.streetvibe_index_policy_bg }};
+$colorPolicy: {{ settings.streetvibe_index_policy_color }};
+
+.streetvibe-index-policy {
+  background: $bgPolicy;
+  color: $colorPolicy;
+  .list-policy {
+    margin: 0;
+    justify-content: center;
+    .policy-item {
+      flex: 0 0 auto;
+      width: 25%;
+      padding: 20px;
+      .icon {
+        margin-bottom: 5px;
+        img {
+          max-height: 30px;
+        }
+      }
+      .title {
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    .list-policy {
+      .policy-item {
+        width: 50%;
+        padding: 15px 10px;
+        .title {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+$colorColBanner: {{ settings.streetvibe_index_col_banner_color }};
+.streetvibe-index-col-banner {
+  padding: 60px 0;
+  .list-col {
+    margin: 0;
+    gap: 15px 30px;
+    .col-item {
+      flex: 0 0 auto;
+      width: calc(100% / 3 - 20px);
+      position: relative;
+      .title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.2);
+        color: $colorColBanner;
+        font-size: 28px;
+        font-weight: 600;
+        padding: 20px;
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    .list-col {
+      flex-flow: nowrap;
+      gap: 15px;
+      overflow-x: scroll;
+      .col-item {
+        width: 80%;
+        .title {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+  }
+}

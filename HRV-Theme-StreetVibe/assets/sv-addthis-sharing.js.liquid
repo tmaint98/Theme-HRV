@@ -1,0 +1,117 @@
+StreetVibe.Addthis = {
+		init: function() {
+			var that = this;
+      that.StreetVibe_addthisIconShare();
+      that.StreetVibe_clickIconsToolbar();
+		},
+  StreetVibe_addthisIconShare: function(){
+		if ($('.streetvibe_addthis_listSharing').length > 0){
+			$(window).scroll(function(){
+				if($(window).scrollTop() > 250 ) {
+					$('.streetvibe_addthis_listSharing_list').addClass('is-show');
+				} else {
+					$('.streetvibe_addthis_listSharing_list').removeClass('is-show');
+				}
+			});
+			$('.streetvibe_addthis_contact__icons .streetvibe-box-contact,.streetvibe_addthis_contact__lists .streetvibe_addthis_close').on('click', function(e){
+				if($('.streetvibe_addthis_listSharing').hasClass('active')){
+					$('body').removeClass('streetvibe-streetvibe-locked-scroll');
+					$('.streetvibe_addthis_listSharing').removeClass('active');
+					$('.streetvibe_addthis_listSharing').fadeOut(150);				
+				}
+				else{		
+					$('.streetvibe_addthis_listSharing').fadeIn(100);
+					$('.streetvibe_addthis_listSharing').addClass('active');
+				}
+			});
+			$("body").on('click', function(event) {
+				if ($(event.target).is('.streetvibe_addthis_contact__dialog') || $(event.target).is('.addThiclose')) {
+					event.preventDefault();
+					$('body').removeClass('streetvibe-streetvibe-locked-scroll');
+					$('.streetvibe_addthis_listSharing').removeClass('active');
+					$('.streetvibe_addthis_listSharing').fadeOut(150);			
+				}
+			});
+			$('.streetvibe-body-popupform form.contact-form').submit(function(e){
+				var self = $(this);
+				if($(this)[0].checkValidity() == true){
+					e.preventDefault();
+					grecaptcha.ready(function() {
+						grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+							self.find('input[name="g-recaptcha-response"]').val(token);
+							$.ajax({
+								type: 'POST',
+								url:'/contact',
+								data: $('.streetvibe-body-popupform form.contact-form').serialize(),			 
+								success:function(data){		
+									$('.streetvibe-modal-addthis.fade.show').modal('hide');
+									swal({
+										icon: "success",
+										className: "streetvibe-form-success",
+										title: "{%if settings.streetvibe_addthis_icon3_title2 != ''%}{{settings.streetvibe_addthis_icon3_title2}}{%else%}Đăng kí thông tin thành công{%endif%}",
+										text: "{{settings.streetvibe_addthis_icon3_content}}",
+										button: false,
+										timer: 5000,
+									}).then((result) => {
+										//location.reload(); 
+									});
+								},	
+							})
+						}); 
+					});
+				}
+			});
+		}
+		/*if ($('.layoutProduct_scroll').length > 0 ) {
+			if	(jQuery(window).width() < 768 ){
+				var curScrollTop = 0;
+				$(window).scroll(function(){	
+					var scrollTop = $(window).scrollTop();
+					if(scrollTop > curScrollTop  && scrollTop > 200 ) {
+						$('.layoutProduct_scroll').removeClass('scroll-down').addClass('scroll-up');
+					}
+					else {
+						if (scrollTop > 200 && scrollTop + $(window).height() + 150 < $(document).height()) {
+							$('.layoutProduct_scroll').removeClass('scroll-up').addClass('scroll-down');	
+						}
+					}
+					if(scrollTop < curScrollTop  && scrollTop < 200 ) {
+						$('.layoutProduct_scroll').removeClass('scroll-up').removeClass('scroll-down');
+					}
+					curScrollTop = scrollTop;
+				});
+			}
+		}*/
+	},
+  StreetVibe_clickIconsToolbar: function(){
+		$('.streetvibe-toolbarCartClick').click(function(){
+			if($('.streetvibe_addthis_listSharing').hasClass('active')){
+				$('.streetvibe_addthis_listSharing').removeClass('active');
+				$('.streetvibe_addthis_listSharing').fadeOut(150);	
+			}
+			$('body').addClass('streetvibe-locked-scroll');
+      $('.streetvibe-header-action-item').removeClass('streetvibe-js-action-show');
+			$('.streetvibe-sidebar-main').addClass('streetvibe-is-show-right');
+			$('.streetvibe-sidebar-main .streetvibe-sitenav-cart').addClass('streetvibe-show');
+		});
+		$('.streetvibe-toolbarContactClick').click(function(){
+			if($('.streetvibe_addthis_listSharing').hasClass('active')){
+				$('body').removeClass('streetvibe-locked-scroll');
+				$('.streetvibe_addthis_listSharing').removeClass('active');
+				$('.streetvibe_addthis_listSharing').fadeOut(150);				
+			}
+			else{		
+				$('body').addClass('streetvibe-locked-scroll');
+				$('.streetvibe_addthis_listSharing').fadeIn(100);
+				$('.streetvibe_addthis_listSharing').addClass('active');
+			}
+		});
+		$('.streetvibe-toolbarMenuClick').click(function(){
+			$('.streetvibe-activeMenuChecked').trigger('click');
+		});
+	},
+};
+(function() {
+  StreetVibe.Addthis.init();
+})();
+

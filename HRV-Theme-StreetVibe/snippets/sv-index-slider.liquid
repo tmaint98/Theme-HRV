@@ -1,0 +1,132 @@
+{%comment%}
+<link rel="preload stylesheet" href="{{ 'sv-index-slider.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'sv-index-slider.js' | asset_url }}"></script>
+{%endcomment%}
+
+<div class="streetvibe-index-slider" id="streetvibe-index-slider">
+  <div class="container-fluid index-slider">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slider-item">
+            <div class="slide--image">
+              <picture>
+                <source media="(max-width: 767px)" srcset="{{ 'streetvibe_index_slider_1_img_mb.jpg' | asset_url}}" />
+                <source media="(min-width: 768px)" srcset="{{ 'streetvibe_index_slider_1_img.jpg' | asset_url}}" />
+                <img src="{{ 'streetvibe_index_slider_1_img.jpg' | asset_url }}" alt="{{ settings.streetvibe_index_slider_1_title_2 | strip_html | escape }}" class="swiper-lazy" loading="lazy"/>
+              </picture>
+            </div>
+            <div class="slide--content">
+              <div class="content">
+                {% if settings.streetvibe_index_slider_1_title_1 != '' %}
+                  <div class="title1"><span class="text-ani">{{ settings.streetvibe_index_slider_1_title_1 }}</span></div>
+                {% endif %}
+                {% if settings.streetvibe_index_slider_1_title_2 != '' %}
+                  <h2 class="title2"><span class="text-ani">{{ settings.streetvibe_index_slider_1_title_2 | newline_to_br }}</span></h2>
+                {% endif %}
+                {% if settings.streetvibe_index_slider_1_desc != '' %}
+                  <div class="desc"><span class="text-ani">{{ settings.streetvibe_index_slider_1_desc | newline_to_br }}</span></div>
+                {% endif %}
+                {% if settings.streetvibe_index_slider_1_btn_1 != '' or settings.streetvibe_index_slider_1_btn_2 != '' %}
+                  <div class="btn-more">
+                    {% if settings.streetvibe_index_slider_1_btn_1 != ''%}
+                    <a href="{{ settings.streetvibe_index_slider_1_link_1 }}" class="button">{{ settings.streetvibe_index_slider_1_btn_1 }}</a>
+                    {% endif %}
+                    {% if settings.streetvibe_index_slider_1_btn_2 != ''%}
+                    <a href="{{ settings.streetvibe_index_slider_1_link_2 }}" class="button">{{ settings.streetvibe_index_slider_1_btn_2 }}</a>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- for i in (2..4) -%}
+          {% capture show_slide %}streetvibe_index_slider_{{i}}_show{% endcapture %}
+          {% capture image %}streetvibe_index_slider_{{i}}_img.jpg{% endcapture %}
+          {% capture image_mb %}streetvibe_index_slider_{{i}}_img_mb.jpg{% endcapture %}
+          {% capture title1 %}streetvibe_index_slider_{{i}}_title_1{% endcapture %}
+          {% capture title2 %}streetvibe_index_slider_{{i}}_title_2{% endcapture %}
+          {% capture desc %}streetvibe_index_slider_{{i}}_desc{% endcapture %}
+          {% capture btn1 %}streetvibe_index_slider_{{i}}_btn_1{% endcapture %}
+          {% capture link1 %}streetvibe_index_slider_{{i}}_link_1{% endcapture %}
+          {% capture btn2 %}streetvibe_index_slider_{{i}}_btn_2{% endcapture %}
+          {% capture link2 %}streetvibe_index_slider_{{i}}_link_2{% endcapture %}
+          {%- if settings[show_slide] -%}
+            <div class="swiper-slide">
+              <div class="slider-item">
+                <div class="slide--image">
+                  <picture>
+                    <source media="(max-width: 767px)" srcset="{{ image_mb | asset_url}}" />
+                    <source media="(min-width: 768px)" srcset="{{ image | asset_url}}" />
+                    <img src="{{ image | asset_url }}" alt="{{ settings[title2] | strip_html | escape }}" class="swiper-lazy" loading="lazy" />
+                  </picture>
+                </div>
+                <div class="slide--content">
+                  <div class="content">
+                    {% if settings[title1] != '' %}
+                      <div class="title1"><span class="text-ani">{{ settings[title1] }}</span></div>
+                    {% endif %}
+                    {% if settings[title2] != '' %}
+                      <h2 class="title2"><span class="text-ani">{{ settings[title2] | newline_to_br }}</span></h2>
+                    {% endif %}
+                    {% if settings[desc] != '' %}
+                      <div class="desc"><span class="text-ani">{{ settings[desc] | newline_to_br }}</span></div>
+                    {% endif %}
+                    {% if settings[btn1] != '' or settings[btn2] != '' %}
+                      <div class="btn-more">
+                        {% if settings[btn1] != ''%}
+                        <a href="{{ settings[link1] }}" class="button">{{ settings[btn1] }}</a>
+                        {% endif %}
+                        {% if settings[btn2] != ''%}
+                        <a href="{{ settings[link2] }}" class="button">{{ settings[btn2] }}</a>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="swiper-pagination"></div>
+      {%comment%}
+      <div class="swiper-nav swiper-next">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-right"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+        </svg>
+      </div>
+      <div class="swiper-nav swiper-prev">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-left"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+        </svg>
+      </div>
+{%endcomment%}
+    </div>
+  </div>
+</div>
+
+<div class="section-home-pus-promotion pus-promotion-grids">
+  <div class="container">
+    <div class="hrv-pus-promotion" data-hrvpus-layout="flashsale"></div>
+  </div>
+</div>
+<div class="section-home-hrvpmo hrvpmo-grids">
+  <div class="container">
+    <div class="hrv-pmo-coupon" data-hrvpmo-layout="grids"></div>
+    <div class="hrv-pmo-discount" data-hrvpmo-layout="grids"></div>
+  </div>
+</div>

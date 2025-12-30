@@ -1,0 +1,42 @@
+{%- unless has_section_collection -%}
+  <link rel="preload stylesheet" href="{{ 'sv-index-col.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_section_collection = true -%}
+{%- endunless -%}
+
+{% capture color %}streetvibe_col_{{ind}}_color{%endcapture%}
+{% capture title %}streetvibe_col_{{ind}}_title{%endcapture%}
+{% capture handle %}streetvibe_col_{{ind}}_handle{%endcapture%}
+{% capture limit %}streetvibe_col_{{ind}}_limit{%endcapture%}
+{% capture btn %}streetvibe_col_{{ind}}_btn{%endcapture%}
+{% assign col_handle = settings[handle] %}
+<div class="streetvibe-index-col streetvibe-index-ajax index-col" data-handle="{{col_handle}}">
+  <div class="container">
+    <div class="col-heading text-center">
+      <h2 class="title">
+        {% if settings[title] != empty %}{{settings[title]}}{% else %}{{ collections[col_handle].title }}{% endif %}
+      </h2>
+      {% if settings[btn] != empty and collections[col_handle].products.size > settings[limit] %}
+        <a href="{{collections[col_handle].url}}" class="btn-link">{{ settings[btn] }}</a>
+      {% endif %}
+    </div>
+    <div class="col-list">
+      {% if collections[col_handle].products.size == 0 %}
+        <div class="col-md-12 product-noloop">
+          <div class="collection-alert-no text-center">
+            <p>Chưa có sản phẩm nào trong danh mục này</p>
+          </div>
+        </div>
+      {% else %}
+        <div class="row list-pro">
+          {%comment%}
+          {% for product in collections[col_handle].products limit: settings[limit] %}
+            <div class="pro-item">
+              {% include 'sv-product-loop' %}
+            </div>
+          {% endfor %}
+        {%endcomment%}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

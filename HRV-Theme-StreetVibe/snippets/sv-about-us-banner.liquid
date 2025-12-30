@@ -1,0 +1,25 @@
+{%if settings.show_streetvibe_about_us_banner%}
+{%- unless has_heading -%}
+  <link rel="preload stylesheet" href="{{ 'sv-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_heading = true -%}
+{%- endunless -%}
+<link rel="preload stylesheet" href="{{ 'sv-about-us-banner.scss.css' | asset_url }}" as="stylesheet">
+
+<div class="streetvibe-about-us-banner text-center">
+  <div class="banner-img">
+    <picture>
+      <source media="(max-width: 767px)" srcset="{{ 'streetvibe_about_us_banner_mb.jpg' | asset_url}}" />
+      <source media="(min-width: 768px)" srcset="{{ 'streetvibe_about_us_banner_dk.jpg' | asset_url}}" />
+      <img src="{{ 'streetvibe_about_us_banner_dk.jpg' | asset_url }}" alt="{{ settings.streetvibe_about_us_banner_title_2 }}" loading="lazy"/>
+    </picture>
+  </div>
+  <div class="banner-content">
+    <div class="container">
+      <div class="heading-title">
+        {%if settings.streetvibe_about_us_banner_title_1 != empty%}<div class="title1">{{settings.streetvibe_about_us_banner_title_1}}</div>{%endif%}
+        {%if settings.streetvibe_about_us_banner_title_2 != empty%}<h2 class="title2">{{settings.streetvibe_about_us_banner_title_2}}</h2>{%endif%}
+      </div>
+    </div>
+  </div>
+</div>
+{%endif%}

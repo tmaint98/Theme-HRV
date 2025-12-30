@@ -1,0 +1,37 @@
+.streetvibe-index-col {
+  padding: 60px 0;
+  $colorCol: var(--color);
+  color: $colorCol;
+  .btn-link {
+    color: $colorCol;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb,currentColor 40%,transparent);
+     &:hover {
+      text-decoration-color: $colorCol;
+    }
+  }
+  .col-heading {
+    margin-bottom: 30px;
+    .title {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+  }
+  .list-pro {
+    margin: 0;
+    gap: 30px;
+    .pro-item {
+      flex: 0 0 auto;
+      width: calc(100% / 3 - 20px);
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .list-pro {
+      gap: 30px 15px;
+      .pro-item {
+        width: calc(100% / 2 - 7.5px);
+      }
+    }
+  }
+}

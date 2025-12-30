@@ -1,0 +1,24 @@
+{%if settings.show_streetvibe_about_us_video_2 %}
+{%- unless has_heading -%}
+  <link rel="preload stylesheet" href="{{ 'sv-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_heading = true -%}
+{%- endunless -%}
+<link rel="preload stylesheet" href="{{ 'sv-about-us-video-2.scss.css' | asset_url }}" as="stylesheet">
+
+<div class="streetvibe-about-us-video-2">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-12">
+        <div class="heading-title">
+            {%if settings.streetvibe_about_us_video_2_title != empty %}<h2 class="title2">{{settings.streetvibe_about_us_video_2_title | newline_to_br}}</h2>{%endif%}
+          </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="video-box">
+          <iframe	src="https://www.youtube.com/embed/{{settings.streetvibe_about_us_video_2_id}}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&playlist={{settings.streetvibe_about_us_video_2_id}}" title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endif%}

@@ -1,0 +1,23 @@
+<link rel="preload stylesheet" href="{{ 'sv-index-col-banner.scss.css' | asset_url }}" as="stylesheet">
+<div class="streetvibe-index-col-banner streetvibe-index-ajax" id="sv-index-col-banner">
+  {%comment%}
+  <div class="container">
+    <div class="row list-col">
+      {%for i in (1..3)%}
+        {%capture show %}show_streetvibe_index_col_banner_{{i}}{%endcapture%}
+        {%capture img %}streetvibe_index_col_banner_{{i}}_img.jpg{%endcapture%}
+        {%capture title %}streetvibe_index_col_banner_{{i}}_title{%endcapture%}
+        {%capture link %}streetvibe_index_col_banner_{{i}}_link{%endcapture%}
+        {%if settings[show] %}
+          <div class="col-item">
+            <a href="{{settings[link]}}">
+              <img src="{{ img | asset_url}}" alt="{{settings[title]}}" />
+              <div class="title">{{settings[title]}}</div>
+            </a>
+          </div>
+        {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+{%endcomment%}
+</div>

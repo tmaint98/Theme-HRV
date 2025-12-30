@@ -1,0 +1,57 @@
+StreetVibe.IndexAjax = {
+		init: function() {
+			var that = this;
+      that.StreetVibe_IndexAjax();
+		},
+  StreetVibe_IndexAjax: function(){
+    $('.streetvibe-index-ajax').each(function(){
+      const $this = $(this);
+      let id = $this.attr('id');
+      let urls = '{{shop.url}}?view=' + id;
+      let hd = $this.attr('data-handle');
+      if($this.hasClass('index-col') || $this.hasClass('index-col-slide')){
+        if($this.hasClass('index-col')){
+          urls = '/collections/' + hd + '?view=col-data';
+        }else{
+          urls = '/collections/' + hd + '?view=slide-data';
+        }
+      }else if($this.hasClass('index-blog')){
+        urls = '/blogs/' + hd + '?view=index-data';
+      }
+      setTimeout(function(){ 
+        $.ajax({
+          url: urls,					
+          type: 'GET',
+          async: false,
+          success:function(data){
+            setTimeout(function(){ 
+              if($this.hasClass('index-review')){
+                $('.streetvibe-index-ajax[id="'+ id +'"]').html(data);
+                StreetVibe.IndexReviewSlider.StreetVibe_IndexReviewSlider();
+              }else if($this.hasClass('index-col')){
+                $('.streetvibe-index-col[data-handle="'+hd+'"] .list-pro').html(data);
+                StreetVibe.ProductLoop.StreetVibe_loopImgSlider();
+              }else if($this.hasClass('index-col-slide')){
+                $('.streetvibe-index-col-slide[data-handle="'+hd+'"] .list-pro').html(data);
+                StreetVibe.IndexColSlider.StreetVibe_IndexColSlider(hd);
+                StreetVibe.ProductLoop.StreetVibe_loopImgSlider();
+              }else if($this.hasClass('index-blog')){
+                $('.streetvibe-index-blog .list-blog').html(data);
+              }else{
+                $('.streetvibe-index-ajax[id="'+ id +'"]').html(data);
+              }
+            }, 300);
+          }
+        });
+      }, 500);
+    })
+    
+  }
+};
+(function() {
+  StreetVibe.IndexAjax.init();
+})();
+
+
+
+

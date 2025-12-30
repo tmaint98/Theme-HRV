@@ -1,0 +1,26 @@
+<link rel="preload stylesheet" href="{{ 'sv-index-banner.scss.css' | asset_url }}" as="stylesheet">
+
+<div class="streetvibe-index-banner">
+  <div class="container">
+    <div class="row list-banner">
+    {%for i in (1..2)%}
+      {%capture show%}show_streetvibe_index_banner_{{i}}{%endcapture%}
+      {%capture img%}streetvibe_index_banner_img_{{i}}.jpg{%endcapture%}
+      {%capture title%}streetvibe_index_banner_title_{{i}}{%endcapture%}
+      {%capture btn%}streetvibe_index_banner_btn_{{i}}{%endcapture%}
+      {%capture link%}streetvibe_index_banner_link_{{i}}{%endcapture%}
+      {%if settings[show]%}
+        <div class="banner-item">
+          <div class="item-img">
+            <img src="{{ img | asset_url}}" alt="{{settings[title]}}" />
+          </div>
+          <div class="item-content">
+            <h3 class="title">{{settings[title]}}</h3>
+            <a href="{{settings[link]}}" class="link">{{settings[btn]}}</a>
+          </div>
+        </div>
+      {%endif%}
+    {%endfor%}
+    </div>
+  </div>
+</div>

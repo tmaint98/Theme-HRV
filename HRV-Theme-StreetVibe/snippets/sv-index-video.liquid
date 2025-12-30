@@ -1,0 +1,15 @@
+<link rel="preload stylesheet" href="{{ 'sv-index-video.scss.css' | asset_url }}" as="stylesheet">
+
+<div class="streetvibe-index-video streetvibe-index-ajax" id="sv-index-video">
+  {%comment%}
+  <div class="video-box">
+     <iframe	src="https://www.youtube.com/embed/{{settings.streetvibe_index_video_id}}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&playlist={{settings.streetvibe_index_video_id}}" title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+  <div class="video-content">
+    <div class="container">
+    {% if settings.streetvibe_index_video_title %}<h2 class="title">{{settings.streetvibe_index_video_title}}</h2>{%endif%}
+    {% if settings.streetvibe_index_video_desc %}<div class="desc">{{settings.streetvibe_index_video_desc}}</div>{%endif%}
+    </div>
+  </div>
+{%endcomment%}
+</div>

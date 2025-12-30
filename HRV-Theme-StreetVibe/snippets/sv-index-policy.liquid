@@ -1,0 +1,21 @@
+{%if settings.show_streetvibe_index_policy%}
+<link rel="preload stylesheet" href="{{ 'sv-index-policy.scss.css' | asset_url }}" as="stylesheet">
+
+<div class="streetvibe-index-policy">
+  <div class="container">
+    <div class="row list-policy">
+      {%for i in (1..4)%}
+        {%capture show %}show_streetvibe_index_policy_{{i}}{%endcapture%}
+        {%capture img %}streetvibe_index_policy_{{i}}_img.jpg{%endcapture%}
+        {%capture title %}streetvibe_index_policy_{{i}}_title{%endcapture%}
+        {%if settings[show]%}
+          <div class="policy-item text-center">
+            <div class="icon"><img src="{{img | asset_url}}" alt="{{settings[title]}}"/></div>
+            <div class="title">{{settings[title]}}</div>
+          </div>
+        {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+</div>
+{%endif%}

@@ -1,0 +1,41 @@
+StreetVibe.IndexColSlider = {
+		init: function() {
+			var that = this;
+      //that.StreetVibe_IndexColSlider();
+		},
+  StreetVibe_IndexColSlider: function(handle){
+    const streetvibeSlider = new Swiper ('.streetvibe-index-col-slide[data-handle="'+ handle +'"] .list-pro', {
+      slidesPerView: 3,  
+			//loop: $('.streetvibe-index-col-slide .streetvibe-product-loop').length > 3 ? true:false,
+      loop: false,
+      speed: 1000,
+      autoplay: false,
+      /*autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },*/
+			navigation: {
+				nextEl: '.streetvibe-index-col-slide[data-handle="'+ handle +'"] .swiper-next-list',
+				prevEl: '.streetvibe-index-col-slide[data-handle="'+ handle +'"] .swiper-prev-list',
+			},
+      breakpoints: {
+        0: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3
+        },
+      },
+    });
+    const totalSlides = streetvibeSlider.slides.length;
+    if (totalSlides <= streetvibeSlider.params.slidesPerView) {
+      $('.streetvibe-index-col-slide[data-handle="'+ handle +'"] .swiper-next-list, .streetvibe-index-col-slide[data-handle="'+ handle +'"] .swiper-prev-list').hide();
+    }
+  },
+};
+(function() {
+  StreetVibe.IndexColSlider.init();
+})();
+
+
+

@@ -1,0 +1,30 @@
+{%if settings.show_streetvibe_index_ins%}
+{%- unless has_heading -%}
+  <link rel="preload stylesheet" href="{{ 'sv-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_heading = true -%}
+{%- endunless -%}
+<link rel="preload stylesheet" href="{{ 'sv-index-ins.scss.css' | asset_url }}" as="stylesheet">
+
+<div class="streetvibe-index-ins">
+  <div class="row list-img">
+    {%for i in (1..4)%}
+      {%capture show %}show_streetvibe_index_ins_{{i}}{%endcapture%}
+      {%capture img %}streetvibe_index_ins_{{i}}_img.jpg{%endcapture%}
+      {%capture alt %}streetvibe_index_ins_{{i}}_alt{%endcapture%}
+      {%if settings[show]%}
+      <div class="item-img">
+        <img src="{{ img | asset_url}}" alt="{{settings[alt]}}" />
+      </div>  
+      {%endif%}
+    {%endfor%}
+  </div>
+  <div class="heading-title">
+    {% if settings.streetvibe_index_ins_title_1 != empty %}
+      <div class="title1">{{ settings.streetvibe_index_ins_title_1 }}</div>
+    {% endif %}
+    {% if settings.streetvibe_index_ins_title_2 != empty %}
+      <h2 class="title2"><a href="{{settings.streetvibe_index_ins_link}}">{{ settings.streetvibe_index_ins_title_2 }}</a></h2>
+    {% endif %}
+  </div>
+</div>
+{%endif%}
