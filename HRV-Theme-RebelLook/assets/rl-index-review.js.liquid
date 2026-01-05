@@ -1,0 +1,37 @@
+RebelLook.IndexReviewSlider = {
+		init: function() {
+			var that = this;
+      that.RebelLook_IndexReviewSlider();
+		},
+  RebelLook_IndexReviewSlider: function(){
+    const rebellookSlider = new Swiper ('.rebellook-index-review .swiper', {
+      slidesPerView: 1,  
+			loop: $('.rebellook-index-review .review-item').length > 1 ? true:false,
+      speed: 800,
+      autoplay: false,
+      /*autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },*/
+      /*effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },*/
+			navigation: {
+				nextEl: ".rebellook-index-review .swiper-next",
+				prevEl: ".rebellook-index-review .swiper-prev",
+			},
+    });
+    const totalSlides = rebellookSlider.slides.length;
+    if (totalSlides <= rebellookSlider.params.slidesPerView) {
+      $('.rebellook-index-review .swiper-next, .rebellook-index-review .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  RebelLook.IndexReviewSlider.init();
+})();
+
+
+
+

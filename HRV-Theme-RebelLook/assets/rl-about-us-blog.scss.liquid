@@ -1,0 +1,108 @@
+$bgBlog_btn: {{ settings.rebellook_about_us_blog_bg_btn }};
+$colorBlog_btn: {{ settings.rebellook_about_us_blog_color_btn }};
+@keyframes about-hover-underline-forward {
+  0% {
+    background-position: 100% 100%;
+    background-size: 100% 2px;
+  }
+
+  35% {
+    background-position: 100% 100%;
+    background-size: 0 2px;
+  }
+
+  36% {
+    background-position: 0 100%;
+    background-size: 0 2px;
+  }
+
+  100% {
+    background-position: 0 100%;
+    background-size: 100% 2px;
+  }
+}
+
+.rebellook-about-us-blog {
+  padding: 60px 0;
+  border-bottom: 1px solid #eaeaea;
+  .list-blog {
+    margin: 0;
+    gap: 30px;
+    .article-loop {
+      flex: 0 0 auto;
+      width: calc(100% / 3 - 20px);
+      .article-image {
+        position: relative;
+        overflow: hidden;
+        img {
+          transform: scale(1.06) translateX(0);
+          transition: visibility 0.35s ease
+          , opacity 0.35s ease
+          , transform 0.6s cubic-bezier(0.61, 1, 0.88, 1);
+        }
+      }
+      .article-detail {
+        padding-top: 20px;
+      }
+      .post-title {
+        font-size: 22px;
+        margin-bottom: 10px;
+        a {
+          color: currentcolor;
+        }
+      }
+      .article-post-meta,
+      .entry-content {
+        opacity: 0.8;
+      }
+      .article-post-meta {
+        font-size: 12px;
+        margin-bottom: 15px;
+      }
+      .btn-link {
+        position: relative;
+        display: inline-flex;
+        padding-bottom: 2px;
+        background-repeat: no-repeat;
+        background-image: linear-gradient(90deg, currentColor 0, currentColor 100%);
+        background-position: 100% 100%;
+        background-size: 100% 2px;
+        transition: background-size 0.5s cubic-bezier(0.25, 0.46, 0.35, 0.94)
+        , color 0.2s ease-out
+        , background-color 0.2s ease-out
+        , border-color 0.2s ease-out;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: currentColor;
+         &:hover {
+          animation: about-hover-underline-forward 0.5s cubic-bezier(0.29, 0.15, 0.34, 0.88) 1 forwards;
+        }
+      }
+       &:hover {
+        .article-image img {
+          transform: scale(1.06) translateX(6px);
+        }
+      }
+    }
+  }
+  .btn-more {
+    margin-top: 30px;
+    .button {
+      background-color: $bgBlog_btn;
+      color: $colorBlog_btn;
+    }
+  }
+  @media(max-width: 991px) {}
+@media(max-width: 767px) {
+  padding: 40px 0;
+  .list-blog {
+    .article-loop {
+      width: 100%;
+      .post-title {
+        font-size: 18px;
+      }
+    }
+  }
+}
+}
+

@@ -1,0 +1,48 @@
+RebelLook.AboutLogoSlider = {
+		init: function() {
+			var that = this;
+      that.RebelLook_AboutLogoSlider();
+		},
+  RebelLook_AboutLogoSlider: function(handle){
+    const rebellookSlider = new Swiper ('.rebellook-about-us-partner .list-logo', {
+      slidesPerView: 6,  
+			loop: $('.rebellook-about-us-partner .item-logo').length > 6 ? true:false,
+      speed: 1000,
+      //autoplay: false,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+			/*navigation: {
+				nextEl: '.rebellook-about-us-partner .swiper-next-list',
+				prevEl: '.rebellook-about-us-partner .swiper-prev-list',
+			},
+      pagination: {
+				el: '.rebellook-about-us-partner .swiper-pagination',
+				clickable: true,
+			},*/
+      breakpoints: {
+        0: {
+          slidesPerView: 3,
+          loop: $('.rebellook-about-us-partner .item-logo').length > 3 ? true:false,
+        },
+        768: {
+          slidesPerView: 6,
+          loop: $('.rebellook-about-us-partner .item-logo').length > 6 ? true:false,
+        },
+      },
+    });
+    const totalSlides = rebellookSlider.slides.length;
+    if (totalSlides <= rebellookSlider.params.slidesPerView) {
+      $('.rebellook-about-us-partner .swiper-next-list, .rebellook-about-us-partner .swiper-prev-list').hide();
+    }
+  },
+};
+(function() {
+  RebelLook.AboutLogoSlider.init();
+})();
+
+
+
+
+

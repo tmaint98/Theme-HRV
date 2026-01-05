@@ -1,0 +1,29 @@
+{%layout none%}
+{% assign col_limit = 0 %}
+{% paginate collection.products by 1 %}
+{% assign col_limit = paginate.current_page %}
+{% assign total = paginate.pages %}
+  {% if col_limit > total %}
+    {% assign col_limit = total %}
+  {% endif %}
+{% endpaginate %}
+{% if collection.products.size == 0 %}
+  <div class="col-md-12 product-noloop col-item">
+    <div class="collection-alert-no">
+      <p>Chưa có sản phẩm nào trong danh mục này</p>
+    </div>
+  </div>
+{% else %}
+  <div class="row list-pro col-item">
+      {% for product in collection.products limit: col_limit %}
+        <div class="pro-item">
+          {% include 'rl-product-loop' %}
+        </div>
+      {% endfor %}
+  </div>
+  {%if collection.products.size > col_limit %}
+    <div class="btn-more text-center">
+      <a href="{{collection.url}}" class="button"></a>
+    </div>
+  {%endif%}
+{% endif %}

@@ -1,0 +1,263 @@
+<link rel="preload stylesheet" href="{{ 'rl-page-contact.scss.css' | asset_url }}" as="stylesheet">
+<div class="rebellook-layout-contact">
+  <div class="hidden">
+    <h1>{{ page.title }}</h1>
+    {% include 'breadcrumb' %}</div>
+  {% if settings.rebellook_google_maps_show %}
+    <section class="rebellook-contact-map">
+      <div class="map">
+        {{ settings.rebellook_google_maps_code }}
+      </div>
+      {% if settings.show_rebellook_contact_time_top %}
+        <div class="time-top">
+          <div class="container">
+            <div class="time-box">
+              {% if settings.rebellook_contact_time_top_title != empty %}
+                <h2 class="title">{{ settings.rebellook_contact_time_top_title }}</h2>
+              {% endif %}
+              {% if settings.rebellook_contact_time_top_desc != empty %}
+                <div class="desc">{{ settings.rebellook_contact_time_top_desc }}</div>
+              {% endif %}
+              <ul class="list-time">
+                {% for i in (1..3) %}
+                  {% capture title %}rebellook_contact_time_top_title_{{i}}{%endcapture%}
+                  {% capture desc %}rebellook_contact_time_top_desc_{{i}}{%endcapture%}
+                  {% if settings[title] != empty or settings[desc] != empty %}
+                    <li>
+                      <span class="item_title">{{ settings[title] }}</span>
+                      <span class="item_desc">{{ settings[desc] }}</span>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </section>
+  {% endif %}
+  <section class="rebellook-contact-info">
+    <div class="container">
+      <div class="row form-info">
+        {% if settings.show_rebellook_contact_info %}
+          <div class="col-lg-4 col-12">
+            {% if settings.rebellook_contact_info_title != '' %}
+              <div class="title-info">{{ settings.rebellook_contact_info_title }}</div>
+            {% endif %}
+            <div class="list-info">
+              <ul class="info info-email">
+                {% for i in (1..3) %}
+                  {% capture info %}rebellook_contact_email_{{i}}{%endcapture%}
+                  {% if settings[info] != '' %}
+                    <li>
+                      <a href="mailto:{{settings[info]}}">
+                        <span>{{ settings[info] }}</span>
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+              <ul class="info info-phone">
+                {% for i in (1..3) %}
+                  {% capture info %}rebellook_contact_phone_{{i}}{%endcapture%}
+                  {% if settings[info] != '' %}
+                    <li>
+                      <a href="tel:{{settings[info] | remove: ' '}}">
+                        <span>{{ settings[info] }}</span>
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+            {% if settings.rebellook_contact_address_title != '' %}
+              <div class="title-info">{{ settings.rebellook_contact_address_title}}</div>
+            {% endif %}
+            <div class="list-info">
+              <ul class="info">
+                {% for i in (1..3) %}
+                  {% capture info %}rebellook_contact_address_{{i}}{%endcapture%}
+                  {% if settings[info] != '' %}
+                    <li>
+                      <span>{{ settings[info] }}</span>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+            {% if settings.rebellook_contact_time_title != '' %}
+              <div class="title-info">{{ settings.rebellook_contact_time_title}}</div>
+            {% endif %}
+            {% if settings.rebellook_contact_time_desc != '' %}
+              <div class="desc-info">{{ settings.rebellook_contact_time_desc | newline_to_br}}</div>
+            {% endif %}
+            {% if settings.rebellook_contact_social_show %}
+              {% if settings.rebellook_contact_social_title != '' %}
+                <div class="title-info">{{ settings.rebellook_contact_social_title}}</div>
+              {% endif %}
+              <ul class="rebellook-contact-social">
+                {%- if settings.rebellook_contact_social_link_facebook != blank -%}
+                  <li class="social-svg">
+                    <a
+                      href="{{settings.rebellook_contact_social_link_facebook}}"
+                      target="_blank"
+                      rel="noopener"
+                      title="Facebook"
+                      aria-label="Facebook">
+                      <svg
+                        width="30px"
+                        height="30px"
+                        viewBox="-7 -2 24 24"
+                        preserveAspectRatio="xMinYMin"
+                        class="jam jam-facebook"><path d='M2.046 3.865v2.748H.032v3.36h2.014v9.986H6.18V9.974h2.775s.26-1.611.386-3.373H6.197V4.303c0-.343.45-.805.896-.805h2.254V0H6.283c-4.34 0-4.237 3.363-4.237 3.865z' /></svg>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.rebellook_contact_social_link_youtube != blank -%}
+                  <li class="social-svg">
+                    <a
+                      href="{{settings.rebellook_contact_social_link_youtube}}"
+                      target="_blank"
+                      rel="noopener"
+                      title="Youtube"
+                      aria-label="Youtube">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="M23,9.71a8.5,8.5,0,0,0-.91-4.13,2.92,2.92,0,0,0-1.72-1A78.36,78.36,0,0,0,12,4.27a78.45,78.45,0,0,0-8.34.3,2.87,2.87,0,0,0-1.46.74c-.9.83-1,2.25-1.1,3.45a48.29,48.29,0,0,0,0,6.48,9.55,9.55,0,0,0,.3,2,3.14,3.14,0,0,0,.71,1.36,2.86,2.86,0,0,0,1.49.78,45.18,45.18,0,0,0,6.5.33c3.5.05,6.57,0,10.2-.28a2.88,2.88,0,0,0,1.53-.78,2.49,2.49,0,0,0,.61-1,10.58,10.58,0,0,0,.52-3.4C23,13.69,23,10.31,23,9.71ZM9.74,14.85V8.66l5.92,3.11C14,12.69,11.81,13.73,9.74,14.85Z" /></svg>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.rebellook_contact_social_link_instagram != blank -%}
+                  <li class="social-svg">
+                    <a
+                      href="{{settings.rebellook_contact_social_link_instagram}}"
+                      target="_blank"
+                      rel="noopener"
+                      title="Instagram"
+                      aria-label="Instagram">
+                      <svg viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-instagram"><path d='M14.017 0h-8.07A5.954 5.954 0 0 0 0 5.948v8.07a5.954 5.954 0 0 0 5.948 5.947h8.07a5.954 5.954 0 0 0 5.947-5.948v-8.07A5.954 5.954 0 0 0 14.017 0zm3.94 14.017a3.94 3.94 0 0 1-3.94 3.94h-8.07a3.94 3.94 0 0 1-3.939-3.94v-8.07a3.94 3.94 0 0 1 3.94-3.939h8.07a3.94 3.94 0 0 1 3.939 3.94v8.07z' /><path d='M9.982 4.819A5.17 5.17 0 0 0 4.82 9.982a5.17 5.17 0 0 0 5.163 5.164 5.17 5.17 0 0 0 5.164-5.164A5.17 5.17 0 0 0 9.982 4.82zm0 8.319a3.155 3.155 0 1 1 0-6.31 3.155 3.155 0 0 1 0 6.31z' /><circle cx='15.156' cy='4.858' r='1.237' /></svg>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.rebellook_contact_social_link_tiktok != blank -%}
+                  <li class="social-svg svg-tiktok">
+                    <a
+                      href="{{settings.rebellook_contact_social_link_tiktok}}"
+                      target="_blank"
+                      rel="noopener"
+                      title="Tiktok"
+                      aria-label="Tiktok">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="48"
+                        height="48"
+                        viewBox="0 0 48 48">
+                        <path d="M 11.5 6 C 8.4802259 6 6 8.4802259 6 11.5 L 6 36.5 C 6 39.519774 8.4802259 42 11.5 42 L 36.5 42 C 39.519774 42 42 39.519774 42 36.5 L 42 11.5 C 42 8.4802259 39.519774 6 36.5 6 L 11.5 6 z M 11.5 9 L 36.5 9 C 37.898226 9 39 10.101774 39 11.5 L 39 36.5 C 39 37.898226 37.898226 39 36.5 39 L 11.5 39 C 10.101774 39 9 37.898226 9 36.5 L 9 11.5 C 9 10.101774 10.101774 9 11.5 9 z M 26.435547 13.023438 A 1.50015 1.50015 0 0 0 25 14.5 L 25 28 C 25 30.227598 23.227598 32 21 32 C 18.772402 32 17 30.227598 17 28 C 17 25.772402 18.772402 24 21 24 A 1.50015 1.50015 0 1 0 21 21 C 17.151598 21 14 24.151598 14 28 C 14 31.848402 17.151598 35 21 35 C 24.848402 35 28 31.848402 28 28 L 28 20.335938 C 29.268121 21.316987 30.78243 22 32.5 22 A 1.50015 1.50015 0 1 0 32.5 19 C 29.996501 19 28 17.003499 28 14.5 A 1.50015 1.50015 0 0 0 26.435547 13.023438 z"></path>
+                      </svg>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.rebellook_contact_social_link_shopee != blank -%}
+                  <li class="social-svg svg-shopee">
+                    <a
+                      href="{{settings.rebellook_contact_social_link_shopee}}"
+                      target="_blank"
+                      rel="noopener"
+                      title="Shopee"
+                      aria-label="Shopee">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="48"
+                        height="48"
+                        viewBox="0 0 48 48">
+                        <path d="M 24 1 C 19.015304 1 15.187203 5.491076 14.589844 11 L 5.5917969 11 A 1.50015 1.50015 0 0 0 4.09375 12.587891 L 5.7773438 41.234375 A 1.50015 1.50015 0 0 0 5.7773438 41.236328 C 5.901433 43.336252 7.6680925 45 9.7714844 45 L 38.228516 45 C 40.332664 45 42.096549 43.335805 42.220703 41.236328 A 1.50015 1.50015 0 0 0 42.220703 41.234375 L 43.90625 12.587891 A 1.50015 1.50015 0 0 0 42.408203 11 L 33.410156 11 C 32.812797 5.491076 28.984696 1 24 1 z M 24 4 C 27.044271 4 29.834574 6.9017187 30.392578 11 L 17.607422 11 C 18.165426 6.9017187 20.955729 4 24 4 z M 7.1816406 14 L 40.818359 14 L 39.226562 41.058594 C 39.194717 41.597117 38.768367 42 38.228516 42 L 9.7714844 42 C 9.2308762 42 8.8033952 41.598623 8.7714844 41.058594 L 7.1816406 14 z M 24.074219 17.011719 C 20.135219 17.011719 17.164063 19.515937 17.164062 22.835938 C 17.164062 26.625937 20.635828 27.892109 23.423828 28.912109 C 26.744828 30.126109 28.308594 30.929062 28.308594 33.039062 C 28.308594 34.694063 26.349453 36.041016 23.939453 36.041016 C 21.113453 36.041016 18.640234 33.938969 18.615234 33.917969 L 18.490234 33.802734 C 18.397234 33.717734 18.277344 33.671875 18.152344 33.671875 C 18.133344 33.671875 18.11375 33.671828 18.09375 33.673828 C 17.94975 33.690828 17.819281 33.770625 17.738281 33.890625 L 16.632812 35.519531 C 16.487813 35.733531 16.529469 36.0235 16.730469 36.1875 L 16.84375 36.279297 C 17.62975 36.916297 20.4575 38.988281 23.9375 38.988281 C 28.0415 38.988281 31.257813 36.376062 31.257812 33.039062 C 31.259813 28.637063 27.477453 27.254531 24.439453 26.144531 C 21.498453 25.069531 20.113281 24.392938 20.113281 22.835938 C 20.113281 21.169937 21.778219 19.960938 24.074219 19.960938 C 25.743219 19.960938 27.216312 20.620672 27.945312 21.013672 C 28.062313 21.076672 28.414281 21.287875 28.613281 21.421875 L 28.751953 21.513672 C 28.834953 21.569672 28.931297 21.597656 29.029297 21.597656 C 29.065297 21.597656 29.100719 21.594891 29.136719 21.587891 C 29.269719 21.558891 29.384078 21.475375 29.455078 21.359375 L 30.466797 19.714844 C 30.608797 19.484844 30.540453 19.181203 30.314453 19.033203 L 30.148438 18.925781 C 29.299437 18.353781 26.997219 17.011719 24.074219 17.011719 z"></path>
+                      </svg>
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if settings.rebellook_contact_social_link_lazada != blank -%}
+                  <li class="social-svg svg-lazada">
+                    <a
+                      href="{{settings.rebellook_contact_social_link_lazada}}"
+                      target="_blank"
+                      rel="noopener"
+                      title="Lazada"
+                      aria-label="Lazada">
+                      <svg viewBox="0 0 50.8 50.8" xmlns="http://www.w3.org/2000/svg"><path d="M28.048 14.434c1.041-.555 7.536-4.625 7.772-4.76.02-.012.509-.348 1.156.022.902.486 7.055 4.252 7.31 4.437.439.254.693.717.693 1.225v13.496a1.371 1.371 0 0 1-.786 1.11c-.578.323-15.89 9.936-17.995 11.092-.486.3-1.087.3-1.596.023-2.059-1.202-17.417-10.815-17.995-11.093a1.407 1.407 0 0 1-.786-1.132v-13.52c0-.484.254-.947.647-1.2l7.356-4.46c.37-.209.786-.232 1.156-.024.185.092 6.962 4.53 8.026 4.945 1.573.717 3.539.67 5.042-.161z" style="fill:none;stroke-width:3.17491;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /></svg>
+                    </a>
+                  </li>
+                {%- endif -%}
+              </ul>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if settings.show_rebellook_contact_form %}
+          <div class="col-lg-8 col-12">
+            <div class="form">
+              <div class="heading-title">
+                {% if settings.rebellook_contact_form_title != empty %}
+                  <h2 class="title2">{{ settings.rebellook_contact_form_title }}</h2>
+                {% endif %}
+                {% if settings.rebellook_contact_form_desc != empty %}
+                  <divv class="desc">{{ settings.rebellook_contact_form_desc }}</divv>
+                {% endif %}
+              </div>
+              <div id="contactFormWrapper">
+          {% form 'contact' %}
+          {% if form.posted_successfully? %}
+          <div class="alert alert-success">
+            Cám ơn bạn đã liên hệ! Chúng tôi sẽ trả lời ngay khi có thể
+          </div>
+          {% endif %}
+          <div class="contact-form">
+            <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                <div class="input-group">
+                  <label for="form-name">Tên của bạn</label>
+                  <input required type="text" id="form-name" name="contact[name]" class="form-control" placeholder="Tên của bạn" aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <div class="col-sm-6 col-xs-12">
+                <div class="input-group">
+                  <label for="form-email">Email của bạn</label>
+                  <input required type="text" id="form-email" name="contact[email]" class="form-control" placeholder="Email của bạn" aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <div class="col-sm-6 col-xs-12">
+                <div class="input-group">
+                  <label for="form-phone">Số điện thoại của bạn</label>
+                  <input pattern="[0-9]{10,12}" id="form-phone" required type="text" name="contact[phone]" class="form-control" placeholder="Số điện thoại của bạn" aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <div class="col-sm-12 col-xs-12">
+                <div class="input-group group-text">
+                  <label for="form-body">Nội dung</label>
+                  <textarea required id="form-body" name="contact[body]" class="form-control" placeholder="Nội dung"></textarea>
+                </div>
+                <div class="sitebox-recaptcha " >
+                    This site is protected by reCAPTCHA and the Google
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a> 
+                    and <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">Terms of Service</a> apply.
+                  </div>	
+              </div>
+              <div class="col-sm-12 col-xs-12">
+                <div class="btn-form">
+                  <button class="button dark cta-submitform">
+                    <span class="icon"><svg width="22px" height="22px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 491.022 491.022" style="enable-background:new 0 0 491.022 491.022;" xml:space="preserve"> <g> <g> <path d="M490.916,13.991c-0.213-1.173-0.64-2.347-1.28-3.307c-0.107-0.213-0.213-0.533-0.32-0.747 c-0.107-0.213-0.32-0.32-0.533-0.533c-0.427-0.533-0.96-1.067-1.493-1.493c-0.427-0.32-0.853-0.64-1.28-0.96 c-0.213-0.107-0.32-0.32-0.533-0.427c-0.32-0.107-0.747-0.32-1.173-0.427c-0.533-0.213-1.067-0.427-1.6-0.533 c-0.64-0.107-1.28-0.213-1.92-0.213c-0.533,0-1.067,0-1.6,0c-0.747,0.107-1.493,0.32-2.133,0.533 c-0.32,0.107-0.747,0.107-1.067,0.213L6.436,209.085c-5.44,2.347-7.893,8.64-5.547,14.08c1.067,2.347,2.88,4.373,5.227,5.44 l175.36,82.453v163.947c0,5.867,4.8,10.667,10.667,10.667c3.733,0,7.147-1.92,9.067-5.12l74.133-120.533l114.56,60.373 c5.227,2.773,11.627,0.747,14.4-4.48c0.427-0.853,0.747-1.813,0.96-2.667l85.547-394.987c0-0.213,0-0.427,0-0.64 c0.107-0.64,0.107-1.173,0.213-1.707C491.022,15.271,491.022,14.631,490.916,13.991z M190.009,291.324L36.836,219.218 L433.209,48.124L190.009,291.324z M202.809,437.138V321.831l53.653,28.267L202.809,437.138z M387.449,394.898l-100.8-53.013 l-18.133-11.2l-0.747,1.28l-57.707-30.4L462.116,49.298L387.449,394.898z"/> </g> </g> </svg></span>
+                    {{settings.rebellook_contact_form_btn}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endform %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</div>

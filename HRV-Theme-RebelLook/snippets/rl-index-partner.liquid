@@ -1,0 +1,23 @@
+<link rel="preload stylesheet" href="{{ 'rl-index-partner.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'rl-index-partner.js' | asset_url }}"></script>
+
+<div class="rebellook-index-partner wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+  <div class="container">
+    <div class="list-logo swiper">
+      <div class="swiper-wrapper">
+      {% for i in (1..10) %}
+        {% capture show %}rebellook_index_logo_show_{{i}}{%endcapture%}
+        {% capture img %}rebellook_index_logo_img_{{i}}.jpg{%endcapture%}
+        {% capture alt %}rebellook_index_logo_alt_{{i}}{%endcapture%}
+        {% if settings[show] %}
+          <div class="swiper-slide">
+            <div class="item-logo">
+              <img src="{{ img | asset_url}}" alt="{{settings[alt]}}" />
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

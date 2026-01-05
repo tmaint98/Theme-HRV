@@ -1,0 +1,61 @@
+RebelLook.IndexInsSlider = {
+		init: function() {
+			var that = this;
+      that.RebelLook_IndexInsSlider();
+		},
+  RebelLook_IndexInsSlider: function(handle){
+    const rebellookSlider = new Swiper ('.rebellook-index-ins .list-ins', {
+      slidesPerView: 6,  
+			loop: $('.rebellook-index-ins .item-ins').length > 6 ? true:false,
+      speed: 5000,
+      //autoplay: false,
+      autoplay: {
+        delay: 0,
+        //disableOnInteraction: false,
+      },
+			/*navigation: {
+				nextEl: '.rebellook-index-ins .swiper-next-list',
+				prevEl: '.rebellook-index-ins .swiper-prev-list',
+			},
+      pagination: {
+				el: '.rebellook-index-ins .swiper-pagination',
+				clickable: true,
+			},*/
+      breakpoints: {
+        0: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3
+        },
+        992: {
+          slidesPerView: 6
+        },
+      },
+    });
+    const totalSlides = rebellookSlider.slides.length;
+    if (totalSlides <= rebellookSlider.params.slidesPerView) {
+      $('.rebellook-index-ins .swiper-next-list, .rebellook-index-ins .swiper-prev-list').hide();
+    }
+    $('.rebellook-index-ins .list-ins .swiper-slide').each(function (index) {
+      $(this).attr('data-order', (index % 4) + 1);
+    });
+    // Dừng Swiper khi hover vào slider (sử dụng jQuery)
+    $('.rebellook-index-ins .list-ins').on('mouseenter', function() {
+      rebellookSlider.autoplay.stop(); // dừng autoplay khi hover
+    });
+    
+    // Tiếp tục autoplay khi bỏ hover (sử dụng jQuery)
+    $('.rebellook-index-ins .list-ins').on('mouseleave', function() {
+      rebellookSlider.autoplay.start(); // bắt đầu lại autoplay khi rời chuột
+    });
+  },
+};
+(function() {
+  RebelLook.IndexInsSlider.init();
+})();
+
+
+
+
+

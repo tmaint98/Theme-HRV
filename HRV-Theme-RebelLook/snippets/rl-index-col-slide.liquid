@@ -1,0 +1,48 @@
+{%- unless has_heading -%}
+  <link rel="preload stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_heading = true -%}
+{%- endunless -%}
+{%- unless has_section_collection_slide -%}
+  <link rel="preload stylesheet" href="{{ 'rl-index-col-slide.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'rl-index-col-slide.js' | asset_url }}"></script>
+  {%- assign has_section_collection_slide = true -%}
+{%- endunless -%}
+
+
+{% capture title %}rebellook_index_col_slide_{{ind}}_title{%endcapture%}
+{% capture handle %}rebellook_index_col_slide_{{ind}}_handle{%endcapture%}
+{% capture limit %}rebellook_index_col_slide_{{ind}}_limit{%endcapture%}
+{% capture btn %}rebellook_index_col_slide_{{ind}}_btn{%endcapture%}
+{% assign col_handle = settings[handle] %}
+<div class="rebellook-index-col-slide rebellook-index-ajax index-col-slide wow fadeInRight" data-wow-delay="0.5s" data-wow-duration="0.8s" data-handle="{{col_handle}}">
+  <div class="container-fluid">
+    <div class="heading-title">
+        <h2 class="title2">
+          {% if settings[title] != empty %}{{settings[title]}}{% else %}{{ collections[col_handle].title }}{% endif %}
+        </h2>
+      {% if settings[btn] != empty and collections[col_handle].products.size > settings[limit] %}
+        <a href="{{collections[col_handle].url}}" class="btn-link">{{ settings[btn] }}</a>
+      {% endif %}
+    </div>
+    <div class="col-slide">
+      {% if collections[col_handle].products.size == 0 %}
+        <div class="col-md-12 product-noloop">
+          <div class="collection-alert-no text-center">
+            <p>Chưa có sản phẩm nào trong danh mục này</p>
+          </div>
+        </div>
+      {% else %}
+        <div class="list-pro swiper">
+          <div class="swiper-wrapper">
+            {% for product in collections[col_handle].products limit: settings[limit] %}
+              <div class="swiper-slide">
+                {% include 'rl-product-loop' %}
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

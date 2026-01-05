@@ -1,0 +1,24 @@
+<link rel="preload stylesheet" href="{{ 'rl-index-policy-1.scss.css' | asset_url }}" as="stylesheet">
+<div class="rebellook-index-policy-1 wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+  <div class="container">
+    <div class="row list-policy">
+      {%for i in (1..4)%}
+        {%capture show%}rebellook_index_policy_1_show_{{i}}{%endcapture%}
+        {%capture img%}rebellook_index_policy_1_img_{{i}}.jpg{%endcapture%}
+        {%capture title%}rebellook_index_policy_1_title_{{i}}{%endcapture%}
+        {%capture desc%}rebellook_index_policy_1_desc_{{i}}{%endcapture%}
+        {%if settings[show]%}
+          <div class="policy-item">
+            <div class="item-icon">
+              <img src="{{ img | asset_url}}" alt="{{settings[title]}}" />
+            </div>
+            <div class="item-content">
+              {%if settings[title] != empty %}<h3 class="title">{{settings[title]}}</h3>{%endif%}
+              <div class="desc">{{settings[desc]}}</div>
+            </div>
+          </div>
+        {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<link rel="preload stylesheet" href="{{ 'rl-page-about-us.scss.css' | asset_url }}" as="stylesheet">
+{% assign has_heading = false %}
+
+<div class="rebellook-layout-about-us">
+   <section class="section-breadcrumb">
+      <div class="banner-img">
+        <picture>
+          <source media="(max-width: 767px)" srcset="{{ 'rebellook_about_us_breadcrumb_bg_mb.jpg' | asset_url}}" />
+          <source media="(min-width: 768px)" srcset="{{ 'rebellook_about_us_breadcrumb_bg_dk.jpg' | asset_url}}" />
+          <img src="{{ 'rebellook_about_us_breadcrumb_bg_dk.jpg' | asset_url }}" alt="{{ page.title }}" loading="lazy"/>
+        </picture>
+      </div>
+    <div class="banner-content">
+      <div class="container">
+        <h1 class="text-center">{{ page.title }}</h1>
+        {% include 'breadcrumb' %}
+      </div>
+    </div>
+  </section>
+  {%include 'rl-about-us-about'%}
+  {%include 'rl-about-us-review'%}
+  {%include 'rl-about-us-partner'%}
+  {%include 'rl-about-us-video'%}
+  {%include 'rl-about-us-blog'%}
+</div>
+
+
+
+
+
+

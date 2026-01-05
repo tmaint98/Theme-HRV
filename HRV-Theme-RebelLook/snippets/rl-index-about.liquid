@@ -1,0 +1,39 @@
+{%- unless has_heading -%}
+  <link rel="preload stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_heading = true -%}
+{%- endunless -%}
+<link rel="preload stylesheet" href="{{ 'rl-index-about.scss.css' | asset_url }}" as="stylesheet">
+
+<div class="rebellook-index-about wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-7 col-12">
+        <div class="about-banner">
+          <img src="{{ 'rebellook_index_about_img.jpg' | asset_url }}" alt="{{settings.rebellook_index_about_title}}" />
+        </div>
+      </div>
+      <div class="col-lg-5 col-12">
+        <div class="about-content">
+          <div class="heading-title">
+            {% if settings.rebellook_index_about_title != empty %}<h2 class="title2">{{settings.rebellook_index_about_title}}</h2>{%endif%}
+            <div class="desc">{{settings.rebellook_index_about_desc}}</div>
+          </div>
+          {% if settings.rebellook_index_about_btn != empty%}
+          <div class="btn-more">
+            <a href="{{settings.rebellook_index_about_link}}" class="button">{{settings.rebellook_index_about_btn}}</a>
+          </div>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+    {% if settings.rebellook_index_about_marquee_desc != '' %}
+    <div class="marquee">
+      <div class="marquee__inner">
+        {% for i in (1..4) %}
+          <div class="marquee__inner--item">{{ settings.rebellook_index_about_marquee_desc }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>

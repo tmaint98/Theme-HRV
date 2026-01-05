@@ -1,0 +1,227 @@
+$bgTopbar: {{ settings.rebellook_topbar_bg }};
+$colorTopbar: {{ settings.rebellook_topbar_color }};
+.rebellook-topbar {
+  padding: 8px 15px;
+  background: $bgTopbar;
+  color: $colorTopbar;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  .topbar-left,
+  .topbar-right {
+    flex: 0 0 auto;
+    width: 30%;
+  }
+  .topbar-center {
+    flex: 0 0 auto;
+    width: calc(40% - 40px);
+  }
+  .topbar-right {
+    text-align: right;
+  }
+  .rebellook-topbar-slide {
+    .slide-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      a {
+        text-decoration: underline;
+        color: $colorTopbar;
+      }
+    }
+    .swiper-nav {
+      position: absolute;
+      top: 0;
+      width: 65px;
+      height: 100%;
+      color: $colorTopbar;
+      z-index: 2;
+      .icon {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 100%;
+        svg {
+          position: absolute;
+          top: 0;
+          left: 8px;
+          transition: all 0.3s;
+        }
+        &--1 svg {
+          opacity: 0;
+          visibility: hidden;
+          width: 20px;
+          height: 20px;
+        }
+        &--2 svg {
+          top: 3px;
+        }
+      }
+      svg {
+        fill: currentcolor;
+      }
+      &.swiper-prev {
+        left: 0;
+      }
+      &.swiper-next {
+        right: 0;
+      }
+       &:hover {
+        .icon {
+          &--1 svg {
+            opacity: 1;
+            visibility: visible;
+          }
+          &--2 svg {
+            opacity: 0;
+            visibility: hidden;
+          }
+        }
+        &.swiper-prev {
+          .icon {
+            &--1 svg {
+              transform: translateX(-20px);
+            }
+            &--2 svg {
+              transform: translateX(-10px);
+            }
+          }
+        }
+        &.swiper-next {
+          .icon {
+            &--1 svg {
+              transform: translateX(20px);
+            }
+            &--2 svg {
+              transform: translateX(10px);
+            }
+          }
+        }
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    .topbar-left,
+    .topbar-right {
+      display: none;
+    }
+    .topbar-center {
+      width: 100%;
+    }
+  }
+  @media(max-width: 767px) {
+    font-size: 12px;
+    padding: 0;
+    .rebellook-topbar-slide {
+      .swiper-slide {
+        height: auto;
+        .slide-item {
+          height: 100%;
+          padding: 0 20px;
+          text-align: center;
+        }
+      }
+      .swiper-nav {
+        .icon {
+          svg {
+            top: 8px;
+          }
+          &--2 svg {
+            top: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*----- Translate ------*/
+body {
+  top: 0 !important;
+}
+.skiptranslate {
+  display: none;
+
+
+  /*
+   width: 0;
+   height: 0;
+   opacity: 0;
+*/
+}
+.rebellook-translate-wrapper {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  .language-text {
+    font-size: 12px;
+  }
+  .rebellook-translate-dropdown-wrapper {
+    position: absolute;
+    right: 0;
+    z-index: 9;
+    padding-top: 12px;
+    margin-top: -12px;
+    width: 100%;
+    max-width: 130px;
+    transition: 0.3s all;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    .rebellook-translate-dropdown {
+      overflow-y: auto;
+      font-size: 12px;
+      scroll-padding: 0.5rem 0;
+      width: 100%;
+      min-width: 105px;
+      background-color: #fff;
+      color: #333;
+      text-align: left;
+      z-index: 99;
+      left: 0;
+      box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2);
+      .js-language-select {
+        .flag {
+          svg {
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+      a {
+        display: block;
+        padding: 5px 8px;
+        transition: 0.3s all;
+        background-color: transparent;
+         &:hover {
+          background-color: rgba($colorTopbar, 0.1);
+        }
+      }
+
+    }
+  }
+  .icon-svg {
+    --icon-height: 12px;
+    --icon-width: 12px;
+  }
+   &:hover,
+  &.active {
+    .rebellook-translate-dropdown-wrapper {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .icon-svg {
+      transform: rotate(-180deg);
+    }
+  }
+}
+@media(max-width: 991px) {
+  .rebellook-header-action_translate {
+    display: none;
+  }
+}
+/*----- END Translate ------*/

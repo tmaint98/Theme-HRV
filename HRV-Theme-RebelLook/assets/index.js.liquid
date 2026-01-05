@@ -1,0 +1,49 @@
+RebelLook.IndexAjax = {
+		init: function() {
+			var that = this;
+      //that.RebelLook_IndexAjax();
+		},
+  RebelLook_IndexAjax: function(){
+    $('.rebellook-index-ajax').each(function(){
+      const $this = $(this);
+      let id = $this.attr('id');
+      let urls = '{{shop.url}}?view=' + id;
+      let hd = $this.attr('data-handle');
+      if($this.hasClass('index-col-slide')){
+        urls = '/collections/' + hd + '?view=slide-data';
+      }else if($this.hasClass('index-blog')){
+        urls = '/blogs/' + hd + '?view=index-data';
+      }
+      setTimeout(function(){ 
+        $.ajax({
+          url: urls,					
+          type: 'GET',
+          async: false,
+          success:function(data){
+            setTimeout(function(){ 
+              if($this.hasClass('index-review')){
+                $('.rebellook-index-ajax[id="'+ id +'"]').html(data);
+                RebelLook.IndexReviewSlider.RebelLook_IndexReviewSlider();
+              }else if($this.hasClass('index-col-slide')){
+                $('.rebellook-index-col-slide[data-handle="'+hd+'"] .list-pro').html(data);
+                RebelLook.IndexColSlider.RebelLook_IndexColSlider(hd);
+              }else if($this.hasClass('index-blog')){
+                $('.rebellook-index-blog .list-blog').html(data);
+              }else{
+                $('.rebellook-index-ajax[id="'+ id +'"]').html(data);
+              }
+            }, 300);
+          }
+        });
+      }, 500);
+    })
+    
+  }
+};
+(function() {
+  RebelLook.IndexAjax.init();
+})();
+
+
+
+

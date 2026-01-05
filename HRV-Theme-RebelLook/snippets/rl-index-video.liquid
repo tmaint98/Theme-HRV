@@ -1,0 +1,23 @@
+<link rel="preload stylesheet" href="{{ 'rl-index-video.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'rl-index-video.js' | asset_url }}"></script>
+<div class="rebellook-index-video wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+  <div class="container-fluid">
+    <div class="banner-video">
+    <a href="https://www.youtube.com/watch?v={{settings.rebellook_index_video_id}}">
+      <img src="{{'rebellook_index_video_img.jpg' | asset_url}}" alt="video" loading="lazy" decoding="async" />
+      <div class="video-play">
+        {%if settings.rebellook_index_video_title != empty %}<div class="title">{{settings.rebellook_index_video_title}}</div>{%endif%}
+        <div class="icon-play">
+          <svg class="play-stroke" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="140px" viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" xml:space="preserve">
+            <circle class="stroke-1" fill="none" cx="150" cy="150" r="149"></circle>
+            <circle class="stroke-2" fill="none" cx="150" cy="150" r="149"></circle>
+          </svg>
+          <svg class="play-icon" width="30px" height="30px" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.79062 2.09314C4.63821 1.98427 4.43774 1.96972 4.27121 2.05542C4.10467 2.14112 4 2.31271 4 2.5V12.5C4 12.6873 4.10467 12.8589 4.27121 12.9446C4.43774 13.0303 4.63821 13.0157 4.79062 12.9069L11.7906 7.90687C11.922 7.81301 12 7.66148 12 7.5C12 7.33853 11.922 7.18699 11.7906 7.09314L4.79062 2.09314Z" />
+          </svg>
+        </div>
+      </div>
+    </a>
+  </div>
+  </div>
+</div>

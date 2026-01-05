@@ -1,0 +1,25 @@
+<link rel="preload stylesheet" href="{{ 'rl-index-col-banner.scss.css' | asset_url }}" as="stylesheet">
+<div class="rebellook-index-col-banner rebellook-index-ajax" id="rebellook-index-col-banner">
+  <div class="container-fluid">
+    <div class="row list-banner">
+      {%for i in (1..4)%}
+        {%capture show%}rebellook_index_col_banner_show_{{i}}{%endcapture%}
+        {%capture img%}rebellook_index_col_banner_img_{{i}}.jpg{%endcapture%}
+        {%capture title%}rebellook_index_col_banner_title_{{i}}{%endcapture%}
+        {%capture handle%}rebellook_index_col_banner_handle_{{i}}{%endcapture%}
+        {%assign col_handle = settings[handle]%}
+        {%if settings[show]%}
+          <div class="banner-item banner-item--{{i}} wow {%if i == 1 or i == 3%}fadeInLeft{%else%}fadeInRight{%endif%} {%if i == 1 or i == 4%}col-lg-8{%else%}col-lg-4{%endif%} col-12" data-wow-delay="0.5s" data-wow-duration="0.8s">
+            <div class="item-img">
+              <a href="{{collections[col_handle].url}}"><img src="{{ img | asset_url}}" alt="{%if settings[title] != empty %}{{settings[title]}}{%else%}{{collections[col_handle].title}}{%endif%}" /></a>
+            </div>
+            <div class="item-content">
+              <h3 class="title"><a href="{{collections[col_handle].url}}">{%if settings[title] != empty %}{{settings[title]}}{%else%}{{collections[col_handle].title}}{%endif%}</a></h3>
+              {%if collections[col_handle].products.size > 0%}<div class="desc">{{collections[col_handle].products.size}} sản phẩm</div>{%endif%}
+            </div>
+          </div>
+        {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+</div>

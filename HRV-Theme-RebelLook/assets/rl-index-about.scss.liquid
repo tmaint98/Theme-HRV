@@ -1,0 +1,78 @@
+{%- assign webfont_title = settings.base_font_title | split : ':' | first -%}
+:root{
+  --rl-index-about-time: {{ settings.rebellook_index_about_marquee_time }}s;
+}
+$bgBtn: {{settings.rebellook_index_about_btn_bg}};
+$colorBtn: {{settings.rebellook_index_about_btn_color}};
+
+@keyframes index-marquee-about {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.rebellook-index-about{
+  position: relative;
+  .btn-more{
+    .button{
+      background-color: $bgBtn;
+      color: $colorBtn;
+    }
+  }
+  .marquee {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    font-family: "{{ webfont_title }}", sans-serif;
+    &__inner {
+      display: inline-flex;
+      gap: 30px;
+      animation: index-marquee-about var(--rl-index-about-time) linear infinite;
+      &--item {
+        display: inline-block;
+        font-size: 95px;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 1.3;
+      }
+    }
+  }
+
+
+  
+   .marquee:hover .marquee__inner {
+   animation-play-state: paused;
+   }
+@media(min-width: 1200px){
+  .container-fluid{
+    padding: 0;
+  }
+    .about-content{
+      padding: 15% 25% 0 10%;
+    }
+  }
+  @media(max-width: 991px) {
+    .about-content{
+      margin-top: 20px;
+    }
+    .marquee{
+      position: relative;
+      bottom: 0;
+      padding-top: 30px;
+      &__inner--item {
+      font-size: 28px;
+    }
+    }
+  }
+@media(max-width: 767px) {
+    .marquee__inner--item {
+      font-size: 24px;
+    }
+  }
+  
+}

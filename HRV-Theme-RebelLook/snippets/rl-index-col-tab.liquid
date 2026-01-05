@@ -1,0 +1,75 @@
+{%- unless has_heading -%}
+  <link rel="preload stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_heading = true -%}
+{%- endunless -%}
+{%- unless has_section_collection_tab -%}
+  <link rel="preload stylesheet" href="{{ 'rl-index-col-tab.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'rl-index-col-tab.js' | asset_url }}"></script>
+  {%- assign has_section_collection_tab = true -%}
+{%- endunless -%}
+
+
+{% capture desc %}rebellook_index_col_tab_{{ind}}_desc{%endcapture%}
+{% capture limit %}rebellook_index_col_tab_{{ind}}_limit{%endcapture%}
+{% capture btn %}rebellook_index_col_tab_{{ind}}_btn{%endcapture%}
+{% capture bg_btn %}rebellook_index_col_tab_{{ind}}_bg_btn{%endcapture%}
+{% capture color_btn %}rebellook_index_col_tab_{{ind}}_color_btn{%endcapture%}
+
+<div class="rebellook-index-col-tab" id="rebellook-index-tab-{{ind}}" style="--bg-btn: {{bg_btn}};--color-btn: {{settings[color_btn]}};">
+  <div class="container-fluid">
+    {%if settings[desc] != empty %}<div class="tab-desc text-center wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">{{settings[desc] | newline_to_br}}</div>{%endif%}
+    <div class="col-tab wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+      {% assign tab_title = ''%}
+      {% assign tab_content = ''%}
+      {% assign count = 0 %}
+      {%for i in (1..5)%}
+        {%capture show%}rebellook_index_col_tab_{{ind}}_show_{{i}}{%endcapture%}
+        {%capture title%}rebellook_index_col_tab_{{ind}}_title_{{i}}{%endcapture%}
+        {%capture handle%}rebellook_index_col_tab_{{ind}}_handle_{{i}}{%endcapture%}
+        {% assign col_handle = settings[handle] %}
+        {%if settings[show]%}
+          {% assign count = count | plus: 1%}
+          {%capture tab_title_html%}
+          <div class="title-item {% if count == 1 %}active{%endif%}" data-id="rebellook-index-tab-{{ind}}-{{i}}" data-handle="{{col_handle}}" data-limit="{{settings[limit]}}">{% if settings[title] != empty %}{{settings[title]}}{% else %}{{ collections[col_handle].title }}{% endif %}</div>
+          {%endcapture%}
+          {%capture tab_content_html%}
+            {% if count == 1 %}
+            <div class="content-item active" id="rebellook-index-tab-{{ind}}-{{i}}" data-btn="{{settings[btn]}}">
+              {% if collections[col_handle].products.size == 0 %}
+              <div class="col-md-12 product-noloop col-item">
+                <div class="collection-alert-no">
+                  <p>Chưa có sản phẩm nào trong danh mục này</p>
+                </div>
+              </div>
+            {% else %}
+              <div class="row list-pro col-item">
+                  {% for product in collections[col_handle].products limit: settings[limit] %}
+                    <div class="pro-item">
+                      {% include 'rl-product-loop' %}
+                    </div>
+                  {% endfor %}
+              </div>
+              {%if settings[btn] != empty and collections[col_handle].products.size > settings[limit] %}
+                <div class="btn-more text-center">
+                  <a href="{{collections[col_handle].url}}" class="button">{{settings[btn]}}</a>
+                </div>
+              {%endif%}
+            {% endif %}
+            </div>
+            {%else%}
+            <div class="content-item" id="rebellook-index-tab-{{ind}}-{{i}}" data-btn="{{settings[btn]}}"></div>
+            {%endif%}
+          {%endcapture%}
+          {% assign tab_title = tab_title | append: tab_title_html %}
+          {% assign tab_content = tab_content | append: tab_content_html %}
+        {%endif%}
+      {%endfor%}
+
+      <div class="col-tab-title">{{tab_title}}</div>
+      <div class="col-tab-content">{{tab_content}}<div>
+      
+    </div>
+  </div>
+</div>
+  </div>
+</div>

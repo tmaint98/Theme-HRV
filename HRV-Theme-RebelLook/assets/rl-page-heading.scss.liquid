@@ -1,0 +1,57 @@
+{%- assign webfont_title = settings.base_font_title | split : ':' | first -%}
+.heading-title{
+  margin-bottom: 40px;position: relative;
+  .title1{font-size: 12px;font-weight: 600;text-transform: uppercase;margin-bottom: 15px;opacity: 0.8;}
+  .title2{font-size: 45px;font-family: "{{ webfont_title }}", sans-serif;margin-bottom: 20px;line-height: 1.3;}
+  .desc{opacity: 0.8;}
+  @media(max-width: 767px){
+    margin-bottom: 25px;
+    .title2{
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .title2, .desc{
+      br{
+      content: '';
+      &:after{
+        content: ' ';
+      }
+    }
+    }
+  }
+}
+.button {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+    padding: 15px 25px;
+    line-height: normal;
+    color: var(--shop-color-button-text);
+    background-color: var(--shop-color-button);
+    border: none;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 1px;
+    outline: none !important;
+    -webkit-transition: all 0.45s;
+    transition: all 0.45s;
+    @media(min-width: 992px) {
+       &:hover,
+      &.has-hover,
+       &:focus {
+        opacity: 0.8;
+      }
+       
+    }
+    @media(max-width: 767px) {
+      font-size: 12px;
+      padding: 8px 15px;
+      min-height: 35px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+

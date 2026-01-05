@@ -1,0 +1,44 @@
+RebelLook.IndexColTab = {
+		init: function() {
+			var that = this;
+      that.RebelLook_IndexColTab();
+		},
+  RebelLook_IndexColTab: function(){
+    let $parent =  $('.rebellook-index-col-tab');
+    $parent.find('.title-item').click(function(){
+      const $that = $(this);
+      let id = $that.attr('data-id');
+      let handle = $that.attr('data-handle');
+      let limit = $that.attr('data-limit');
+      $parent.find('.title-item').removeClass('active');
+      $parent.find('.content-item').removeClass('active');
+      $parent.find('.title-item[data-id="'+ id +'"]').addClass('active');
+      $parent.find('.content-item[id="'+ id +'"]').addClass('active');
+      if(!$parent.find('.content-item[id="'+ id +'"] .col-item').length){
+        urls = '/collections/' + handle + '?view=tab-data&page=' + limit;
+        console.log(urls);
+        $.ajax({
+          url: urls,					
+          type: 'GET',
+          async: false,
+          success:function(data){
+            $parent.find('.content-item[id="'+ id +'"]').html(data);
+            let btn = $parent.find('.content-item[id="'+ id +'"]').attr('data-btn');
+            if(btn != '' && btn != undefined){
+              $parent.find('.content-item[id="'+ id +'"] .btn-more a').html(btn);
+            }else{
+              $parent.find('.content-item[id="'+ id +'"] .btn-more').remove();
+            }
+          }
+        });
+      }
+    })
+  },
+};
+(function() {
+  RebelLook.IndexColTab.init();
+})();
+
+
+
+

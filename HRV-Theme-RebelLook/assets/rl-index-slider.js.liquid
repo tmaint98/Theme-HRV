@@ -1,0 +1,39 @@
+RebelLook.IndexMainSlider = {
+		init: function() {
+			var that = this;
+      that.RebelLook_IndexMainSlider();
+		},
+  RebelLook_IndexMainSlider: function(){
+    const rebellookSlider = new Swiper ('.rebellook-index-slider .swiper', {
+      slidesPerView: 1,  
+			loop: $('.rebellook-index-slider .slider-item').length > 1 ? true:false,
+      preloadImages: false,
+      lazy: true,
+      speed: 1000,
+      autoplay: false,
+      /*autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },*/
+			navigation: {
+				nextEl: ".rebellook-index-slider .swiper-next",
+				prevEl: ".rebellook-index-slider .swiper-prev",
+			},
+      pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			
+    });
+    const totalSlides = rebellookSlider.slides.length;
+    if (totalSlides <= rebellookSlider.params.slidesPerView) {
+      $('.rebellook-index-slider .swiper-next, .rebellook-index-slider .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  RebelLook.IndexMainSlider.init();
+})();
+
+
+

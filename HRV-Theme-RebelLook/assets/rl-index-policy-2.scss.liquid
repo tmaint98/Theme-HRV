@@ -1,0 +1,88 @@
+@keyframes icon-bounce2 {
+  0,
+  100%,
+  20%,
+  50%,
+  80% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0)
+  }
+
+  40% {
+    -webkit-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    transform: translateY(-10px)
+  }
+
+  60% {
+    -webkit-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    transform: translateY(-5px)
+  }
+}
+.rebellook-index-policy-2 {
+  border-top: 1px solid currentcolor;
+  .list-policy {
+    margin: 0;
+    .policy-item {
+      flex: 0 0 auto;
+      width: 25%;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-left: 1px solid currentcolor;
+      .item-icon {
+        flex: 0 0 40px;
+        img {
+          max-width: 40px;
+        }
+      }
+      .item-content {
+        .title {
+          font-size: 18px;
+        }
+      }
+       &:last-child {
+        border-right: 1px solid currentcolor;
+      }
+       &:hover {
+        .item-icon {
+          img {
+            animation: icon-bounce2 1s infinite linear;
+          }
+        }
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    .list-policy {
+      padding-bottom: 20px;
+      .policy-item {
+        width: 100%;
+        border-left: none;
+        padding: 20px 0 0;
+         &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    .list-policy {
+      .policy-item {
+        gap: 10px;
+        .item-icon {
+          flex: 0 0 30px;
+          img {
+            max-width: 30px;
+          }
+        }
+        .item-content .title{
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

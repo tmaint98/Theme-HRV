@@ -1,0 +1,53 @@
+RebelLook.Footer = {
+		init: function() {
+			var that = this;
+      that.RebelLook_toggleFooter();
+      that.RebelLook_newsletterForm();
+		},
+  RebelLook_toggleFooter: function(){
+		$('.rebellook-title-footer').on('click', function(){
+			if ($(window).width() < 992) {
+				jQuery(this).toggleClass('opened').parent().find('.rebellook-block-collapse').stop().slideToggle('medium');
+			}
+		});
+	},
+  RebelLook_newsletterForm: function(){
+		if($('.rebellook-newsletter-form').length > 0){
+			$('.rebellook-newsletter-form form.contact-form').submit(function(e) { 
+				var self = $(this);
+				if($(this)[0].checkValidity() == true){
+					e.preventDefault();
+					grecaptcha.ready(function() {
+						grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+							self.find('input[name="g-recaptcha-response"]').val(token);
+							$.ajax({
+								type: 'POST',
+								url:'/account/contact',
+								data: $('.rebellook-newsletter-form form.contact-form').serialize(),
+								success:function(data){		
+									if($(data).find('#rebellook-newsletter-success').length > 0){
+										$('.rebellook-newsletter-form .rebellook-newsletter-error').html('');
+										swal({
+											icon: "success",
+											className: "rebellook-newsletter-form-success",
+											title: "Đăng kí thông tin thành công",
+											text: "Thông báo sẽ tự động tắt sau 5 giây...",
+											button: false,
+											timer: 5000,
+										});
+										e.target.reset();
+									} else {
+										$('.rebellook-newsletter-form .rebellook-newsletter-error').html('Địa chỉ email không hợp lệ');
+									}
+								},	
+							})
+						}); 
+					});
+				}
+			});
+		}
+	},
+};
+(function() {
+  RebelLook.Footer.init();
+})();

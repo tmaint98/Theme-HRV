@@ -1,0 +1,47 @@
+{%if settings.rebellook_index_ins_show %}
+{%- unless has_heading -%}
+  <link rel="preload stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  {%- assign has_heading = true -%}
+{%- endunless -%}
+<link rel="preload stylesheet" href="{{ 'rl-index-ins.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'rl-index-ins.js' | asset_url }}"></script>
+
+<div class="rebellook-index-ins wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+  <div class="container">
+    <div class="heading-title">
+      {% if settings.rebellook_index_ins_title != empty %}
+        <h2 class="title2">
+          {{ settings.rebellook_index_ins_title }}
+        </h2>
+      {% endif %}
+      {% if settings.rebellook_index_ins_btn != empty %}
+      <a href="{{settings.rebellook_index_ins_link}}" class="btn-link">{{settings.rebellook_index_ins_btn}}</a>
+      {%endif%}
+    </div>
+    <div class="list-ins swiper">
+      <div class="swiper-wrapper">
+      {% for i in (1..10) %}
+        {% capture show %}rebellook_index_ins_show_{{i}}{%endcapture%}
+        {% capture img %}rebellook_index_ins_img_{{i}}.jpg{%endcapture%}
+        {% capture alt %}rebellook_index_ins_alt_{{i}}{%endcapture%}
+        {% capture link %}rebellook_index_ins_link_{{i}}{%endcapture%}
+        {% if settings[show] %}
+          <div class="swiper-slide">
+            <div class="item-ins item-ins--{{i}}">
+              <a href="{{settings[link]}}">
+                <img src="{{ img | asset_url}}" alt="{{settings[alt]}}" />
+                <div class="icon">
+                  <span>
+                  <svg width="30px" height="30px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-instagram"><path d='M14.017 0h-8.07A5.954 5.954 0 0 0 0 5.948v8.07a5.954 5.954 0 0 0 5.948 5.947h8.07a5.954 5.954 0 0 0 5.947-5.948v-8.07A5.954 5.954 0 0 0 14.017 0zm3.94 14.017a3.94 3.94 0 0 1-3.94 3.94h-8.07a3.94 3.94 0 0 1-3.939-3.94v-8.07a3.94 3.94 0 0 1 3.94-3.939h8.07a3.94 3.94 0 0 1 3.939 3.94v8.07z'/><path d='M9.982 4.819A5.17 5.17 0 0 0 4.82 9.982a5.17 5.17 0 0 0 5.163 5.164 5.17 5.17 0 0 0 5.164-5.164A5.17 5.17 0 0 0 9.982 4.82zm0 8.319a3.155 3.155 0 1 1 0-6.31 3.155 3.155 0 0 1 0 6.31z'/><circle cx='15.156' cy='4.858' r='1.237'/></svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+  {%endif%}

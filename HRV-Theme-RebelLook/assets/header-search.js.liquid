@@ -1,0 +1,100 @@
+RebelLook.Search = {
+  init: function(){
+    var that = this;
+    that.RebelLook_searchAutoHeader();
+  },
+  RebelLook_searchAutoHeader: function(){
+		$('.rebellook-ultimate-search').submit(function(e) {
+			e.preventDefault();
+			var q = $(this).find('input[name=q]').val();
+			if(q.indexOf('script') > -1 || q.indexOf('>') > -1){
+				alert('Từ khóa của bạn có chứa mã độc hại! Vui lòng nhập lại từ khóa khác');
+				$(this).find('input[name=q]').val('');
+			}
+			else{
+				var q_follow = 'product';
+				var query = encodeURIComponent('(title:product contains ' + q + ')');
+				if( !q ) {
+					window.location = '/search?type='+ q_follow +'&q=*';
+					return;
+				}	
+				else {
+					window.location = '/search?type=' + q_follow +'&q=filter=' + query;
+					return;
+				}
+			}
+		});
+		var $input = $('.rebellook-ultimate-search input[type="text"]');
+		$input.bind('keyup change paste propertychange', function() {
+			var key = $(this).val(),
+					$parent = $(this).parents('.rebellook-wpo-wrapper-search'),
+					$results = $(this).parents('.rebellook-wpo-wrapper-search').find('.rebellook-smart-search-wrapper');
+
+			if(key.indexOf('script') > -1 || key.indexOf('>') > -1){
+				alert('Từ khóa của bạn có chứa mã độc hại! Vui lòng nhập lại từ khóa khác');
+				$(this).val('');
+				$('.rebellook-ultimate-search input[type="text"]').val('');
+			}
+			else{
+				if(key.length > 0 ){
+					$(this).attr('data-history', key);
+					$('.rebellook-ultimate-search input[type="text"]').val($(this).val());
+					var q_follow = 'product',
+							str = '';
+					str = '/search?type=product&q=' + key + '&view=header-ultimate-product';
+					$.ajax({
+						url: str,
+						type: 'GET',
+						async: true,
+						success: function(data){
+							$results.find('.rebellook-resultsContent').html(data);
+						}
+					})
+					if(!$('.rebellook-header-action_search').hasClass('rebellook-js-action-show')){
+						$('body').removeClass("locked-scroll");
+						$('.rebellook-header-action-item').removeClass('rebellook-js-action-show');
+					}
+					$("rebellook-ultimate-search").addClass("expanded");
+					$results.fadeIn();
+				}
+				else{
+					$('rebellook-ultimate-search input[type="text"]').val($(this).val());
+					$("rebellook-ultimate-search").removeClass("expanded");
+					$results.fadeOut();
+				}
+			}
+
+		})
+		$('body').click(function(evt) {
+			var target = evt.target;
+			if (target.id !== 'rebellook-ajaxSearchResults' && target.id !== 'rebellook-inputSearchAuto') {
+				$("#rebellook-ajaxSearchResults").hide();
+			}
+			if (target.id !== 'rebellook-ajaxSearchResults-mb' && target.id !== 'rebellook-inputSearchAuto-mb') {
+				$("#rebellook-ajaxSearchResults-mb").hide();
+			}
+			if (target.id !== 'rebellook-ajaxSearchResults-3' && target.id !== 'rebellook-inputSearchAuto-3') {
+				$("#rebellook-ajaxSearchResults-3").hide();
+			}
+		});
+		$('body').on('click', '.rebellook-ultimate-search input[type="text"]', function() {
+			if ($(this).is(":focus")) {
+				if ($(this).val() != '') {
+					$(".rebellook-ajaxSearchResults").show();
+				}
+			} else {
+			}
+		})
+		$('body').on('click', '.rebellook-ultimate-search .search-close', function(e){
+			e.preventDefault();
+			$(".rebellook-ajaxSearchResults").hide();
+			$(".rebellook-ultimate-search").removeClass("expanded");
+			$(".rebellook-ultimate-search").find('input[name=q]').val('');
+		})
+	},
+};
+
+(function() {
+  RebelLook.Search.init();
+})();
+

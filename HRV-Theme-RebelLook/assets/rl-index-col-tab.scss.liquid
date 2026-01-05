@@ -1,0 +1,86 @@
+{%- assign webfont_title = settings.base_font_title | split : ':' | first -%}
+$bgBtn: {{settings.rebellook_index_col_tab_1_bg_btn}};
+$colorBtn: {{settings.rebellook_index_col_tab_1_color_btn}};
+.rebellook-index-col-tab {
+  padding: 80px 0;
+  .button {
+    color: $colorBtn;
+    background-color: $bgBtn;
+  }
+  .tab-desc {
+    font-size: 28px;
+    font-family: "{{ webfont_title }}"
+    , sans-serif;
+    font-weight: 600;
+    margin-bottom: 60px;
+  }
+  .col-tab-title {
+    display: flex;
+    flex-flow: wrap;
+    gap: 10px 15px;
+    margin-bottom: 25px;
+    .title-item {
+      padding: 2px 5px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+       &:hover,
+      &.active {
+        border-color: currentcolor;
+      }
+    }
+  }
+  .col-tab-content {
+    .content-item {
+      display: none;
+      &.active {
+        display: block;
+      }
+    }
+    .list-pro {
+      margin: 0;
+      .pro-item {
+        flex: 0 0 auto;
+        width: 25%;
+        border: 1px solid #eaeaea;
+        margin-top: -1px;
+        margin-inline-start: -1px;
+        padding: 25px;
+        transition: all 0.3s;
+         &:hover {
+          box-shadow: 0 0 0 1px currentcolor inset
+          , 0 5px 43px 0 rgba(27, 26, 26, 0.15)
+        }
+      }
+    }
+    .btn-more{
+      margin-top: 30px;
+    }
+  }
+  @media(min-width: 992px) {}
+@media(max-width: 991px) {
+  .tab-desc {
+    br {
+      content: '';
+       &:after {
+        content: ' ';
+      }
+    }
+  }
+}
+@media(max-width: 767px) {
+  padding: 40px 0;
+  .tab-desc{
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  .col-tab-content {
+    .list-pro {
+      .pro-item {
+        width: 50%;
+        padding: 5px;
+      }
+    }
+  }
+}
+}
