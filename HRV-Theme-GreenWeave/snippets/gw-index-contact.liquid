@@ -1,6 +1,7 @@
 {%unless template == 'page.process' or template == 'page.contact' %}
 {%if settings.greenweave_show_footer_newsletter%}
-<link rel="preload stylesheet" href="{{ 'gw-index-contact.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'gw-index-contact.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-index-contact.scss.css' | asset_url }}">
 <div class="greenweave-form-contact">
   <div class="container">
 		<div class="form-contact">

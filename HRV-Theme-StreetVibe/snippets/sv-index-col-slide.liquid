@@ -1,5 +1,6 @@
 {%- unless has_section_collection_slide -%}
-  <link rel="preload stylesheet" href="{{ 'sv-index-col-slide.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'sv-index-col-slide.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'sv-index-col-slide.scss.css' | asset_url }}">
   <script fetchpriority="low" type="text/javascript" defer src="{{ 'sv-index-col-slide.js' | asset_url }}"></script>
   {%- assign has_section_collection_slide = true -%}
 {%- endunless -%}

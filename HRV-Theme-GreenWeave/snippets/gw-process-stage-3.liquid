@@ -1,9 +1,11 @@
 {%if settings.show_greenweave_process_stage_3%}
   {%unless has_heading %} 
-  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}">
   {% assign has_heading = true %}
 {% endunless %}
-  <link rel="preload stylesheet" href="{{ 'gw-process-stage-3.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'gw-process-stage-3.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-process-stage-3.scss.css' | asset_url }}">
 	<section class="greenweave-process-stage-3">
 		<div class="container">
 			<div class="row align-items-center">

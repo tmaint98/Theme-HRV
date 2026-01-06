@@ -1,8 +1,10 @@
 {%unless has_heading %} 
-  <link rel="preload stylesheet" href="{{ 'uc-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'uc-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'uc-page-heading.scss.css' | asset_url }}">
   {% assign has_heading = true %}
 {% endunless %}
-<link rel="preload stylesheet" href="{{ 'uc-index-contact.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'uc-index-contact.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'uc-index-contact.scss.css' | asset_url }}">
 <section class="urbanconstruct-index-contact wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
     <div class="container-fluid">
       <div class="contact-img">

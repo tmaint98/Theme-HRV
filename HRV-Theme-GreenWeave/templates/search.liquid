@@ -1,6 +1,8 @@
-<link rel="preload stylesheet" href="{{ 'gw-product-loop.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'gw-product-loop.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-product-loop.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-product-loop.js' | asset_url }}"></script>
-<link rel="preload stylesheet" href="{{ 'style-search.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'style-search.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'style-search.scss.css' | asset_url }}">
 <div class="layout-searchPage" id="layout-searchpage">
 	{%- include 'breadcrumb' -%}
 	<div class="container">

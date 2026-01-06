@@ -1,9 +1,11 @@
 {%unless has_heading %} 
-  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}">
   {% assign has_heading = true %}
 {% endunless %}
 {%-unless has_section_collection -%} 
-  <link rel="preload stylesheet" href="{{ 'gw-index-collection.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'gw-index-collection.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-index-collection.scss.css' | asset_url }}">
   {%- assign has_section_collection = true -%}
 {%- endunless -%}
 {%capture bg_col%}greenweave_index_collection_{{ind}}_bg{%endcapture%}

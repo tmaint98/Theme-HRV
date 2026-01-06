@@ -1,9 +1,11 @@
 {%if settings.streetvibe_header_topbar_show%}
-<link rel="preload stylesheet" href="{{ 'streetvibe-topbar.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'streetvibe-topbar.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'streetvibe-topbar.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'streetvibe-topbar.js' | asset_url }}"></script>
 {%if settings.streetvibe_topbar_time_show%}
 {%assign time = settings.streetvibe_topbar_time_num | replace:'/','-' | replace: ';','T'%}
-<link rel="preload stylesheet" href="{{ 'soon.min.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'soon.min.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'soon.min.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'soon.min.js' | asset_url }}"></script>
 {%endif%}
 {%if settings.streetvibe_shop_google_translate%}

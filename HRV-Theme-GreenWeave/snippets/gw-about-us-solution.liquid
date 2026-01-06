@@ -7,10 +7,12 @@
   {% endunless %}
   {%endif%}
   {%unless has_heading %} 
-  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}">
   {% assign has_heading = true %}
 {% endunless %}
-  <link rel="preload stylesheet" href="{{ 'gw-about-us-solution.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'gw-about-us-solution.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-about-us-solution.scss.css' | asset_url }}">
   <section class="greenweave-about-us-solution">
     <div class="container">
       <div class="heading-title">

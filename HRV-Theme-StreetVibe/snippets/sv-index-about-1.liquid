@@ -1,8 +1,10 @@
 {%- unless has_heading -%}
-  <link rel="preload stylesheet" href="{{ 'sv-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'sv-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'sv-page-heading.scss.css' | asset_url }}">
   {%- assign has_heading = true -%}
 {%- endunless -%}
-<link rel="preload stylesheet" href="{{ 'sv-index-about-1.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'sv-index-about-1.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'sv-index-about-1.scss.css' | asset_url }}">
 
 <div class="streetvibe-index-about-1 streetvibe-index-ajax" id="sv-index-about-1">
   {%comment%}<div class="container">

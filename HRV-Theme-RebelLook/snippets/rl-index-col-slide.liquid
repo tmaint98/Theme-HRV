@@ -1,9 +1,11 @@
 {%- unless has_heading -%}
-  <link rel="preload stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}">
   {%- assign has_heading = true -%}
 {%- endunless -%}
 {%- unless has_section_collection_slide -%}
-  <link rel="preload stylesheet" href="{{ 'rl-index-col-slide.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'rl-index-col-slide.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rl-index-col-slide.scss.css' | asset_url }}">
   <script fetchpriority="low" type="text/javascript" defer src="{{ 'rl-index-col-slide.js' | asset_url }}"></script>
   {%- assign has_section_collection_slide = true -%}
 {%- endunless -%}

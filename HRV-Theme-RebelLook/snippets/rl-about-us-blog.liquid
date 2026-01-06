@@ -1,9 +1,11 @@
 {%if settings.show_rebellook_about_us_blog%}
 {%- unless has_heading -%}
-  <link rel="preload stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}">
   {%- assign has_heading = true -%}
 {%- endunless -%}
-<link rel="preload stylesheet" href="{{ 'rl-about-us-blog.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'rl-about-us-blog.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rl-about-us-blog.scss.css' | asset_url }}">
 <div class="rebellook-about-us-blog wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s" data-handle="{{settings.rebellook_about_us_blog_handle}}">
   <div class="container">
     <div class="heading-title text-center">

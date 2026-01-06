@@ -1,5 +1,6 @@
 {%if settings.show_rebellook_about_us_video%}
-<link rel="preload stylesheet" href="{{ 'rl-about-us-video.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'rl-about-us-video.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rl-about-us-video.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'rl-about-us-video.js' | asset_url }}"></script>
 <div class="rebellook-about-us-video wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
   <div class="container-fluid">

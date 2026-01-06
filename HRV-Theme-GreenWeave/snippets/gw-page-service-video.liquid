@@ -1,9 +1,11 @@
 {% if settings.show_greenweave_page_services_video %}
 {%unless has_heading %} 
-  <link rel="preload stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'gw-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-page-heading.scss.css' | asset_url }}">
   {% assign has_heading = true %}
 {% endunless %}
-<link rel="preload stylesheet" href="{{ 'gw-page-service-video.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'gw-page-service-video.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-page-service-video.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-page-service-video.js' | asset_url }}"></script>
 <section class="greenweave-page-service-video">
   <div class="banner-video">

@@ -1,9 +1,11 @@
 {%if settings.show_streetvibe_about_us_video_2 %}
 {%- unless has_heading -%}
-  <link rel="preload stylesheet" href="{{ 'sv-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'sv-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'sv-page-heading.scss.css' | asset_url }}">
   {%- assign has_heading = true -%}
 {%- endunless -%}
-<link rel="preload stylesheet" href="{{ 'sv-about-us-video-2.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'sv-about-us-video-2.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'sv-about-us-video-2.scss.css' | asset_url }}">
 
 <div class="streetvibe-about-us-video-2">
   <div class="container">

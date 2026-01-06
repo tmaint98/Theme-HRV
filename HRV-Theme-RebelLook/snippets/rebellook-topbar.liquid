@@ -1,5 +1,6 @@
 {%if settings.rebellook_header_topbar_show%}
-<link rel="preload stylesheet" href="{{ 'rebellook-topbar.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'rebellook-topbar.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rebellook-topbar.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'rebellook-topbar.js' | asset_url }}"></script>
 {%if settings.rebellook_shop_google_translate%}
 {%- include 'theme_google_translate_js' -%}

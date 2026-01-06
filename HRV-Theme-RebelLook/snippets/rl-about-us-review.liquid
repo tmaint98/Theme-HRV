@@ -1,5 +1,6 @@
 {%if settings.show_rebellook_about_us_review%}
-<link rel="preload stylesheet" href="{{ 'rl-about-us-review.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'rl-about-us-review.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rl-about-us-review.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'rl-about-us-review.js' | asset_url }}"></script>
 
 <div class="rebellook-about-us-review wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">

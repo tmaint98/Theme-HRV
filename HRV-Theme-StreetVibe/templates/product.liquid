@@ -1,10 +1,13 @@
-<link rel="preload stylesheet" href="{{ 'sv-product-loop.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'sv-product-loop.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'sv-product-loop.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'sv-product-loop.js' | asset_url }}"></script>
 {% if settings.product_coupon_show %}
-<link rel="preload stylesheet" href="{{ 'coupon.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'coupon.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'coupon.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'coupon.js' | asset_url }}"></script>
 {%endif%}
-<link rel="preload stylesheet" href="{{ 'style-product.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'style-product.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'style-product.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'product.js' | asset_url }}"></script>
 {%- assign tabs = product.metafields.hrvptabs.tabs -%}
 {%- assign check_pro_tab = false -%}

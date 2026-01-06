@@ -1,4 +1,5 @@
-<link rel="preload stylesheet" href="{{ 'style-blog.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'style-blog.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'style-blog.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'blog.js' | asset_url }}"></script>
 <div  class="layout-article" id="article">
 	{%- include 'breadcrumb' -%}

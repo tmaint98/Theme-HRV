@@ -1,4 +1,5 @@
-<link rel="preload stylesheet" href="{{ 'footer.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'footer.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'footer.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'footer.js' | asset_url }}"></script>
 {%- if settings.streetvibe_toolbar_bottom_selected == 'streetvibe_toolbar_style_1' or settings.streetvibe_toolbar_bottom_selected == 'streetvibe_toolbar_style_2' -%}
   {%- assign classtoolbar = 'has-toolbar' -%}

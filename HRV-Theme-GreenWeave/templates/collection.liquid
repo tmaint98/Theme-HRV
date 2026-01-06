@@ -1,6 +1,8 @@
-<link rel="preload stylesheet" href="{{ 'gw-product-loop.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'gw-product-loop.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'gw-product-loop.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'gw-product-loop.js' | asset_url }}"></script>
-<link rel="preload stylesheet" href="{{ 'style-collection.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'style-collection.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'style-collection.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'collection.js' | asset_url }}"></script>
 {%- assign check_filer = false -%}
 {%- if settings.collection_filter_show -%}

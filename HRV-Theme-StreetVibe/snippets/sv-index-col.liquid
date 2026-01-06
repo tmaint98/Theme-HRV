@@ -1,5 +1,6 @@
 {%- unless has_section_collection -%}
-  <link rel="preload stylesheet" href="{{ 'sv-index-col.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'sv-index-col.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'sv-index-col.scss.css' | asset_url }}">
   {%- assign has_section_collection = true -%}
 {%- endunless -%}
 

@@ -1,5 +1,6 @@
 {% if settings.show_streetvibe_about_us_video%}
-<link rel="preload stylesheet" href="{{ 'sv-about-us-video.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'sv-about-us-video.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'sv-about-us-video.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'sv-about-us-video.js' | asset_url }}"></script>
 
 <div class="streetvibe-about-us-video">

@@ -1,8 +1,10 @@
 {%- unless has_heading -%}
-  <link rel="preload stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="stylesheet">
+  <link rel="preload" href="{{ 'rl-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rl-page-heading.scss.css' | asset_url }}">
   {%- assign has_heading = true -%}
 {%- endunless -%}
-<link rel="preload stylesheet" href="{{ 'rl-index-about.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'rl-index-about.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rl-index-about.scss.css' | asset_url }}">
 
 <div class="rebellook-index-about wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
   <div class="container-fluid">

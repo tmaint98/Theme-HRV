@@ -1,14 +1,17 @@
-<link rel="preload stylesheet" href="{{ 'header.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'header.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'header.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'header.js' | asset_url }}"></script>
 {%if settings.greenweave_shop_google_translate%}
 {%- include 'theme_google_translate_js' -%}
 {%endif%}
 {%if settings.greenweave_shop_buying%}
-<link rel="preload stylesheet" href="{{ 'header-minicart.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'header-minicart.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'header-minicart.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'header-minicart.js' | asset_url }}"></script>
 {%endif%}
 {%if settings.show_greenweave_header_search%}
-<link rel="preload stylesheet" href="{{ 'header-search.scss.css' | asset_url }}" as="stylesheet">
+<link rel="preload" href="{{ 'header-search.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'header-search.scss.css' | asset_url }}">
 <script fetchpriority="low" type="text/javascript" defer src="{{ 'header-search.js' | asset_url }}"></script>
 {%endif%}
 
