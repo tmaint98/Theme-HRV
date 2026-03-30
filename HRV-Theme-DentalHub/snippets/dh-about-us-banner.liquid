@@ -1,0 +1,22 @@
+{%if settings.show_dentalhub_about_us_banner%}
+<link rel="preload" href="{{ 'dh-about-us-banner.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-about-us-banner.scss.css' | asset_url }}">
+
+
+<section class="dentalhub-about-us-banner">
+  <div class="banner-img">
+    <picture>
+      <source media="(max-width: 767px)" srcset="{{ 'dentalhub_about_us_banner_mb.jpg' | asset_url}}" />
+      <source media="(min-width: 768px)" srcset="{{ 'dentalhub_about_us_banner_dk.jpg' | asset_url}}" />
+      <img src="{{ 'dentalhub_about_us_banner_dk.jpg' | asset_url }}" alt="{{ settings.dentalhub_about_us_banner_title | strip_html | escape }}" loading="lazy" decoding="sync"/>
+    </picture>
+  </div>
+  {%if settings.dentalhub_about_us_banner_title != empty%}
+  <div class="banner-title">
+    <div class="container">
+    <h2 class="title">{{settings.dentalhub_about_us_banner_title}}</h2>
+    </div>
+  </div>
+  {%endif%}
+</section>
+{%endif%}

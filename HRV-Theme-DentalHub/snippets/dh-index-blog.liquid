@@ -1,0 +1,70 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+
+<link rel="preload" href="{{ 'dh-index-blog.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-index-blog.scss.css' | asset_url }}">
+<link href="{{ 'dh-index-blog.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'dh-index-blog.js' | asset_url }}"></script>
+
+<section class="dentalhub-index-blog">
+    {% if settings.dentalhub_index_blog_title != empty %}
+      <div class="heading-title">
+        <h2 class="title">{{ settings.dentalhub_index_blog_title | newline_to_br }}</h2>
+      </div>
+    {% endif %}
+
+    {% if blogs[settings.dentalhub_index_blog_handle].articles.size == 0 %}
+      <p class="txt-noArticle">Chưa có bài viết nào trong mục này</p>
+    {% else %}
+      <div class="list-blog swiper">
+        <div class="swiper-wrapper">
+          {% for article in blogs[settings.dentalhub_index_blog_handle].articles limit: settings.dentalhub_index_blog_limit %}
+            {% include 'article-image' with article: article %}
+            <div class="swiper-slide">
+              <article class="article-loop">
+                <div class="article-inner">
+                  <div class="article-image">
+                    <a href="{{ article.url}}" class="blog-post-thumbnail" title="{{ article.title }}" rel="nofollow">
+                      <img
+                        class="lazyload"
+                        {% if forloop.first %}
+                        data-src="{{ imageUrl | product_img_url : '1024x1024' }}"
+                        {% else %}
+                        data-src="{{ imageUrl | product_img_url : 'grande' }}"
+                        {% endif %}
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                        alt="{{ article.title }}">
+                    </a>
+                  </div>
+                  <div class="article-detail">
+                    <div class="detail-top">
+                    <div class="date">
+                        <time pubdate datetime="{{ article.published_at | date: '%d Tháng %m, %Y' }}">{{ article.published_at | date: '%d Tháng %m, %Y' }}</time>
+                    </div>
+                    <h3 class="post-title">
+                        <a href="{{ article.url}}" title="{{ article.title }}">{{ article.title }}</a>
+                      </h3>
+                    </div>
+                    <div class="detail-bottom">
+                    <div class="author"><span class="desc">bởi:</span> <span class="name">{{ article.author }}</span></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="swiper-btn">
+        <div class="swiper-nav swiper-prev">
+          <svg width="30px" height="30px" viewBox="-78.5 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>left</title><path d="M257 64L291 98 128 262 291 426 257 460 61 262 257 64Z" /></svg>
+        </div>
+          <div class="swiper-nav swiper-next">
+          <svg width="30px" height="30px" viewBox="-77 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>right</title><path d="M98 460L64 426 227 262 64 98 98 64 294 262 98 460Z" /></svg>
+        </div>
+      </div>
+    {% endif %}
+</section>

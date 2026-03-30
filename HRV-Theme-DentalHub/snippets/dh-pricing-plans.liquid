@@ -1,0 +1,50 @@
+{% if settings.show_dentalhub_pricing_plans %}
+  {% unless has_heading %}
+    <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+    <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+    {%- assign has_heading = true -%}
+  {% endunless %}
+  <link rel="preload" href="{{ 'dh-pricing-plans.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-pricing-plans.scss.css' | asset_url }}">
+
+
+  <section class="dentalhub-pricing-plans">
+    <div class="container">
+      {% if settings.dentalhub_pricing_plans_title != empty %}
+        <div class="heading-title">
+          <h2 class="title">{{ settings.dentalhub_pricing_plans_title | newline_to_br }}</h2>
+        </div>
+      {% endif %}
+      <div class="row list-plans">
+        {% for i in (1..3) %}
+          {% capture show %}show_dentalhub_pricing_plans_{{i}}{%endcapture%}
+          {% capture title %}dentalhub_pricing_plans_{{i}}_title{%endcapture%}
+          {% capture price %}dentalhub_pricing_plans_{{i}}_price{%endcapture%}
+          {% capture desc %}dentalhub_pricing_plans_{{i}}_desc{%endcapture%}
+          {% capture service %}dentalhub_pricing_plans_{{i}}_service{%endcapture%}
+          {% capture btn %}dentalhub_pricing_plans_{{i}}_btn{%endcapture%}
+          {% capture link %}dentalhub_pricing_plans_{{i}}_link{%endcapture%}
+          {% if settings[show] %}
+            <div class="col-lg-4 col-12">
+              <div class="plans-item">
+                <div class="item-top">
+                  <div class="top-title">{{ settings[title] }}</div>
+                  <div class="top-price">{{ settings[price] }}</div>
+                  <div class="top-desc">{{ settings[desc] }}</div>
+                </div>
+                <div class="item-content">
+                  {{ settings[service] | newline_to_br }}
+                </div>
+                {% if settings[btn] != empty %}
+                  <div class="item-btn">
+                    <a href="{{settings[link]}}"><span class="title">{{ settings[btn] }}</span><span class="icon"><svg width="20px" height="20px" viewBox="0 0 24 24" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg"><path id="primary" d="M12,20a1,1,0,0,1-1-1V13H5a1,1,0,0,1,0-2h6V5a1,1,0,0,1,2,0v6h6a1,1,0,0,1,0,2H13v6A1,1,0,0,1,12,20Z" ></path></svg></span></a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}

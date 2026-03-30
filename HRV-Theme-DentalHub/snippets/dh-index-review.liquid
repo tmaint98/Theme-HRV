@@ -1,0 +1,53 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+
+<link rel="preload" href="{{ 'dh-index-review.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-index-review.scss.css' | asset_url }}">
+<link href="{{ 'dh-index-review.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'dh-index-review.js' | asset_url }}"></script>
+
+<section class="dentalhub-index-review">
+    {% if settings.dentalhub_index_review_title != empty %}
+      <div class="heading-title">
+        <h2 class="title">{{ settings.dentalhub_index_review_title | newline_to_br }}</h2>
+      </div>
+    {% endif %}
+      <div class="list-review swiper">
+        <div class="swiper-wrapper">
+          {% for i in (1..10) %}
+            {%capture show%}show_dentalhub_index_review_{{i}}{%endcapture%}
+            {%capture img%}dentalhub_index_review_{{i}}_img.jpg{%endcapture%}
+            {%capture name%}dentalhub_index_review_{{i}}_name{%endcapture%}
+            {%capture position%}dentalhub_index_review_{{i}}_position{%endcapture%}
+            {%capture desc%}dentalhub_index_review_{{i}}_desc{%endcapture%}
+            {%if settings[show]%}
+            <div class="swiper-slide">
+              <div class="review-item">
+                <div class="item-info">
+                  <div class="icon"><img src="{{ img | asset_url }}" alt="{{settings[name]}}" loading="lazy" decoding="sync" /></div>
+                  <div class="detail">
+                    <div class="name">{{settings[name]}}</div>
+                    <div class="position">{{settings[position]}}</div>
+                  </div>
+                </div>
+                <div class="item-desc">
+                  {{settings[desc]}}
+                </div>
+              </div>
+            </div>
+            {%endif%}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="swiper-btn">
+        <div class="swiper-nav swiper-prev">
+          <svg width="30px" height="30px" viewBox="-78.5 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>left</title><path d="M257 64L291 98 128 262 291 426 257 460 61 262 257 64Z" /></svg>
+        </div>
+          <div class="swiper-nav swiper-next">
+          <svg width="30px" height="30px" viewBox="-77 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>right</title><path d="M98 460L64 426 227 262 64 98 98 64 294 262 98 460Z" /></svg>
+        </div>
+      </div>
+</section>

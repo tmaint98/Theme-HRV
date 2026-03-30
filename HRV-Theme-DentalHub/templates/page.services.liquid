@@ -1,0 +1,14 @@
+{% assign has_heading = false %}
+{% assign has_section_collection = false %}
+
+<div class="dentalhub-layout-service">
+	<div class="hidden"><h1>{{ page.title }}</h1>{% include 'breadcrumb' %}</div>
+  
+  {% include 'dh-service-banner' %}
+  {% include 'dh-service-collection-1' %}
+  {% include 'dh-service-collection-2' %}
+  {% include 'dh-service-collection-3' %}
+  {% include 'dh-service-message' %}
+  {% include 'dh-service-core' %}
+  {% include 'dh-service-form' %}
+</div>

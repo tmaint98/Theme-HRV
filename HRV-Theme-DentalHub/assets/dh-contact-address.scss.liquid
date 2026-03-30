@@ -1,0 +1,61 @@
+$colorMain: {{ settings.shop_main_color }};
+$colorText: {{ settings.shop_text_color }};
+$bgBtn: {{ settings.shop_main_button }};
+$colorBtn: {{ settings.shop_main_button_text }};
+.dentalhub-contact-address {
+  padding: 80px 0;
+  .list-team {
+    gap: 40px 0;
+  }
+  .team-item {
+    padding-left: 25px;
+    border-left: 1px solid rgba($colorText, 0.2);
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+      .icon {
+        flex: 0 0 auto;
+        width: 26px;
+        height: 26px;
+        background: $bgBtn;
+        color: $colorBtn;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        opacity: 0;
+        svg {
+          fill: currentcolor;
+        }
+      }
+    }
+    .name {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .address {
+      opacity: 0.8;
+    }
+     &:hover {
+      .title .icon {
+        opacity: 1;
+        transform: rotate(90deg);
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .list-team {
+      gap: 20px 0;
+    }
+    .team-item {
+      padding-left: 15px;
+      .name {
+        font-size: 18px;
+      }
+    }
+  }
+}

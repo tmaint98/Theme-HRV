@@ -1,0 +1,67 @@
+{% unless has_heading %}
+    <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+    <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+  {% endunless %}
+
+  <link rel="preload" href="{{ 'dh-index-blog-2.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-index-blog-2.scss.css' | asset_url }}">
+
+  <section class="dentalhub-index-blog-2">
+    <div class="container">
+      {% if settings.dentalhub_index_blog2_title != empty %}
+      <div class="heading-title">
+        <h2 class="title">{{ settings.dentalhub_index_blog2_title | newline_to_br }}</h2>
+      </div>
+    {% endif %}
+    {% if blogs[settings.dentalhub_index_blog2_handle].articles.size == 0 %}
+      <p class="txt-noArticle">Chưa có bài viết nào trong mục này</p>
+    {% else %}
+      <div class="row list-blog">
+        {% for article in blogs[settings.dentalhub_index_blog2_handle].articles limit: settings.dentalhub_index_blog2_limit %}
+          {% include 'article-image' with article: article %}
+          <div class="col-lg-4 col-12">
+          <article class="article-loop">
+            <div class="article-inner">
+              <div class="article-image">
+                <a href="{{ article.url}}" class="blog-post-thumbnail" title="{{ article.title }}" rel="nofollow">
+                  <img
+                    class="lazyload"
+                    {% if forloop.first %}
+                    data-src="{{ imageUrl | product_img_url : '1024x1024' }}"
+                    {% else %}
+                    data-src="{{ imageUrl | product_img_url : 'grande' }}"
+                    {% endif %}
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                    alt="{{ article.title }}">
+                </a>
+              </div>
+              <div class="article-detail">
+                <div class="detail-top">
+                  <div class="date">
+                    <time pubdate datetime="{{ article.published_at | date: '%d Tháng %m, %Y' }}">{{ article.published_at | date: '%d Tháng %m, %Y' }}</time>
+                    <span class="author">bởi: <span class="name">{{ article.author }}</span></span>
+                  </div>
+                  <h3 class="post-title">
+                    <a href="{{ article.url}}" title="{{ article.title }}">{{ article.title }}</a>
+                  </h3>
+                  <div class="short-article">
+                    {{ article.excerpt_or_content | strip_html | truncatewords: 10 }}
+                  </div>
+                </div>
+                <div class="btn-link">
+          				<a href="{{ article.url }}" class="arrow-link"><span class="title">Xem chi tiết</span><span class="icon"><svg width="20px" height="20px" viewBox="0 0 24 24" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg"><path id="primary" d="M12,20a1,1,0,0,1-1-1V13H5a1,1,0,0,1,0-2h6V5a1,1,0,0,1,2,0v6h6a1,1,0,0,1,0,2H13v6A1,1,0,0,1,12,20Z" ></path></svg></span></a>
+          			</div>
+              </div>
+            </div>
+          </article>
+          </div>
+        {% endfor %}
+      </div>
+      {% if settings.dentalhub_index_blog2_btn != empty and blogs[settings.dentalhub_index_blog2_handle].articles.size > settings.dentalhub_index_blog2_limit %}
+        <div class="btn-more text-center"><a href="{{blogs[settings.dentalhub_index_blog2_handle].url}}" class="button">{{settings.dentalhub_index_blog2_btn}}</a></div>
+        {%endif%}
+    {% endif %}
+    </div>
+  </section>
+

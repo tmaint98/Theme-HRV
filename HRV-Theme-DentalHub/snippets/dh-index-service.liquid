@@ -1,0 +1,35 @@
+{%unless has_heading%}
+<link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{%endunless%}
+<link rel="preload" href="{{ 'dh-index-service.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-index-service.scss.css' | asset_url }}">
+
+<section class="dentalhub-index-service">
+  <div class="container">
+    {% if settings.dentalhub_index_service_title != empty %}
+      <div class="heading-title">
+        <h2 class="title">{{ settings.dentalhub_index_service_title | newline_to_br }}</h2>
+      </div>
+    {% endif %}
+    <div class="row list-service">
+      {% for i in (1..4) %}
+        {% capture show %}show_dentalhub_index_service_{{i}}{%endcapture%}
+        {% capture img %}dentalhub_index_service_{{i}}_img.jpg{%endcapture%}
+        {% capture title %}dentalhub_index_service_{{i}}_title{%endcapture%}
+        {% capture desc %}dentalhub_index_service_{{i}}_desc{%endcapture%}
+        {% if settings[show] %}
+          <div class="col-lg-3 col-12 service-item">
+            <div class="icon"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" loading="lazy" decoding="sync" /></div>
+            <div class="detail">
+              {%if settings[title] != empty%}<div class="title">{{settings[title]}}</div>{%endif%}
+              {%if settings[desc] != empty%}<div class="desc">{{settings[desc]}}</div>{%endif%}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+

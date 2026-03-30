@@ -1,0 +1,39 @@
+DentalHub.IndexMainSlider = {
+		init: function() {
+			var that = this;
+      that.DentalHub_IndexMainSlider();
+		},
+  DentalHub_IndexMainSlider: function(){
+    const dentalhubSlider = new Swiper ('.dentalhub-index-slider .swiper', {
+      slidesPerView: 1,  
+			loop: $('.dentalhub-index-slider .slider-item').length > 1 ? true:false,
+      preloadImages: false,
+      lazy: true,
+      speed: 1000,
+      //autoplay: false,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+			navigation: {
+				nextEl: ".dentalhub-index-slider .swiper-next",
+				prevEl: ".dentalhub-index-slider .swiper-prev",
+			},
+      /*pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},*/
+			
+    });
+    const totalSlides = dentalhubSlider.slides.length;
+    if (totalSlides <= dentalhubSlider.params.slidesPerView) {
+      $('.dentalhub-index-slider .swiper-next, .dentalhub-index-slider .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  DentalHub.IndexMainSlider.init();
+})();
+
+
+

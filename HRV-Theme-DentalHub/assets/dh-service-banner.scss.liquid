@@ -1,0 +1,26 @@
+$colorBanner: {{settings.dentalhub_service_banner_color}};
+.dentalhub-service-banner{
+  position: relative;
+  color: $colorBanner;
+  .banner-title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    .title{font-size: 82px;}
+  }
+  @media(max-width: 991px){
+  .banner-title{
+    .title{font-size: 50px;text-align: center;}
+  }
+  }
+  @media(max-width: 767px){
+  .banner-title{
+    .title{font-size: 30px;}
+  }
+  }
+}
+

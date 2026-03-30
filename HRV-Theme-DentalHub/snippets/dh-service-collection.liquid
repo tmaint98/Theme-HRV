@@ -1,0 +1,52 @@
+{%unless has_heading %} 
+  <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+  {% assign has_heading = true %}
+{% endunless %}
+{%-unless has_section_collection -%} 
+  <link rel="preload" href="{{ 'dh-service-collection.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-service-collection.scss.css' | asset_url }}">
+  {%- assign has_section_collection = true -%}
+{%- endunless -%}
+<link rel="preload" href="{{ 'dh-product-loop.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-product-loop.scss.css' | asset_url }}">
+<link href="{{ 'dh-product-loop.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'dh-product-loop.js' | asset_url }}"></script>
+{%capture title%}dentalhub_service_col_{{ind}}_title{%endcapture%}
+{%capture handle%}dentalhub_service_col_{{ind}}_handle{%endcapture%}
+{%capture limit%}dentalhub_service_col_{{ind}}_limit{%endcapture%}
+{%capture btn%}dentalhub_service_col_{{ind}}_btn{%endcapture%}
+{%assign col_handle = settings[handle]%}
+<section class="dentalhub-service-collection">
+  <div class="container">
+    <div class="row">
+      {% if settings[title] != empty%}
+      <div class="col-xl-3 col-12">
+        <div class="heading-title">
+          <h2 class="title">{{settings[title] | newline_to_br}}</h2>
+        </div>
+      </div>
+      {%endif%}
+      <div class="col-xl-9 col-12">
+        {%- if collections[col_handle].products.size == 0 -%}
+          <div class="collection-alert-no">
+            <p>Chưa có sản phẩm nào trong danh mục này</p>
+          </div>
+        {%- else -%}
+          <div class="row listProduct-row">
+            {%- for product in collections[col_handle].products limit: settings[limit] -%}
+              <div class="col-lg-3 col-6 product-item">
+                {%- include 'dh-product-loop' -%}
+              </div>
+            {%- endfor -%}
+          </div>
+          {% if collections[col_handle].products.size > settings[limit] and settings[btn] != '' %}
+            <div class="btn-more">
+              <a href="{{collections[col_handle].url}}" class="button">{{ settings[btn] }}</a>
+            </div>
+          {% endif %}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>

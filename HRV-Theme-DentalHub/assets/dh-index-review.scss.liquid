@@ -1,0 +1,118 @@
+$colorText: {{ settings.shop_text_color }};
+$bgBlog: {{ settings.dentalhub_index_review_bg }};
+$colorBlog: {{ settings.dentalhub_index_review_color }};
+.dentalhub-index-review {
+  position: relative;
+  padding: 50px 0 50px 15px;
+  .swiper-nav {
+    position: absolute;
+    top: calc(50% - 25px);
+    z-index: 2;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $colorText;
+    border-radius: 50%;
+    cursor: pointer;
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: currentcolor;
+    }
+    &.swiper-next {
+      top: calc(50% + 40px);
+    }
+  }
+  .review-item {
+    background: $bgBlog;
+    color: $colorBlog;
+    padding: 60px 40px;
+    font-size: 18px;
+    .item-info {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      .icon {
+        flex: 0 0 auto;
+        img {
+          max-width: 75px;
+          border-radius: 50%;
+        }
+      }
+      .name {
+        font-size: 25px;
+        font-weight: 600;
+      }
+      .position {
+        opacity: 0.8;
+      }
+    }
+    .item-desc {
+      opacity: 0.8;
+      margin-top: 30px;
+    }
+  }
+  @media(min-width: 576px) {
+    padding-left: calc((100% - 540px) / 2);
+  }
+  @media(min-width: 768px) {
+    padding-left: calc((100% - 720px) / 2);
+  }
+  @media(min-width: 1200px) {
+    padding-left: calc((100% - 1170px) / 2);
+  }
+  @media(min-width: 1366px) {
+    padding-left: calc((100% - 1290px) / 2);
+    .swiper-nav {
+      left: calc((100% - 1340px) / 2);
+    }
+  }
+  @media(min-width: 1440px) {
+    .swiper-nav {
+      left: calc((100% - 1410px) / 2);
+    }
+  }
+  @media(min-width: 1600px) {
+    padding-left: calc((100% - 1410px) / 2);
+    .swiper-nav {
+      left: calc((100% - 1530px) / 2);
+    }
+  }
+  @media(max-width: 1200px) {
+    .swiper-nav {
+      position: unset;
+      width: 40px;
+      height: 40px;
+    }
+    .swiper-btn {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 25px 0 25px 15px;
+    .review-item {
+      padding: 30px 20px;
+      font-size: 14px;
+      .item-info {
+        gap: 20px;
+        .icon img {
+          max-width: 60px;
+        }
+        .name {
+          font-size: 18px;
+        }
+      }
+      .item-desc{
+        margin-top: 15px;
+      }
+    }
+    .swiper-btn{
+      margin-top: 15px;
+    }
+  }
+}

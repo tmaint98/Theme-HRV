@@ -1,0 +1,107 @@
+$bgBtn: {{ settings.shop_main_button }};
+$colorBtn: {{ settings.shop_main_button_text }};
+$bgPlans: {{ settings.dentalhub_pricing_plans_bg }};
+$colorPlans: {{ settings.dentalhub_pricing_plans_color }};
+.dentalhub-pricing-plans {
+  padding: 80px 0;
+  background: $bgPlans;
+  color: $colorPlans;
+  .plans-item {
+    .item-top {
+      margin-bottom: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba($colorPlans, 0.2);
+      .top-title {
+        font-size: 18px;
+        opacity: 0.8;
+      }
+      .top-price {
+        font-size: 50px;
+        font-weight: 600;
+      }
+      .top-desc {
+        font-size: 25px;
+        font-weight: 600;
+      }
+    }
+    .item-content {
+      font-size: 18px;
+      line-height: 1.2;
+      opacity: 0.8;
+    }
+    .item-btn {
+      margin-top: 40px;
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: $colorPlans;
+        font-weight: 600;
+         &:hover {
+          .icon svg {
+            transform: rotate(90deg);
+          }
+        }
+      }
+      .icon {
+        flex: 0 0 auto;
+        width: 26px;
+        height: 26px;
+        background: $bgBtn;
+        color: $colorBtn;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          fill: currentcolor;
+          transition: all 0.3s;
+        }
+
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    .list-plans {
+      gap: 50px;
+    }
+    .plans-item {
+      .item-top {
+        .top-price {
+          font-size: 40px;
+        }
+        .top-desc {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .plans-item {
+      .item-top {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        .top-title {
+          font-size: 16px;
+        }
+        .top-price {
+          font-size: 35px;
+        }
+        .top-desc {
+          font-size: 18px;
+        }
+      }
+      .item-content {
+        font-size: 14px;
+      }
+      .item-btn {
+        margin-top: 30px;
+        .icon {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+  }
+}

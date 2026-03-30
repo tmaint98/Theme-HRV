@@ -1,0 +1,53 @@
+DentalHub.Footer = {
+		init: function() {
+			var that = this;
+      that.DentalHub_toggleFooter();
+      that.DentalHub_newsletterForm();
+		},
+  DentalHub_toggleFooter: function(){
+		$('.dentalhub-title-footer').on('click', function(){
+			if ($(window).width() < 992) {
+				jQuery(this).toggleClass('opened').parent().find('.dentalhub-block-collapse').stop().slideToggle('medium');
+			}
+		});
+	},
+  DentalHub_newsletterForm: function(){
+		if($('.dentalhub-newsletter-form').length > 0){
+			$('.dentalhub-newsletter-form form.contact-form').submit(function(e) { 
+				var self = $(this);
+				if($(this)[0].checkValidity() == true){
+					e.preventDefault();
+					grecaptcha.ready(function() {
+						grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+							self.find('input[name="g-recaptcha-response"]').val(token);
+							$.ajax({
+								type: 'POST',
+								url:'/account/contact',
+								data: $('.dentalhub-newsletter-form form.contact-form').serialize(),
+								success:function(data){		
+									if($(data).find('#dentalhub-newsletter-success').length > 0){
+										$('.dentalhub-newsletter-form .dentalhub-newsletter-error').html('');
+										swal({
+											icon: "success",
+											className: "dentalhub-newsletter-form-success",
+											title: "Đăng kí thông tin thành công",
+											text: "Thông báo sẽ tự động tắt sau 5 giây...",
+											button: false,
+											timer: 5000,
+										});
+										e.target.reset();
+									} else {
+										$('.dentalhub-newsletter-form .dentalhub-newsletter-error').html('Địa chỉ email không hợp lệ');
+									}
+								},	
+							})
+						}); 
+					});
+				}
+			});
+		}
+	},
+};
+(function() {
+  DentalHub.Footer.init();
+})();

@@ -1,0 +1,20 @@
+DentalHub.AboutFaqs = {
+		init: function() {
+			var that = this;
+      that.DentalHub_aboutFaqs();
+		},
+  DentalHub_aboutFaqs:function(){
+			$('.dentalhub-about-us-faqs .header-faqs').on('click', function(){
+				if(!$(this).hasClass('opened')){ 
+					jQuery('.dentalhub-about-us-faqs .header-faqs').removeClass('opened').parent().find('.content-faqs').stop().slideUp('medium');
+					jQuery(this).toggleClass('opened').parent().find('.content-faqs').stop().slideToggle('medium');
+				}else{
+					jQuery(this).toggleClass('opened').parent().find('.content-faqs').stop().slideToggle('medium');
+				}
+			});
+		},
+};
+(function() {
+  DentalHub.AboutFaqs.init();
+})();
+

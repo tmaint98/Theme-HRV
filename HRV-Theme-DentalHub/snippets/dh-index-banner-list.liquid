@@ -1,0 +1,19 @@
+<link rel="preload" href="{{ 'dh-index-banner-list.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-index-banner-list.scss.css' | asset_url }}">
+
+
+  <section class="dentalhub-index-banner-list">
+    <div class="container">
+      <div class="list-banner">
+        {%for i in (1..6)%}
+          {%capture img%}dentalhub_index_banner_list_{{i}}_img.jpg{%endcapture%}
+          {%capture alt%}dentalhub_index_banner_list_{{i}}_alt{%endcapture%}
+          <div class="banner-item">
+            <img src="{{ img | asset_url}}" alt="{{settings[alt]}}" loading="lazy" decoding="sync"/>
+          </div>
+        {%endfor%}
+      </div>
+    </div>
+  </section>
+
+  

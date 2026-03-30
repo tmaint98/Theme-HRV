@@ -1,0 +1,74 @@
+<link rel="preload" href="{{ 'dh-index-slider.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-index-slider.scss.css' | asset_url }}">
+<link href="{{ 'dh-index-slider.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'dh-index-slider.js' | asset_url }}"></script>
+{%unless has_heading%}
+<link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{%endunless%}
+
+<div class="dentalhub-index-slider" id="dentalhub-index-slider">
+  <div class="container index-slider">
+    {%if settings.dentalhub_index_slider_title != empty%}<div class="heading-title"><h2 class="title">{{settings.dentalhub_index_slider_title | newline_to_br}}</h2></div>{%endif%}
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slider-item">
+            <div class="slide--image">
+              <a href="{{settings.dentalhub_index_slider_1_link}}">
+              <picture>
+                <source media="(max-width: 767px)" srcset="{{ 'dentalhub_index_slider_1_img.jpg' | asset_url}}" />
+                <source media="(min-width: 768px)" srcset="{{ 'dentalhub_index_slider_1_img.jpg' | asset_url}}" />
+                <img src="{{ 'dentalhub_index_slider_1_img.jpg' | asset_url }}" alt="{{ settings.dentalhub_index_slider_1_alt | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/>
+              </picture>
+              </a>
+            </div>
+          </div>
+        </div>
+        {%- for i in (2..4) -%}
+          {% capture show_slide %}dentalhub_index_slider_{{i}}_show{% endcapture %}
+          {% capture image %}dentalhub_index_slider_{{i}}_img.jpg{% endcapture %}
+          {% capture alt %}dentalhub_index_slider_{{i}}_alt{% endcapture %}
+          {% capture link %}dentalhub_index_slider_{{i}}_link{% endcapture %}
+          {%- if settings[show_slide] -%}
+            <div class="swiper-slide">
+              <div class="slider-item">
+                <div class="slide--image">
+                  <a href="{{settings[link]}}">
+                  <picture>
+                    <source media="(max-width: 767px)" srcset="{{ image | asset_url}}" />
+                    <source media="(min-width: 768px)" srcset="{{ image | asset_url}}" />
+                    <img src="{{ image | asset_url }}" alt="{{ settings[alt] | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync" />
+                  </picture>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%comment%}<div class="swiper-pagination"></div>{%endcomment%}
+      
+      <div class="swiper-nav swiper-next">
+        <svg width="30px" height="30px" viewBox="-77 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>right</title><path d="M98 460L64 426 227 262 64 98 98 64 294 262 98 460Z" /></svg>
+      </div>
+      <div class="swiper-nav swiper-prev">
+        <svg width="30px" height="30px" viewBox="-78.5 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>left</title><path d="M257 64L291 98 128 262 291 426 257 460 61 262 257 64Z" /></svg>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section-home-pus-promotion pus-promotion-grids">
+  <div class="container">
+    <div class="hrv-pus-promotion" data-hrvpus-layout="flashsale"></div>
+  </div>
+</div>
+<div class="section-home-hrvpmo hrvpmo-grids">
+  <div class="container">
+    <div class="hrv-pmo-coupon" data-hrvpmo-layout="grids"></div>
+    <div class="hrv-pmo-discount" data-hrvpmo-layout="grids"></div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+$colorText: {{ settings.shop_text_color }};
+.dentalhub-about-us-about-1{
+  padding: 80px 0;
+  .btn-more{
+    margin-top: 40px;
+  }
+  .btn-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 30px;
+    border: 1px solid;
+    color: currentcolor;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    .link-title{
+      padding-right: 10px;
+      border-right: 1px solid rgba($colorText,0.2);
+    }
+    .icon{
+      svg{
+        fill: currentcolor;
+        transition: all 0.3s;
+      }
+    }
+    &:hover{
+      .icon svg{
+        transform: rotate(90deg);
+      }
+    }
+  }
+  
+  @media(max-width: 767px){
+    padding: 40px 0;
+    
+    .btn-more{
+      margin-top: 30px;
+    }
+    .btn-link{
+      padding: 12px 20px;
+    }
+
+  }
+}
+

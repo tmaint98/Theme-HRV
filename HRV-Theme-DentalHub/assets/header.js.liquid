@@ -1,0 +1,402 @@
+DentalHub.Header = {
+		init: function() {
+			var that = this;
+      that.DentalHub_scrollFixedHeader();
+      that.DentalHub_actionClick();
+      that.DentalHub_clickIconsHeader();
+      that.DentalHub_menuSidebar();
+      that.DentalHub_modalLive();
+		  that.DentalHub_hiddenBtnLive();
+      that.DentalHub_headerformBooking();
+		},
+  DentalHub_scrollFixedHeader: function(){
+		var $header = $(".dentalhub-mainHeader--height");
+		var curScrollTop = 0;
+		$(window).scroll(function(e) {
+			var scroll = $(window).scrollTop();
+			if(scroll > $header.height()){
+				$header.addClass('dentalhub-fixed-header');
+			}
+			else{
+				$header.removeClass('dentalhub-fixed-header');
+			}
+		});
+	},
+  DentalHub_actionClick: function(){
+		$(document).on('click', function (event) {
+			var class_name = event.target.className.animVal;
+			if(class_name == 'dentalhub-svg-ico-account' || class_name == 'dentalhub-svg-ico-search'){}
+			else{
+				if (!$(event.target).closest('.dentalhub-header-action_dropdown').length) {
+					$('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+				}
+			}
+		})
+	},
+  DentalHub_clickIconsHeader: function(){
+		$('.dentalhub-header-action_clicked').click(function(e){
+			e.preventDefault();		
+			if($(this).parents('.dentalhub-header-action-item').hasClass('dentalhub-js-action-show')){
+				$('body').removeClass('dentalhub-locked-scroll');
+				$(this).parents('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+				if($(window).width() < 992){
+					if ($(this).parents('.dentalhub-header-action-item').hasClass('dentalhub-header-action_cart')) {
+						$('.dentalhub-siteCart-mobile__overlay').removeClass('dentalhub-show-cart');
+						$('body').removeClass('dentalhub-locked-scroll').removeClass('dentalhub-body-showcart');
+					}
+				}
+			}
+			else{
+				$('body').removeClass("dentalhub-locked-scroll-menu");
+				$('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+				$('body').addClass('dentalhub-locked-scroll');
+				$(this).parents('.dentalhub-header-action-item').addClass('dentalhub-js-action-show');
+				if($(window).width() < 992){
+					if ($(this).parents('.dentalhub-header-action-item').hasClass('dentalhub-header-action_cart'))  {
+
+						$('.dentalhub-siteCart-mobile').addClass('dentalhub-show-cart');
+						$('body').removeClass('dentalhub-locked-scroll').addClass('dentalhub-body-showcart');
+					}
+				}
+			}		
+		});	
+		$('.dentalhub-siteCart-mobile__header').click(function() {
+			if ($(this).parents('.dentalhub-siteCart-mobile').hasClass('dentalhub-show-cart')) {
+				$(this).parents('.dentalhub-siteCart-mobile').removeClass('dentalhub-show-cart');
+				$('body').removeClass('dentalhub-locked-scroll').removeClass('dentalhub-body-showcart');
+				$('.dentalhub-header-action-item.dentalhub-header-action_cart').removeClass('dentalhub-js-action-show');
+			} else {	
+				$('body').addClass('dentalhub-body-showcart');
+				$(this).parents('.dentalhub-siteCart-mobile').addClass('dentalhub-show-cart');
+
+			}
+		});
+		$('.dentalhub-siteCart-mobile__overlay').on('click', function(e){
+			$(this).parents('.dentalhub-siteCart-mobile').removeClass('dentalhub-show-cart');
+			$('body').removeClass('dentalhub-locked-scroll').removeClass('dentalhub-body-showcart');
+			$('.dentalhub-header-action-item.dentalhub-header-action_cart').removeClass('dentalhub-js-action-show');
+		})
+		$('body').on('click', '#dentalhub-sitenav-overlay', function(e){
+			$('body').removeClass('dentalhub-locked-scroll');
+			$('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+		});
+		$('body').on('click', '#dentalhub-sitenav-overlay,.sitenav-content .btnclose', function(e){
+			$('body').removeClass('dentalhub-locked-scroll').removeClass("dentalhub-locked-scroll-menu");
+			$('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+		});
+		$('.dentalhub-activeCartChecked').click(function() {
+			$('body').addClass('dentalhub-locked-scroll');
+			$('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+			$('.dentalhub-sidebar-main').addClass('dentalhub-is-show-right');
+			$('.dentalhub-sidebar-main .dentalhub-sitenav-cart').addClass('dentalhub-show');
+		});
+		$('.dentalhub-activeMenuChecked').click(function() {
+			if($('.dentalhub-sidebar-main .dentalhub-sitenav-wrapper.dentalhub-sitenav-menu').length == 0){
+				$.ajax({
+					url: '/index?view=header-load-menu',
+					success:function(data){
+						$('.dentalhub-sidebar-main').append(data);
+						setTimeout(function() {
+							if($('.addThis_listSharing').hasClass('active')){
+								$('.addThis_listSharing').removeClass('active');
+								$('.addThis_listSharing').fadeOut(150);	
+							}
+							$('body').addClass('dentalhub-locked-scroll');
+							$('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+							$('.dentalhub-sidebar-main').addClass('dentalhub-is-show-left');
+							$('.dentalhub-sidebar-main .dentalhub-sitenav-menu').addClass('dentalhub-show');
+						},100);
+						DentalHub.Header.DentalHub_menuSidebar();
+						DentalHub.Header.DentalHub_closeSidebarMain();
+            {%if settings.DentalHub_shop_google_translate%}
+            if($(window).width() < 992){
+              var currentLang_mb = localStorage.getItem("selectedLang"),
+            currentLangFlag_mb = localStorage.getItem("selectedLangFlag");
+        
+            if (currentLang_mb) {
+              document.documentElement.setAttribute("lang", currentLang_mb);
+            }
+            changeLanguage(currentLang_mb,currentLangFlag_mb);
+            }
+            {%endif%}
+					}
+				});
+			}else{
+				if($('.addThis_listSharing').hasClass('active')){
+					$('.addThis_listSharing').removeClass('active');
+					$('.addThis_listSharing').fadeOut(150);	
+				}
+				$('body').addClass('dentalhub-locked-scroll');
+				$('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+				$('.dentalhub-sidebar-main').addClass('dentalhub-is-show-left');
+				$('.dentalhub-sidebar-main .dentalhub-sitenav-menu').addClass('dentalhub-show');
+			}
+		});
+    $('.dentalhub-activeInfoChecked').click(function() {
+			$('body').addClass('dentalhub-locked-scroll');
+			$('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+			$('.dentalhub-sidebar-main').addClass('dentalhub-is-show-right');
+			$('.dentalhub-sidebar-main .dentalhub-sitenav-info').addClass('dentalhub-show');
+		});
+		$('.dentalhub-sidebar-overlay, .dentalhub-btn-sitenav-close').on('click', function(e){
+			$('body').removeClass('dentalhub-locked-scroll').removeClass('dentalhub-body-showcart');
+			$(this).parents('.dentalhub-sidebar-main').removeClass('dentalhub-is-show-right');
+			$(this).parents('.dentalhub-sidebar-main').removeClass('dentalhub-is-show-left');
+			$('.dentalhub-sidebar-main .dentalhub-sitenav-wrapper').removeClass('dentalhub-show');
+		})
+	},
+  DentalHub_menuSidebar: function(){
+		$('.dentalhub-plus-nClick1').click(function(e){
+			e.preventDefault();
+			$(this).parents('.dentalhub-level0').toggleClass('opened');
+			$(this).parents('.dentalhub-level0').children('ul').slideToggle(200);
+		});
+		$('.dentalhub-plus-nClick2').click(function(e){
+			e.preventDefault();
+			$(this).parents('.dentalhub-level1').toggleClass('opened');
+			$(this).parents('.dentalhub-level1').children('ul').slideToggle(200);
+		});
+		$('.dentalhub-plus-nClick3').click(function(e){
+			e.preventDefault();
+			$(this).parents('.dentalhub-level2').toggleClass('opened');
+			$(this).parents('.dentalhub-level2').children('ul').slideToggle(200);
+		});
+		/*jQuery('.sidebox-title .htitle').click(function(){
+			$(this).parents('.group-sidebox').toggleClass('is-open').find('.sidebox-content-togged').slideToggle('medium');
+		}); */
+	},
+  DentalHub_closeSidebarMain: function(){
+		$('.dentalhub-sidebar-overlay, .dentalhub-btn-sitenav-close').on('click', function(e){
+			$('body').removeClass('dentalhub-locked-scroll');
+			$(this).parents('.dentalhub-sidebar-main').removeClass('dentalhub-is-show-right');
+			$(this).parents('.dentalhub-sidebar-main').removeClass('dentalhub-is-show-left');
+			$('.dentalhub-sidebar-main .dentalhub-sitenav-wrapper').removeClass('dentalhub-show');
+			jQuery('body').removeClass('dentalhub-mainBody-mbcart').removeClass('dentalhub-body-showcart');
+		})
+	},
+  DentalHub_modalLive: function(){
+		$('.dentalhub-header-box-live .dentalhub-btn-live').click(function(){
+			$('.dentalhub-modal-live').toggleClass('opened');
+		});
+		$('.dentalhub-box-live-mb .dentalhub-btn-live').click(function(){
+			$('.dentalhub-modal-live').toggleClass('opened');
+		});
+		$('.dentalhub-btn-close--live').click(function(){
+			$('.dentalhub-modal-live').removeClass('opened');
+		});
+	},
+	DentalHub_hiddenBtnLive: function(){
+		setTimeout(function(){
+			$('.dentalhub-box-live-mb').removeClass('hidden');
+		},500);
+
+		$('.dentalhub-btn-close').click(function(){
+			$('.dentalhub-box-live-mb').addClass('hidden');
+		});
+	},
+  DentalHub_headerformBooking: function(){
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		var h = today.getHours();
+		var m = today.getMinutes();
+		if(h<10){h='0'+h} if(m<10){m='0'+m} 
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} 
+		today =yyyy+'-'+mm+'-'+dd;
+	
+		$('.header-formbooking #header_your_date').val(today);
+		//$('#header_your_time').val(h + ':' + m);
+		function checkSelect(obj) {
+			var name = $(obj).attr("data-valid");
+
+			$("."+name+"-validation").html("");
+			$(obj).css("border-bottom","");
+
+			if($(obj).val() == 'none' || $(obj).val() == 'undefined'  || $(obj).val() == undefined) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Vui lòng chọn thông tin tại đây");
+				return false;
+			}
+			return true;
+		}
+		function checkEmpty(obj) {
+			var name = $(obj).attr("data-valid");
+
+			$("."+name+"-validation").html("");
+			$(obj).css("border-bottom","");
+
+			if($(obj).val() == "" || $(obj).val() == 'null' || $(obj).val() == null  || $(obj).val() == 'undefined'  || $(obj).val() == undefined) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+				return false;
+			}
+			return true;
+		}
+		function checkEmail(obj) {
+			var result_ph = true;
+
+			var name = $(obj).attr("data-valid");
+			$("."+name+"-validation").html("");
+			$(obj).css("border-bottom","");
+
+			result_ph = checkEmpty(obj);
+
+			if(!result_ph) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+				return false;
+			}
+
+			var email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			result_ph = email_regex.test($(obj).val());
+
+			if(!result_ph) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Địa chỉ Email không hợp lệ");
+				return false;
+			}
+
+			return result_ph;
+		}
+		function checkPhone(obj) {
+			var result = true;
+
+			var name = $(obj).attr("data-valid");
+			$("."+name+"-validation").html("");
+			$(obj).css("border-bottom","");
+
+			result = checkEmpty(obj);
+
+			if(!result) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+				return false;
+			}
+
+			var phone_regex = /(^0[2-9]\d{8}$)|(^01\d{9}$)/;
+			result = phone_regex.test($(obj).val());
+
+			if(!result) {
+				$(obj).css("border-bottom","#FF0000 1px solid");
+				$("."+name+"-validation").html("Số điện thoại không hợp lệ");
+				return false;
+			}
+
+			return result;
+		}
+    var valid = false;
+		function validate(){
+			var name = $('.header-formbooking #header_full_name').val();
+			var phone = $('.header-formbooking #header_your_phone').val();
+			var email = $('.header-formbooking #header_your_email').val();
+			
+			//debugger;
+			if(name != '' && name != null && checkPhone($(".header-formbooking #header_your_phone")) && checkEmail($(".header-formbooking #header_your_email"))){
+				valid = true;
+				//valid = valid && checkPhone($(".header-formbooking #header_your_phone"));
+			}
+			else{
+				valid = false;
+			}
+			if(valid == true){
+				$("#header-btn-booking-send").removeClass('btn-disabled').attr("disabled",false);
+			}
+			else{
+				$("#header-btn-booking-send").addClass('btn-disabled').attr("disabled",true);
+			}
+		}
+    
+		$('.header-formbooking #header_full_name').on('change keyup blur',function(){
+			checkEmpty($('.header-formbooking #header_full_name'));
+      validate();
+		})
+		$('.header-formbooking #header_your_phone').on('change keyup blur',function(){
+			checkPhone($(this));
+      validate();
+		})
+		$('.header-formbooking #header_your_email').on('change keyup blur',function(){
+			checkEmail($(this));
+      validate();
+		})
+    $('.header-formbooking .input-group select').change(function(){
+      checkSelect($(this));
+      validate();
+		})
+
+		$('#header-btn-booking-send').click(function(e){
+			e.preventDefault() ;
+			if(checkEmpty($(".header-formbooking #header_full_name")) && checkPhone($(".header-formbooking #header_your_phone")) && checkEmail($(".header-formbooking #header_your_email"))){
+				let check_form = false;
+				debugger;
+				{%if settings.dh_form_header_booking == 'google-sheet'%}
+					check_form = true;
+				{%endif%}
+				 if(check_form){
+					 let unindexed_array = $(".header-formbooking").serializeArray();
+					 let indexed_array = {};
+					 let url = $(".header-formbooking").attr('action');
+					 $.map(unindexed_array, function(n, i){
+						 indexed_array[n['name']] = n['value'];
+					 });
+					 //debugger;
+					 $.ajax({
+						 type: 'POST',
+						 url: url,
+						 async : false,
+						 data: indexed_array,
+						 dataType: 'json',
+						 complete: function() {
+							 setTimeout(function(){
+								 $('#modal-header-form').modal('hide');
+								 $('#mymodal_success_header').modal('show');
+							 },300);
+							 setTimeout(function(){
+								 $('#mymodal_success_header').modal('hide');
+							 },5000);	
+						 },
+						 error: function(XMLHttpRequest, textStatus) {
+							 console.log('err', textStatus );
+						 }
+					 });
+				 }
+				 else{
+					const self = $(this).parents('form');
+              let namee = self.find("#header_full_name").val(),
+              phonee = self.find("#header_your_phone").val(),
+              emaill = self.find("#header_your_email").val(),
+              message = "{%if settings.dh_form_header_service != ''%}{{settings.dh_form_header_service}}: {%else%}Dịch vụ: {%endif%}";
+              message += self.find("#header_dh_form_header_page").val();
+              message += "\nNgày: " + self.find("#header_your_date").val();
+               message += "\n{%if settings.dh_form_header_time != ''%}{{settings.dh_form_header_time}}: {%else%}Giờ: {%endif%} " + self.find("#header_dh_form_header_time").val();
+             grecaptcha.ready(function() {
+               grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+                 self.find('input[name="g-recaptcha-response"]').val(token);
+                  $.ajax({
+                   type: 'POST',
+                   url:'/contact',
+                   data: "form_type=contact&__RequestVerificationToken="+self.find('input[name="__RequestVerificationToken"]').val()+"&utf8=✓&contact[name]="+namee+"&contact[phone]="+phonee+"&contact[email]="+emaill+"&contact[body]="+message+"&g-recaptcha-response="+self.find('input[name="g-recaptcha-response"]').val(),
+                   success:function(data){
+                     self.trigger("reset")
+                     setTimeout(function(){
+                       $('#modal-header-form').modal('hide');
+    									 $('#mymodal_success_header').modal('show');
+    								 },300);
+    								 setTimeout(function(){
+    									 $('#mymodal_success_header').modal('hide');
+    								 },5000);	
+                   }
+                 })
+               })
+             })
+				 }
+				}
+		});
+		$("#mymodal_success_header").on('hidden.bs.modal', function(){
+					 location.reload();
+		});	
+	},
+};
+(function() {
+  DentalHub.Header.init();
+})();

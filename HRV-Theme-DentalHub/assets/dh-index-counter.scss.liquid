@@ -1,0 +1,103 @@
+$colorText: {{ settings.shop_text_color }};
+.dentalhub-index-counter{
+  padding: 50px 0;
+  .row{
+    align-items: center;
+  }
+  >div{
+    flex: 0 0 auto;
+  }
+  .heading-title{
+    width: 40%;
+  }
+  .banner{
+    width: 25%;
+  }
+  .list-counter{
+    width: 35%;
+    display: flex;
+    flex-flow: column; 
+    gap: 40px;
+  }
+  .counter-item{
+    .counter-group{
+      font-size: 52px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba($colorText,0.1);
+    }
+    .desc{
+      font-size: 18px;
+      opacity: 0.8;
+    }
+  }
+  .btn-more{
+    margin-top: 40px;
+  }
+  .btn-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 30px;
+    border: 1px solid;
+    color: currentcolor;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    .link-title{
+      padding-right: 10px;
+      border-right: 1px solid rgba($colorText,0.2);
+    }
+    .icon{
+      svg{
+        fill: currentcolor;
+        transition: all 0.3s;
+      }
+    }
+    &:hover{
+      .icon svg{
+        transform: rotate(90deg);
+      }
+    }
+  }
+  @media(min-width: 1200px){
+    .heading-title{
+      padding-right: 35px;
+    }
+    .banner{
+      padding-left: 30px;
+    }
+    .list-counter{
+      padding-left: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 25px 0;
+    .row{
+      margin: 0;
+      gap: 15px;
+    }
+    .heading-title,.banner,.list-counter{
+      width: 100%;
+    }
+    .list-counter{
+      gap: 20px;
+    }
+    .btn-more{
+      margin-top: 30px;
+    }
+    .btn-link{
+      padding: 12px 20px;
+    }
+
+    .counter-item {
+      .counter-group{
+          font-size: 35px;
+    }
+      .desc{
+        font-size: 14px;
+      }
+    }
+    
+  }
+}

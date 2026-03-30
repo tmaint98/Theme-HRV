@@ -1,0 +1,90 @@
+
+$colorMain: {{ settings.shop_main_color }};
+$colorText: {{ settings.shop_text_color }};
+.dentalhub-index-blog-2 {
+  padding: 80px 0;
+  .article-loop {
+    .article-detail {
+      padding: 30px 0 20px;
+    }
+    .post-title {
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+    .date,
+    .short-article {
+      opacity: 0.8;
+    }
+    .date {
+      margin-bottom: 10px;
+    }
+    .btn-link {
+      margin-top: 20px;
+      .arrow-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-top: 10px;
+        .icon {
+          flex: 0 0 auto;
+          width: 26px;
+          height: 26px;
+          background: $colorMain;
+          color: #fff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s;
+          svg {
+            fill: currentcolor;
+          }
+        }
+         &:hover {
+          .icon {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+  }
+  .btn-more {
+    margin-top: 40px;
+    .button {
+      display: inline-block;
+      padding: 15px 25px;
+      background: $colorMain;
+      color: #fff;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+  }
+  @media(max-width: 991px){
+    .list-blog{
+      gap: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+    .list-blog{
+      gap: 20px;
+    }
+    .article-loop {
+    .article-detail {
+      padding: 20px 0;
+    }
+    .post-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .btn-link {
+      margin-top: 10px;
+    }
+  }
+    .btn-more{
+      margin-top: 20px;
+    }
+  }
+}

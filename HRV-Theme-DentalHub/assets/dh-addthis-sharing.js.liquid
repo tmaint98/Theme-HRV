@@ -1,0 +1,118 @@
+DentalHub.Addthis = {
+		init: function() {
+			var that = this;
+      that.DentalHub_addthisIconShare();
+      that.DentalHub_clickIconsToolbar();
+		},
+  DentalHub_addthisIconShare: function(){
+		if ($('.dentalhub_addthis_listSharing').length > 0){
+			$(window).scroll(function(){
+				if($(window).scrollTop() > 250 ) {
+					$('.dentalhub_addthis_listSharing_list').addClass('is-show');
+				} else {
+					$('.dentalhub_addthis_listSharing_list').removeClass('is-show');
+				}
+			});
+			$('.dentalhub_addthis_contact__icons .dentalhub-box-contact,.dentalhub_addthis_contact__lists .dentalhub_addthis_close').on('click', function(e){
+				if($('.dentalhub_addthis_listSharing').hasClass('active')){
+					$('body').removeClass('dentalhub-locked-scroll');
+					$('.dentalhub_addthis_listSharing').removeClass('active');
+					$('.dentalhub_addthis_listSharing').fadeOut(150);				
+				}
+				else{		
+					$('.dentalhub_addthis_listSharing').fadeIn(100);
+					$('.dentalhub_addthis_listSharing').addClass('active');
+				}
+			});
+			$("body").on('click', function(event) {
+				if ($(event.target).is('.dentalhub_addthis_contact__dialog') || $(event.target).is('.addThiclose')) {
+					event.preventDefault();
+					$('body').removeClass('dentalhub-locked-scroll');
+					$('.dentalhub_addthis_listSharing').removeClass('active');
+					$('.dentalhub_addthis_listSharing').fadeOut(150);			
+				}
+			});
+			$('.dentalhub-body-popupform form.contact-form').submit(function(e){
+				var self = $(this);
+				if($(this)[0].checkValidity() == true){
+					e.preventDefault();
+					grecaptcha.ready(function() {
+						grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+							self.find('input[name="g-recaptcha-response"]').val(token);
+							$.ajax({
+								type: 'POST',
+								url:'/contact',
+								data: $('.dentalhub-body-popupform form.contact-form').serialize(),			 
+								success:function(data){		
+									$('.dentalhub-modal-addthis.fade.show').modal('hide');
+									swal({
+										icon: "success",
+										className: "dentalhub-form-success",
+										title: "{%if settings.dentalhub_addthis_icon3_title2 != ''%}{{settings.dentalhub_addthis_icon3_title2}}{%else%}Đăng kí thông tin thành công{%endif%}",
+										text: "{{settings.dentalhub_addthis_icon3_content}}",
+										button: false,
+										timer: 5000,
+									}).then((result) => {
+										//location.reload(); 
+									});
+								},	
+							})
+						}); 
+					});
+				}
+			});
+		}
+		/*if ($('.layoutProduct_scroll').length > 0 ) {
+			if	(jQuery(window).width() < 768 ){
+				var curScrollTop = 0;
+				$(window).scroll(function(){	
+					var scrollTop = $(window).scrollTop();
+					if(scrollTop > curScrollTop  && scrollTop > 200 ) {
+						$('.layoutProduct_scroll').removeClass('scroll-down').addClass('scroll-up');
+					}
+					else {
+						if (scrollTop > 200 && scrollTop + $(window).height() + 150 < $(document).height()) {
+							$('.layoutProduct_scroll').removeClass('scroll-up').addClass('scroll-down');	
+						}
+					}
+					if(scrollTop < curScrollTop  && scrollTop < 200 ) {
+						$('.layoutProduct_scroll').removeClass('scroll-up').removeClass('scroll-down');
+					}
+					curScrollTop = scrollTop;
+				});
+			}
+		}*/
+	},
+  DentalHub_clickIconsToolbar: function(){
+		$('.dentalhub-toolbarCartClick').click(function(){
+			if($('.dentalhub_addthis_listSharing').hasClass('active')){
+				$('.dentalhub_addthis_listSharing').removeClass('active');
+				$('.dentalhub_addthis_listSharing').fadeOut(150);	
+			}
+			$('body').addClass('dentalhub-locked-scroll');
+      $('.dentalhub-header-action-item').removeClass('dentalhub-js-action-show');
+			$('.dentalhub-sidebar-main').addClass('dentalhub-is-show-right');
+			$('.dentalhub-sidebar-main .dentalhub-sitenav-cart').addClass('dentalhub-show');
+		});
+		$('.dentalhub-toolbarContactClick').click(function(){
+			if($('.dentalhub_addthis_listSharing').hasClass('active')){
+				$('body').removeClass('dentalhub-locked-scroll');
+				$('.dentalhub_addthis_listSharing').removeClass('active');
+				$('.dentalhub_addthis_listSharing').fadeOut(150);				
+			}
+			else{		
+				$('body').addClass('dentalhub-locked-scroll');
+				$('.dentalhub_addthis_listSharing').fadeIn(100);
+				$('.dentalhub_addthis_listSharing').addClass('active');
+			}
+		});
+		$('.dentalhub-toolbarMenuClick').click(function(){
+			$('.dentalhub-activeMenuChecked').trigger('click');
+		});
+	},
+};
+(function() {
+  DentalHub.Addthis.init();
+})();
+
+

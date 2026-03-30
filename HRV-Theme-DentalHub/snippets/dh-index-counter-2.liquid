@@ -1,0 +1,29 @@
+<link rel="preload" href="{{ 'dh-index-counter-2.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-index-counter-2.scss.css' | asset_url }}">
+<link href="{{ 'dh-index-counter-2.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'dh-index-counter-2.js' | asset_url }}"></script>
+
+  <section class="dentalhub-index-counter-2">
+    <div class="container">
+      <div class="row list-counter">
+        {%for i in (1..4)%}
+				{%capture show%}show_dentalhub_index_counter2_{{i}}{%endcapture%}
+				{%capture num%}dentalhub_index_counter2_{{i}}_num{%endcapture%}
+        {%capture unit%}dentalhub_index_counter2_{{i}}_unit{%endcapture%}
+				{%capture desc%}dentalhub_index_counter2_{{i}}_desc{%endcapture%}
+				{%if settings[show]%}
+          <div class="col-lg-3 col-md-6 col-12">
+    				<div class="counter-item">
+					<div class="counter">
+						<div class="counter-group notranslate"><span class="counter-num" data-counter="{{settings[num]}}">{{settings[num]}}</span>{%if settings[unit] != empty%}<span class="unit">{{settings[unit]}}</span>{%endif%}</div>
+						<div class="desc">{{settings[desc]}}</div>
+					</div>
+				</div>
+          </div>
+				{%endif%}
+				{%endfor%}
+      </div>
+    </div>
+  </section>
+
+  

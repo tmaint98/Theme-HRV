@@ -1,0 +1,49 @@
+$colorText: {{ settings.shop_text_color }};
+.dentalhub-pricing-table{
+  padding: 80px 0;
+  .table-item{
+    .title{
+      font-size: 25px;
+      margin-bottom: 25px;
+    }
+  }
+  .table-content{
+      .content-tr{
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        border-top: 1px solid rgba($colorText, 0.2);
+        .content-td{
+          flex: 0 0 auto;
+          width: calc(60% - 15px);
+          &:first-child{
+            font-weight: 600;
+          }
+          &:last-child{
+            width: 40%;
+            text-align: right;
+            opacity: 0.8;
+          }
+        }
+        &:last-child{
+          border-bottom: 1px solid rgba($colorText, 0.2);
+        }
+      }
+    }
+  @media(max-width: 991px){
+    .row{
+      gap: 40px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+    .table-item{
+    .title{
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+  }
+  }
+}

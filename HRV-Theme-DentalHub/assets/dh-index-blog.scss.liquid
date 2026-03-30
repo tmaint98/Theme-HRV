@@ -1,0 +1,122 @@
+$colorText: {{ settings.shop_text_color }};
+$bgBlog: {{ settings.dentalhub_index_blog_bg }};
+$colorBlog: {{ settings.dentalhub_index_blog_color }};
+
+.dentalhub-index-blog {
+  position: relative;
+  padding: 50px 0 50px 15px;
+  .swiper-nav {
+    position: absolute;
+    top: calc(50% - 25px);
+    z-index: 2;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $colorText;
+    border-radius: 50%;
+    cursor: pointer;
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: currentcolor;
+    }
+    &.swiper-next {
+      top: calc(50% + 40px);
+    }
+  }
+
+
+  .article-loop {
+    .article-inner {
+      display: flex;
+      background: $bgBlog;
+      color: $colorBlog;
+      a {
+        color: $colorBlog;
+      }
+      > div {
+        flex: 0 0 auto;
+        width: 50%;
+      }
+      .article-detail {
+        padding: 35px;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        .post-title {
+          font-size: 25px;
+          margin-top: 50px;
+        }
+        .author .name {
+          display: block;
+          font-weight: 600;
+        }
+        .desc, .date{
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  @media(min-width: 576px) {
+    padding-left: calc((100% - 540px) / 2);
+  }
+  @media(min-width: 768px) {
+    padding-left: calc((100% - 720px) / 2);
+  }
+  @media(min-width: 1200px) {
+    padding-left: calc((100% - 1170px) / 2);
+  }
+  @media(min-width: 1366px) {
+    padding-left: calc((100% - 1290px) / 2);
+    .swiper-nav {
+      left: calc((100% - 1340px) / 2);
+    }
+  }
+  @media(min-width: 1440px) {
+    .swiper-nav {
+      left: calc((100% - 1410px) / 2);
+    }
+  }
+  @media(min-width: 1600px) {
+    padding-left: calc((100% - 1410px) / 2);
+    .swiper-nav {
+      left: calc((100% - 1530px) / 2);
+    }
+  }
+  @media(max-width: 1200px) {
+    .swiper-nav {
+      position: unset;
+      width: 40px;
+      height: 40px;
+    }
+    .swiper-btn{
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 25px 0 25px 15px;
+    .article-loop {
+    .article-inner {
+      flex-flow: wrap;
+      > div {
+        width: 100%;
+      }
+      .article-detail {
+        padding: 15px;
+        .post-title {
+          font-size: 18px;
+          margin-top: 12px;
+        }
+      }
+    }
+  }
+    .swiper-btn{
+      margin-top: 15px;
+    }
+  }
+}

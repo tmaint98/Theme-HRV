@@ -1,0 +1,31 @@
+{% if settings.show_dentalhub_service_message %}
+  {% unless has_heading %}
+    <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+    <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+    {%- assign has_heading = true -%}
+  {% endunless %}
+  <link rel="preload" href="{{ 'dh-service-message.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-service-message.scss.css' | asset_url }}">
+
+
+  <section class="dentalhub-service-message">
+    <div class="message-banner">
+      <img src="{{ 'dentalhub_service_message_img.jpg' | asset_url}}" alt="{{settings.dentalhub_service_message_title | strip_html | escape }}" loading="lazy" decoding="sync" />
+    </div>
+    <div class="message-content">
+      <div class="container">
+        <div class="row">
+          <div class="offset-lg-7 col-lg-5 col-12">
+            {% if settings.dentalhub_service_message_desc != empty %}
+              <div class="desc">{{ settings.dentalhub_service_message_desc }}</div>
+            {% endif %}
+            <div class="message-info">
+              <div class="name">{{ settings.dentalhub_service_message_name }}</div>
+              <div class="position">{{ settings.dentalhub_service_message_position }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

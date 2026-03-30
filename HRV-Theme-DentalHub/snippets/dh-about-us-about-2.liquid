@@ -1,0 +1,48 @@
+{% if settings.show_dentalhub_about_us_about_2 %}
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+<link rel="preload" href="{{ 'dh-about-us-about-2.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-about-us-about-2.scss.css' | asset_url }}">
+
+
+  <section class="dentalhub-about-us-about-2">
+    <div class="row">
+        <div class="col-xl-8 col-12">
+          <div class="about-banner">
+            <img src="{{ 'dentalhub_about_us_about_2_img.jpg' | asset_url }}" alt="{{ settings.dentalhub_about_us_about_2_title | strip_html | escape }}" loading="lazy" decoding="sync"/>
+          </div>
+        </div>
+        <div class="col-xl-4 col-12">
+          <div class="about-content">
+            <div class="heading-title">
+              {% if settings.dentalhub_about_us_about_2_title != empty %}
+                <h2 class="title">{{ settings.dentalhub_about_us_about_2_title | newline_to_br }}</h2>
+              {% endif %}
+              {% if settings.dentalhub_about_us_about_2_desc != empty %}
+                <div class="desc">{{ settings.dentalhub_about_us_about_2_desc | newline_to_br}}</div>
+              {% endif %}
+              {% if settings.dentalhub_about_us_about_2_btn != empty %}
+                <div class="btn-more">
+                  <a href="{{ settings.dentalhub_about_us_about_2_link }}" class="btn-link">
+                    <span class="link-title">{{ settings.dentalhub_about_us_about_2_btn }}</span>
+                    <span class="icon">
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg"><path id="primary" d="M12,20a1,1,0,0,1-1-1V13H5a1,1,0,0,1,0-2h6V5a1,1,0,0,1,2,0v6h6a1,1,0,0,1,0,2H13v6A1,1,0,0,1,12,20Z" ></path></svg>
+                    </span>
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+            {%if settings.dentalhub_about_us_about_2_title_1 != empty or settings.dentalhub_about_us_about_2_desc_1 != empty%}
+              <div class="about-more">
+                {%if settings.dentalhub_about_us_about_2_title_1 != empty%}<div class="title">{{settings.dentalhub_about_us_about_2_title_1}}</div>{%endif%}
+                {%if settings.dentalhub_about_us_about_2_desc_1 != empty%}<div class="desc">{{settings.dentalhub_about_us_about_2_desc_1}}</div>{%endif%}
+              </div>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+  </section>
+{%endif%}

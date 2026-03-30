@@ -1,0 +1,118 @@
+$colorMain: {{ settings.shop_main_color }};
+$colorText: {{ settings.shop_text_color }};
+$bgBtn: {{ settings.shop_main_button }};
+$colorBtn: {{ settings.shop_main_button_text }};
+.dentalhub-about-us-faqs {
+  padding: 80px 0;
+  .list-faqs {
+    max-width: 840px;
+    font-size: 15px;
+    .faq-item {
+      border-bottom: 1px solid rgba($colorText, 0.2);
+       &:first-child {
+        border-top: 1px solid rgba($colorText, 0.2);
+      }
+    }
+    .header-faqs {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 25px 0 25px 60px;
+      border-bottom: 1px dashed #eee;
+      position: relative;
+      cursor: pointer;
+      .icon {
+        position: absolute;
+        top: 26px;
+        left: 0;
+        width: 26px;
+        height: 26px;
+        background: rgba($colorText, 0.1);
+        border-radius: 50%;
+         &:before,
+         &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          mask-repeat: no-repeat;
+          mask-position: center;
+          height: 26px;
+          transition: all 0.3s;
+        }
+         &:before {
+          background: $colorText;
+          -webkit-mask-image: url("data:image/svg+xml, %3Csvg fill='currentColor' width='20px' height='20px' viewBox='0 0 24 24' id='plus' data-name='Flat Color' xmlns='http://www.w3.org/2000/svg' class='icon flat-color'%3E%3Cpath id='primary' d='M12, 20a1, 1, 0, 0, 1-1-1V13H5a1, 1, 0, 0, 1, 0-2h6V5a1, 1, 0, 0, 1, 2, 0v6h6a1, 1, 0, 0, 1, 0, 2H13v6A1, 1, 0, 0, 1, 12, 20Z' %3E%3C/path%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml, %3Csvg fill='currentColor' width='20px' height='20px' viewBox='0 0 24 24' id='plus' data-name='Flat Color' xmlns='http://www.w3.org/2000/svg' class='icon flat-color'%3E%3Cpath id='primary' d='M12, 20a1, 1, 0, 0, 1-1-1V13H5a1, 1, 0, 0, 1, 0-2h6V5a1, 1, 0, 0, 1, 2, 0v6h6a1, 1, 0, 0, 1, 0, 2H13v6A1, 1, 0, 0, 1, 12, 20Z' %3E%3C/path%3E%3C/svg%3E");
+          z-index: 1;
+        }
+         &:after {
+          opacity: 0;
+          background: $colorBtn;
+          -webkit-mask-image: url("data:image/svg+xml, %3Csvg fill='currentColor' width='20px' height='20px' viewBox='0 0 24 24' id='minus' data-name='Flat Color' xmlns='http://www.w3.org/2000/svg' class='icon flat-color'%3E%3Cpath id='primary' d='M19, 13H5a1, 1, 0, 0, 1, 0-2H19a1, 1, 0, 0, 1, 0, 2Z' %3E%3C/path%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml, %3Csvg fill='currentColor' width='20px' height='20px' viewBox='0 0 24 24' id='minus' data-name='Flat Color' xmlns='http://www.w3.org/2000/svg' class='icon flat-color'%3E%3Cpath id='primary' d='M19, 13H5a1, 1, 0, 0, 1, 0-2H19a1, 1, 0, 0, 1, 0, 2Z' %3E%3C/path%3E%3C/svg%3E");
+        }
+      }
+
+
+       &:hover {
+        .icon {
+           &:before {
+            transform: rotate(90deg);
+          }
+        }
+      }
+      &.opened {
+        .icon {
+          background: $bgBtn;
+           &:before {
+            opacity: 0;
+          }
+           &:after {
+            opacity: 1
+          }
+        }
+      }
+    }
+    .content-faqs {
+      display: none;
+      font-size: 18px;
+      padding-bottom: 30px;
+    }
+  }
+  @media(min-width: 1200px) {
+    .list-faqs {
+      padding-left: 50px;
+    }
+  }
+  @media(max-width: 991px){
+    .row{
+      gap: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+    .list-faqs {
+    max-width: 840px;
+    font-size: 15px;
+    .faq-item {
+      border-bottom: 1px solid rgba($colorText, 0.2);
+       &:first-child {
+        border-top: 1px solid rgba($colorText, 0.2);
+      }
+    }
+    .header-faqs {
+      font-size: 18px;
+      padding: 15px 0 15px 40px;
+      .icon{
+        top: 15px;
+      }
+    }
+    .content-faqs {
+      font-size: 14px;
+      padding-bottom: 20px;
+    }
+  }
+  }
+}

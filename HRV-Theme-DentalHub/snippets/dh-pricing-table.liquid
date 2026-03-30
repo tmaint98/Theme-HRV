@@ -1,0 +1,46 @@
+{% if settings.show_dentalhub_pricing_table %}
+  {% unless has_heading %}
+    <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+    <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+    {%- assign has_heading = true -%}
+  {% endunless %}
+  <link rel="preload" href="{{ 'dh-pricing-table.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-pricing-table.scss.css' | asset_url }}">
+
+
+  <section class="dentalhub-pricing-table">
+    <div class="container">
+      {% if settings.dentalhub_pricing_table_title != empty %}
+        <div class="heading-title">
+          <h2 class="title">{{ settings.dentalhub_pricing_table_title | newline_to_br }}</h2>
+        </div>
+      {% endif %}
+      <div class="row">
+      {%for i in (1..2)%}
+        {%capture show%}show_dentalhub_pricing_table_{{i}}{%endcapture%}
+        {%capture title%}dentalhub_pricing_table_{{i}}_title{%endcapture%}
+        {%if settings[show]%}
+          <div class="col-lg-6 col-12">
+            <div class="table-item">
+              {%if settings[title] != empty%}<h3 class="title">{{settings[title]}}</h3>{%endif%}
+              <div class="table-content">
+                {%for j in (1..10)%}
+                  {%capture show_item%}show_dentalhub_pricing_table_{{i}}_{{j}}{%endcapture%}
+                  {%capture title_item%}dentalhub_pricing_table_{{i}}_{{j}}_title{%endcapture%}
+                  {%capture price%}dentalhub_pricing_table_{{i}}_{{j}}_price{%endcapture%}
+                  {%if settings[show_item]%}
+                <div class="content-tr">
+                  <div class="content-td">{{settings[title_item]}}</div>
+                  <div class="content-td">{{settings[price]}}</div>
+                </div>
+                    {%endif%}
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+        {%endif%}
+        {%endfor%}
+      </div>
+    </div>
+  </section>
+{%endif%}

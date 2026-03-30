@@ -1,0 +1,73 @@
+$colorText: {{settings.shop_text_color}};
+.dentalhub-index-slider {
+  padding: 80px 0 60px;
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+  }
+  .slide--image{
+    text-align: center;
+  }
+  .swiper {
+    .swiper-nav {
+      position: absolute;
+      top: calc(50% - 23px);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      color: $colorText;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: currentcolor;
+        polyline,
+        line {
+          stroke: currentcolor;
+        }
+      }
+      &.swiper-next {
+        right: 15px;
+      }
+      &.swiper-prev {
+        left: 15px;
+      }
+       &:hover {
+        background: rgba($colorText, 0.2);
+      }
+    }
+  }
+  
+  @media(max-width: 767px) {
+    padding: 25px 0 15px;
+    .swiper {
+      .swiper-nav {
+        top: calc(50% - 20px);
+        width: 40px;
+        height: 40px;
+        background: rgba($colorText, 0.2);
+        &.swiper-next {
+          right: 5px;
+        }
+        &.swiper-prev {
+          left: 5px;
+        }
+      }
+    }
+  }
+}
+
+.hrv-pus-promotion:empty,
+.section-home-pus-promotion:empty,
+.hrv-pmo-discount:empty,
+.hrv-pmo-coupon:empty,
+.section-home-hrvpmo:empty {
+  padding: 0;
+}

@@ -1,0 +1,107 @@
+$bgAbout: {{ settings.dentalhub_about_us_about_2_bg }};
+$colorAbout: {{ settings.dentalhub_about_us_about_2_color }};
+.dentalhub-about-us-about-2{
+  padding: 80px 0;
+  position: relative;
+  color: $colorAbout;
+  &:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 90%;
+    height: 100%;
+    background: $bgAbout;
+  }
+  .btn-more{
+    margin-top: 30px;
+  }
+  .btn-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 30px;
+    border: 1px solid;
+    color: currentcolor;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    .link-title{
+      padding-right: 10px;
+      border-right: 1px solid rgba($colorAbout,0.2);
+    }
+    .icon{
+      svg{
+        fill: currentcolor;
+        transition: all 0.3s;
+      }
+    }
+    &:hover{
+      .icon svg{
+        transform: rotate(90deg);
+      }
+    }
+  }
+  .about-more{
+    padding-left: 15px;
+    border-left: 1px solid rgba($colorAbout,0.5); 
+    .title{
+      font-size: 18px;
+      font-weight: 600;
+      margin-block: 5px;
+    }
+    .desc{
+      font-size: 14px;
+    }
+  }
+  /*@media(min-width: 576px) {
+    padding-right: calc((100% - 540px) / 2);
+  }
+  @media(min-width: 768px) {
+    padding-right: calc((100% - 720px) / 2);
+  }*/
+  @media(min-width: 1200px) {
+    padding-right: calc((100% - 1170px) / 2);
+  }
+  @media(min-width: 1366px) {
+    padding-right: calc((100% - 1290px) / 2);
+  }
+  @media(min-width: 1600px) {
+    padding-right: calc((100% - 1410px) / 2);
+  }
+  @media(min-width: 992px){
+    .heading-title{
+      .title{
+        font-size: 40px;
+      }
+      .desc{
+        font-size: 16px;
+      }
+    }
+  }
+  @media(max-width: 1199px) and (min-width: 992px){
+    padding-left: calc((100% - 960px) / 2);
+    padding-right: calc((100% - 960px) / 2);
+  }
+  @media(max-width: 991px) and (min-width: 768px){
+    padding-left: calc((100% - 720px) / 2);
+    padding-right: calc((100% - 720px) / 2);
+  }
+  @media(max-width: 767px) and (min-width: 576px){
+    padding-left: calc((100% - 540px) / 2);
+    padding-right: calc((100% - 540px) / 2);
+  }
+  @media(max-width: 1199px){
+    &:before{
+    width: 100%;
+  }
+  }
+  @media(max-width: 991px){
+    .row{
+      gap: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 15px;
+  }
+}

@@ -1,0 +1,44 @@
+{% if settings.show_dentalhub_about_us_faqs %}
+  {% unless has_heading %}
+    <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+    <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+    {%- assign has_heading = true -%}
+  {% endunless %}
+  <link rel="preload" href="{{ 'dh-about-us-faqs.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-about-us-faqs.scss.css' | asset_url }}">
+  <link href="{{ 'dh-about-us-faqs.js' | asset_url }}" rel="preload" as="script">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'dh-about-us-faqs.js' | asset_url }}"></script>
+
+  <section class="dentalhub-about-us-faqs">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-12">
+          <div class="faqs-banner"><img src="{{ 'dentalhub_about_us_faqs_img.jpg' | asset_url}}" alt="" /></div>
+        </div>
+        <div class="col-lg-6 col-12">
+          <div class="list-faqs">
+            {%- for i in (1..6) -%}
+              {%- capture title -%}dentalhub_about_us_faqs_{{i}}_title{%- endcapture -%}
+              {%- capture desc -%}dentalhub_about_us_faqs_{{i}}_desc{%- endcapture -%}
+              {%- if settings[title] != blank -%}
+                {%- if forloop.first -%}
+                  <div class="faq-item">
+                    <div class="header-faqs opened"><span class="icon"></span><span class="title">{{ settings[title] }}</span></div>
+                    <div class="content-faqs" style="display: block;">{{ settings[desc] }}</div>
+                  </div>
+                {%- else -%}
+                  <div class="faq-item">
+                    <div class="header-faqs"><span class="icon"></span><span class="title">{{ settings[title] }}</span></div>
+                    <div class="content-faqs">{{ settings[desc] }}</div>
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+{% endif %}

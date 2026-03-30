@@ -1,0 +1,22 @@
+{%if settings.show_dentalhub_pricing_banner%}
+<link rel="preload" href="{{ 'dh-pricing-banner.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-pricing-banner.scss.css' | asset_url }}">
+
+
+<section class="dentalhub-pricing-banner">
+  <div class="banner-img">
+    <picture>
+      <source media="(max-width: 767px)" srcset="{{ 'dentalhub_pricing_banner_mb.jpg' | asset_url}}" />
+      <source media="(min-width: 768px)" srcset="{{ 'dentalhub_pricing_banner_dk.jpg' | asset_url}}" />
+      <img src="{{ 'dentalhub_pricing_banner_dk.jpg' | asset_url }}" alt="{{ settings.dentalhub_pricing_banner_title | strip_html | escape }}" loading="lazy" decoding="sync"/>
+    </picture>
+  </div>
+  {%if settings.dentalhub_pricing_banner_title != empty%}
+  <div class="banner-title">
+    <div class="container">
+    <h2 class="title">{{settings.dentalhub_pricing_banner_title}}</h2>
+    </div>
+  </div>
+  {%endif%}
+</section>
+{%endif%}

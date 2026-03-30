@@ -1,0 +1,43 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+<link rel="preload" href="{{ 'dh-index-message.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'dh-index-message.scss.css' | asset_url }}">
+
+
+<section class="dentalhub-index-message">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-12">
+        <div class="message-banner">
+          <img src="{{ 'dentalhub_index_message_img.jpg' | asset_url}}" alt="{{settings.dentalhub_index_message_title | strip_html | escape }}" loading="lazy" decoding="sync" />
+        </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="message-content">
+          <div class="heading-title">
+              {% if settings.dentalhub_index_message_title != empty %}
+                <h2 class="title">{{ settings.dentalhub_index_message_title | newline_to_br }}</h2>
+              {% endif %}
+              {% if settings.dentalhub_index_message_desc != empty %}
+                <div class="desc">{{ settings.dentalhub_index_message_desc }}</div>
+              {% endif %}
+          </div>
+          {%if settings.show_dentalhub_index_message_signature%}
+            <div class="message-signature">
+              <img src="{{ 'dentalhub_index_message_signature_img.jpg' | asset_url}}" alt="{{settings.dentalhub_index_message_name }}" loading="lazy" decoding="sync" />
+            </div>
+          {%endif%}
+          <div class="message-info">
+            <div class="name">{{settings.dentalhub_index_message_name}}</div>
+            <div class="position">{{settings.dentalhub_index_message_position}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

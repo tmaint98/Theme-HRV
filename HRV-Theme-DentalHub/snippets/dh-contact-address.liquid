@@ -1,0 +1,36 @@
+{% if settings.show_dentalhub_contact_address %}
+  {% unless has_heading %}
+    <link rel="preload" href="{{ 'dh-page-heading.scss.css' | asset_url }}" as="style">
+    <link rel="stylesheet" href="{{ 'dh-page-heading.scss.css' | asset_url }}">
+    {%- assign has_heading = true -%}
+  {% endunless %}
+  <link rel="preload" href="{{ 'dh-contact-address.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'dh-contact-address.scss.css' | asset_url }}">
+
+
+  <section class="dentalhub-contact-address">
+    <div class="container">
+      {% if settings.dentalhub_contact_address_title != empty %}
+        <div class="heading-title">
+          <h2 class="title">{{ settings.dentalhub_contact_address_title | newline_to_br }}</h2>
+        </div>
+      {% endif %}
+      <div class="row list-team">
+        {%for i in (1..12)%}
+          {%capture show %}show_dentalhub_contact_address_{{i}}{%endcapture%}
+          {%capture name %}dentalhub_contact_address_{{i}}_name{%endcapture%}
+          {%capture address %}dentalhub_contact_address_{{i}}_address{%endcapture%}
+          {%capture link %}dentalhub_contact_address_{{i}}_link{%endcapture%}
+          {%if settings[show]%}
+            <div class="col-xl-3 col-lg-6 col-12">
+            <div class="team-item">
+              <a href="{{settings[link]}}" class="title"><span class="name">{{settings[name]}}</span><span class="icon"><svg width="20px" height="20px" viewBox="0 0 24 24" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg"><path id="primary" d="M12,20a1,1,0,0,1-1-1V13H5a1,1,0,0,1,0-2h6V5a1,1,0,0,1,2,0v6h6a1,1,0,0,1,0,2H13v6A1,1,0,0,1,12,20Z" ></path></svg></span></a>
+              <a href="{{settings[link]}}" class="address">{{settings[address]}}</a>
+            </div>
+            </div>
+          {%endif%}
+        {%endfor%}
+      </div>
+    </div>
+  </section>
+{% endif %}

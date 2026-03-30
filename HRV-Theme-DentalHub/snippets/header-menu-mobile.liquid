@@ -1,0 +1,86 @@
+<div class="dentalhub-sitenav-wrapper dentalhub-sitenav-left dentalhub-sitenav-menu">
+	<div class="dentalhub-sitenav-inner">
+		<div class="dentalhub-sitenav-header">
+      {%if settings.dentalhub_shop_google_translate%}
+        <div class="dentalhub-menu-translate">
+          {%- include 'theme_google_translate' -%}
+        </div>
+      {%else%}
+        {% if settings.dentalhub_use_logo %}
+          <div class="dentalhub-menu-logo">
+            <a href="{{shop.url}}"  itemprop="url">
+              <img itemprop="logo" src="{{ 'dentalhub_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+            </a>
+          </div>
+        {% else %}
+        <div class="dentalhub-sitenav-header__title">
+          <a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a>
+        </div>
+        {% endif %}
+      
+        {%endif%}
+			<a name="button-close" class="dentalhub-sitenav-header__btn dentalhub-btn-sitenav-close">
+				<svg viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z" fill-rule="evenodd"></path></svg>
+			</a>
+		</div>
+		<div class="dentalhub-sitenav-content">
+			<div class="dentalhub-menu-mobile--wrap">
+				<ul class="dentalhub-menuList-links">
+					{% for link in linklists[settings.dentalhub_mainmenu_link].links%}
+					{% if linklists[link.handle].links == empty %}				
+					<li class="{% if link.active %} active {% endif %}"><a href="{{link.url}}" title="{{link.title}}"><span>{{link.title}}</span></a></li>
+					{% else %}
+					<li class="dentalhub-has-submenu dentalhub-level0 {% if link.active %} active {% endif %}">
+						<a href="{{ link.url }}" title="{{link.title}}">{{ link.title }} <span class="dentalhub-icon-plus-submenu dentalhub-plus-nClick1"></span></a>
+						<ul class="dentalhub-submenu-links">
+							{% for link2 in linklists[link.handle].links %}
+							{% if linklists[link2.handle].links == empty %}
+							<li><a href="{{ link2.url }}" title="{{link2.title}}">{{ link2.title }}</a></li>
+							{% else %}
+							<li class="dentalhub-has-submenu dentalhub-level1">
+								<a href="{{ link2.url }}">{{ link2.title }}  <span class="dentalhub-icon-plus-submenu dentalhub-plus-nClick2"></span></a>
+								<ul class="dentalhub-submenu-links" >
+									{% for link3 in linklists[link2.handle].links %}	
+									{% if linklists[link3.handle].links == empty %}
+									<li class=""><a href="{{ link3.url }}" title="{{link3.title}}" >{{ link3.title }}</a></li>
+									{% else %}
+									<li class="dentalhub-has-submenu dentalhub-level2">
+										<a href="{{ link3.url }}">{{ link3.title }}  <span class="dentalhub-icon-plus-submenu dentalhub-plus-nClick3"></span></a>
+										<ul class="dentalhub-submenu-links" >
+											{% for link4 in linklists[link3.handle].links %}
+											<li><a href="{{ link4.url }}" title="{{link4.title}}">{{ link4.title }}</a></li>
+											{% endfor %}
+										</ul>
+									</li>
+									{% endif %}
+									{% endfor %}
+								</ul>
+							</li>
+							{% endif %}
+							{% endfor %}
+						</ul>
+					</li>
+					{% endif %}
+					{% endfor%}
+				</ul>	
+        
+			</div>
+      {%if settings.show_dentalhub_header_hotline or settings.show_dentalhub_header_email%}
+      <div class="dentalhub-menu-mobile_contact">
+        {%if settings.show_dentalhub_header_hotline %}
+        <div class="hotline"><a href="tel:{{settings.dentalhub_header_hotline_num | remove: ' '}}">{{settings.dentalhub_header_hotline_num}}</a></div>
+        {%endif%}
+        {%if settings.show_dentalhub_header_email %}
+        <div class="email"><a href="mailto:{{settings.dentalhub_header_email_num }}">{{settings.dentalhub_header_email_num}}</a></div>
+        {%endif%}
+      </div>
+    {%endif%}
+      {%if settings.show_dentalhub_header_btn%}
+        <div class="dentalhub-menu-mobile_btn">
+          <button type="button" class="button" data-toggle="modal" data-target="#modal-header-form">{{settings.dentalhub_header_btn_title}}</button>
+        </div>
+      {%endif%}
+		</div>
+	</div>
+	<div class="dentalhub-sidebar-overlay"></div>
+</div>
