@@ -885,3 +885,142 @@ table.table-cart tr td.item .ico-gift{display: inline-block;width: 16px;vertical
 	.hrvpmo-grids .dlpm-slide.dlpm-next{right:-15px;}
 	.hrvpmo-grids .dlpm-slide.dlpm-pre{left:-15px;}
 }
+
+/*===== swal  ============================================*/
+.swal-modal {
+	padding: 20px 15px 15px;
+	margin-bottom: 50px;
+	background: #ffffff;
+	color: var(--shop-color-text);
+	.swal-button-container {
+		margin: 7px;
+	}
+	.swal-button {
+		box-shadow: none;
+	}
+	.swal-title {
+		display: block;
+		font-size: 16px;
+		text-transform: uppercase;
+		margin: 0;
+		color: var(--shop-color-text);
+		padding: 10px 0;
+	}
+	.swal-text {
+		display: block;
+		text-align: center;
+		font-size: 14px;
+		color: var(--shop-color-text);
+		font-weight: 400;
+		padding: 0;
+		margin: 0;
+		max-width: 100%;
+	}
+	.swal-content {
+		font-size: 15px;
+	}
+	.swal-footer {
+		text-align: center;
+		padding: 8px 0;
+		.swal-button {
+			position: relative;
+			display: inline-block;
+			min-width: 110px;
+			padding: 10px 25px;
+			line-height: normal;
+			color: #000;
+			border: 1px solid #000;
+			border-radius: 2px;
+			text-transform: uppercase;
+			font-size: 12px;
+			text-align: center;
+			letter-spacing: 1px;
+			background-color: transparent;
+			-webkit-transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86)
+				, border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+			transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86)
+				, border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+			z-index: 1;
+			overflow: hidden;
+			box-shadow: none;
+			&.swal-button--cancel {
+				border: 1px solid #000;
+				background-color: #000;
+				color: #fff;
+			}
+			&.swal-button--confirm {
+				border: 1px solid #ec0b0b;
+				background-color: #ec0b0b;
+				color: #fff;
+			}
+		}
+	}
+
+	&.swal-cart-remove .swal-button--confirm {
+		background: var(--shop-color-button);
+		color: #ffffff;
+	}
+	&.swal-cart-remove .swal-button,
+	&.swal-cart-checkInvoice .swal-button {
+		width: 100px;
+	}
+	&.swal-cart-checkInvoice .swal-button--cancel {
+		background: #333333;
+		color: #ffffff;
+	}
+	&.swal-cart-checkInvoice .swal-button--confirm {
+		background: red;
+		color: #ffffff;
+	}
+
+	&.swal-alert-km,
+	&.swal-alert-km-qv {
+		width: 380px;
+		padding-left: 20px;
+		padding-right: 20px;
+		.swal-content {
+			margin-top: 10px;
+			padding: 0;
+		}
+		.swal-footer {
+			text-align: center;
+			padding: 8px 0;
+			.swal-button-container {
+				display: block;
+				margin: 0
+			}
+			.swal-button-container + .swal-button-container {
+				margin-top: 10px;
+			}
+			.swal-button {
+				width: 100%;
+				padding-left: 15px;
+				padding-right: 15px;
+				min-width: 150px;
+				&.swal-button--cancel {
+					border: 1px solid #dfdfdf;
+					background-color: #dfdfdf;
+					color: #000000;
+				}
+				&.swal-button--confirm {
+					border: 1px solid var(--shop-color-button);
+					background-color: var(--shop-color-button);
+					color: #fff;
+				}
+			}
+		}
+	}
+	&.copy-success {
+		max-width: 250px;
+	}
+	@media(max-width: 767px) {
+		&.swal-alert-km-qv .swal-button-container,
+		&.swal-alert-km .swal-button-container {
+			display: block;
+		}
+		&.swal-alert-km-qv .swal-button,
+		&.swal-alert-km .swal-button {
+			width: 100%;
+		}
+	}
+}

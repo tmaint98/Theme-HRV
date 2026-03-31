@@ -154,7 +154,8 @@
 			.greenweave-product--image img {
 				transform: scale(1.08);
 			}
-			.greenweave-list-icon {
+      @media (min-width: 992px) {
+  			.greenweave-list-icon {
 				> div {
 					transition-property: opacity;
 					opacity: 1;
@@ -175,7 +176,8 @@
 					}
 				}
 
-			}
+  			}
+      }
 		}
 	}
 	.greenweave-proloop-detail {
@@ -538,6 +540,7 @@
 	@media(max-width: 767px) {
 		.greenweave-proloop-image {
 			.greenweave-list-icon {
+        display: none;
 				a,
 				button {
 					width: 35px;
@@ -717,7 +720,7 @@
 	}
 }
 .greenweave-modal-product-quickview {
-	background: rgba(3, 17, 27, 0.3); z-index: 99999 !important;
+	background: rgba(3, 17, 27, 0.3); z-index: 9999 !important;
 	.modal-dialog-centered {
 		pointer-events: none;
 		display: -webkit-box;display: -ms-flexbox;display: flex;
@@ -1138,6 +1141,7 @@
 		left: 0;right: 0;bottom: 0;
 		z-index: 3;
 		background: #ffffff;
+    margin-bottom: 0!important;
 	} 
 }
 
