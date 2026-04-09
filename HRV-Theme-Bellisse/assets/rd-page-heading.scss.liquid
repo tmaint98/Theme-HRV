@@ -1,0 +1,30 @@
+$colorMain: {{settings.shop_main_color}};
+.heading-title {
+  margin-bottom: 50px;
+  .title1{
+    margin-bottom: 10px;
+  }
+  .title2{
+    font-size: 64px;
+    line-height: 1.2;
+    margin: 0;
+  }
+  @media (max-width: 991px) {
+    .title2 {
+      font-size: 40px;
+      br{
+      content: '';
+      &:after{
+        content: ' ';
+      }
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    margin-bottom: 25px;
+    .title2 {
+      font-size: 28px;
+    }
+  }
+}
+

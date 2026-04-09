@@ -1,0 +1,30 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'rd-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'rd-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+<link rel="preload" href="{{ 'rd-index-banner.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-index-banner.scss.css' | asset_url }}">
+<section class="radiance-index-banner" id="{{settings.radiance_index_banner_menu | handle}}">
+  <div class="banner-img">
+    <picture>
+      <source media="(max-width: 767px)" srcset="{{ 'radiance_index_banner_img_mb.jpg' | asset_url}}" />
+      <source media="(min-width: 768px)" srcset="{{ 'radiance_index_banner_img.jpg' | asset_url}}" />
+      <img src="{{ 'radiance_index_banner_img.jpg' | asset_url }}" alt="{{settings.radiance_index_banner_title | strip_html | escape}}" loading="lazy" decoding="sync"/>
+    </picture>
+    </div>
+  <div class="banner-content">
+    <div class="container text-center">
+    <div class="heading-title">
+      {% if settings.radiance_index_banner_title != empty %}
+        <h2 class="title2">{{ settings.radiance_index_banner_title | newline_to_br }}</h2>
+      {% endif %}
+    </div>
+    {% if settings.radiance_index_banner_btn != empty %}
+      <div class="btn-more">
+        <a href="{{settings.radiance_index_banner_link}}" class="button">{{ settings.radiance_index_banner_btn }}</a>
+      </div>
+    {% endif %}
+    </div>
+  </div>
+</section>

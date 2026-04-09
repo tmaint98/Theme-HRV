@@ -1,0 +1,103 @@
+<link rel="preload" href="{{ 'rd-index-slider.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-index-slider.scss.css' | asset_url }}">
+<link href="{{ 'rd-index-slider.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'rd-index-slider.js' | asset_url }}"></script>
+
+
+
+<div class="radiance-index-slider" id="{{settings.radiance_index_slider_menu | handle}}">
+  <div class="index-slider">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slider-item">
+            <div class="slide--image">
+              <picture>
+                <source media="(max-width: 767px)" srcset="{{ 'radiance_index_slider_1_img_mb.jpg' | asset_url}}" />
+                <source media="(min-width: 768px)" srcset="{{ 'radiance_index_slider_1_img.jpg' | asset_url}}" />
+                <img src="{{ 'radiance_index_slider_1_img.jpg' | asset_url }}" alt="{{ settings.radiance_index_slider_1_title_2 | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/>
+              </picture>
+            </div>
+            <div class="slide--content">
+              <div class="content">
+                <div class="container">
+                {% if settings.radiance_index_slider_1_title_1 != '' %}
+                  <div class="title1"><span class="text-ani">{{ settings.radiance_index_slider_1_title_1 }}</span></div>
+                {% endif %}
+                {% if settings.radiance_index_slider_1_title_2 != '' %}
+                  <h2 class="title2"><span class="text-ani">{{ settings.radiance_index_slider_1_title_2 | newline_to_br }}</span></h2>
+                {% endif %}
+                {% if settings.radiance_index_slider_1_btn != '' %}
+                  <div class="btn-more">
+                    <a href="{{ settings.radiance_index_slider_1_link }}" class="button">{{ settings.radiance_index_slider_1_btn }}</a>
+                   </div>
+                {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- for i in (2..4) -%}
+          {% capture show_slide %}radiance_index_slider_{{i}}_show{% endcapture %}
+          {% capture image %}radiance_index_slider_{{i}}_img.jpg{% endcapture %}
+          {% capture image_mb %}radiance_index_slider_{{i}}_img_mb.jpg{% endcapture %}
+          {% capture title1 %}radiance_index_slider_{{i}}_title_1{% endcapture %}
+          {% capture title2 %}radiance_index_slider_{{i}}_title_2{% endcapture %}
+          {% capture btn %}radiance_index_slider_{{i}}_btn{% endcapture %}
+          {% capture link %}radiance_index_slider_{{i}}_link{% endcapture %}
+          {%- if settings[show_slide] -%}
+            <div class="swiper-slide">
+              <div class="slider-item">
+                <div class="slide--image">
+                  <picture>
+                    <source media="(max-width: 767px)" srcset="{{ image_mb | asset_url}}" />
+                    <source media="(min-width: 768px)" srcset="{{ image | asset_url}}" />
+                    <img src="{{ image | asset_url }}" alt="{{ settings[title2] | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync" />
+                  </picture>
+                </div>
+                <div class="slide--content">
+                  <div class="content">
+                    <div class="container">
+                    {% if settings[title1] != '' %}
+                      <div class="title1"><span class="text-ani">{{ settings[title1] }}</span></div>
+                    {% endif %}
+                    {% if settings[title2] != '' %}
+                      <h2 class="title2"><span class="text-ani">{{ settings[title2] | newline_to_br }}</span></h2>
+                    {% endif %}
+                    {% if settings[btn] != ''%}
+                      <div class="btn-more">
+                        <a href="{{ settings[link] }}" class="button">{{ settings[btn] }}</a>
+                      </div>
+                    {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="swiper-pagination"></div>
+      {%comment%}
+      <div class="swiper-nav swiper-next">
+        <svg width="30px" height="30px" viewBox="-77 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>right</title><path d="M98 460L64 426 227 262 64 98 98 64 294 262 98 460Z" /></svg>
+      </div>
+      <div class="swiper-nav swiper-prev">
+        <svg width="30px" height="30px" viewBox="-78.5 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>left</title><path d="M257 64L291 98 128 262 291 426 257 460 61 262 257 64Z" /></svg>
+      </div>
+{%endcomment%}
+    </div>
+  </div>
+</div>
+
+<div class="section-home-pus-promotion pus-promotion-grids">
+  <div class="container">
+    <div class="hrv-pus-promotion" data-hrvpus-layout="flashsale"></div>
+  </div>
+</div>
+<div class="section-home-hrvpmo hrvpmo-grids">
+  <div class="container">
+    <div class="hrv-pmo-coupon" data-hrvpmo-layout="grids"></div>
+    <div class="hrv-pmo-discount" data-hrvpmo-layout="grids"></div>
+  </div>
+</div>

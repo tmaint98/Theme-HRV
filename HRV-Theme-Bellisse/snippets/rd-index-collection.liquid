@@ -1,0 +1,54 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'rd-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'rd-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+{%-unless has_section_collection -%} 
+  <link rel="preload" href="{{ 'rd-index-collection.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-index-collection.scss.css' | asset_url }}">
+<link rel="preload" href="{{ 'rd-product-loop-small.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-product-loop-small.scss.css' | asset_url }}">
+  {%- assign has_section_collection = true -%}
+{%- endunless -%}
+{%capture menu%}radiance_index_collection_{{ind}}_menu{%endcapture%}
+{%capture title1%}radiance_index_collection_{{ind}}_title_1{%endcapture%}
+{%capture title2%}radiance_index_collection_{{ind}}_title_2{%endcapture%}
+{%capture handle%}radiance_index_collection_{{ind}}_handle{%endcapture%}
+{%capture limit%}radiance_index_collection_{{ind}}_limit{%endcapture%}
+{%capture btn%}radiance_index_collection_{{ind}}_btn{%endcapture%}
+{%capture color_title%}radiance_index_collection_{{ind}}_main{%endcapture%}
+{%capture bgbtn%}radiance_index_collection_{{ind}}_button{%endcapture%}
+{%capture colorbtn%}radiance_index_collection_{{ind}}_button_text{%endcapture%}
+{%capture show_icon_left%}show_radiance_index_collection_{{ind}}_icon_left{%endcapture%}
+{%capture icon_left%}radiance_index_collection_{{ind}}_img_left.jpg{%endcapture%}
+{%capture show_icon_right%}show_radiance_index_collection_{{ind}}_icon_right{%endcapture%}
+{%capture icon_right%}radiance_index_collection_{{ind}}_img_right.jpg{%endcapture%}
+{%assign col_handle = settings[handle]%}
+<section class="radiance-index-collection {%if settings[show_icon_left]%}has-left{%endif%} {%if settings[show_icon_right]%}has-right{%endif%}" id="{{settings[menu]| handle}}" style="--icon-left: url('{{ icon_left | asset_url}}');--icon-right: url('{{ icon_right | asset_url}}');">
+  <div class="container">
+    <div class="heading-title text-center">
+      {% if settings[title1] != empty %}
+        <div class="title1" style="--color: {{ settings[color_title] }}">{{ settings[title1] }}</div>
+      {% endif %}
+      {% if settings[title2] != empty %}
+        <h2 class="title2">{{ settings[title2] | newline_to_br }}</h2>
+      {% endif %}
+    </div>
+    <div class="collection-list">
+      {%- if collections[col_handle].products.size == 0 -%}
+      <div class="col-md-12 product-noloop text-center">
+        <div class="collection-alert-no"><p>Chưa có sản phẩm nào trong danh mục này</p></div>
+      </div>
+      {%- else -%}
+        <div class="row list-pro">
+      {%- for product in collections[col_handle].products limit: settings[limit] -%}
+      {%- include 'rd-product-loop-small' -%}
+      {%- endfor -%}	
+        </div>
+        {%- if collections[col_handle].products.size > settings[limit] and settings[btn] != empty -%}
+          <div class="btn-more text-center"><a href="{{collections[col_handle].url}}" class="button" style="--bgbtn: {{ settings[bgbtn] }};--colorbtn: {{ settings[colorbtn] }}">{{settings[btn]}}</a></div>
+      {%- endif -%}		
+      {%- endif -%}	
+    </div>
+  </div>
+</section>

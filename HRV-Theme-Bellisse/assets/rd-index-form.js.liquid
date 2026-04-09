@@ -1,0 +1,214 @@
+Radiance.IndexForm = {
+		init: function() {
+			var that = this;
+      {%if settings.show_radiance_header_btn%}
+      Radiance.Header.Radiance_HeaderformBooking($('.radiance-index-form'));
+      {%else%}
+      that.Radiance_formBooking($('.radiance-index-form'));
+      {%endif%}
+		},
+  Radiance_formBooking: function($id){
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		var h = today.getHours();
+		var m = today.getMinutes();
+		if(h<10){h='0'+h} if(m<10){m='0'+m} 
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} 
+		today =yyyy+'-'+mm+'-'+dd;
+	
+		$id.find('#your_date').val(today);
+		//$('#your_time').val(h + ':' + m);
+		function checkSelect(obj) {
+			var name = $id.find(obj).attr("data-valid");
+
+			$id.find("."+name+"-validation").html("");
+			$id.find(obj).css("border","");
+
+			if($id.find(obj).val() == 'none' || $id.find(obj).val() == 'undefined'  || $id.find(obj).val() == undefined) {
+				$id.find(obj).css("border","#FF0000 1px solid");
+				$id.find("."+name+"-validation").html("Vui lòng chọn thông tin tại đây");
+				return false;
+			}
+			return true;
+		}
+		function checkEmpty(obj) {
+			var name = $id.find(obj).attr("data-valid");
+
+			$id.find("."+name+"-validation").html("");
+			$id.find(obj).css("border","");
+
+			if($id.find(obj).val() == "" || $id.find(obj).val() == 'null' || $id.find(obj).val() == null  || $id.find(obj).val() == 'undefined'  || $id.find(obj).val() == undefined) {
+				$id.find(obj).css("border","#FF0000 1px solid");
+				$id.find("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+				return false;
+			}
+			return true;
+		}
+		function checkEmail(obj) {
+			var result_ph = true;
+
+			var name = $id.find(obj).attr("data-valid");
+			$id.find("."+name+"-validation").html("");
+			$id.find(obj).css("border","");
+
+			result_ph = checkEmpty(obj);
+
+			if(!result_ph) {
+				$id.find(obj).css("border","#FF0000 1px solid");
+				$id.find("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+				return false;
+			}
+
+			var email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			result_ph = email_regex.test($id.find(obj).val());
+
+			if(!result_ph) {
+				$id.find(obj).css("border","#FF0000 1px solid");
+				$id.find("."+name+"-validation").html("Địa chỉ Email không hợp lệ");
+				return false;
+			}
+
+			return result_ph;
+		}
+		function checkPhone(obj) {
+			var result = true;
+
+			var name = $id.find(obj).attr("data-valid");
+			$id.find("."+name+"-validation").html("");
+			$id.find(obj).css("border","");
+
+			result = checkEmpty(obj);
+
+			if(!result) {
+				$id.find(obj).css("border","#FF0000 1px solid");
+				$id.find("."+name+"-validation").html("Vui lòng điền thông tin tại đây");
+				return false;
+			}
+
+			var phone_regex = /(^0[2-9]\d{8}$)|(^01\d{9}$)/;
+			result = phone_regex.test($id.find(obj).val());
+
+			if(!result) {
+				$id.find(obj).css("border","#FF0000 1px solid");
+				$id.find("."+name+"-validation").html("Số điện thoại không hợp lệ");
+				return false;
+			}
+
+			return result;
+		}
+    var valid = false;
+		function validate(){
+			var name = $id.find('.form-booking #full_name').val();
+			var phone = $id.find('.form-booking #your_phone').val();
+			var email = $id.find('.form-booking #your_email').val();
+			
+			//debugger;
+			if(name != '' && name != null && checkPhone($id.find(".form-booking #your_phone")) && checkEmail($id.find(".form-booking #your_email"))){
+				valid = true;
+				//valid = valid && checkPhone($(".form-booking #your_phone"));
+			}
+			else{
+				valid = false;
+			}
+			if(valid == true){
+				$id.find("#btn-booking-send").removeClass('btn-disabled').attr("disabled",false);
+			}
+			else{
+				$id.find("#btn-booking-send").addClass('btn-disabled').attr("disabled",true);
+			}
+		}
+    
+		$id.find('.form-booking #full_name').on('change keyup blur',function(){
+			checkEmpty($id.find('.form-booking #full_name'));
+      validate();
+		})
+		$id.find('.form-booking #your_phone').on('change keyup blur',function(){
+			checkPhone($(this));
+      validate();
+		})
+		$id.find('.form-booking #your_email').on('change keyup blur',function(){
+			checkEmail($(this));
+      validate();
+		})
+    $id.find('.form-booking .input-group select').change(function(){
+      checkSelect($(this));
+      validate();
+		})
+
+		$id.find('#btn-booking-send').click(function(e){
+			e.preventDefault() ;
+			if(checkEmpty($id.find(".form-booking #full_name")) && checkPhone($id.find(".form-booking #your_phone")) && checkEmail($id.find(".form-booking #your_email"))){
+				let check_form = false;
+				debugger;
+				{%if settings.rd_form_booking == 'google-sheet'%}
+					check_form = true;
+				{%endif%}
+				 if(check_form){
+					 let unindexed_array = $id.find(".form-booking form").serializeArray();
+					 let indexed_array = {};
+					 let url = $id.find(".form-booking form").attr('action');
+					 $.map(unindexed_array, function(n, i){
+						 indexed_array[n['name']] = n['value'];
+					 });
+					 //debugger;
+					 $.ajax({
+						 type: 'POST',
+						 url: url,
+						 async : false,
+						 data: indexed_array,
+						 dataType: 'json',
+						 complete: function() {
+							 setTimeout(function(){
+								 //$('#modal-booking').modal('hide');
+								 $('#mymodal_success').modal('show');
+							 },300);
+							 setTimeout(function(){
+								 $('#mymodal_success').modal('hide');
+							 },5000);	
+						 },
+						 error: function(XMLHttpRequest, textStatus) {
+							 console.log('err', textStatus );
+						 }
+					 });
+				 }
+				 else{
+					const self = $(this).parents('form');
+              let namee = self.find("#full_name").val(),
+              phonee = self.find("#your_phone").val(),
+              emaill = self.find("#your_email").val(),
+              message = "{%if settings.rd_form_service != ''%}{{settings.rd_form_service}}: {%else%}Dịch vụ: {%endif%}";
+              message += self.find("#rd_form_service").val();
+              message += "\nNgày: " + self.find("#your_date").val();
+               message += "\n{%if settings.rd_form_content != ''%}{{settings.rd_form_content}}: {%else%}Mô tả: {%endif%} " + self.find("#your_content").val();
+             grecaptcha.ready(function() {
+               grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+                 self.find('input[name="g-recaptcha-response"]').val(token);
+                  $.ajax({
+                   type: 'POST',
+                   url:'/contact',
+                   data: "form_type=contact&__RequestVerificationToken="+self.find('input[name="__RequestVerificationToken"]').val()+"&utf8=✓&contact[name]="+namee+"&contact[phone]="+phonee+"&contact[email]="+emaill+"&contact[body]="+message+"&g-recaptcha-response="+self.find('input[name="g-recaptcha-response"]').val(),
+                   success:function(data){
+                     self.trigger("reset")
+                     setTimeout(function(){
+    									 $('#mymodal_success').modal('show');
+    								 },300);
+    								 setTimeout(function(){
+    									 $('#mymodal_success').modal('hide');
+    								 },5000);	
+                   }
+                 })
+               })
+             })
+				 }
+				}
+		});
+		$("#mymodal_success").on('hidden.bs.modal', function(){
+					 location.reload();
+		});	
+	},
+};
+(function() {
+  Radiance.IndexForm.init();
+})();

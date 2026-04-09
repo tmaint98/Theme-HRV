@@ -1,0 +1,78 @@
+Radiance.IndexMainSlider = {
+		init: function() {
+			var that = this;
+      that.Radiance_IndexMainSlider();
+		},
+  Radiance_IndexMainSlider: function(){
+    let lastRealIndex = 0;
+    const radianceSlider = new Swiper ('.radiance-index-slider .swiper', {
+      slidesPerView: 1,  
+			loop: $('.radiance-index-slider .slider-item').length > 2 ? true:false,
+      preloadImages: false,
+      lazy: true,
+      speed: 1000,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      
+      
+      on: {
+    init() {
+      lastRealIndex = this.realIndex;
+    },
+
+    slideChange() {
+      const leavingRealIndex = lastRealIndex;
+
+      // ⏱ delay đúng 1 frame
+      requestAnimationFrame(() => {
+
+        // reset SAU khi swiper đã render
+        this.slides.forEach(slide => {
+          slide.classList.remove('is-leaving');
+        });
+
+        const leavingSlide = [...this.slides].find(slide =>
+          !slide.classList.contains('swiper-slide-duplicate') &&
+          Number(slide.getAttribute('data-swiper-slide-index')) === leavingRealIndex
+        );
+
+        if (leavingSlide) {
+          leavingSlide.classList.add('is-leaving');
+        }
+      });
+    },
+
+    slideChangeTransitionEnd() {
+      lastRealIndex = this.realIndex;
+    }
+  },
+      autoplay: false,
+      /*autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },*/
+			/*navigation: {
+				nextEl: ".radiance-index-slider .swiper-next",
+				prevEl: ".radiance-index-slider .swiper-prev",
+			},*/
+      pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			
+    });
+    
+    const totalSlides = radianceSlider.slides.length;
+    if (totalSlides <= radianceSlider.params.slidesPerView) {
+      $('.radiance-index-slider .swiper-next, .radiance-index-slider .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  Radiance.IndexMainSlider.init();
+})();
+
+
+

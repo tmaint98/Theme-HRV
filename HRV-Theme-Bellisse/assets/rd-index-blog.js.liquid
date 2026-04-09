@@ -1,0 +1,59 @@
+Radiance.IndexBlogSlider = {
+		init: function() {
+			var that = this;
+      that.Radiance_IndexBlogSlider();
+		},
+  Radiance_IndexBlogSlider: function(){
+    let lastRealIndex = 0;
+    const radianceSlider = new Swiper ('.radiance-index-blog .swiper', {
+      slidesPerView: 3,  
+			loop: $('.radiance-index-blog .article-loop').length > 3 ? true:false,
+      preloadImages: false,
+      lazy: true,
+      speed: 1000,
+      //autoplay: false,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+			/*navigation: {
+				nextEl: ".radiance-index-blog .swiper-next",
+				prevEl: ".radiance-index-blog .swiper-prev",
+			},*/
+      pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+      breakpoints: {
+      0: {
+        slidesPerView: 1,
+        loop: $('.radiance-index-blog .article-loop').length > 1 ? true:false,
+        spaceBetween: 10
+      },
+      768: {
+        slidesPerView: 2,
+        loop: $('.radiance-index-blog .article-loop').length > 2 ? true:false,
+        spaceBetween: 20
+      },
+      992: {
+        slidesPerView: 3,
+        loop: $('.radiance-index-blog .article-loop').length > 3 ? true:false,
+        spaceBetween: 30
+      }
+    }
+			
+    });
+    
+    const totalSlides = radianceSlider.slides.length;
+    if (totalSlides <= radianceSlider.params.slidesPerView) {
+      $('.radiance-index-blog .swiper-next, .radiance-index-blog .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  Radiance.IndexBlogSlider.init();
+})();
+
+
+
+

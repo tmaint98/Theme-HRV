@@ -1,0 +1,105 @@
+$colorMain: {{ settings.radiance_index_service_1_main }};
+$bgBtn: {{ settings.radiance_index_service_1_button }};
+$colorBtn: {{ settings.radiance_index_service_1_button_text }};
+.radiance-index-service-1 {
+  padding: 80px 0;
+  .heading-title{
+    .title1{
+      color: $colorMain;
+    }
+  }
+  .button {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+    padding: 15px 30px;
+    line-height: normal;
+    color: $colorBtn;
+    background-color: $bgBtn;
+    border: 0;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+    outline: none !important;
+    -webkit-transition: all 0.45s;
+    transition: all 0.45s;
+     &:before {
+      content: '';
+      background-color: rgba($colorBtn, 0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: -1;
+      transition: all 0.4s ease-in-out;
+    }
+    @media(min-width: 992px) {
+       &:hover,
+      &.has-hover,
+       &:focus {
+        border-color: transparent;
+      }
+       &:hover:before,
+       &.has-hover:before,
+       &:focus:before {
+        opacity: 1;
+      }
+    }
+    @media(max-width: 767px) {
+      font-size: 12px;
+      padding: 8px 15px;
+      min-height: 35px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .service-item {
+    position: relative;
+    overflow: hidden;
+    .item-img img {
+      transition: all 0.6s;
+      width: 100%;
+    }
+    .item-content {
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+      padding: 10px;
+      background: #fff;
+      max-width: 75%;
+      font-size: 20px;
+    }
+     &:hover {
+      .item-img img {
+        transform: scale(1.04);
+      }
+    }
+  }
+  .btn-more{
+    margin-top: 60px;
+  }
+  @media(max-width: 991px){
+    .list-service{
+      gap: 30px 0;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 40px 0;
+    scroll-margin-block-start: 110px;
+    .list-service{
+      gap: 15px 0;
+    }
+    .service-item .item-content{
+      font-size: 18px;
+    }
+    .btn-more{
+    margin-top: 30px;
+  }
+  }
+}

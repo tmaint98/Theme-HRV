@@ -1,0 +1,44 @@
+{%unless has_heading%}
+<link rel="preload" href="{{ 'rd-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-page-heading.scss.css' | asset_url }}">
+{%- assign has_heading = true -%}
+{%endunless%}
+<link rel="preload" href="{{ 'rd-index-service-1.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-index-service-1.scss.css' | asset_url }}">
+<section class="radiance-index-service-1" id="{{settings.radiance_index_service_1_menu | handle}}">
+  <div class="container">
+    <div class="heading-title text-center">
+      {%if settings.radiance_index_service_1_title_1 != empty%}
+      <div class="title1">{{settings.radiance_index_service_1_title_1}}</div>
+        {%endif%}
+      {%if settings.radiance_index_service_1_title_2 != empty%}
+      <h2 class="title2">{{settings.radiance_index_service_1_title_2 | newline_to_br}}</h2>
+      {%endif%}
+    </div>
+    <div class="row list-service">
+      {%for i in (1..4)%}
+        {%capture show%}show_radiance_index_service_1_{{i}}{%endcapture%}
+        {%capture img%}radiance_index_service_1_{{i}}_img.jpg{%endcapture%}
+        {%capture title%}radiance_index_service_1_{{i}}_title{%endcapture%}
+        {%capture link%}radiance_index_service_1_{{i}}_link{%endcapture%}
+        {%if settings[show]%}
+          <div class="col-lg-3 col-md-6 col-12">
+          <div class="service-item">
+            <a href="{{settings[link]}}">
+            <div class="item-img"><img src="{{ img | asset_url}}" alt="{{settings[title] | strip_html | escape}}" loading="lazy" decoding="sync" /></div>
+            <div class="item-content">
+              {{settings[title]}}
+            </div>
+            </a>
+          </div>
+          </div>
+        {%endif%}
+      {%endfor%}
+    </div>
+    {%if settings.radiance_index_service_1_btn != empty%}
+      <div class="btn-more text-center">
+        <a href="{{settings.radiance_index_service_1_link}}" class="button">{{settings.radiance_index_service_1_btn}}</a>
+      </div>
+      {%endif%}
+  </div>
+</section>

@@ -1,0 +1,43 @@
+{%unless has_heading%}
+<link rel="preload" href="{{ 'rd-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-page-heading.scss.css' | asset_url }}">
+{%- assign has_heading = true -%}
+{%endunless%}
+<link rel="preload" href="{{ 'rd-index-service-2.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-index-service-2.scss.css' | asset_url }}">
+<section class="radiance-index-service-2 {%if settings.show_radiance_index_service_2_img%}has-icon{%endif%}" id="{{settings.radiance_index_service_2_menu | handle}}">
+  <div class="container">
+    <div class="heading-title text-center">
+      {%if settings.radiance_index_service_2_title_1 != empty%}
+      <div class="title1">{{settings.radiance_index_service_2_title_1}}</div>
+        {%endif%}
+      {%if settings.radiance_index_service_2_title_2 != empty%}
+      <h2 class="title2">{{settings.radiance_index_service_2_title_2 | newline_to_br}}</h2>
+      {%endif%}
+    </div>
+    <div class="row list-service">
+      {%for i in (1..8)%}
+        {%capture show%}show_radiance_index_service_2_{{i}}{%endcapture%}
+        {%capture icon%}radiance_index_service_2_{{i}}_img.jpg{%endcapture%}
+        {%capture banner%}radiance_index_service_2_{{i}}_banner.jpg{%endcapture%}
+        {%capture title%}radiance_index_service_2_{{i}}_title{%endcapture%}
+        {%capture desc%}radiance_index_service_2_{{i}}_desc{%endcapture%}
+        {%capture link%}radiance_index_service_2_{{i}}_link{%endcapture%}
+        {%if settings[show]%}
+          <div class="col-lg-3 col-md-6 col-12">
+          <div class="service-item text-center">
+            <a href="{{settings[link]}}" style="--bg-img: url('{{ banner | asset_url}}')">
+            <div class="item-img"><img src="{{ icon | asset_url}}" alt="{{settings[title] | strip_html | escape}}" loading="lazy" decoding="sync" /></div>
+            <div class="item-content">
+              <h3 class="title">{{settings[title]}}</h3>
+              <div class="desc">{{settings[desc]}}</div>
+            </div>
+            </a>
+          </div>
+          </div>
+        {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+</section>
+

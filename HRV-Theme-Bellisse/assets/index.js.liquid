@@ -1,0 +1,57 @@
+Radiance.IndexAjax = {
+		init: function() {
+			var that = this;
+      that.Radiance_IndexAjax();
+		},
+  Radiance_IndexAjax: function(){
+    $('.radiance-index-ajax').each(function(){
+      const $this = $(this);
+      let id = $this.attr('id');
+      let urls = '{{shop.url}}?view=' + id;
+      let hd = $this.attr('data-handle');
+      if($this.hasClass('index-col') || $this.hasClass('index-col-slide')){
+        if($this.hasClass('index-col')){
+          urls = '/collections/' + hd + '?view=col-data';
+        }else{
+          urls = '/collections/' + hd + '?view=slide-data';
+        }
+      }else if($this.hasClass('index-blog')){
+        urls = '/blogs/' + hd + '?view=index-data';
+      }
+      setTimeout(function(){ 
+        $.ajax({
+          url: urls,					
+          type: 'GET',
+          async: false,
+          success:function(data){
+            setTimeout(function(){ 
+              if($this.hasClass('index-review')){
+                $('.radiance-index-ajax[id="'+ id +'"]').html(data);
+                Radiance.IndexReviewSlider.Radiance_IndexReviewSlider();
+              }else if($this.hasClass('index-col')){
+                $('.radiance-index-col[data-handle="'+hd+'"] .list-pro').html(data);
+                Radiance.ProductLoop.Radiance_loopImgSlider();
+              }else if($this.hasClass('index-col-slide')){
+                $('.radiance-index-col-slide[data-handle="'+hd+'"] .list-pro').html(data);
+                Radiance.IndexColSlider.Radiance_IndexColSlider(hd);
+                Radiance.ProductLoop.Radiance_loopImgSlider();
+              }else if($this.hasClass('index-blog')){
+                $('.radiance-index-blog .list-blog').html(data);
+              }else{
+                $('.radiance-index-ajax[id="'+ id +'"]').html(data);
+              }
+            }, 300);
+          }
+        });
+      }, 500);
+    })
+    
+  }
+};
+(function() {
+  Radiance.IndexAjax.init();
+})();
+
+
+
+

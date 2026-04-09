@@ -1,0 +1,29 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'rd-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'rd-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+
+<link rel="preload" href="{{ 'rd-index-gallery.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'rd-index-gallery.scss.css' | asset_url }}">
+<section class="radiance-index-gallery" id="{{settings.radiance_index_gallery_menu | handle}}">
+  <div class="container">
+    <div class="heading-title text-center">
+      {% if settings.radiance_index_gallery_title_1 != empty %}
+        <div class="title1">{{ settings.radiance_index_gallery_title_1 }}</div>
+      {% endif %}
+      {% if settings.radiance_index_gallery_title_2 != empty %}
+        <h2 class="title2">{{ settings.radiance_index_gallery_title_2 | newline_to_br }}</h2>
+      {% endif %}
+    </div>
+    <div class="list-img">
+      {%for i in (1..6)%}
+        {%capture img%}radiance_index_gallery_{{i}}_img.jpg{%endcapture%}
+        {%capture alt%}radiance_index_gallery_{{i}}_alt{%endcapture%}
+        <div class="item">
+          <img src="{{ img | asset_url}}" alt="{{settings[alt]}}" />
+        </div>
+        {%endfor%}
+    </div>
+  </div>
+</section>

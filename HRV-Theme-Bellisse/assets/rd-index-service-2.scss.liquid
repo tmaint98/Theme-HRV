@@ -1,0 +1,98 @@
+$colorMain: {{ settings.radiance_index_service_2_main }};
+$bgService: {{ settings.radiance_index_service_2_bg }};
+$colorService: {{ settings.radiance_index_service_2_color }};
+.radiance-index-service-2 {
+  padding: 80px 0;
+
+  .heading-title {
+    .title1 {
+      color: $colorMain;
+    }
+  }
+  .list-service {
+    gap: 30px 0;
+  }
+  .service-item {
+    height: 100%;
+    a {
+      display: inline-block;
+      position: relative;
+      color: $colorService;
+      padding: 85px 30px;
+      height: 100%;
+       &:before,
+       &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: all 0.5s;
+      }
+       &:before {
+        background: $bgService;
+      }
+       &:after {
+        background-image: var(--bg-img);
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+      }
+      > div {
+        position: relative;
+        transition: all 0.5s;
+      }
+       &:hover {
+         &:after {
+          opacity: 1;
+        }
+        > div {
+          opacity: 0;
+        }
+      }
+    }
+    .item-img {
+      margin-bottom: 15px;
+      img {
+        max-width: 100px;
+      }
+    }
+    .item-content {
+      .title {
+        font-size: 24px;
+      }
+      .desc {
+        font-size: 14px;
+      }
+    }
+  }
+  @media(min-width: 1200px) {
+    position: relative;
+    &.has-icon {
+       &:before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: 0;
+        width: 15%;
+        height: 35%;
+        background-image: url("{{'radiance_index_service_2_img.jpg' | asset_url}}");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: top left;
+      }
+
+    }
+  }
+  @media(max-width: 767px){
+    scroll-margin-block-start: 110px;
+    padding: 40px 0;
+    .list-service {
+    gap: 15px 0;
+  }
+    .service-item .item-content .title{
+      font-size: 20px;
+    }
+  }
+}

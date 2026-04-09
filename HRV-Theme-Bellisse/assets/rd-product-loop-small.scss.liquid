@@ -1,0 +1,92 @@
+{%- assign webfont_title = settings.base_font_title | split : ':' | first -%}
+$colorText: {{ settings.shop_text_color }};
+.product-loop-small {
+  .product-inner {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    > div {
+      flex: 0 0 auto;
+    }
+  }
+  .proloop-image {
+    width: 90px;
+  }
+  .proloop-detail {
+    width: calc(100% - 120px);
+    .proloop-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      h3 {
+        flex: 0 0 auto;
+        max-width: 60%;
+        font-size: 22px;
+        margin-bottom: 0;
+      }
+      .title-line {
+        flex: 1;
+        border-bottom: 1px dashed rgba($colorText, 0.3);
+        min-width: 30px;
+        height: 16px;
+      }
+
+    }
+
+    .proloop-desc p {
+      margin: 0;
+    }
+    .proloop--price {
+      font-size: 22px;
+      font-family: "{{ webfont_title }}"
+      , sans-serif;
+      font-weight: 600;
+      color: var(--shop-color-main);
+      margin: 0;
+      line-height: 20px;
+      display: flex;
+      flex-flow: column;
+      justify-content: end;
+      span.price-del {
+        font-size: 16px;
+        color: #636363;
+        text-decoration: line-through;
+      }
+    }
+    .wrapper-action-loop {
+      flex: 0 0 auto;
+      max-width: calc(40% - 30px);
+      text-align: right;
+    }
+  }
+  @media(max-width: 767px) {
+    .product-inner {
+      gap: 15px;
+    }
+    .proloop-image {
+      width: 60px;
+    }
+    .proloop-detail {
+      width: calc(100% - 75px);
+      .proloop-title {
+        h3 {
+          font-size: 18px;
+        }
+        .title-line {
+        min-width: 10px;
+      }
+      }
+
+      .proloop--price {
+        font-size: 18px;
+        span.price-del {
+          font-size: 14px;
+        }
+      }
+      .wrapper-action-loop {
+        max-width: calc(40% - 10px);
+      }
+    }
+  }
+}
