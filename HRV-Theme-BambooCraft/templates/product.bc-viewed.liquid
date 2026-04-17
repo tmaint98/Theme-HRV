@@ -1,0 +1,215 @@
+{%- layout none -%}
+
+{% comment %}Tính phần trăm{% endcomment %}
+{% assign on_sale = false %}
+{% if product.variants.first.compare_at_price > product.variants.first.price %}
+{% assign on_sale = true %}
+{% endif %}
+{% comment %}<!-- Sản phẩm có giá 0đ  -->{% endcomment %}
+{%- assign price_zero = false -%}
+{%- if  product.variants.first.price == 0 -%}
+{%- assign price_zero = true -%}
+{%- endif -%}
+{% comment %}Tính giá khuyến mãi{% endcomment %}
+{% if product.variants.first.compare_at_price > product.variants.first.price %}
+{% assign price_sale = 0 %}
+{% assign price_sale = product.variants.first.compare_at_price | minus: product.variants.first.price | divided_by:product.variants.first.compare_at_price | times : 100 | round : 0 %}
+{% endif %}
+
+{% comment %}Tình trạng hết hàng{% endcomment %}
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}  
+
+
+{% comment %}<!-- Tag sản phẩm -->{% endcomment %}
+{%- assign at_store = false -%}	
+{%- assign check_gift = false -%}
+{%- for tag in product.tags -%}
+{%- if tag == 'giftbox' -%} {%- assign check_gift = true -%} {%- endif -%}
+{%- endfor -%}
+
+{% comment %}<!-- Check collection -->{% endcomment %}
+{%- assign is_preorder_prodloop = false -%}
+{%- for item in product.collections -%}
+	{%- if item.handle == settings.collection_preorder -%}
+		{%- assign is_preorder_prodloop = true -%}
+		{%- break -%}
+	{%- endif -%}
+{%- endfor -%}
+{% comment %}<!-- Check Video -->{% endcomment %}
+{%- assign check_video = false -%}
+{%-if product.media.size > 0 -%}
+{%- for media in product.media -%}
+		{%- if media.media_type == 'external_video' -%}
+			{%- assign check_video = true -%}
+		{%- endif -%}
+{%-endfor-%}
+{%- endif -%}
+
+{%assign template_project = false%}
+{%if product.template_suffix == 'project'%}
+{%assign template_project = true%}
+{%endif%}
+
+{%-assign index_item = forloop.index | times: 1 -%}
+<div class="bamboocraft-product-loop {%if template_service %}bamboocraft-product-loop-service{%endif%}" data-id="{{ product.variants.first.id }}">
+  <div class="bamboocraft-product-inner" data-proid="{{ product.id }}" id="{{section}}_loop_{{index_item}}">
+    <div class="bamboocraft-proloop-image">
+      {% if on_sale %}
+        <div class="bamboocraft-pro-sale">
+          <span>-{{ price_sale }}%</span>
+        </div>
+      {% endif %}
+      {% if sold_out %}
+        <div class="bamboocraft-pro-soldout">
+          <span>Hết hàng</span>
+        </div>
+      {% endif %}
+      {% if settings.promotion_hrvapp_use and settings.promotion_hrvapp == 'appcombo' or settings.promotion_hrvapp == 'appbuyxgety' %}
+        <div class="gift product_gift_label d-none" data-id="{{product.id}}">
+          <img class="lazyload" data-src="{{ settings.combo_icon }}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="Icon quà tặng">
+        </div>
+      {% endif %}
+
+      {%- if product.description contains '"image360":' or check_video -%}
+        <div class="bamboocraft-pro-iconbox ">
+        {%- if check_video -%}
+          <div class="bamboocraft-pro-video">
+            <img class="lazyload" data-src="https://file.hstatic.net/200000592359/file/icon_video_2d253ef605b0407da214e359ac3bdea5.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="image video" />
+          </div>
+        {%- endif -%}
+        {%- if product.description contains '"image360":' - %}
+          				<div class="bamboocraft-pro-360">
+          					<img class="lazyload" data-src="https://file.hstatic.net/200000592359/file/icon_spin_3_556d2cb6ff344907b916eeb57020e156.png" 
+          							 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+          							 alt="image 360"/>
+          				</div>
+          				{%-endif -%}
+          </div>
+        {%- endif -%}
+        <a href="{{product.url}}" class="bamboocraft-product-link">
+          <div class="bamboocraft-product--image" data-src="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'large' }}{%else%}{{'no_image.jpg' | asset_url}}{%endif%}">
+            <picture>
+              <source media="(max-width: 480px)" data-srcset="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'large' }}{%else%}{{'no_image.jpg' | asset_url}}{%endif%}" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+              <source media="(min-width: 481px)" data-srcset="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'master' }}{%else%}{{'no_image.jpg' | asset_url}}{%endif%}" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+              <img class="lazyload img-loop " data-src="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'small' }}{%else%}{{'no_image.jpg' | asset_url}}{%endif%}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{% if product.featured_image.alt.size >0 %}{{ product.featured_image.alt | strip_html | escape }}{% else%} {{product.title | strip_html | escape}} {% endif %}" />
+            </picture>
+          </div>
+        </a>
+      
+        <div class="bamboocraft-list-icon">
+          {%unless template_service or price_zero or check_gift%}
+          <div class="bamboocraft-quickview-product">
+            <a
+              class="bamboocraft-icon-quickview"
+              href="javascript:void(0)"
+              name="icon quickview"
+              data-handle="{{product.url}}"
+              title="Xem nhanh">
+              <svg width="20px" height="20px" viewBox="0 0 24 24">
+  <path d="M2.03381935,11.8192361 C4.16808919,6.31506648 10.3602678,3.58322297 15.8644374,5.71749281 C18.6654288,6.80359152 20.8800819,9.01824467 21.9661807,11.8192361 C22.0112731,11.9355272 22.0112731,12.0644728 21.9661807,12.1807639 C19.8319108,17.6849335 13.6397322,20.416777 8.1355626,18.2825072 C5.3345712,17.1964085 3.11991805,14.9817553 2.03381935,12.1807639 C1.98872688,12.0644728 1.98872688,11.9355272 2.03381935,11.8192361 Z M8.49709046,17.3501459 C13.4256883,19.2612348 18.9628618,16.8680219 20.9616531,12.0000475 C19.9532865,9.54665483 17.9813179,7.6108696 15.5029095,6.64985412 C10.5743117,4.73876518 5.0371382,7.13197809 3.03834692,11.9999525 C4.04671349,14.4533452 6.01868212,16.3891304 8.49709046,17.3501459 Z M12,16 C9.790861,16 8,14.209139 8,12 C8,9.790861 9.790861,8 12,8 C14.209139,8 16,9.790861 16,12 C16,14.209139 14.209139,16 12,16 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z"/>
+</svg>
+            </a>
+          </div>
+          {%endunless%}
+          <div class="bamboocraft-view-product">
+            <a href="{{product.url}}">
+              <svg
+                width="20px"
+                height="20px"
+                viewBox="0 0 24 24"
+                id="right"
+                class="icon line">
+                <polyline id="primary" points="14 5 21 12 14 19" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline>
+                <line
+                  id="primary-2"
+                  data-name="primary"
+                  x1="21"
+                  y1="12"
+                  x2="3"
+                  y2="12"
+                  style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="bamboocraft-proloop-detail text-center">
+        {%- unless product.vendor == 'Khác' -%}
+          <p class="bamboocraft-proloop--vendor">{{ product.vendor | link_to_vendor }}</p>
+        {%- endunless -%}
+
+        <h3>
+          <a href="{{product.url}}" class="bamboocraft-quickview-product" data-handle="{{product.url}}">{{ product.title }}</a>
+        </h3>
+        
+          {%- unless product.type == 'Khác' -%}
+            <div class="bamboocraft-proloop--type">{{ product.type }}</div>
+          {%- endunless -%}
+        {%- if settings.productreviews_hrvapp_use and settings.productreviews_hrvapp_proloop -%}
+          <div class="bamboocraft-proloop--review">
+            <!-- check review -->
+            {%- assign rate_review = product.metafields.src.product_loop | append: "" - %}
+              				{% assign rate_number = '' %}
+              				{%-if rate_review ! = '' - %}
+              				{%-assign rate_number = rate_review | remove: ' đánh giá' - %}
+              				{%-endif -%}
+            <div class="haravan-product-reviews-badge" data-id="{{ product.id }}">
+              {{ product.metafields.src.product_loop }}
+            </div>
+          </div>
+        {%- endif -%}
+        <div class="{% unless price_zero or check_gift or settings.promotion_hrvapp_use or sold_out %}has-cart{%endunless%}">
+        <div class="bamboocraft-wrapper-action-loop">
+          {%- unless price_zero -%}
+            <p class="bamboocraft-proloop--price {% if on_sale %}on-sale{% endif %}">
+              <span class="bamboocraft-price">{{ product.variants.first.price | money }}</span>
+              {%- if on_sale -%}
+                <span class="bamboocraft-price-del">{{ product.variants.first.compare_at_price | money }}</span>
+              {%- endif -%}
+              {%- if sold_out -%}
+                <span class="bamboocraft-prohzt-soldout">Hết hàng</span>
+              {%- endif -%}
+            </p>
+          {%- endunless -%}
+          
+          {%- if price_zero or check_gift -%}
+            <div class="bamboocraft-proloop-actions">
+              <div class="bamboocraft-proloop-actions__inner">
+                {%- if check_gift -%}
+                  <a href="{{product.url}}" class="bamboocraft-btn-proloop bamboocraft-btn-proloop-gift" title="{{product.title}}">
+                    <span>Hàng tặng không bán</span>
+                  </a>
+                {%- else -%}
+                  <a href="{{settings.prod_pricezero_link}}" class="bamboocraft-btn-proloop bamboocraft-btn-proloop-contact">{{ settings.prod_pricezero_title }}</a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+        {% unless price_zero or check_gift or settings.promotion_hrvapp_use %}
+            <div class="bamboocraft-cart-product">
+              {%- if settings.bamboocraft_shop_buying and product.variants.first.price > 0 -%}
+                {% unless sold_out %}
+                <button
+                  type="submit"
+                  class="bamboocraft-btn-proloop-cart bamboocraft-add-to-cart {% if sold_out %} disabled {%endif%} {% if product.variants.size > 1 %}bamboocraft-btn-addcart-view {% endif %}"
+                  onclick="BambooCraft.ProductLoop.BambooCraft_addCartProdItem('{{ product.variants.first.id }}')"
+                  {% if sold_out %}
+                  disabled
+                  {% endif %}>
+                  Thêm vào giỏ
+                </button>
+                  {%endunless%}
+              {%- endif -%}
+            </div>
+          {% endunless %}
+        </div>
+      </div>
+    </div>
+	<script> var viewed = {{product | json}}; </script>	
+</div>

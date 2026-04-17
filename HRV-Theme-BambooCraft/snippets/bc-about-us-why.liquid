@@ -1,0 +1,52 @@
+{% if settings.show_bamboocraft_about_us_why %}
+  {% unless has_heading %}
+    <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+    <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+    {%- assign has_heading = true -%}
+  {% endunless %}
+  <link rel="preload" href="{{ 'bc-about-us-why.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-about-us-why.scss.css' | asset_url }}">
+  <section class="bamboocraft-about-us-why {%if settings.show_bamboocraft_about_us_why_img%}has-icon{%endif%}">
+    <div class="container">
+      <div class="heading-title text-center">
+        <div class="title1">{{ settings.bamboocraft_about_us_why_title_1 }}</div>
+        <h1 class="title2">{{ settings.bamboocraft_about_us_why_title_2 | newline_to_br }}</h1>
+        <div class="desc">{{ settings.bamboocraft_about_us_why_desc | newline_to_br}}</div>
+      </div>
+      <div class="row list-why justify-content-center">
+        {% for i in (1..3) %}
+          {% capture show %}show_bamboocraft_about_us_why_{{i}}{%endcapture%}
+          {% capture img %}bamboocraft_about_us_why_{{i}}_img.jpg{%endcapture%}
+          {% capture title %}bamboocraft_about_us_why_{{i}}_title{%endcapture%}
+          {% capture desc %}bamboocraft_about_us_why_{{i}}_desc{%endcapture%}
+          {% if settings[show] %}
+            <div class="col-lg-4 col-12 why-item">
+              <div class="img"><img src="{{ img | asset_url}}" alt="{{ settings[title] }}" loading="lazy" decoding="sync" /></div>
+              <div class="detail">
+                <h3 class="title">{{ settings[title] }}</h3>
+                <div class="desc">{{ settings[desc] }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% if settings.bamboocraft_about_us_why_btn != empty %}
+        <div class="btn-more text-center">
+          <a href="{{settings.bamboocraft_about_us_why_link}}" class="button">
+            <span>{{ settings.bamboocraft_about_us_why_btn }}</span>
+            <svg
+              width="20px"
+              height="20px"
+              viewBox="0 0 24 24"
+              id="right"
+              data-name="Flat Color"
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon flat-color">
+              <path id="primary" d="M21.71,11.29l-7-7a1,1,0,0,0-1.42,1.42L18.59,11H3a1,1,0,0,0,0,2H18.59l-5.3,5.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l7-7A1,1,0,0,0,21.71,11.29Z"></path>
+            </svg>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}

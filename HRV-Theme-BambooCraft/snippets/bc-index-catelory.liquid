@@ -1,0 +1,43 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+<link rel="preload" href="{{ 'bc-index-catelory.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-index-catelory.scss.css' | asset_url }}">
+
+<section class="bamboocraft-index-catelory">
+  <div class="container">
+    <div class="row list-catelory">
+      {%for i in (1..3)%}
+        {%capture show%}show_bamboocraft_index_catelory_{{i}}{%endcapture%}
+        {%capture handle%}bamboocraft_index_catelory_{{i}}_handle{%endcapture%}
+        {%capture img%}bamboocraft_index_catelory_{{i}}_img.jpg{%endcapture%}
+        {%capture title%}bamboocraft_index_catelory_{{i}}_title{%endcapture%}
+        {%capture btn%}bamboocraft_index_catelory_{{i}}_btn{%endcapture%}
+        {%assign col_handle = settings[handle]%}
+        {%assign col_url = collections[col_handle].url%}
+        {%if settings[show]%}
+          <div class="col-lg-4 col-12">
+          <div class="catelory-item">
+            <div class="img"><img src="{{ img | asset_url}}" alt="{{ settings[title] }}" loading="lazy" decoding="sync" /></div>
+            <div class="content">
+              <div class="info">
+              <h3 class="title"><a href="{{col_url}}">{{settings[title]}}</a></h3>
+              {%if collections[col_handle].products.size > 0%}
+                <div class="size">{{collections[col_handle].products.size}} sản phẩm</div>
+              {%endif%}
+              </div>
+              {%if settings[btn] != empty%}
+              <div class="btn-more">
+                <a href="{{col_url}}" class="button"><span>{{settings[btn]}}</span> <svg width="20px" height="20px" viewBox="0 0 24 24" id="right" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color"><path id="primary" d="M21.71,11.29l-7-7a1,1,0,0,0-1.42,1.42L18.59,11H3a1,1,0,0,0,0,2H18.59l-5.3,5.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l7-7A1,1,0,0,0,21.71,11.29Z"></path></svg></a>
+              </div>
+              {%endif%}
+            </div>
+          </div>
+          </div>
+        {%endif%}
+        {%endfor%}
+    </div>
+  </div>
+</section>

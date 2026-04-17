@@ -1,0 +1,23 @@
+<link rel="preload" href="{{ 'bc-index-partner.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-index-partner.scss.css' | asset_url }}">
+<link href="{{ 'bc-index-partner.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'bc-index-partner.js' | asset_url }}"></script>
+
+<section class="bamboocraft-index-partner">
+  <div class="container">
+    <div class="logo-partner swiper">
+      <div class="swiper-wrapper">
+        {% for i in (1..10) %}
+          {%capture show%}show_bamboocraft_index_partner_{{i}}_img{%endcapture%}
+          {%capture img%}bamboocraft_index_partner_{{i}}_img.jpg{%endcapture%}
+          {%capture alt%}bamboocraft_index_partner_{{i}}_alt{%endcapture%}
+          {%if settings[show]%}
+          <div class="swiper-slide">
+            <div class="logo-item"><img src="{{ img | asset_url}}" alt="{{ settings[alt] }}" loading="lazy" decoding="sync" /></div>
+          </div>
+          {%endif%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

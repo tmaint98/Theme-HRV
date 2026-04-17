@@ -1,0 +1,371 @@
+:root {
+  --bg-contact-btn: {{ settings.bamboocraft_page_contact_bg_btn }};
+  --color-contact-btn: {{ settings.bamboocraft_page_contact_color_btn }};
+}
+$bgBreadcrumb: {{ settings.bamboocraft_contact_breadcrumb_bg }};
+$colorBreadcrumb: {{ settings.bamboocraft_contact_breadcrumb_color }};
+$mainBreadcrumb: {{ settings.bamboocraft_contact_breadcrumb_main }};
+@keyframes br_img_left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    height: 100%;
+    transform: translateX(0);
+  }
+}
+@keyframes br_img_right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    height: 100%;
+    transform: translateX(0);
+  }
+}
+.bamboocraft-contact-breadcrumb {
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+  background: $bgBreadcrumb;
+  color: $colorBreadcrumb;
+  .heading-title {
+    max-width: 80%;
+    margin: 0 auto;
+    .title1 {
+      color: $mainBreadcrumb;
+    }
+    .title2 {
+        font-size: 65px;
+    }
+  }
+  @media(min-width: 1200px) {
+    &.has-icon-1,
+    &.has-icon-2 {
+       &:before,
+       &:after {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background-size: cover;
+      }
+
+    }
+    &.has-icon-1 {
+       &:before {
+        content: '';
+        left: 0;
+        width: 15%;
+        background-image: url("{{ 'bamboocraft_contact_breadcrumb_img_1.jpg' | asset_url}}");
+        background-position: top right;
+        transform: translateX(-100%);
+        animation: br_img_left 0.5s forwards 0.2s ease-out;
+      }
+    }
+    &.has-icon-2 {
+       &:after {
+        content: '';
+        right: 0;
+        width: 12%;
+        background-image: url("{{ 'bamboocraft_contact_breadcrumb_img_2.jpg' | asset_url}}");
+        background-position: top left;
+        transform: translateX(100%);
+        animation: br_img_right 0.5s forwards 0.2s ease-out;
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 60px 0;
+    .heading-title {
+      max-width: 100%;
+      .title2 {
+        font-size: 40px;
+    }
+    }
+  }
+}
+
+.bamboocraft-layout-contact {
+  .button {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+    padding: 18px 45px;
+    line-height: normal;
+    color: var(--color-contact-btn);
+    background-color: var(--bg-contact-btn);
+    border: none;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+    outline: none !important;
+    -webkit-transition: all 0.45s;
+    transition: all 0.45s;
+    @media(min-width: 992px) {
+       &:hover,
+      &.has-hover,
+       &:focus {
+        opacity: 0.8;
+      }
+
+    }
+    @media(max-width: 767px) {
+      font-size: 12px;
+      padding: 8px 15px;
+      min-height: 35px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .sitebox-recaptcha {
+    padding: 6px 0 0;
+    text-align: left;
+    font-size: 13px;
+    clear: both;
+  }
+}
+.bamboocraft-contact-map {
+  .map {
+    display: flex;
+    iframe {
+      min-height: 590px;
+    }
+  }
+  @media(max-width: 767px) {
+    .map {
+      iframe {
+        min-height: 250px;
+      }
+    }
+  }
+}
+.bamboocraft-contact-info {
+  padding: 80px 0;
+  .info-group {
+    gap: 30px;
+    margin: 0;
+     &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+    > div {
+      flex: 0 0 auto;
+    }
+    .title-info {
+      width: 35%;
+      font-weight: 600;
+      i {
+        margin-right: 10px;
+      }
+    }
+    .list-info,
+    .desc-info {
+      width: calc(65% - 30px);
+      font-size: 14px;
+      li {
+         &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+  .form {
+    .contact-form .input-group {
+      position: relative;
+      margin-bottom: 30px;
+      &.group-text {
+        margin-bottom: 0;
+      }
+      .icon-form {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        z-index: 1;
+        svg {
+          fill: currentcolor;
+          opacity: 0.6;
+        }
+      }
+      .line {
+         &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background: currentcolor;
+          transition: all 0.3s;
+        }
+      }
+      input,
+      textarea {
+        background: none;
+        border: 1px solid #e6e6e6;
+        border-radius: 30px;
+        padding: 12px 20px;
+        box-shadow: none;
+        font-size: 14px;
+      }
+      input {
+        height: 50px;
+      }
+      textarea {
+        height: 150px;
+      }
+      input[type="checkbox"] {
+        width: 18px;
+        height: 24px;
+        flex: 0 0 18px;
+        appearance: checkbox;
+        -webkit-appearance: checkbox;
+        margin-right: 10px;
+      }
+      label {
+        margin: 0;
+        opacity: 0.6;
+        flex: 0 0 calc(100% - 30px);
+        font-size: 14px;
+      }
+       &:not(.error) {
+        input,
+        textarea {
+           &:focus {
+             + .line:before {
+              width: 100%;
+            }
+          }
+        }
+         &:hover {
+          .line:before {
+            width: 100%;
+          }
+        }
+      }
+
+    }
+    .cta-submitform {
+      margin-top: 30px;
+      .icon {
+        margin-right: 10px;
+        svg {
+          fill: var(--color-contact-btn);
+        }
+      }
+
+    }
+  }
+  .bamboocraft-contact-map {
+    margin-top: 60px;
+  }
+  @media(min-width: 1200px) {
+    .content-info {
+      padding-right: 50px;
+      border-right: 1px solid #e6e6e6;
+      > div {
+        position: relative;
+      }
+      &.has-icon {
+        position: relative;
+         &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: calc(100% - 60px);
+          width: 35%;
+          height: 50%;
+          background-image: url("{{'bamboocraft_contact_info_img.jpg' | asset_url}}");
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: right;
+        }
+      }
+    }
+    .bamboocraft-contact-map {
+      &.has-icon {
+        position: relative;
+         &:before {
+          content: '';
+          position: absolute;
+          top: -80px;
+          left: calc(100% - 110px);
+          width: 20%;
+          height: 45%;
+          background-image: url("{{ 'bamboocraft_contact_map_img.jpg' | asset_url}}");
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: right;
+        }
+      }
+    }
+    .form {
+      padding-left: 50px;
+    }
+    .heading-title {
+      .title2.info-title {
+        font-size: 50px;
+      }
+    }
+  }
+  @media(min-width: 768px) {
+    .heading-title {
+      .title2 {
+        font-size: 28px;
+      }
+    }
+  }
+  @media(max-width: 991px){
+    .content-info{
+      padding-bottom: 30px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .list-info {
+      .info {
+         &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+        li {
+          font-size: 14px;
+        }
+        &.info-phone {
+          a {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+    .info-group {
+      gap: 5px;
+      &:not(:last-child){
+        margin-bottom: 20px;
+      }
+      .title-info,.list-info,
+    .desc-info{
+      width: 100%;
+      text-align: center;
+    }
+    }
+    .form {
+      margin-top: 30px;
+      .contact-form .input-group {
+        margin-bottom: 15px;
+        input,
+        textarea {
+          font-size: 14px;
+        }
+      }
+      .btn-form {
+        text-align: center;
+      }
+    }
+.bamboocraft-contact-map{
+  margin-top: 40px;
+}
+  }
+}

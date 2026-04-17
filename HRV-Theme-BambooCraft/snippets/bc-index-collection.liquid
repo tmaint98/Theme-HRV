@@ -1,0 +1,53 @@
+{%unless has_heading %} 
+  <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+  {% assign has_heading = true %}
+{% endunless %}
+{%-unless has_section_collection-%} 
+  <link rel="preload" href="{{ 'bc-index-collection.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-index-collection.scss.css' | asset_url }}">
+  {%- assign has_section_collection = true -%}
+{%- endunless -%}
+
+{%capture img%}bamboocraft_index_col_{{ind}}_img.jpg{%endcapture%}
+{%capture title%}bamboocraft_index_col_{{ind}}_title{%endcapture%}
+{%capture handle%}bamboocraft_index_col_{{ind}}_handle{%endcapture%}
+{%capture limit%}bamboocraft_index_col_{{ind}}_limit{%endcapture%}
+{%capture btn%}bamboocraft_index_col_{{ind}}_btn{%endcapture%}
+{%assign col_handle = settings[handle]%}
+<section class="bamboocraft-index-collection">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        {% if settings[title] != empty%}
+        <div class="heading-title">
+          <h2 class="title2">{{settings[title] | newline_to_br}}</h2>
+        </div>
+        {%endif%}
+        {%- if collections[col_handle].products.size == 0 -%}
+          <div class="collection-alert-no">
+            <p>Chưa có sản phẩm nào trong danh mục này</p>
+          </div>
+        {%- else -%}
+          <div class="row listProduct-row">
+            {%- for product in collections[col_handle].products limit: settings[limit] -%}
+              <div class="col-6 product-item">
+                {%- include 'bc-product-loop' -%}
+              </div>
+            {%- endfor -%}
+          </div>
+          {% if collections[col_handle].products.size > settings[limit] and settings[btn] != '' %}
+            <div class="btn-more text-center">
+              <a href="{{collections[col_handle].url}}" class="button">{{ settings[btn] }}</a>
+            </div>
+          {% endif %}
+        {%- endif -%}
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="banner">
+          <img src="{{ img | asset_url}}" alt="{{ settings[title] | strip_html | escape }}" loading="lazy" decoding="sync" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

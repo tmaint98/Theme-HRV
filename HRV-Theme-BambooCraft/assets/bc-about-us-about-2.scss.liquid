@@ -1,0 +1,26 @@
+$mainAbout2: {{ settings.bamboocraft_about_us_about2_main }};
+.bamboocraft-about-us-about2 {
+  padding: 60px 0;
+  .heading-title {
+    .title1 {
+      color: $mainAbout2;
+    }
+  }
+  @media(min-width: 1200px) {
+    .about-content{
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+  @media(max-width: 991px) {
+    .row {
+      gap: 40px;
+    }
+    .about-banner {
+      text-align: center;
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+  }
+}

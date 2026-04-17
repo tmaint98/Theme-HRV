@@ -1,0 +1,24 @@
+<link rel="preload" href="{{ 'bc-index-service.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-index-service.scss.css' | asset_url }}">
+
+<section class="bamboocraft-index-service">
+  <div class="container">
+    <div class="row list-service">
+      {%for i in (1..4)%}
+        {%capture show%}show_bamboocraft_index_service_{{i}}{%endcapture%}
+        {%capture img%}bamboocraft_index_service_{{i}}_img.jpg{%endcapture%}
+        {%capture title%}bamboocraft_index_service_{{i}}_title{%endcapture%}
+        {%capture desc%}bamboocraft_index_service_{{i}}_desc{%endcapture%}
+        {%if settings[show]%}
+          <div class="service-item text-center">
+            <div class="icon"><img src="{{ img | asset_url}}" alt="{{settings[title]}}" loading="lazy" decoding="sync" /></div>
+            <div class="detail">
+              <div class="title">{{settings[title]}}</div>
+              <div class="desc">{{settings[desc]}}</div>
+            </div>
+          </div>
+        {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,120 @@
+BambooCraft.Product = {
+		init: function() {
+			var that = this;
+      that.BambooCraft_sliderProductRelated('#owlProduct-related');
+      that.BambooCraft_scrollSidebarBottom();
+      that.BambooCraft_addCartStickyProduct();
+      that.BambooCraft_shareLinkMobile();
+      that.BambooCraft_tooltipShare();
+      that.BambooCraft_copylinkProd();
+		},
+  BambooCraft_copylinkProd: function(){
+		$(document).on('click', '.share-link-js', function(e){ 
+			e.preventDefault();	
+			var copyText = $(this).attr('data-url');
+			var dummy = $('<input class="copy-url-hide">').val(copyText).appendTo('body').select();
+			dummy.focus();
+			document.execCommand('copy');
+			$('.copy-url-hide').hide();
+			swal({
+				icon: "success",
+				className: "copy-success",
+				text: "Đã sao chép",
+				button: false,
+				timer: 1500,
+			});
+		});
+	},
+  BambooCraft_sliderProductRelated:function(target){
+		if($(target).length > 0 ){	
+			$(target).owlCarousel({
+				items: 5,
+				nav: true,
+				dots: false,
+				loop: false,	
+				lazyLoad:true,
+				smartSpeed:1500,
+				autoplayTimeout: 1500,
+        margin: 20,
+				responsive: {
+					0: {
+						items: 2,
+						//stagePadding: 20,
+            margin: 5,
+					},
+					768: {
+						items: 2,
+            margin: 20,
+					},
+					992: {
+						items: 5,
+            margin: 20,
+					},
+					1200: {
+						items: 5,
+						touchDrag: $(target).find('.product-loop').length > 5 ? true:false,
+						mouseDrag: $(target).find('.product-loop').length > 5 ? true:false,
+            margin: 20,
+					}
+				}
+			});
+		}
+	},
+  BambooCraft_tooltipShare: function(){
+		if($(window).width() > 1200){
+			$('.productDetail--main .product-toshare [data-toggle="popover"]').popover({
+				container: 'body'
+			})
+		}
+	},
+  BambooCraft_scrollSidebarBottom: function(){
+		setTimeout(function(){
+			var hActionTop = $('.product-actions').offset().top + 100;
+			$(window).scroll(function() {
+				if (hActionTop < $(this).scrollTop()){  
+					$('.sidebar-action-bottom').addClass("is-show");
+					$('.bamboocraft_actiontoolbar_mobile').addClass("is-hide");
+				}
+				else{
+					$('.sidebar-action-bottom').removeClass("is-show");
+					$('.bamboocraft_actiontoolbar_mobile').removeClass("is-hide");
+				}
+				if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+					$('.sidebar-action-bottom').removeClass("is-show");
+					$('.bamboocraft_actiontoolbar_mobile').removeClass("is-hide");
+				}
+			});
+		}, 1000);
+	},
+  BambooCraft_addCartStickyProduct: function(){
+		$('#add-to-cart-sticky').click(function(){	
+			$('#add-to-cart').trigger('click');
+		});
+	},
+	BambooCraft_shareLinkMobile: function(){	
+		if($('#share-mobile').length > 0){
+			if(jQuery(window).width() < 991){
+				var text = $('.layout-productDetail .product-name h1').html();
+				//console.log(title)
+				//var img = $('.product-gallery__slide .product-gallery__photo:eq(0) img').attr('src');
+				const shareData = {
+					//title: title,
+					text: text,
+					url: location.href
+				}
+				const btn = document.getElementById('share-mobile');
+				// Share must be triggered by "user activation"
+				btn.addEventListener('click', async () => {
+					try {
+						await navigator.share(shareData);
+					} catch (err) {
+						resultPara.textContent = `Error: ${err}`;
+					}
+				});
+			}
+		}
+	},
+};
+(function() {
+  BambooCraft.Product.init();
+})();

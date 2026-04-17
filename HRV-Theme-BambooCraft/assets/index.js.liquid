@@ -1,0 +1,57 @@
+BambooCraft.IndexAjax = {
+		init: function() {
+			var that = this;
+      that.BambooCraft_IndexAjax();
+		},
+  BambooCraft_IndexAjax: function(){
+    $('.bamboocraft-index-ajax').each(function(){
+      const $this = $(this);
+      let id = $this.attr('id');
+      let urls = '{{shop.url}}?view=' + id;
+      let hd = $this.attr('data-handle');
+      if($this.hasClass('index-col') || $this.hasClass('index-col-slide')){
+        if($this.hasClass('index-col')){
+          urls = '/collections/' + hd + '?view=col-data';
+        }else{
+          urls = '/collections/' + hd + '?view=slide-data';
+        }
+      }else if($this.hasClass('index-blog')){
+        urls = '/blogs/' + hd + '?view=index-data';
+      }
+      setTimeout(function(){ 
+        $.ajax({
+          url: urls,					
+          type: 'GET',
+          async: false,
+          success:function(data){
+            setTimeout(function(){ 
+              if($this.hasClass('index-review')){
+                $('.bamboocraft-index-ajax[id="'+ id +'"]').html(data);
+                BambooCraft.IndexReviewSlider.BambooCraft_IndexReviewSlider();
+              }else if($this.hasClass('index-col')){
+                $('.bamboocraft-index-col[data-handle="'+hd+'"] .list-pro').html(data);
+                BambooCraft.ProductLoop.BambooCraft_loopImgSlider();
+              }else if($this.hasClass('index-col-slide')){
+                $('.bamboocraft-index-col-slide[data-handle="'+hd+'"] .list-pro').html(data);
+                BambooCraft.IndexColSlider.BambooCraft_IndexColSlider(hd);
+                BambooCraft.ProductLoop.BambooCraft_loopImgSlider();
+              }else if($this.hasClass('index-blog')){
+                $('.bamboocraft-index-blog .list-blog').html(data);
+              }else{
+                $('.bamboocraft-index-ajax[id="'+ id +'"]').html(data);
+              }
+            }, 300);
+          }
+        });
+      }, 500);
+    })
+    
+  }
+};
+(function() {
+  BambooCraft.IndexAjax.init();
+})();
+
+
+
+

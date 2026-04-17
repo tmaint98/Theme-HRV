@@ -1,0 +1,34 @@
+{% if settings.show_bamboocraft_about_us_bamboo %}
+  {% unless has_heading %}
+    <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+    <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+    {%- assign has_heading = true -%}
+  {% endunless %}
+  <link rel="preload" href="{{ 'bc-about-us-bamboo.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-about-us-bamboo.scss.css' | asset_url }}">
+  <section class="bamboocraft-about-us-bamboo">
+    <div class="container">
+      <div class="heading-title text-center">
+        <div class="title1">{{ settings.bamboocraft_about_us_bamboo_title_1 }}</div>
+        <h1 class="title2">{{ settings.bamboocraft_about_us_bamboo_title_2 | newline_to_br }}</h1>
+      </div>
+      <div class="row list-bamboo justify-content-center">
+        {% for i in (1..3) %}
+          {% capture show %}show_bamboocraft_about_us_bamboo_{{i}}{%endcapture%}
+          {% capture img %}bamboocraft_about_us_bamboo_{{i}}_img.jpg{%endcapture%}
+          {% capture title %}bamboocraft_about_us_bamboo_{{i}}_title{%endcapture%}
+          {% capture desc %}bamboocraft_about_us_bamboo_{{i}}_desc{%endcapture%}
+          {% if settings[show] %}
+            <div class="col-lg-4 col-12 bamboo-item text-center">
+              <div class="img"><img src="{{ img | asset_url}}" alt="{{ settings[title] }}" loading="lazy" decoding="sync" /></div>
+              <div class="detail">
+                <h3 class="title">{{ settings[title] }}</h3>
+                <div class="desc">{{ settings[desc] }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}

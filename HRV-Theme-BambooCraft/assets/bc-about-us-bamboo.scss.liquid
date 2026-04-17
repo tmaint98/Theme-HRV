@@ -1,0 +1,43 @@
+$mainBamboo: {{ settings.bamboocraft_about_us_bamboo_main }};
+.bamboocraft-about-us-bamboo {
+  padding: 80px 0;
+  .heading-title {
+    .title1 {
+      color: $mainBamboo;
+    }
+  }
+  .bamboo-item {
+    .img {
+      margin-bottom: 30px;
+    }
+    .detail {
+      padding: 0 25px;
+    }
+    .title {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .desc {
+      font-size: 14px;
+    }
+  }
+  @media(max-width: 991px) {
+    .row {
+      gap: 40px;
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .bamboo-item {
+      .img {
+        margin-bottom: 20px;
+      }
+      .detail {
+        padding: 0;
+      }
+      .title {
+        font-size: 20px;
+      }
+    }
+  }
+}

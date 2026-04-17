@@ -1,0 +1,28 @@
+BambooCraft.IndexGallery = {
+		init: function() {
+			var that = this;
+      that.BambooCraft_fancyboxGallery();
+		},
+   BambooCraft_fancyboxGallery:function(){
+			$('.bamboocraft-index-gallery .gallery-item a[data-fancybox="index-gallery"]').fancybox({
+				protect: true,
+				hash : false,
+				buttons : [
+					"slideShow",
+					'zoom',
+					"thumbs",
+					'close'
+				],
+				animationEffect: "zoom",
+				infobar : false,
+			});
+		}
+};
+(function() {
+  BambooCraft.IndexGallery.init();
+})();
+
+
+
+
+

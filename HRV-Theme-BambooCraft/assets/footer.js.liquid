@@ -1,0 +1,71 @@
+BambooCraft.Footer = {
+		init: function() {
+			var that = this;
+      that.BambooCraft_toggleFooter();
+      that.BambooCraft_newsletterForm();
+      that.BambooCraft_viewFooter();
+		},
+  BambooCraft_toggleFooter: function(){
+		$('.bamboocraft-title-footer').on('click', function(){
+			if ($(window).width() < 992) {
+				jQuery(this).toggleClass('opened').parent().find('.bamboocraft-block-collapse').stop().slideToggle('medium');
+			}
+		});
+	},
+  BambooCraft_newsletterForm: function(){
+		if($('.bamboocraft-newsletter-form').length > 0){
+			$('.bamboocraft-newsletter-form form.contact-form').submit(function(e) { 
+				var self = $(this);
+				if($(this)[0].checkValidity() == true){
+					e.preventDefault();
+					grecaptcha.ready(function() {
+						grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+							self.find('input[name="g-recaptcha-response"]').val(token);
+							$.ajax({
+								type: 'POST',
+								url:'/account/contact',
+								data: $('.bamboocraft-newsletter-form form.contact-form').serialize(),
+								success:function(data){		
+									if($(data).find('#bamboocraft-newsletter-success').length > 0){
+										$('.bamboocraft-newsletter-form .bamboocraft-newsletter-error').html('');
+										swal({
+											icon: "success",
+											className: "bamboocraft-newsletter-form-success",
+											title: "Đăng kí thông tin thành công",
+											text: "Thông báo sẽ tự động tắt sau 5 giây...",
+											button: false,
+											timer: 5000,
+										});
+										e.target.reset();
+									} else {
+										$('.bamboocraft-newsletter-form .bamboocraft-newsletter-error').html('Địa chỉ email không hợp lệ');
+									}
+								},	
+							})
+						}); 
+					});
+				}
+			});
+		}
+	},
+  BambooCraft_viewFooter: function() {
+		var viewedTextCounter = false;
+		$(window).scroll(function(){
+		function isScrolledIntoView(elem) {	
+			var docViewTop = $(window).scrollTop() +50;
+			var docViewBottom = docViewTop + $(window).height();
+			var elemTop = $(elem).offset().top + 50;
+			var elemBottom = elemTop + $(elem).height();
+			return ((elemTop <= docViewBottom) && (elemBottom >= docViewTop));
+		}
+			if (isScrolledIntoView($(".bamboocraft-mainFooter")) && !viewedTextCounter) {
+				viewedTextCounter = true;
+				$(".bamboocraft-mainFooter").addClass('has-view');
+			}
+		});
+		
+	},
+};
+(function() {
+  BambooCraft.Footer.init();
+})();

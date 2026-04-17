@@ -1,0 +1,44 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+{%- unless has_section_collection_slide -%}
+  <link rel="preload" href="{{ 'bc-index-collection-slide.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-index-collection-slide.scss.css' | asset_url }}">
+  <link href="{{ 'bc-index-collection-slide.js' | asset_url }}" rel="preload" as="script">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'bc-index-collection-slide.js' | asset_url }}"></script>
+  {%- assign has_section_collection_slide = true -%}
+{% endunless %}
+{% capture title %}bamboocraft_index_col_slide_{{ind}}_title{%endcapture%}
+{% capture handle %}bamboocraft_index_col_slide_{{ind}}_handle{%endcapture%}
+{% capture limit %}bamboocraft_index_col_slide_{{ind}}_limit{%endcapture%}
+{% assign col_handle = settings[handle] %}
+<section class="bamboocraft-index-col-slide">
+  <div class="container-fluid">
+    {% if settings[title] != empty %}
+      <div class="heading-title">
+        <h2 class="title2">{{ settings[title] | newline_to_br }}</h2>
+      </div>
+    {% endif %}
+    {%- if collections[col_handle].products.size == 0 -%}
+      <div class="collection-alert-no">
+        <p>Chưa có sản phẩm nào trong danh mục này</p>
+      </div>
+    {%- else -%}
+      <div class="listProduct-row">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            {%- for product in collections[col_handle].products limit: settings[limit] -%}
+              <div class="swiper-slide">
+                <div class="product-item">
+                  {%- include 'bc-product-loop' -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+    </div>
+</section>

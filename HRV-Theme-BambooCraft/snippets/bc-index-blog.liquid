@@ -1,0 +1,68 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+
+<link rel="preload" href="{{ 'bc-index-blog.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-index-blog.scss.css' | asset_url }}">
+<section class="bamboocraft-index-blog">
+  <div class="container">
+    <div class="heading-title text-center">
+      {% if settings.bamboocraft_index_blog_title_1 != empty %}
+        <div class="title1">{{ settings.bamboocraft_index_blog_title_1 }}</div>
+      {% endif %}
+      {% if settings.bamboocraft_index_blog_title_2 != empty %}
+        <h2 class="title2">{{ settings.bamboocraft_index_blog_title_2 | newline_to_br }}</h2>
+      {% endif %}
+    </div>
+    <div class="blog-content">
+      {% if blogs[settings.bamboocraft_index_blog_handle].articles.size == 0 %}
+        <p class="txt-noArticle text-center">Chưa có bài viết nào trong mục này</p>
+        {% else %}
+        <div class="row list-article">
+          {% for article in blogs[settings.bamboocraft_index_blog_handle].articles limit: settings.bamboocraft_index_blog_limit %}
+            {% include 'article-image' with article: article %}
+            <div class="col-lg-4 col-12">
+            <article class="article-loop">
+              <div class="article-inner">
+                <div class="article-image">
+                  <a href="{{ article.url}}" class="blog-post-thumbnail" title="{{ article.title }}" rel="nofollow">
+                    <img
+                      class="lazyload"
+                      {% if forloop.first %}
+                      data-src="{{ imageUrl | product_img_url : '1024x1024' }}"
+                      {% else %}
+                      data-src="{{ imageUrl | product_img_url : 'grande' }}"
+                      {% endif %}
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                      alt="{{ article.title }}">
+                  </a>
+                </div>
+                <div class="article-detail">
+                  <div class="article-title">
+                    <h3 class="post-title">
+                      <a href="{{ article.url}}" title="{{ article.title }}">{{ article.title }}</a>
+                    </h3>
+                  </div>
+                  <div class="article-post-meta">
+                    <span class="date">
+                      <time pubdate datetime="{{ article.published_at | date: '%d Tháng %m, %Y' }}">{{ article.published_at | date: '%d Tháng %m, %Y' }}</time>
+                    </span>
+                    <span class="author">bởi: {{ article.author }}</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            </div>
+          {% endfor %}
+        </div>
+        {% if blogs[settings.bamboocraft_index_blog_handle].articles.size > settings.bamboocraft_index_blog_limit and settings.bamboocraft_index_blog_btn != empty %}
+          <div class="btn-more text-center">
+            <a href="{{blogs[settings.bamboocraft_index_blog_handle].url}}" class="button">{{settings.bamboocraft_index_blog_btn}}</a>
+          </div>
+          {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>

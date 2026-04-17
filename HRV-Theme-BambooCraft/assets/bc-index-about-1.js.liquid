@@ -1,0 +1,40 @@
+BambooCraft.IndexCounter = {
+		init: function() {
+			var that = this;
+      that.BambooCraft_indexCounter();
+		},
+   BambooCraft_indexCounter: function() {
+		var viewedTextCounter = false;
+		$(window).scroll(function(){
+		function isScrolledIntoView(elem) {	
+			var docViewTop = $(window).scrollTop() +50;
+			var docViewBottom = docViewTop + $(window).height();
+			var elemTop = $(elem).offset().top + 50;
+			var elemBottom = elemTop + $(elem).height();
+			return ((elemTop <= docViewBottom) && (elemBottom >= docViewTop));
+		}
+			if (isScrolledIntoView($(".bamboocraft-index-about-1 .list-counter")) && !viewedTextCounter) {
+				viewedTextCounter = true;
+				$('.bamboocraft-index-about-1 .counter').each(function () {
+					$(this).prop('Counter',0).animate({
+						Counter: $(this).find('.counter-num').data('counter')
+					}, {
+						duration: 2000,
+						easing: 'swing',
+						step: function (now) {
+							$(this).find('.counter-num').text(Math.ceil(now));
+						}
+					});
+				});
+			}
+		});
+		
+	},
+};
+(function() {
+  BambooCraft.IndexCounter.init();
+})();
+
+
+
+

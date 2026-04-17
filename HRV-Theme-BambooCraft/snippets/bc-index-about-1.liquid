@@ -1,0 +1,77 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+<link rel="preload" href="{{ 'bc-index-about-1.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-index-about-1.scss.css' | asset_url }}">
+<link href="{{ 'bc-index-about-1.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'bc-index-about-1.js' | asset_url }}"></script>
+
+<section class="bamboocraft-index-about-1">
+  <div class="container">
+    <div class="row align-items-center {%if settings.show_bamboocraft_index_about_1_img_1%}has-icon-1{%endif%} {%if settings.show_bamboocraft_index_about_1_img_2%}has-icon-2{%endif%}">
+      <div class="col-lg-6 col-12">
+        <div class="banner">
+          <img src="{{ 'bamboocraft_index_about_1_img.jpg' | asset_url}}" alt="{{ settings.bamboocraft_index_about_1_title | strip_html | escape }}" loading="lazy" decoding="sync" />
+        </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="about-content">
+          <div class="heading-title">
+            {% if settings.bamboocraft_index_about_1_title_1 != empty %}
+              <div class="title1">{{ settings.bamboocraft_index_about_1_title_1 | newline_to_br }}</div>
+            {% endif %}
+            {% if settings.bamboocraft_index_about_1_title_2 != empty %}
+              <h2 class="title2">{{ settings.bamboocraft_index_about_1_title_2 | newline_to_br }}</h2>
+            {% endif %}
+            {% if settings.bamboocraft_index_about_1_desc != empty %}
+              <div class="desc">{{ settings.bamboocraft_index_about_1_desc }}</div>
+            {% endif %}
+          </div>
+          <div class="list-counter">
+            {% for i in (1..2) %}
+              {% capture show %}show_bamboocraft_index_about_1_{{i}}{%endcapture%}
+              {% capture num %}bamboocraft_index_about_1_{{i}}_num{%endcapture%}
+              {% capture unit %}bamboocraft_index_about_1_{{i}}_unit{%endcapture%}
+              {% capture desc %}bamboocraft_index_about_1_{{i}}_desc{%endcapture%}
+              {% if settings[show] %}
+                <div class="counter-item">
+                  <div class="counter">
+                    <div class="counter-group notranslate">
+                      <span class="counter-num" data-counter="{{settings[num]}}">{{ settings[num] }}</span>
+                      {% if settings[unit] != empty %}
+                        <span class="unit">{{ settings[unit] }}</span>
+                      {% endif %}
+                    </div>
+                    <div class="desc">{{ settings[desc] }}</div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {%if settings.bamboocraft_index_about_1_btn != empty%}
+              <div class="btn-more">
+                <a href="{{settings.bamboocraft_index_about_1_link}}" class="button"><span>{{settings.bamboocraft_index_about_1_btn}}</span> <svg width="20px" height="20px" viewBox="0 0 24 24" id="right" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color"><path id="primary" d="M21.71,11.29l-7-7a1,1,0,0,0-1.42,1.42L18.59,11H3a1,1,0,0,0,0,2H18.59l-5.3,5.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l7-7A1,1,0,0,0,21.71,11.29Z"></path></svg></a>
+              </div>
+            {%endif%}
+        </div>
+      </div>
+    </div>
+    {% if settings.show_bamboocraft_index_about_1_message %}
+      <div class="message-content text-center">
+        {% if settings.bamboocraft_index_about_1_message_desc != empty %}
+          <div class="desc">{{ settings.bamboocraft_index_about_1_message_desc }}</div>
+        {% endif %}
+        {% if settings.show_bamboocraft_index_about_1_message_signature %}
+          <div class="message-signature">
+            <img src="{{ 'bamboocraft_index_about_1_message_signature_img.jpg' | asset_url}}" alt="{{settings.bamboocraft_index_about_1_message_position }}" loading="lazy" decoding="sync" />
+          </div>
+        {% endif %}
+        <div class="message-info">
+          <div class="position">{{ settings.bamboocraft_index_about_1_message_position }}</div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>

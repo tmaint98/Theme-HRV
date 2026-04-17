@@ -1,0 +1,54 @@
+{%- assign webfont_title = settings.base_font_title | split : ':' | first -%}
+$colorText: {{ settings.shop_text_color }};
+.bamboocraft-index-service {
+  padding: 60px 0;
+  .list-service {
+    margin: 0;
+    justify-content: center;
+  }
+  .service-item {
+    flex: 0 0 auto;
+    width: calc(100% / 4);
+    padding: 0 40px;
+     &:not(:first-child) {
+      border-left: 1px solid rgba($colorText, 0.2);
+    }
+    .icon {
+      margin-bottom: 20px;
+      img {
+        max-width: 64px;
+      }
+    }
+    .title {
+      font-size: 18px;
+      font-family: "{{ webfont_title }}"
+      , sans-serif;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .desc {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  }
+  @media(max-width: 991px) {
+    .list-service {
+      gap: 30px 0;
+    }
+    .service-item {
+      width: calc(100% / 2);
+      padding: 0 30px;
+      &:nth-child(3) {
+      border-left: none;
+    }
+    }
+  }
+  @media(max-width: 767px){
+    padding: 30px 0;
+    .service-item {
+      width: 100%;
+      padding: 0;
+      border-left: none !important;
+    }
+  }
+}

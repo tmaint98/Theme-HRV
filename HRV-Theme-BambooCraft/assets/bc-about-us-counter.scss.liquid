@@ -1,0 +1,67 @@
+{%- assign webfont_title = settings.base_font_title | split : ':' | first -%}
+.bamboocraft-about-us-counter {
+  padding: 60px 0 100px;
+  .list-counter {
+    margin: 0;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    > div {
+      flex: 0 0 auto;
+    }
+    .counter-item {
+      width: calc(100% / 4 - 37.5px);
+      text-align: center;
+      .counter-group {
+        font-size: 60px;
+        font-family: "{{ webfont_title }}"
+        , sans-serif;
+        font-weight: 600;
+        line-height: 1.1;
+        margin-bottom: 10px;
+      }
+      .desc {
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+    &.has-icon {
+      .counter-item {
+        width: calc(100% / 4 - 112.5px);
+      }
+      .img {
+        width: 50px;
+        img {
+          max-width: 50px;
+        }
+      }
+    }
+  }
+  @media(max-width: 1199px) {
+    .list-counter {
+      .counter-item {
+        .counter-group {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    .list-counter {
+      gap: 35px;
+      .counter-item {
+        width: 100%;
+      }
+      &.has-icon {
+        .counter-item,
+        .img {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0 60px;
+  }
+}

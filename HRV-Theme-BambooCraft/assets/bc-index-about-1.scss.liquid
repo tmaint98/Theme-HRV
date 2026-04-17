@@ -1,0 +1,127 @@
+{%- assign webfont_title = settings.base_font_title | split : ':' | first -%}
+$colorAbout: {{ settings.bamboocraft_index_about_1_color }};
+.bamboocraft-index-about-1 {
+  padding: 60px 0;
+  overflow: hidden;
+  .heading-title {
+    .title1 {
+      color: $colorAbout;
+    }
+  }
+
+  .list-counter {
+    display: flex;
+    gap: 30px;
+    .counter-item {
+      flex: 0 0 auto;
+      width: calc(50% - 15px);
+      .counter-group {
+        font-size: 60px;
+        font-family: "{{ webfont_title }}"
+        , sans-serif;
+        font-weight: 600;
+        line-height: 1.1;
+      }
+      .desc {
+        font-weight: 600;
+      }
+    }
+  }
+  .btn-more {
+    margin-top: 40px;
+  }
+  .message-content {
+    max-width: 630px;
+    margin: 80px auto 0;
+    .desc {
+      font-size: 40px;
+      font-family: "{{ webfont_title }}"
+      , sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .message-signature {
+      margin: 20px 0;
+      img {
+        max-width: 202px;
+      }
+    }
+    .position {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.6;
+    }
+  }
+  @media(min-width: 992px) {
+    .heading-title {
+      margin-bottom: 30px;
+    }
+
+  }
+  @media(min-width: 1200px) {
+    .has-icon-1,
+    .has-icon-2 {
+      position: relative;
+       &:before,
+       &:after {
+        position: absolute;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: left;
+      }
+    }
+    .has-icon-1 {
+       &:before {
+        content: '';
+        top: 0;
+        left: 100%;
+        width: 15%;
+        height: 25%;
+        background-image: url("{{ 'bamboocraft_index_about_1_img_1.jpg' | asset_url}}");
+      }
+    }
+    .has-icon-2 {
+       &:after {
+        content: '';
+        bottom: -10%;
+        left: 92%;
+        width: 25%;
+        height: 25%;
+        background-image: url("{{ 'bamboocraft_index_about_1_img_2.jpg' | asset_url}}");
+      }
+    }
+    .about-content {
+      padding-left: 80px;
+    }
+  }
+  @media(max-width: 991px) {
+    text-align: center;
+    .row {
+      gap: 30px;
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 30px 0;
+    .list-counter {
+      gap: 20px;
+      .counter-item {
+        width: calc(50% - 10px);
+        .counter-group {
+          font-size: 35px;
+        }
+      }
+    }
+    .btn-more {
+      margin-top: 30px;
+    }
+    .message-content{
+      margin-top: 40px;
+      .desc{
+        font-size: 22px;
+      }
+      .message-signature img{
+        max-width: 150px;
+      }
+    }
+  }
+}

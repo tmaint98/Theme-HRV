@@ -1,0 +1,81 @@
+$bgBreadcrumb: {{ settings.bamboocraft_about_us_breadcrumb_bg }};
+$colorBreadcrumb: {{ settings.bamboocraft_about_us_breadcrumb_color }};
+$mainBreadcrumb: {{ settings.bamboocraft_about_us_breadcrumb_main }};
+@keyframes br_img_left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    height: 100%;
+    transform: translateX(0);
+  }
+}
+@keyframes br_img_right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    height: 100%;
+    transform: translateX(0);
+  }
+}
+.bamboocraft-about-us-breadcrumb {
+  padding: 120px 0;
+  position: relative;
+  background: $bgBreadcrumb;
+  color: $colorBreadcrumb;
+  .heading-title {
+    max-width: 80%;
+    margin: 0 auto;
+    .title1 {
+      color: $mainBreadcrumb;
+    }
+    .title2 {
+        font-size: 65px;
+    }
+  }
+  @media(min-width: 1200px) {
+    &.has-icon-1,
+    &.has-icon-2 {
+       &:before,
+       &:after {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background-size: cover;
+      }
+
+    }
+    &.has-icon-1 {
+       &:before {
+        content: '';
+        left: 0;
+        width: 15%;
+        background-image: url("{{ 'bamboocraft_about_us_breadcrumb_img_1.jpg' | asset_url}}");
+        background-position: top right;
+        transform: translateX(-100%);
+        animation: br_img_left 0.5s forwards 0.2s ease-out;
+      }
+    }
+    &.has-icon-2 {
+       &:after {
+        content: '';
+        right: 0;
+        width: 12%;
+        background-image: url("{{ 'bamboocraft_about_us_breadcrumb_img_2.jpg' | asset_url}}");
+        background-position: top left;
+        transform: translateX(100%);
+        animation: br_img_right 0.5s forwards 0.2s ease-out;
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 60px 0;
+    .heading-title {
+      max-width: 100%;
+      .title2{
+        font-size: 40px;
+      }
+    }
+  }
+}

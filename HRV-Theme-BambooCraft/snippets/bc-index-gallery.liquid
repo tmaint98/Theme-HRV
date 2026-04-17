@@ -1,0 +1,36 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+<link rel="preload" href="{{ 'bc-index-gallery.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-index-gallery.scss.css' | asset_url }}">
+<link href="{{ 'bc-index-gallery.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'bc-index-gallery.js' | asset_url }}"></script>
+
+<section class="bamboocraft-index-gallery">
+  <div class="container">
+    <div class="heading-title text-center">
+      {% if settings.bamboocraft_index_gallery_title_2 != empty %}
+        <h2 class="title2">{{ settings.bamboocraft_index_gallery_title_2 | newline_to_br }}</h2>
+      {% endif %}
+      {% if settings.bamboocraft_index_gallery_title_1 != empty %}
+        <div class="title1">{{ settings.bamboocraft_index_gallery_title_1 | newline_to_br }}</div>
+      {% endif %}
+    </div>
+    <div class="row list-gallery">
+      {% for i in (1..6) %}
+        {% capture show %}show_bamboocraft_index_gallery_{{i}}{%endcapture%}
+        {% capture img %}bamboocraft_index_gallery_{{i}}_img.jpg{%endcapture%}
+        {% capture alt %}bamboocraft_index_gallery_{{i}}_alt{%endcapture%}
+        {% if settings[show] %}
+          <div class="gallery-item">
+            <a data-fancybox="index-gallery" href="{{ img | asset_url }}">
+              <img src="{{ img | asset_url}}" alt="{{ settings[alt] }}" loading="lazy" decoding="sync" />
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

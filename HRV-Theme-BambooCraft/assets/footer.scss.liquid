@@ -1,0 +1,389 @@
+$bgFt: {{ settings.bamboocraft_footer_bg }};
+$colorFt: {{ settings.bamboocraft_footer_color }};
+$bgFtBtn: {{ settings.bamboocraft_footer_bg_btn }};
+$colorFtBtn: {{ settings.bamboocraft_footer_color_btn }};
+$colorHover: {{ settings.shop_text_hover_color }};
+@keyframes ft_img_left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    height: 100%;
+    transform: translateX(0);
+  }
+}
+@keyframes ft_img_right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    height: 100%;
+    transform: translateX(0);
+  }
+}
+.bamboocraft-mainFooter {
+  background-color: $bgFt;
+  color: rgba($colorFt, 0.8);
+  padding-top: 80px;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  .button {
+    display: inline-block;
+    padding: 10px 30px;
+    font-weight: 600;
+    border: 1px solid;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+  a {
+     &:not(:hover) {
+      color: rgba($colorFt, 0.8);
+    }
+  }
+  h2 a {
+     &:not(:hover) {
+      color: $colorFt;
+    }
+  }
+  .bamboocraft-ft-logo {
+    img {
+      max-height: 60px;
+      margin-bottom: 20px;
+    }
+  }
+  .bamboocraft-widget-footer {
+    .bamboocraft-title-footer,
+    .bamboocraft-fter-title {
+      position: relative;
+      margin-bottom: 28px;
+      font-weight: 600;
+      color: $colorFt;
+      font-size: 20px;
+      letter-spacing: 1px;
+      @media(max-width: 991px) {
+        border-bottom: 1px dashed rgba($colorFt, 0.3);
+        margin: 0;
+        padding: 15px 0;
+         &:not(.bamboocraft-fter-title):before {
+          content: "\f107";
+          font-family: "FontAwesome";
+          position: absolute;
+          top: 12px;
+          right: 10px;
+          text-align: center;
+          font-size: 22px;
+          transition: all 0.4s ease-in-out 0s;
+          -moz-transition: all 0.4s ease-in-out 0s;
+          -o-transition: all 0.4s ease-in-out 0s;
+          -webkit-transition: all 0.4s ease-in-out 0s;
+          -ms-transition: all 0.4s ease-in-out 0s;
+        }
+        &.opened {
+          font-weight: 700;
+        }
+         &.opened:before {
+          -moz-transform: rotate(-180deg);
+          -webkit-transform: rotate(-180deg);
+          -o-transform: rotate(-180deg);
+          -ms-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+        }
+      }
+      @media(max-width: 767px) {
+        font-size: 15px;
+      }
+    }
+    .desc {
+      margin: 0;
+    }
+    .desc-newsletter {
+      margin-bottom: 20px;
+    }
+  }
+
+  .bamboocraft-newsletter {
+    margin: 60px 0;
+    .bamboocraft-title-footer{
+      font-size: 50px;
+      color: $colorFt;
+    }
+    @media(max-width: 767px){
+      margin: 30px 0;
+      .bamboocraft-title-footer{
+        font-size: 25px;
+      }
+    }
+  }
+
+
+  .bamboocraft-footer-newsletter {
+    max-width: 690px;
+    margin: 30px auto 0;
+    .bamboocraft-newsletter-form {
+      padding: 10px;
+      border-radius: 60px;
+      background: #fff;
+      .bamboocraft-newsletter-input {
+        background: #fff;
+        border: none;
+        outline: none;
+        border-radius: 0;
+        color: #333;
+        &::-webkit-input-placeholder {
+          color: #333 !important;
+        }
+        &::-moz-placeholder {
+          color: #333 !important;
+        }
+         &:-moz-placeholder {
+          color: #333 !important;
+        }
+      }
+      .contact-form .input-group {
+        flex-flow: nowrap;
+        gap: 5px;
+        margin: 0;
+        input {
+          font-size: 14px;
+        }
+      }
+      .btn-more {
+        flex: 0 0 auto;
+        .btn-icon {
+        border: none;
+        outline: none;
+        padding: 0 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        background: $bgFtBtn;
+        color: $colorFtBtn;
+        svg {
+          fill: currentcolor;
+        }
+         &:hover {
+          opacity: 0.8;
+        }
+        }
+      }
+      .bamboocraft-newsletter-error{
+        margin: 0;
+      }
+    }
+  }
+  .bamboocraft-logo-footer {
+    margin-top: 20px;
+  }
+  .bamboocraft-footerNav-social {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    i,
+    svg {
+      width: 36px;
+      height: 36px;
+      line-height: 34px;
+      font-size: 19px;
+      text-align: center;
+      border: 1px solid;
+      border-radius: 50%;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+    }
+    .social-svg {
+      svg {
+        padding: 6px;
+        fill: currentColor;
+      }
+      &.svg-lazada {
+        svg path {
+          stroke: currentColor;
+        }
+      }
+    }
+  }
+  .bamboocraft-address-footer {
+    margin-bottom: 20px;
+    li {
+      margin-bottom: 10px;
+      i {
+        width: 20px;
+      }
+      &.address-phone {
+        font-size: 22px;
+        font-weight: 600;
+      }
+    }
+  }
+  .bamboocraft-footer-link {
+    li ~ li {
+      margin-top: 10px;
+    }
+    a {
+      position: relative;
+       &:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 1px;
+        left: auto;
+        right: 0;
+        bottom: 0;
+        background-color: $colorHover;
+        -ms-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+      }
+       &:hover {
+         &:before {
+          width: 100%;
+          left: 0;
+          right: auto;
+        }
+      }
+    }
+  }
+  .bamboocraft-footer-copyright {
+    margin-top: 40px;
+    padding: 35px 0;
+    border-top: 1px solid rgba($colorFt, 0.1);
+    p {
+      margin: 0;
+    }
+  }
+  .bamboocraft-payment {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+    img {
+      max-width: 36px;
+    }
+  }
+  
+  @media(min-width: 992px) {
+    .bamboocraft-footer-newsletter {
+      .bamboocraft-newsletter-title h3 {
+        margin: 0;
+      }
+      .bamboocraft-newsletter-form {
+        .contact-form .input-group {
+          margin: 0;
+        }
+      }
+    }
+  }
+  @media(min-width: 1200px) {
+    &.has-icon-1,
+    &.has-icon-2 {
+       &:before,
+       &:after {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background-size: cover;
+      }
+  
+    }
+    &.has-icon-1 {
+       &:before {
+        content: '';
+        left: 0;
+        width: 15%;
+        background-image: url("{{ 'bamboocraft_footer_img_1.jpg' | asset_url}}");
+        background-position: top right;
+        transform: translateX(-100%);
+      }
+       &.has-view:before {
+        animation: ft_img_left 0.5s forwards 0.2s ease-out;
+      }
+    }
+    &.has-icon-2 {
+       &:after {
+        content: '';
+        right: 0;
+        width: 12%;
+        background-image: url("{{ 'bamboocraft_footer_img_2.jpg' | asset_url}}");
+        background-position: top left;
+        transform: translateX(100%);
+      }
+       &.has-view:after {
+        animation: ft_img_right 0.5s forwards 0.2s ease-out;
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    &.has-toolbar {
+      padding-bottom: 45px;
+    }
+    .bamboocraft-widget-footer {
+       &:last-child {
+        .bamboocraft-title-footer {
+          border: none;
+        }
+        .bamboocraft-content-footer {
+          border-top: 1px dashed rgba($colorFt, 0.3);
+        }
+      }
+      .bamboocraft-block-collapse {
+        display: none;
+        padding: 15px 0;
+      }
+      .bamboocraft-newsletter {
+        margin-top: 0;
+        .bamboocraft-title-footer {
+          border-top: 1px dashed rgba($colorFt, 0.3);
+        }
+      }
+    }
+    .bamboocraft-footer-about {
+      margin-bottom: 20px;
+    }
+    .bamboocraft-footer-newsletter {
+      .bamboocraft-newsletter-title h3 {
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+    }
+    .bamboocraft-footer-copyright {
+      margin-top: 25px;
+      padding: 25px 0;
+      text-align: center;
+      > .row {
+        gap: 15px;
+      }
+      .bamboocraft-footer-link {
+        justify-content: center;
+      }
+    }
+    .bamboocraft-payment{
+      justify-content: center;
+    }
+  }
+  @media(max-width: 767px) {
+    padding-top: 50px;
+    .bamboocraft-footer-about {
+      .title {
+      font-size: 26px;
+      br {
+        content: '';
+         &:after {
+          content: ' ';
+        }
+      }
+    }
+    }
+    .bamboocraft-footer-newsletter {
+      margin: 15px auto 0;
+      .bamboocraft-newsletter-form{
+        padding: 6px;
+      }
+    }
+  }
+}

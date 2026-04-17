@@ -1,0 +1,55 @@
+BambooCraft.IndexColSlider = {
+		init: function() {
+			var that = this;
+      that.BambooCraft_IndexColSlider();
+		},
+  BambooCraft_IndexColSlider: function(){
+    const bamboocraftSlider = new Swiper ('.bamboocraft-index-col-slide .swiper', {
+      slidesPerView: 4,  
+			loop: $('.bamboocraft-index-col-slide .product-item').length > 4 ? true:false,
+      preloadImages: false,
+      lazy: true,
+      speed: 1000,
+      //autoplay: false,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 2,
+          spaceBetween: 10
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 15
+        },
+        992: {
+          slidesPerView: 4,
+          spaceBetween: 30
+        }
+      },
+			/*navigation: {
+				nextEl: ".bamboocraft-index-col-slide .swiper-next",
+				prevEl: ".bamboocraft-index-col-slide .swiper-prev",
+			},*/
+      pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			
+    });
+    const totalSlides = bamboocraftSlider.slides.length;
+    if (totalSlides <= bamboocraftSlider.params.slidesPerView) {
+      $('.bamboocraft-index-col-slide .swiper-next, .bamboocraft-index-col-slide .swiper-prev').hide();
+    }
+  }
+};
+(function() {
+  BambooCraft.IndexColSlider.init();
+})();
+
+
+
+
+

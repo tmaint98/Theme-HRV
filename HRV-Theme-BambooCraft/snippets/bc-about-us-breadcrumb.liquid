@@ -1,0 +1,17 @@
+{%if settings.show_bamboocraft_about_us_breadcrumb%}
+  {% unless has_heading %}
+  <link rel="preload" href="{{ 'bc-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'bc-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+<link rel="preload" href="{{ 'bc-about-us-breadcrumb.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-about-us-breadcrumb.scss.css' | asset_url }}">
+<section class="bamboocraft-about-us-breadcrumb {%if settings.show_bamboocraft_about_us_breadcrumb_img_1%}has-icon-1{%endif%} {%if settings.show_bamboocraft_about_us_breadcrumb_img_2%}has-icon-2{%endif%}">
+  <div class="container">
+    <div class="heading-title text-center">
+      <div class="title1">{{settings.bamboocraft_about_us_breadcrumb_title_1}}</div>
+      <h1 class="title2">{{settings.bamboocraft_about_us_breadcrumb_title_2 | newline_to_br}}</h1>
+    </div>
+  </div>
+</section>
+{%endif%}

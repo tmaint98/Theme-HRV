@@ -1,0 +1,61 @@
+$colorGallery: {{ settings.bamboocraft_index_gallery_color }};
+.bamboocraft-index-gallery {
+  padding: 60px 0;
+  .heading-title {
+    .title1 {
+      color: $colorGallery;
+      text-transform: unset;
+    }
+  }
+  .list-gallery {
+    gap: 4px;
+    margin: 0;
+  }
+  .gallery-item {
+    flex: 0 0 auto;
+    width: calc(100% / 6 - 3.5px);
+    a {
+      position: relative;
+      display: block;
+       &:before,
+       &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+       &:before {
+        background: rgba(0, 0, 0, 0.6);
+      }
+       &:after {
+        background: #fff;
+        -webkit-mask: url("data:image/svg+xml, %3Csvg fill='%23fff' width='40px' height='40px' viewBox='0 0 17 17' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cpath d='M16 9h-7v7h-1v-7h-7v-1h7v-7h1v7h7v1z' /%3E%3C/svg%3E") center / contain;
+        mask: url("data:image/svg+xml, %3Csvg fill='%23fff' width='40px' height='40px' viewBox='0 0 17 17' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cpath d='M16 9h-7v7h-1v-7h-7v-1h7v-7h1v7h7v1z' /%3E%3C/svg%3E") center / contain;
+        mask-repeat: no-repeat;
+        mask-size: 40px;
+      }
+       &:hover {
+         &:before,
+         &:after {
+          opacity: 1;
+        }
+      }
+    }
+
+  }
+  @media(max-width: 991px) {
+    .gallery-item {
+      width: calc(100% / 3 - 3px);
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 30px 0;
+    .list-gallery {
+      margin: 0;
+    }
+  }
+}

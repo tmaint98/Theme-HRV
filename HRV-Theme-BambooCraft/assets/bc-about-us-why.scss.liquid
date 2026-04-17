@@ -1,0 +1,66 @@
+$bgWhy: {{ settings.bamboocraft_about_us_why_bg }};
+$colorWhy: {{ settings.bamboocraft_about_us_why_color }};
+$mainWhy: {{ settings.bamboocraft_about_us_why_main }};
+.bamboocraft-about-us-why {
+  padding: 80px 0;
+  background: $bgWhy;
+  color: $colorWhy;
+  .heading-title {
+    .title1 {
+      color: $mainWhy;
+    }
+  }
+  .button {
+    color: $colorWhy;
+  }
+  .list-why {
+    margin: 0;
+  }
+  .why-item {
+    text-align: center;
+    padding: 0 35px;
+    .img {
+      margin-bottom: 20px;
+      img {
+        max-width: 64px;
+      }
+    }
+    .title {
+      font-size: 20px;
+    }
+    .desc {
+      font-size: 14px;
+    }
+  }
+  .btn-more {
+    margin-top: 50px;
+  }
+  @media(min-width: 1200px) {
+    &.has-icon {
+      position: relative;
+       &:before {
+        content: '';
+        position: absolute;
+        top: -80px;
+        right: 0;
+        width: 12%;
+        height: 40%;
+        background-image: url("{{ 'bamboocraft_about_us_why_img.jpg' | asset_url}}");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    .row {
+      gap: 40px;
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 40px 0;
+    .btn-more {
+      margin-top: 30px;
+    }
+  }
+}

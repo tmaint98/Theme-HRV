@@ -1,0 +1,37 @@
+<link rel="preload" href="{{ 'bc-about-us-counter.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-about-us-counter.scss.css' | asset_url }}">
+<link href="{{ 'bc-about-us-counter.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'bc-about-us-counter.js' | asset_url }}"></script>
+
+<section class="bamboocraft-about-us-counter">
+  <div class="container">
+    <div class="row list-counter {%if settings.show_bamboocraft_about_us_counter_img%}has-icon{%endif%}">
+      {%assign count = 0%}
+      {% for i in (1..4) %}
+        {% capture show %}show_bamboocraft_about_us_counter_{{i}}{%endcapture%}
+        {% capture num %}bamboocraft_about_us_counter_{{i}}_num{%endcapture%}
+        {% capture unit %}bamboocraft_about_us_counter_{{i}}_unit{%endcapture%}
+        {% capture desc %}bamboocraft_about_us_counter_{{i}}_desc{%endcapture%}
+        {% if settings[show] %}
+          {%assign count = count | plus: 1%}
+          {% if settings.show_bamboocraft_about_us_counter_img %}
+            {% unless count == 1 %}
+              <div class="img"><img src="{{ 'bamboocraft_about_us_counter_img.jpg' | asset_url}}" alt="about-counter" loading="lazy" decoding="sync" /></div>
+            {% endunless %}
+          {% endif %}
+          <div class="counter-item">
+            <div class="counter">
+              <div class="counter-group notranslate">
+                <span class="counter-num" data-counter="{{settings[num]}}">{{ settings[num] }}</span>
+                {% if settings[unit] != empty %}
+                  <span class="unit">{{ settings[unit] }}</span>
+                {% endif %}
+              </div>
+              <div class="desc">{{ settings[desc] }}</div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

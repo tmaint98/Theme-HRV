@@ -1,0 +1,130 @@
+<link rel="preload" href="{{ 'bc-index-slider.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'bc-index-slider.scss.css' | asset_url }}">
+<link href="{{ 'bc-index-slider.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'bc-index-slider.js' | asset_url }}"></script>
+
+
+<div class="bamboocraft-index-slider" id="bamboocraft-index-slider">
+  <div class="index-slider">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slider-item">
+            <div class="slide--image">
+              <div class="img-group img-left {%if settings.show_bamboocraft_index_slider_1_img_left_1%}has-bg{%endif%}" style="--bg-img: url({{ 'bamboocraft_index_slider_1_img_left_1.jpg' | asset_url }})">
+                {%if settings.show_bamboocraft_index_slider_1_img_left_2%}
+                  <div class="img img--2"><img src="{{ 'bamboocraft_index_slider_1_img_left_2.jpg' | asset_url }}" alt="{{ settings.bamboocraft_index_slider_1_title | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+                {%if settings.show_bamboocraft_index_slider_1_img_left_3%}
+                  <div class="img img--3"><img src="{{ 'bamboocraft_index_slider_1_img_left_3.jpg' | asset_url }}" alt="{{ settings.bamboocraft_index_slider_1_title | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+                {%if settings.show_bamboocraft_index_slider_1_img_left_4%}
+                  <div class="img img--4"><img src="{{ 'bamboocraft_index_slider_1_img_left_4.jpg' | asset_url }}" alt="{{ settings.bamboocraft_index_slider_1_title | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+              </div>
+              <div class="img-group img-right {%if settings.show_bamboocraft_index_slider_1_img_right_1%}has-bg{%endif%}" style="--bg-img: url({{ 'bamboocraft_index_slider_1_img_right_1.jpg' | asset_url }})">
+              {%if settings.show_bamboocraft_index_slider_1_img_right_2%}
+                  <div class="img img--2"><img src="{{ 'bamboocraft_index_slider_1_img_right_2.jpg' | asset_url }}" alt="{{ settings.bamboocraft_index_slider_1_title | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+                {%if settings.show_bamboocraft_index_slider_1_img_right_3%}
+                  <div class="img img--3"><img src="{{ 'bamboocraft_index_slider_1_img_right_3.jpg' | asset_url }}" alt="{{ settings.bamboocraft_index_slider_1_title | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+              </div>
+            </div>
+            <div class="slide--content">
+              <div class="container ">
+              <h2 class="title"><span class="text-ani">{{settings.bamboocraft_index_slider_1_title}}</span></h2>
+              <div class="desc"><span class="text-ani">{{settings.bamboocraft_index_slider_1_desc}}</span></div>
+              {%if settings.bamboocraft_index_slider_1_btn != empty%}
+                <div class="btn-more">
+                  <a href="{{settings.bamboocraft_index_slider_1_link}}" class="button"><span>{{settings.bamboocraft_index_slider_1_btn}}</span> <svg width="20px" height="20px" viewBox="0 0 24 24" id="right" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color"><path id="primary" d="M21.71,11.29l-7-7a1,1,0,0,0-1.42,1.42L18.59,11H3a1,1,0,0,0,0,2H18.59l-5.3,5.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l7-7A1,1,0,0,0,21.71,11.29Z"></path></svg></a>
+                </div>
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- for i in (2..4) -%}
+          {% capture show_slide %}bamboocraft_index_slider_{{i}}_show{% endcapture %}
+          {% capture title %}bamboocraft_index_slider_{{i}}_title{% endcapture %}
+          {% capture desc %}bamboocraft_index_slider_{{i}}_desc{% endcapture %}
+          {% capture show_img_left_1 %}show_bamboocraft_index_slider_{{i}}_img_left_1{% endcapture %}
+          {% capture img_left_1 %}bamboocraft_index_slider_{{i}}_img_left_1.jpg{% endcapture %}
+          {% capture show_img_left_2 %}show_bamboocraft_index_slider_{{i}}_img_left_2{% endcapture %}
+          {% capture img_left_2 %}bamboocraft_index_slider_{{i}}_img_left_2.jpg{% endcapture %}
+          {% capture show_img_left_3 %}show_bamboocraft_index_slider_{{i}}_img_left_3{% endcapture %}
+          {% capture img_left_3 %}bamboocraft_index_slider_{{i}}_img_left_3.jpg{% endcapture %}
+          {% capture show_img_left_4 %}show_bamboocraft_index_slider_{{i}}_img_left_4{% endcapture %}
+          {% capture img_left_4 %}bamboocraft_index_slider_{{i}}_img_left_4.jpg{% endcapture %}
+          {% capture show_img_right_1 %}show_bamboocraft_index_slider_{{i}}_img_right_1{% endcapture %}
+          {% capture img_right_1 %}bamboocraft_index_slider_{{i}}_img_right_1.jpg{% endcapture %}
+          {% capture show_img_right_2 %}show_bamboocraft_index_slider_{{i}}_img_right_2{% endcapture %}
+          {% capture img_right_2 %}bamboocraft_index_slider_{{i}}_img_right_2.jpg{% endcapture %}
+          {% capture show_img_right_3 %}show_bamboocraft_index_slider_{{i}}_img_right_3{% endcapture %}
+          {% capture img_right_3 %}bamboocraft_index_slider_{{i}}_img_right_3.jpg{% endcapture %}
+          {% capture btn %}bamboocraft_index_slider_{{i}}_btn{% endcapture %}
+          {% capture link %}bamboocraft_index_slider_{{i}}_link{% endcapture %}
+          {%- if settings[show_slide] -%}
+            <div class="swiper-slide">
+              <div class="slider-item">
+                <div class="slide--image">
+              <div class="img-group img-left {%if settings[show_img_left_1]%}has-bg{%endif%}" style="--bg-img: url({{ img_left_1 | asset_url }})">
+                {%if settings[show_img_left_2]%}
+                  <div class="img img--2"><img src="{{ img_left_2 | asset_url }}" alt="{{ settings[title] | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+                {%if settings[show_img_left_3]%}
+                  <div class="img img--3"><img src="{{ img_left_3 | asset_url }}" alt="{{ settings[title] | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+                {%if settings[show_img_left_4]%}
+                  <div class="img img--4"><img src="{{ img_left_4 | asset_url }}" alt="{{ settings[title] | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+              </div>
+              <div class="img-group img-right {%if settings[show_img_right_1]%}has-bg{%endif%}" style="--bg-img: url({{ img_right_1 | asset_url }})">
+                 {%if settings[show_img_right_2]%}
+                  <div class="img img--2"><img src="{{ img_right_2 | asset_url }}" alt="{{ settings[title] | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+                {%if settings[show_img_right_3]%}
+                  <div class="img img--3"><img src="{{ img_right_3 | asset_url }}" alt="{{ settings[title] | strip_html | escape }}" class="swiper-lazy" loading="lazy" decoding="sync"/></div>
+                {%endif%}
+              </div>
+            </div>
+            <div class="slide--content">
+              <div class="container ">
+              <h2 class="title"><span class="text-ani">{{settings[title]}}</span></h2>
+              <div class="desc"><span class="text-ani">{{settings[desc]}}</span></div>
+              {%if settings[btn] != empty%}
+                <div class="btn-more">
+                  <a href="{{settings[link]}}" class="button"><span>{{settings[btn]}}</span> <svg width="20px" height="20px" viewBox="0 0 24 24" id="right" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color"><path id="primary" d="M21.71,11.29l-7-7a1,1,0,0,0-1.42,1.42L18.59,11H3a1,1,0,0,0,0,2H18.59l-5.3,5.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l7-7A1,1,0,0,0,21.71,11.29Z"></path></svg></a>
+                </div>
+                {%endif%}
+              </div>
+            </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%comment%}<div class="swiper-pagination"></div>{%endcomment%}
+      
+      <div class="swiper-nav swiper-next">
+        <svg width="30px" height="30px" viewBox="-77 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>right</title><path d="M98 460L64 426 227 262 64 98 98 64 294 262 98 460Z" /></svg>
+      </div>
+      <div class="swiper-nav swiper-prev">
+        <svg width="30px" height="30px" viewBox="-78.5 0 512 512" xmlns="http://www.w3.org/2000/svg" ><title>left</title><path d="M257 64L291 98 128 262 291 426 257 460 61 262 257 64Z" /></svg>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section-home-pus-promotion pus-promotion-grids">
+  <div class="container">
+    <div class="hrv-pus-promotion" data-hrvpus-layout="flashsale"></div>
+  </div>
+</div>
+<div class="section-home-hrvpmo hrvpmo-grids">
+  <div class="container">
+    <div class="hrv-pmo-coupon" data-hrvpmo-layout="grids"></div>
+    <div class="hrv-pmo-discount" data-hrvpmo-layout="grids"></div>
+  </div>
+</div>

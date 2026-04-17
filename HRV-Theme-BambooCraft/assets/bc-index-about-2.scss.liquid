@@ -1,0 +1,67 @@
+{%- assign webfont_title = settings.base_font_title | split : ':' | first -%}
+
+.bamboocraft-index-about-2 {
+  padding: 40px 0;
+  overflow: hidden;
+
+  .content-item {
+     &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+    .title {
+      font-size: 24px;
+      font-family: "{{ webfont_title }}"
+      , sans-serif;
+      font-weight: 600;
+    }
+    .desc {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-top: 15px;
+    }
+  }
+  @media(min-width: 1200px) {
+    .has-icon {
+      position: relative;
+       &:before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        right: calc(100% - 40px);
+        width: 20%;
+        height: 50%;
+        background-image: url("{{ 'bamboocraft_index_about_2_img.jpg' | asset_url}}");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+      }
+    }
+    .banner {
+      width: 150%;
+    }
+    .about-content {
+      padding: 0 80px 0 40px;
+    }
+  }
+  @media(max-width: 991px) {
+    text-align: center;
+    .row{
+      flex-flow: column-reverse;
+      gap: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    padding: 30px 0;
+    .content-item {
+     &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+    .title {
+      font-size: 20px;
+    }
+    .desc {
+      margin-top: 10px;
+    }
+  }
+  }
+}

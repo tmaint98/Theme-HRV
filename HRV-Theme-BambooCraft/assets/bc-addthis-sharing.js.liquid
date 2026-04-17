@@ -1,0 +1,118 @@
+BambooCraft.Addthis = {
+		init: function() {
+			var that = this;
+      that.BambooCraft_addthisIconShare();
+      that.BambooCraft_clickIconsToolbar();
+		},
+  BambooCraft_addthisIconShare: function(){
+		if ($('.bamboocraft_addthis_listSharing').length > 0){
+			$(window).scroll(function(){
+				if($(window).scrollTop() > 250 ) {
+					$('.bamboocraft_addthis_listSharing_list').addClass('is-show');
+				} else {
+					$('.bamboocraft_addthis_listSharing_list').removeClass('is-show');
+				}
+			});
+			$('.bamboocraft_addthis_contact__icons .bamboocraft-box-contact,.bamboocraft_addthis_contact__lists .bamboocraft_addthis_close').on('click', function(e){
+				if($('.bamboocraft_addthis_listSharing').hasClass('active')){
+					$('body').removeClass('bamboocraft-locked-scroll');
+					$('.bamboocraft_addthis_listSharing').removeClass('active');
+					$('.bamboocraft_addthis_listSharing').fadeOut(150);				
+				}
+				else{		
+					$('.bamboocraft_addthis_listSharing').fadeIn(100);
+					$('.bamboocraft_addthis_listSharing').addClass('active');
+				}
+			});
+			$("body").on('click', function(event) {
+				if ($(event.target).is('.bamboocraft_addthis_contact__dialog') || $(event.target).is('.addThiclose')) {
+					event.preventDefault();
+					$('body').removeClass('bamboocraft-locked-scroll');
+					$('.bamboocraft_addthis_listSharing').removeClass('active');
+					$('.bamboocraft_addthis_listSharing').fadeOut(150);			
+				}
+			});
+			$('.bamboocraft-body-popupform form.contact-form').submit(function(e){
+				var self = $(this);
+				if($(this)[0].checkValidity() == true){
+					e.preventDefault();
+					grecaptcha.ready(function() {
+						grecaptcha.execute('6LchSLkqAAAAABVHBpeFgg8N-WgkYsr5fO6GUF_s', {action: 'submit'}).then(function(token) {
+							self.find('input[name="g-recaptcha-response"]').val(token);
+							$.ajax({
+								type: 'POST',
+								url:'/contact',
+								data: $('.bamboocraft-body-popupform form.contact-form').serialize(),			 
+								success:function(data){		
+									$('.bamboocraft-modal-addthis.fade.show').modal('hide');
+									swal({
+										icon: "success",
+										className: "bamboocraft-form-success",
+										title: "{%if settings.bamboocraft_addthis_icon3_title2 != ''%}{{settings.bamboocraft_addthis_icon3_title2}}{%else%}Đăng kí thông tin thành công{%endif%}",
+										text: "{{settings.bamboocraft_addthis_icon3_content}}",
+										button: false,
+										timer: 5000,
+									}).then((result) => {
+										//location.reload(); 
+									});
+								},	
+							})
+						}); 
+					});
+				}
+			});
+		}
+		/*if ($('.layoutProduct_scroll').length > 0 ) {
+			if	(jQuery(window).width() < 768 ){
+				var curScrollTop = 0;
+				$(window).scroll(function(){	
+					var scrollTop = $(window).scrollTop();
+					if(scrollTop > curScrollTop  && scrollTop > 200 ) {
+						$('.layoutProduct_scroll').removeClass('scroll-down').addClass('scroll-up');
+					}
+					else {
+						if (scrollTop > 200 && scrollTop + $(window).height() + 150 < $(document).height()) {
+							$('.layoutProduct_scroll').removeClass('scroll-up').addClass('scroll-down');	
+						}
+					}
+					if(scrollTop < curScrollTop  && scrollTop < 200 ) {
+						$('.layoutProduct_scroll').removeClass('scroll-up').removeClass('scroll-down');
+					}
+					curScrollTop = scrollTop;
+				});
+			}
+		}*/
+	},
+  BambooCraft_clickIconsToolbar: function(){
+		$('.bamboocraft-toolbarCartClick').click(function(){
+			if($('.bamboocraft_addthis_listSharing').hasClass('active')){
+				$('.bamboocraft_addthis_listSharing').removeClass('active');
+				$('.bamboocraft_addthis_listSharing').fadeOut(150);	
+			}
+			$('body').addClass('bamboocraft-locked-scroll');
+      $('.bamboocraft-header-action-item').removeClass('bamboocraft-js-action-show');
+			$('.bamboocraft-sidebar-main').addClass('bamboocraft-is-show-right');
+			$('.bamboocraft-sidebar-main .bamboocraft-sitenav-cart').addClass('bamboocraft-show');
+		});
+		$('.bamboocraft-toolbarContactClick').click(function(){
+			if($('.bamboocraft_addthis_listSharing').hasClass('active')){
+				$('body').removeClass('bamboocraft-locked-scroll');
+				$('.bamboocraft_addthis_listSharing').removeClass('active');
+				$('.bamboocraft_addthis_listSharing').fadeOut(150);				
+			}
+			else{		
+				$('body').addClass('bamboocraft-locked-scroll');
+				$('.bamboocraft_addthis_listSharing').fadeIn(100);
+				$('.bamboocraft_addthis_listSharing').addClass('active');
+			}
+		});
+		$('.bamboocraft-toolbarMenuClick').click(function(){
+			$('.bamboocraft-activeMenuChecked').trigger('click');
+		});
+	},
+};
+(function() {
+  BambooCraft.Addthis.init();
+})();
+
+
