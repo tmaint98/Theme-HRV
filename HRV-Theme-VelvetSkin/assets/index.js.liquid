@@ -1,0 +1,57 @@
+VelvetSkin.IndexAjax = {
+		init: function() {
+			var that = this;
+      that.VelvetSkin_IndexAjax();
+		},
+  VelvetSkin_IndexAjax: function(){
+    $('.velvetskin-index-ajax').each(function(){
+      const $this = $(this);
+      let id = $this.attr('id');
+      let urls = '{{shop.url}}?view=' + id;
+      let hd = $this.attr('data-handle');
+      if($this.hasClass('index-col') || $this.hasClass('index-col-slide')){
+        if($this.hasClass('index-col')){
+          urls = '/collections/' + hd + '?view=col-data';
+        }else{
+          urls = '/collections/' + hd + '?view=slide-data';
+        }
+      }else if($this.hasClass('index-blog')){
+        urls = '/blogs/' + hd + '?view=index-data';
+      }
+      setTimeout(function(){ 
+        $.ajax({
+          url: urls,					
+          type: 'GET',
+          async: false,
+          success:function(data){
+            setTimeout(function(){ 
+              if($this.hasClass('index-review')){
+                $('.velvetskin-index-ajax[id="'+ id +'"]').html(data);
+                VelvetSkin.IndexReviewSlider.VelvetSkin_IndexReviewSlider();
+              }else if($this.hasClass('index-col')){
+                $('.velvetskin-index-col[data-handle="'+hd+'"] .list-pro').html(data);
+                VelvetSkin.ProductLoop.VelvetSkin_loopImgSlider();
+              }else if($this.hasClass('index-col-slide')){
+                $('.velvetskin-index-col-slide[data-handle="'+hd+'"] .list-pro').html(data);
+                VelvetSkin.IndexColSlider.VelvetSkin_IndexColSlider(hd);
+                VelvetSkin.ProductLoop.VelvetSkin_loopImgSlider();
+              }else if($this.hasClass('index-blog')){
+                $('.velvetskin-index-blog .list-blog').html(data);
+              }else{
+                $('.velvetskin-index-ajax[id="'+ id +'"]').html(data);
+              }
+            }, 300);
+          }
+        });
+      }, 500);
+    })
+    
+  }
+};
+(function() {
+  VelvetSkin.IndexAjax.init();
+})();
+
+
+
+

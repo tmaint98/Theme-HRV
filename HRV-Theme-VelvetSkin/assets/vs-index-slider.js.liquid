@@ -1,0 +1,56 @@
+VelvetSkin.IndexMainSlider = {
+		init: function() {
+			var that = this;
+      that.VelvetSkin_IndexMainSlider();
+      that.VelvetSkin_scrollImg();
+		},
+  VelvetSkin_IndexMainSlider: function(){
+    const velvetskinSlider = new Swiper ('.velvetskin-index-slider .swiper', {
+      slidesPerView: 1,  
+			loop: $('.velvetskin-index-slider .slider-item').length > 1 ? true:false,
+      preloadImages: false,
+      lazy: true,
+      speed: 1000,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      //autoplay: false,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+			navigation: {
+				nextEl: ".velvetskin-index-slider .swiper-next",
+				prevEl: ".velvetskin-index-slider .swiper-prev",
+			},
+      /*pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},*/
+			
+    });
+    const totalSlides = velvetskinSlider.slides.length;
+    if (totalSlides <= velvetskinSlider.params.slidesPerView) {
+      $('.velvetskin-index-slider .swiper-next, .velvetskin-index-slider .swiper-prev').hide();
+    }
+  },
+  VelvetSkin_scrollImg: function(){
+    $(window).on('scroll', function () {
+      var scrollTop = $(window).scrollTop();
+      // điều chỉnh hệ số để nhanh/chậm
+      var widthzoom = 1 + scrollTop * 0.0003;
+    
+      $('.velvetskin-index-slider .slide--image img').css(
+        'transform',
+        'scale(' + widthzoom + ')'
+      );
+    })
+  }
+};
+(function() {
+  VelvetSkin.IndexMainSlider.init();
+})();
+
+
+

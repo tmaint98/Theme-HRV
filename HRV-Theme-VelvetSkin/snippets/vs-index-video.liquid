@@ -1,0 +1,11 @@
+<link rel="preload" href="{{ 'vs-index-video.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'vs-index-video.scss.css' | asset_url }}">
+<section class="velvetskin-index-video">
+  <div class="container-fluid">
+    <div class="video-box">
+      <video autoplay loop muted playsinline webkit-playsinline preload="none" poster="{{'velvetskin_index_video_img.jpg' | asset_url}}">
+        <source src="{{settings.velvetskin_index_video_link}}" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,86 @@
+{%- assign webfont_title_1 = settings.base_font_title1 | split : ':' | first -%}
+$colorText: {{ settings.shop_text_color }};
+.heading-title {
+  margin-bottom: 40px;
+  position: relative;
+  .title1 {
+    font-size: 110px;
+    font-family: "{{ webfont_title_1 }}"
+    , sans-serif;
+    line-height: 1;
+  }
+  .title2 {
+    font-size: 70px;
+    margin-bottom: 0;
+    line-height: 1.2;
+  }
+  .desc {
+    opacity: 0.8;
+    line-height: 1.8;
+  }
+  @media(max-width: 991px) {
+    .title2 {
+      font-size: 60px;
+    }
+    .title2,
+    .desc {
+      br {
+        content: '';
+         &:after {
+          content: ' ';
+        }
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    margin-bottom: 25px;
+    .title1 {
+      font-size: 70px;
+    }
+    .title2 {
+      font-size: 26px;
+    }
+    .desc {
+      margin-top: 10px;
+    }
+  }
+}
+.button {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+  padding: 15px 30px;
+  line-height: normal;
+  color: var(--shop-color-button-text);
+  background-color: var(--shop-color-button);
+  border: none;
+  border-radius: 60px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+  outline: none !important;
+  -webkit-transition: all 0.45s;
+  transition: all 0.45s;
+  svg {
+    fill: currentcolor;
+  }
+  @media(min-width: 992px) {
+     &:hover,
+    &.has-hover,
+     &:focus {
+      color: var(--shop-color-button-text);
+      opacity: 0.8;
+    }
+
+  }
+  @media(max-width: 767px) {
+    font-size: 12px;
+    padding: 8px 15px;
+    min-height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

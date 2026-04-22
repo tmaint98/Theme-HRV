@@ -1,0 +1,39 @@
+{%unless has_heading%}
+<link rel="preload" href="{{ 'vs-page-heading.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'vs-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{%endunless%}
+
+<link rel="preload" href="{{ 'vs-index-about-2.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'vs-index-about-2.scss.css' | asset_url }}">
+<section class="velvetskin-index-about-2">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-12">
+        <div class="about-banner">
+          <img src="{{ 'velvetskin_index_about2_img.jpg' | asset_url }}" alt="{{ settings.velvetskin_index_about2_title_2 | strip_html | escape }}" loading="lazy" decoding="sync"/>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="about-content">
+          <div class="heading-title text-center">
+          {%if settings.velvetskin_index_about2_title_1 != empty%}
+          <div class="title1">{{settings.velvetskin_index_about2_title_1}}</div>
+          {%endif%}
+          {%if settings.velvetskin_index_about2_title_2 != empty%}
+          <h2 class="title2">{{settings.velvetskin_index_about2_title_2 | newline_to_br}}</h2>
+          {%endif%}
+          {%if settings.velvetskin_index_about2_desc != empty%}
+          <div class="desc">{{settings.velvetskin_index_about2_desc}}</div>
+          {%endif%}
+          {%if settings.velvetskin_index_about2_btn != empty%}
+            <div class="btn-more">
+              <a href="{{settings.velvetskin_index_about2_link}}" class="button">{{settings.velvetskin_index_about2_btn}}</a>
+            </div>
+          {%endif%}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

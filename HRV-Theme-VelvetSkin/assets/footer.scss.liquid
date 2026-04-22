@@ -1,0 +1,291 @@
+$bgFt: {{ settings.velvetskin_footer_bg }};
+$colorFt: {{ settings.velvetskin_footer_color }};
+$bgFtBtn: {{ settings.velvetskin_footer_bg_btn }};
+$colorFtBtn: {{ settings.velvetskin_footer_color_btn }};
+
+.velvetskin-mainFooter {
+  padding-bottom: 15px;
+  .velvetskin-footer-container{
+    background-color: $bgFt;
+    color: $colorFt;
+    padding: 80px 40px;
+    border-radius: 10px;
+  }
+  a {
+    color: $colorFt;
+  }
+  h2 a {
+    color: $colorFt;
+  }
+  .velvetskin-ft-logo {
+    h2{
+      font-size: 36px;
+    }
+    img {
+      max-height: 60px;
+      margin-bottom: 20px;
+    }
+  }
+  .velvetskin-widget-footer {
+    .velvetskin-title-footer,
+    .velvetskin-fter-title {
+      position: relative;
+      margin-bottom: 28px;
+      font-weight: 600;
+      color: $colorFt;
+      font-size: 30px;
+      letter-spacing: 1px;
+      @media(max-width: 991px) {
+        border-bottom: 1px dashed rgba($colorFt, 0.3);
+        margin: 0;
+        padding: 15px 0;
+         &:not(.velvetskin-fter-title):before {
+          content: "\f107";
+          font-family: "FontAwesome";
+          position: absolute;
+          top: 12px;
+          right: 10px;
+          text-align: center;
+          font-size: 22px;
+          transition: all 0.4s ease-in-out 0s;
+          -moz-transition: all 0.4s ease-in-out 0s;
+          -o-transition: all 0.4s ease-in-out 0s;
+          -webkit-transition: all 0.4s ease-in-out 0s;
+          -ms-transition: all 0.4s ease-in-out 0s;
+        }
+        &.opened {
+          font-weight: 700;
+        }
+         &.opened:before {
+          -moz-transform: rotate(-180deg);
+          -webkit-transform: rotate(-180deg);
+          -o-transform: rotate(-180deg);
+          -ms-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+        }
+      }
+      @media(max-width: 767px) {
+        font-size: 15px;
+      }
+    }
+    .desc {
+      margin: 0;
+    }
+    .desc-newsletter {
+      margin-bottom: 20px;
+    }
+  }
+  
+  .velvetskin-newsletter {
+      margin-top: 25px;
+    }
+  
+
+  .velvetskin-footer-newsletter {
+    .velvetskin-newsletter-form {
+      .velvetskin-newsletter-input {
+        background: rgba($colorFt, 0.1);
+        border: none;
+        outline: none;
+        border-radius: 0;
+        color: $colorFt;
+        &::-webkit-input-placeholder {
+          color: $colorFt !important;
+        }
+        &::-moz-placeholder {
+          color: $colorFt !important;
+        }
+         &:-moz-placeholder {
+          color: $colorFt !important;
+        }
+      }
+      .contact-form .input-group {
+        flex-flow: nowrap;
+        gap: 5px;
+        input {
+          font-size: 14px;
+          border-radius: 50px;
+        }
+      }
+      .btn-more .btn-icon {
+        border: none;
+        outline: none;
+        padding: 0 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        background: $bgFtBtn;
+        color: $colorFtBtn;
+        svg {
+          fill: currentcolor;
+        }
+         &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  .velvetskin-logo-footer {
+    margin-top: 20px;
+  }
+  .velvetskin-footerNav-social {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    i,
+    svg {
+      width: 36px;
+      height: 36px;
+      line-height: 34px;
+      font-size: 19px;
+      text-align: center;
+      border: 1px solid;
+      border-radius: 50%;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+    }
+    .social-svg {
+      svg {
+        padding: 6px;
+        fill: currentColor;
+      }
+      &.svg-lazada {
+        svg path {
+          stroke: currentColor;
+        }
+      }
+    }
+  }
+  .velvetskin-address-footer {
+    li {
+      margin-bottom: 20px;
+      i {
+        width: 20px;
+      }
+      &.address-phone {
+        font-size: 22px;
+        font-weight: 600;
+      }
+    }
+  }
+  .velvetskin-footer-link {
+    display: flex;
+    flex-flow: wrap;
+    gap: 10px 20px;
+    li {
+      flex: 0 0 auto;
+      width: calc(50% - 10px);
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+  .velvetskin-footer-blog {
+    .item {
+       &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+    .article-footer {
+      display: flex;
+      gap: 15px;
+      .article-image {
+        flex: 0 0 auto;
+        width: 80px;
+      }
+      .post-title {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+      .date {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+    }
+  }
+  .velvetskin-footer-copyright {
+    margin-top: 40px;
+    p {
+      margin: 0;
+    }
+  }
+  @media(min-width: 992px) {
+    .velvetskin-footer-newsletter {
+      .velvetskin-newsletter-title h3 {
+        margin: 0;
+      }
+      .velvetskin-newsletter-form {
+        .contact-form .input-group {
+          margin: 0;
+        }
+      }
+    }
+  }
+  @media(max-width: 991px) {
+    &.has-toolbar {
+      padding-bottom: 45px;
+    }
+    .velvetskin-widget-footer {
+       &:last-child {
+        .velvetskin-title-footer {
+          border: none;
+        }
+        .velvetskin-content-footer {
+          border-top: 1px dashed rgba($colorFt, 0.3);
+        }
+      }
+      .velvetskin-block-collapse {
+        display: none;
+        padding: 15px 0;
+      }
+      .velvetskin-newsletter {
+        margin-top: 0;
+        .velvetskin-title-footer {
+          border-top: 1px dashed rgba(42, 47, 65, 0.3);
+        }
+      }
+    }
+    
+    .velvetskin-footer-newsletter {
+      .velvetskin-newsletter-title h3 {
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+    }
+    .velvetskin-footer-copyright {
+      margin-top: 15px;
+      > .row {
+        gap: 15px;
+      }
+      .velvetskin-footer-link {
+        justify-content: center;
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding-top: 20px;
+    .velvetskin-footer-container{
+      padding: 40px 15px;
+    }
+    .velvetskin-ft-logo h2{
+      font-size: 30px;
+    }
+    .velvetskin-footer-about .title {
+      font-size: 26px;
+      br {
+        content: '';
+         &:after {
+          content: ' ';
+        }
+      }
+    }
+    .velvetskin-footer-newsletter {
+      .velvetskin-newsletter-title h3 {
+        font-size: 22px;
+      }
+    }
+  }
+}

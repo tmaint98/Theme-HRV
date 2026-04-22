@@ -1,0 +1,187 @@
+{% comment %}<!-- Tính phần trăm -->{% endcomment %}
+{% assign on_sale = false %}
+{% if product.variants.first.compare_at_price > product.variants.first.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% comment %}<!-- Tính giá khuyến mãi  -->{% endcomment %}
+{% if product.variants.first.compare_at_price > product.variants.first.price %}
+  {% assign price_sale = 0 %}
+  {% assign price_sale = product.variants.first.compare_at_price | minus: product.variants.first.price | divided_by: product.variants.first.compare_at_price | times: 100 | round: 0 %}
+{% endif %}
+
+{% comment %}<!-- Sản phẩm có giá 0đ  -->{% endcomment %}
+{%- assign price_zero = false -%}
+{%- if product.variants.first.price == 0 -%}
+  {%- assign price_zero = true -%}
+{%- endif -%}
+{% comment %}<!-- Tình trạng hết hàng -->{% endcomment %}
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+{% comment %}<!-- Tag sản phẩm -->{% endcomment %}
+{%- assign at_store = false -%}
+
+{%- assign check_gift = false -%}
+{%- for tag in product.tags -%}
+  {%- if tag == 'giftbox' -%}
+    {%- assign check_gift = true -%}
+  {%- endif -%}
+{%- endfor -%}
+{% comment %}<!-- Check Video -->{% endcomment %}
+{%- assign check_video = false -%}
+{%- if product.media.size > 0 -%}
+  {%- for media in product.media -%}
+    {%- if media.media_type == 'external_video' -%}
+      {%- assign check_video = true -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%assign template_service = false%}
+{%if product.template_suffix == 'services'%}
+{%assign template_service = true%}
+{%endif%}
+
+{%- assign index_item = forloop.index | times: 1 -%}
+{%- if template contains 'search' or template contains 'collection' -%}
+  {%- if page != nil -%}
+    {%- assign index_item = page | minus: 1 | times: settings.collection_pagination_limit | plus: index_item -%}{%- endif -%}
+{%- endif -%}
+<div class="velvetskin-product-loop" data-id="{{ product.variants.first.id }}">
+  <div class="velvetskin-product-inner" data-proid="{{ product.id }}" id="{{section}}_loop_{{index_item}}">
+    <div class="velvetskin-proloop-image">
+      {% if on_sale %}
+        <div class="velvetskin-pro-sale">
+          <span>-{{ price_sale }}%</span>
+        </div>
+      {% endif %}
+      {% if sold_out %}
+        <div class="velvetskin-pro-soldout">
+          <span>Hết hàng</span>
+        </div>
+      {% endif %}
+      {% if settings.promotion_hrvapp_use and settings.promotion_hrvapp == 'appcombo' or settings.promotion_hrvapp == 'appbuyxgety' %}
+        <div class="gift product_gift_label d-none" data-id="{{product.id}}">
+          <img class="lazyload" data-src="{{ settings.combo_icon }}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="Icon quà tặng">
+        </div>
+      {% endif %}
+
+      {%- if product.description contains '"image360":' or check_video -%}
+        <div class="velvetskin-pro-iconbox ">
+        {%- if check_video -%}
+          <div class="velvetskin-pro-video">
+            <img class="lazyload" data-src="https://file.hstatic.net/200000592359/file/icon_video_2d253ef605b0407da214e359ac3bdea5.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="image video" />
+          </div>
+        {%- endif -%}
+        {%- if product.description contains '"image360":' - %}
+          				<div class="velvetskin-pro-360">
+          					<img class="lazyload" data-src="https://file.hstatic.net/200000592359/file/icon_spin_3_556d2cb6ff344907b916eeb57020e156.png" 
+          							 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+          							 alt="image 360"/>
+          				</div>
+          				{%-endif -%}
+          </div>
+        {%- endif -%}
+        <a href="{{product.url}}" class="velvetskin-product-link">
+          {%if product.images.size > 1%}
+            <div class="velvetskin-product--image first-image" data-src="{{ product.featured_image.src | product_img_url: 'large' }}">
+            <picture>
+              <source media="(max-width: 480px)" data-srcset="{{ product.featured_image.src | product_img_url: 'large' }}" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+              <source media="(min-width: 481px)" data-srcset="{{ product.featured_image.src | product_img_url: 'master' }}" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+              <img class="lazyload img-loop " data-src="{{ product.featured_image.src | product_img_url: 'small' }}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{% if product.featured_image.alt.size >0 %}{{ product.featured_image.alt | strip_html | escape }}{% else%} {{product.title | strip_html | escape}} {% endif %}" />
+            </picture>
+          </div>
+            <div class="velvetskin-product--image second-image" data-src="{{ product.images[1] | product_img_url: 'large' }}">
+            <picture>
+              <source media="(max-width: 480px)" data-srcset="{{ product.images[1] | product_img_url: 'large' }}" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+              <source media="(min-width: 481px)" data-srcset="{{ product.images[1] | product_img_url: 'master' }}" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+              <img class="lazyload img-loop " data-src="{{ product.images[1] | product_img_url: 'small' }}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{% if product.featured_image.alt.size >0 %}{{ product.featured_image.alt | strip_html | escape }}{% else%} {{product.title | strip_html | escape}} {% endif %}" />
+            </picture>
+          </div>
+          {%else%}
+          <div class="velvetskin-product--image" data-src="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'large' }}{%else%}{{'no_image.jpg' | asset_url}}{%endif%}">
+            <picture>
+              <source media="(max-width: 480px)" data-srcset="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'large' }}{%else%}{{'no_image.jpg' | asset_url}}{%endif%}" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+              <source media="(min-width: 481px)" data-srcset="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'master' }}{%else%}{{'no_image.jpg' | asset_url}}{%endif%}" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+              <img class="lazyload img-loop " data-src="{%if product.images.size > 0%}{{ product.featured_image.src | product_img_url: 'small' }}{%else%}{{'no_image.jpg' | asset_url}}{%endif%}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{% if product.featured_image.alt.size >0 %}{{ product.featured_image.alt | strip_html | escape }}{% else%} {{product.title | strip_html | escape}} {% endif %}" />
+            </picture>
+          </div>
+          {%endif%}
+        </a>
+
+      </div>
+      <div class="velvetskin-proloop-detail">
+        {%- unless product.vendor == 'Khác' -%}
+          <p class="velvetskin-proloop--vendor">{{ product.vendor | link_to_vendor }}</p>
+        {%- endunless -%}
+
+        <h3>
+          <a href="{{product.url}}" class="velvetskin-quickview-product" data-handle="{{product.url}}">{{ product.title }}</a>
+        </h3>
+        
+          {%- unless product.type == 'Khác' -%}
+            <div class="velvetskin-proloop--type">{{ product.type }}</div>
+          {%- endunless -%}
+          
+        {%- if settings.productreviews_hrvapp_use and settings.productreviews_hrvapp_proloop -%}
+          <div class="velvetskin-proloop--review">
+            <!-- check review -->
+            {%- assign rate_review = product.metafields.src.product_loop | append: "" - %}
+              				{% assign rate_number = '' %}
+              				{%-if rate_review ! = '' - %}
+              				{%-assign rate_number = rate_review | remove: ' đánh giá' - %}
+              				{%-endif -%}
+            <div class="haravan-product-reviews-badge" data-id="{{ product.id }}">
+              {{ product.metafields.src.product_loop }}
+            </div>
+          </div>
+        {%- endif -%}
+        <div class="velvetskin-wrapper-action-loop">
+          {%- unless price_zero -%}
+            <p class="velvetskin-proloop--price {% if on_sale %}on-sale{% endif %}">
+              <span class="velvetskin-price">{{ product.variants.first.price | money }}</span>
+              {%- if on_sale -%}
+                <span class="velvetskin-price-del">{{ product.variants.first.compare_at_price | money }}</span>
+              {%- endif -%}
+              {%- if sold_out -%}
+                <span class="velvetskin-prohzt-soldout">Hết hàng</span>
+              {%- endif -%}
+            </p>
+          {%- endunless -%}
+          
+          {%- if price_zero or check_gift -%}
+            <div class="velvetskin-proloop-actions">
+              <div class="velvetskin-proloop-actions__inner">
+                {%- if check_gift -%}
+                  <a href="{{product.url}}" class="velvetskin-btn-proloop velvetskin-btn-proloop-gift" title="{{product.title}}">
+                    <span>Hàng tặng không bán</span>
+                  </a>
+                {%- else -%}
+                  <a href="{{settings.prod_pricezero_link}}" class="velvetskin-btn-proloop velvetskin-btn-proloop-contact"><span>{{ settings.prod_pricezero_title }}</span></a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+          {% unless price_zero or check_gift or settings.promotion_hrvapp_use %}
+            <div class="velvetskin-cart-product">
+              {%- if settings.velvetskin_shop_buying and product.variants.first.price > 0 -%}
+                
+                <button
+                  type="submit"
+                  class="velvetskin-btn-proloop-cart velvetskin-add-to-cart {% if sold_out %} disabled {%endif%} {% if product.variants.size > 1 %}velvetskin-btn-addcart-view {% endif %}"
+                  onclick="VelvetSkin.ProductLoop.VelvetSkin_addCartProdItem('{{ product.variants.first.id }}')"
+                  {% if sold_out %}
+                  disabled
+                  {% endif %}>
+                  {% if sold_out %}<span>Hết hàng</span>{%else%}<span>Thêm vào giỏ</span>{%endif%}
+                </button>
+                  
+              {%- endif -%}
+            </div>
+          {% endunless %}
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,25 @@
+VelvetSkin.IndexAbout1 = {
+		init: function() {
+			var that = this;
+      that.VelvetSkin_scrollImgAbout();
+		},
+  VelvetSkin_scrollImgAbout: function(){
+    $(window).on('scroll', function () {
+      var scrollTop = $(window).scrollTop();
+      // điều chỉnh hệ số để nhanh/chậm
+      var translatey = scrollTop * 0.15;
+    
+      $('.velvetskin-index-about-1.has-icon .img').css(
+        'transform',
+        'translate3d( 0,-' + translatey + 'px, 0 )'
+      );
+    })
+  }
+};
+(function() {
+  VelvetSkin.IndexAbout1.init();
+})();
+
+
+
+

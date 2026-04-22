@@ -1,0 +1,65 @@
+$colorAbout1: {{ settings.velvetskin_index_about1_main }};
+.velvetskin-index-about-1 {
+  padding: 80px 0;
+  .heading-title {
+    margin-bottom: 0;
+    .title1 {
+      color: $colorAbout1;
+    }
+    .desc {
+      margin-top: 20px;
+    }
+  }
+  .btn-more {
+    margin-top: 40px;
+  }
+  .about-item {
+    display: none;
+  }
+  @media(min-width: 1200px) {
+    &.has-icon {
+      padding: 240px 0;
+    }
+    .about-item {
+      display: block;
+      position: relative;
+      .img {
+        position: absolute;
+        transition: all 0.3s;
+        img {
+          border-radius: 10px;
+          max-width: 220px;
+        }
+        &--1 {
+          top: -30px;
+          left: 0;
+        }
+        &--2 {
+          bottom: -220px;
+          right: 0;
+        }
+        &--3 {
+          top: -80px;
+          left: 0;
+          img {
+            max-width: 160px;
+          }
+        }
+        &--4 {
+          top: 45%;
+          right: 0;
+        }
+        &--5 {
+          bottom: -250px;
+          left: 0;
+        }
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    padding: 20px 0;
+    .btn-more {
+      margin-top: 20px;
+    }
+  }
+}

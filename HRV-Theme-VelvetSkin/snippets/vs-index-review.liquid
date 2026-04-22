@@ -1,0 +1,32 @@
+<link rel="preload" href="{{ 'vs-index-review.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'vs-index-review.scss.css' | asset_url }}">
+<section class="velvetskin-index-review">
+  <div class="container">
+    <div class="row">
+      <div class="offset-lg-2 col-lg-8 col-12">
+        <div class="tab-content">
+          {% assign review_nav = '' %}
+          {% assign count = 0 %}
+          {% for i in (1..5) %}
+            {% capture show %}show_velvetskin_index_review_{{i}}{%endcapture%}
+            {% capture img %}velvetskin_index_review_{{i}}_img.jpg{%endcapture%}
+            {% capture desc %}velvetskin_index_review_{{i}}_desc{%endcapture%}
+            {% if settings[show] %}
+              {% assign count = count | plus: 1 %}
+              <div class="tab-pane {%if count == 1 %}active{%endif%} text-center" id="review-tab-{{i}}">{{ settings[desc] }}</div>
+              {% capture review_nav_html %}<li class="nav-item">
+            <a class="nav-link {%if count == 1 %}active{%endif%}" data-toggle="tab" href="#review-tab-{{i}}">
+              <img src="{{ img | asset_url }}" alt="{{ settings[alt] }}" loading="lazy" decoding="sync" />
+            </a>
+          </li>{%endcapture%}
+              {% assign review_nav = review_nav | append: review_nav_html %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <ul class="nav nav-tabs">
+          {{ review_nav }}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

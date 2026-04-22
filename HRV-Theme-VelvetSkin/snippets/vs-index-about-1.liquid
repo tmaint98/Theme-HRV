@@ -1,0 +1,62 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'vs-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'vs-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+
+<link rel="preload" href="{{ 'vs-index-about-1.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'vs-index-about-1.scss.css' | asset_url }}">
+<link href="{{ 'vs-index-about-1.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'vs-index-about-1.js' | asset_url }}"></script>
+<section class="velvetskin-index-about-1 {%if settings.show_velvetskin_index_about1_img%}has-icon{%endif%}">
+  <div class="container">
+    <div class="row">
+      {% if settings.show_velvetskin_index_about1_img %}
+        <div class="col-lg-3 col-12 about-item">
+          {% for i in (1..2) %}
+            {% capture show %}show_velvetskin_index_about1_img_{{i}}{%endcapture%}
+            {% capture img %}velvetskin_index_about1_img_{{i}}.jpg{%endcapture%}
+            {% capture alt %}velvetskin_index_about1_img_{{i}}_alt{%endcapture%}
+            {% if settings[show] %}
+              <div class="img img--{{i}}">
+                <img src="{{ img | asset_url }}" alt="{{ settings[alt] }}" loading="lazy" decoding="sync" />
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="{%unless settings.show_velvetskin_index_about1_img%} offset-xl-3{%endunless%} col-xl-6 col-12">
+        <div class="heading-title text-center">
+          {% if settings.velvetskin_index_about1_title_2 != empty %}
+            <h2 class="title2">{{ settings.velvetskin_index_about1_title_2 | newline_to_br }}</h2>
+          {% endif %}
+          {% if settings.velvetskin_index_about1_title_1 != empty %}
+            <div class="title1">{{ settings.velvetskin_index_about1_title_1 }}</div>
+          {% endif %}
+          {% if settings.velvetskin_index_about1_desc != empty %}
+            <div class="desc">{{ settings.velvetskin_index_about1_desc }}</div>
+          {% endif %}
+          {% if settings.velvetskin_index_about1_btn != empty %}
+            <div class="btn-more">
+              <a href="{{settings.velvetskin_index_about1_link}}" class="button">{{ settings.velvetskin_index_about1_btn }}</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      {% if settings.show_velvetskin_index_about1_img %}
+        <div class="col-lg-3 col-12 about-item">
+          {% for i in (3..5) %}
+            {% capture show %}show_velvetskin_index_about1_img_{{i}}{%endcapture%}
+            {% capture img %}velvetskin_index_about1_img_{{i}}.jpg{%endcapture%}
+            {% capture alt %}velvetskin_index_about1_img_{{i}}_alt{%endcapture%}
+            {% if settings[show] %}
+              <div class="img img--{{i}}">
+                <img src="{{ img | asset_url }}" alt="{{ settings[alt] }}" loading="lazy" decoding="sync" />
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

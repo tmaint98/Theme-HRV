@@ -1,0 +1,47 @@
+{% unless has_heading %}
+  <link rel="preload" href="{{ 'vs-page-heading.scss.css' | asset_url }}" as="style">
+  <link rel="stylesheet" href="{{ 'vs-page-heading.scss.css' | asset_url }}">
+  {%- assign has_heading = true -%}
+{% endunless %}
+
+<link rel="preload" href="{{ 'vs-index-collection.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'vs-index-collection.scss.css' | asset_url }}">
+{% capture title1 %}velvetskin_index_collection_{{ind}}_title_1{%endcapture%}
+{% capture title2 %}velvetskin_index_collection_{{ind}}_title_2{%endcapture%}
+{% capture handle %}velvetskin_index_collection_{{ind}}_handle{%endcapture%}
+{% capture limit %}velvetskin_index_collection_{{ind}}_limit{%endcapture%}
+{% capture btn %}velvetskin_index_collection_{{ind}}_btn{%endcapture%}
+{% capture color %}velvetskin_index_collection_{{ind}}_main{%endcapture%}
+{% assign col_handle = settings[handle] %}
+<section class="velvetskin-index-collection" style="--color: {{settings[color]}}">
+  <div class="container">
+    <div class="heading-title text-center">
+      {% if settings[title1] != empty %}
+        <div class="title1">{{ settings[title1] }}</div>
+      {% endif %}
+      {% if settings[title2] != empty %}
+        <h2 class="title2">{{ settings[title2] | newline_to_br }}</h2>
+      {% endif %}
+    </div>
+    {%- if collections[col_handle].products.size == 0 -%}
+      <div class="product-noloop text-center">
+        <div class="collection-alert-no">
+          <p>Chưa có sản phẩm nào trong danh mục này</p>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="row list-pro">
+        {%- for product in collections[col_handle].products limit: settings[limit] -%}
+          <div class="product-item">
+            {%- include 'vs-product-loop' -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      {% if settings[btn] != empty and collections[col_handle].products.size > settings[limit] %}
+        <div class="btn-more text-center">
+          <a href="{{collections[col_handle].url}}" class="button">{{ settings[btn] }}</a>
+        </div>
+      {% endif %}
+    {%- endif -%}
+  </div>
+</section>

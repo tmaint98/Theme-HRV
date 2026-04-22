@@ -1,0 +1,26 @@
+<link rel="preload" href="{{ 'vs-index-banner.scss.css' | asset_url }}" as="style">
+<link rel="stylesheet" href="{{ 'vs-index-banner.scss.css' | asset_url }}">
+<link href="{{ 'vs-index-banner.js' | asset_url }}" rel="preload" as="script">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'vs-index-banner.js' | asset_url }}"></script>
+<section class="velvetskin-index-banner">
+    <div class="list-banner swiper">
+      <div class="swiper-wrapper">
+        {% for i in (1..6) %}
+          {% capture show %}show_velvetskin_index_banner_{{i}}{%endcapture%}
+          {% capture img %}velvetskin_index_banner_{{i}}_img.jpg{%endcapture%}
+          {% capture title %}velvetskin_index_banner_{{i}}_title{%endcapture%}
+          {% capture link %}velvetskin_index_banner_{{i}}_link{%endcapture%}
+          {% if settings[show] %}
+            <div class="swiper-slide">
+              <div class="banner-item text-center">
+                <a href="{{settings[link]}}">
+                  <img src="{{ img | asset_url }}" alt="{{ settings[title] }}" loading="lazy" decoding="sync" />
+                  <div class="title">{{ settings[title] }}</div>
+                </a>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+</section>
